@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="topbar"></div>
+
+<div id="wrapper">
+    
+    <div class="header">Samuel Clay</div>
+    <div class="content">
+        <ul>
+            <li>
+                <strong><a href="http://www.newsblur.com">NewsBlur</a>: An RSS feed reader with intelligence.</strong>
+                <code>Written with Django in Python.</code>
+                <small>2009 - 2010</small>
+            </li>
+            <li>
+                <strong><a href="http://www.sunraylab.com">SunRayLab</a>: A CMS for projects. Unfinished.</strong>
+                <code>Written with PHP and mySQL.</code>
+                <small>2007</small>
+            </li>
+            <li>
+                <strong><a href="http://www.ofbrooklyn.com/caselife">CaseLife</a>: Student group communications systems built for campus groups.</strong>
+                <code>Written with PHP and mySQL.</code>
+                <small>2006</small>
+            </li>
+            <li>
+                <strong><a href="http://www.ofbrooklyn.com/jones">Scheduler Jones</a>: A graphical scheduling application for students to plan and share their next semester schedule.</strong>
+                <code>Written in Microsoft Visual C++.</code>
+                <small>2003 - 2007</small>
+            </li>
+            <li>
+                <strong><a href="mailto:samuel@ofbrooklyn.com">samuel@ofbrooklyn.com</a></strong>
+                <small>Email</small>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="header"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com Blog</a></div>
+    <div class="content">
+        <ul class="blog">
+            {% for entry in blog_entries %}
+                <li>
+                    <strong><a href="{{ entry.link }}">{{ entry.title|safe }}</a></strong>
+                    <small>{{ entry.updated_parsed|date:"F jS, Y" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="header"><a href="http://twitter.com/samuelclay">@samuelclay</a> on Twitter</div>
+    <div class="content">
+        <ul class="tweets">
+            {% for tweet in tweets %}
+                <li>
+                    <strong>{{ tweet.text|safe|urlize }}</strong>
+                    <small>{{ tweet.relative_created_at }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+<div id="bottombar"></div>
+{% endblock %}

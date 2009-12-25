@@ -1,0 +1,87 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	border: 0;
+	outline: none;
+	font-size: 1em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* http://orderedlist.com/articles/thining-text-in-safari-under-snow-leopard */
+
+body {
+	-webkit-text-stroke:1px transparent;
+	font-family: "Lucida Grande", "Helvetica", sans-serif;
+	font-size: 16px;
+}
+
+@media only screen and (max-device-width:480px) {
+	body {
+		-webkit-text-stroke:0 black;
+	}
+}
+
+#topbar {
+	border-top: 8px solid #606060;
+	border-bottom: 1px solid #101010;
+	height: 0px;
+}
+#bottombar {
+	border-bottom: 8px solid #606060;
+	border-top: 1px solid #101010;
+	height: 0px;
+}
+
+#wrapper {
+	width: 940px;
+	margin: 0 auto;
+	padding: 80px 20px 40px;
+	overflow: hidden;
+}
+
+.header {
+    float: left;
+    width: 220px;
+    clear: both;
+}
+
+.content {
+    float: right;
+    width: 460px;
+    margin-right: 240px;
+    position: relative;
+}
+
+h2 {
+    margin: 0 0 1em;
+}
+
+ul {
+    margin: 0 0 24px;
+}
+
+ul li {
+    position: relative;
+    margin: 0 0 8px;
+    line-height: 18px;
+}
+strong {
+    font-weight: normal;
+}
+strong a {
+    font-weight: bold;
+}
+small {
+     position: absolute;
+     left: 480px;
+     top: 0;
+     width: 240px;
+     color: #707070;
+/*     text-transform: uppercase;*/
+/*     font-size: 14px;*/
+/*     line-height: 24px;*/
+}
