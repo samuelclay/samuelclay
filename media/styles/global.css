@@ -47,6 +47,7 @@ body {
     float: left;
     width: 220px;
     clear: both;
+    text-transform: uppercase;
 }
 
 .content {
@@ -68,12 +69,6 @@ ul li {
     position: relative;
     margin: 0 0 8px;
     line-height: 18px;
-}
-strong {
-    font-weight: normal;
-}
-strong a {
-    font-weight: bold;
 }
 small {
      position: absolute;

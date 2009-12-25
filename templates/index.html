@@ -5,32 +5,65 @@
 
 <div id="wrapper">
     
-    <div class="header">Samuel Clay</div>
+    <div class="header"><a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a></div>
     <div class="content">
         <ul>
             <li>
-                <strong><a href="http://www.newsblur.com">NewsBlur</a>: An RSS feed reader with intelligence.</strong>
-                <code>Written with Django in Python.</code>
+                <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog kept as a public record of my work.
+                <small>2007 - 2010</small>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="header">Projects</div>
+    <div class="content">
+        <ul>
+            <li>
+                <strong><a href="http://www.newsblur.com">NewsBlur</a>:</strong> An RSS feed reader with intelligence, written with <code>Django</code> in <code>Python</code>.
                 <small>2009 - 2010</small>
             </li>
             <li>
-                <strong><a href="http://www.sunraylab.com">SunRayLab</a>: A CMS for projects. Unfinished.</strong>
-                <code>Written with PHP and mySQL.</code>
-                <small>2007</small>
+                <strong><a href="http://www.svgopen.org/2009/registration.php?section=workshops#Using_Raphael_Javascript_Library_to_write_cross-browser_interactive_SVG_and_VML">Raphaël Vector Library</a>:</strong>
+                A cross-browser <code>JavaScript</code> vector graphics library. I presented my minor contributions and the library with this paper and workshop at SVG Open 2009 at Google in California. <a href="http://www.ofbrooklyn.com/raphael/presentation/index.html">Presentation</a> and <a href="http://www.ofbrooklyn.com/raphael/svg_open_paper.pdf">Paper (PDF)</a>.
+                <small>2009</small>
             </li>
             <li>
-                <strong><a href="http://www.ofbrooklyn.com/caselife">CaseLife</a>: Student group communications systems built for campus groups.</strong>
-                <code>Written with PHP and mySQL.</code>
+                <strong><a href="http://www.sunraylab.com">SunRayLab</a>:</strong> A CMS for projects. Unfinished. More <code>PHP</code>.
+                <small>2007 - 2008</small>
+            </li>
+            <li>
+                <strong><a href="http://www.ofbrooklyn.com/caselife">CaseLife</a>:</strong> Student group communications systems built for campus groups in <code>PHP</code>.
                 <small>2006</small>
             </li>
             <li>
-                <strong><a href="http://www.ofbrooklyn.com/jones">Scheduler Jones</a>: A graphical scheduling application for students to plan and share their next semester schedule.</strong>
-                <code>Written in Microsoft Visual C++.</code>
+                <strong><a href="http://www.ofbrooklyn.com/jones">Scheduler Jones</a>:</strong> A graphical scheduling application for students to plan and share their next semester schedule, written in <code>Microsoft Visual C++</code>.
                 <small>2003 - 2007</small>
             </li>
             <li>
-                <strong><a href="mailto:samuel@ofbrooklyn.com">samuel@ofbrooklyn.com</a></strong>
-                <small>Email</small>
+                <strong><a href="http://library.thinkquest.org/C0110299">The Brain Explorer</a>:</strong> In high school, I led an international team to build this educational site. This won as a semi-finalist in the ThinkQuest competition.
+                <small>1999 - 2001</small>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="header">Code</div>
+    <div class="content">
+        <ul>
+            <li>
+                <strong><a href="http://www.googlecode.com/newsblur">NewsBlur @ Google Code</a>:</strong> The Django/Python code that powers the intelligent feed reader.
+                <small>2009 - 2010</small>
+            </li>
+            <li>
+                <strong><a href="http://github.com/samuelclay/raphael">Raphaël JavaScript Library @ GitHub</a>:</strong> My minor contributions to the Raphaël library are found on GitHub.
+                <small>2009</small>
+            </li>
+            <li>
+                <strong><a href="http://github.com/samuelclay/raphael-easing">Raphaël animation easing formulas @ GitHub</a>:</strong> Additional formulas used in animation easing in Raphaël. Includes easeInOutQuad to easeInOutQuint, bounces, elastic, and even easeInOutCirc.
+                <small>2009</small>
+            </li>
+            <li>
+                <strong><a href="http://github.com/samuelclay/samuelclay">samuelclay.com @ GitHub</a>:</strong> The code that runs this page.
+                <small>2009</small>
             </li>
         </ul>
     </div>
@@ -52,7 +85,7 @@
         <ul class="tweets">
             {% for tweet in tweets %}
                 <li>
-                    <strong>{{ tweet.text|safe|urlize }}</strong>
+                    {{ tweet.text|safe|urlize }}
                     <small>{{ tweet.relative_created_at }}</small>
                 </li>
             {% endfor %}

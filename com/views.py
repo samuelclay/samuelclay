@@ -1,13 +1,21 @@
 from django.shortcuts import render_to_response
 from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 import feedparser
 import datetime
 import twitter
 
-@cache_page(60 * 15)
+# @cache_page(60 * 15)
 def index(request):
-    blog = _fetch_and_parse_blog()
-    tweets = _fetch_and_parse_twitter()
+    blog = cache.get('blog')
+    if not blog:
+        blog = _fetch_and_parse_blog()
+        cache.set('blog', blog, 60 * 10)
+        
+    tweets = cache.get('tweets')
+    if not tweets:
+        tweets = _fetch_and_parse_twitter()
+        cache.set('tweets', tweets, 60 * 10)
     
     return render_to_response('index.html', {
         'blog_entries': blog.entries,

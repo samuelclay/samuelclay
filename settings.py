@@ -4,7 +4,7 @@ ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -19,6 +19,7 @@ DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+# CACHE_BACKEND = 'dummy://'
 CACHE_BACKEND = 'locmem://'
 
 # Local time zone for this installation. Choices can be found here:
