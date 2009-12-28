@@ -39,22 +39,29 @@ body {
 #wrapper {
 	width: 940px;
 	margin: 0 auto;
-	padding: 80px 20px 40px;
+	padding: 80px 8px 40px;
 	overflow: hidden;
 }
 
 .header {
     float: left;
-    width: 220px;
+    width: 204px;
     clear: both;
     text-transform: uppercase;
+    padding: 0 16px 0 0;
+    font-size: 26px;
+    font-family: Helvetica;
+    color: #A0A0A0;
 }
 
 .content {
     float: right;
     width: 460px;
     margin-right: 240px;
+    margin-left: -32px;
+    padding-left: 12px;
     position: relative;
+    margin-bottom: 24px;
 }
 
 h2 {
@@ -62,7 +69,6 @@ h2 {
 }
 
 ul {
-    margin: 0 0 24px;
 }
 
 ul li {
@@ -79,4 +85,20 @@ small {
 /*     text-transform: uppercase;*/
 /*     font-size: 14px;*/
 /*     line-height: 24px;*/
+}
+
+.block-intro {
+    border-left: 20px solid #F5EE4F;
+}
+.block-projects {
+    border-left: 20px solid #A957C8;
+}
+.block-code {
+    border-left: 20px solid #6CC071;
+}
+.block-blog {
+    border-left: 20px solid #DB6E00;
+}
+.block-twitter {
+    border-left: 20px solid #32BEBC;
 }

@@ -6,7 +6,7 @@
 <div id="wrapper">
     
     <div class="header"><a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a></div>
-    <div class="content">
+    <div class="content block-intro">
         <ul>
             <li>
                 <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog  as a public record of my work.
@@ -16,7 +16,7 @@
     </div>
     
     <div class="header">Projects</div>
-    <div class="content">
+    <div class="content block-projects">
         <ul>
             <li>
                 <strong><a href="http://www.newsblur.com">NewsBlur</a>:</strong> An RSS feed reader with intelligence, written with <code>Django</code> in <code>Python</code>.
@@ -47,7 +47,7 @@
     </div>
     
     <div class="header">Code</div>
-    <div class="content">
+    <div class="content block-code">
         <ul>
             <li>
                 <strong><a href="http://www.googlecode.com/newsblur">NewsBlur @ Google Code</a>:</strong> The Django/Python code that powers the intelligent feed reader.
@@ -68,8 +68,8 @@
         </ul>
     </div>
     
-    <div class="header"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com Blog</a></div>
-    <div class="content">
+    <div class="header"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span>.com Blog</a></div>
+    <div class="content block-blog">
         <ul class="blog">
             {% for entry in blog_entries %}
                 <li>
@@ -81,7 +81,7 @@
     </div>
     
     <div class="header"><a href="http://twitter.com/samuelclay">@samuelclay</a> on Twitter</div>
-    <div class="content">
+    <div class="content block-twitter">
         <ul class="tweets">
             {% for tweet in tweets %}
                 <li>
