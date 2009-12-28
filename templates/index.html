@@ -8,7 +8,7 @@
     <div class="header"><a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a></div>
     <div class="content block-intro">
         <ul>
-            <li>
+            <li class="last">
                 <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog  as a public record of my work.
                 <small>2007 - 2010</small>
             </li>
@@ -39,7 +39,7 @@
                 <strong><a href="http://www.ofbrooklyn.com/jones">Scheduler Jones</a>:</strong> A graphical scheduling application for students to plan and share their next semester schedule, written in <code>Microsoft Visual C++</code>.
                 <small>2003 - 2007</small>
             </li>
-            <li>
+            <li class="last">
                 <strong><a href="http://library.thinkquest.org/C0110299">The Brain Explorer</a>:</strong> In high school, I led an international team to build this educational site. This won as a semi-finalist in the ThinkQuest competition.
                 <small>1999 - 2001</small>
             </li>
@@ -61,18 +61,18 @@
                 <strong><a href="http://github.com/samuelclay/raphael-easing">Raphaël animation easing formulas @ GitHub</a>:</strong> Additional formulas used in animation easing in Raphaël. Includes easeInOutQuad to easeInOutQuint, bounces, elastic, and even easeInOutCirc.
                 <small>2009</small>
             </li>
-            <li>
+            <li class="last">
                 <strong><a href="http://github.com/samuelclay/samuelclay">samuelclay.com @ GitHub</a>:</strong> The code that runs this page.
                 <small>2009</small>
             </li>
         </ul>
     </div>
     
-    <div class="header"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span>.com Blog</a></div>
+    <div class="header"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span> .com Blog</a></div>
     <div class="content block-blog">
         <ul class="blog">
             {% for entry in blog_entries %}
-                <li>
+                <li {% if forloop.last %}class="last"{% endif %}>
                     <strong><a href="{{ entry.link }}">{{ entry.title|safe }}</a></strong>
                     <small>{{ entry.updated_parsed|date:"F jS, Y" }}</small>
                 </li>
@@ -84,7 +84,7 @@
     <div class="content block-twitter">
         <ul class="tweets">
             {% for tweet in tweets %}
-                <li>
+                <li{% if forloop.last %}class="last"{% endif %}>
                     {{ tweet.text|safe|urlize }}
                     <small>{{ tweet.relative_created_at }}</small>
                 </li>

@@ -76,6 +76,11 @@ ul li {
     margin: 0 0 8px;
     line-height: 18px;
 }
+
+ul li.last {
+    margin: 0;
+}
+
 small {
      position: absolute;
      left: 480px;
