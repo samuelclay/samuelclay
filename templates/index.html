@@ -84,7 +84,7 @@
     <div class="content block-twitter">
         <ul class="tweets">
             {% for tweet in tweets %}
-                <li{% if forloop.last %}class="last"{% endif %}>
+                <li {% if forloop.last %}class="last"{% endif %}>
                     {{ tweet.text|safe|urlize }}
                     <small>{{ tweet.relative_created_at }}</small>
                 </li>
