@@ -1,0 +1,214 @@
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    outline: none;
+    overflow: hidden;
+    width: 100%;
+    background: #000 url(black.png);
+    color: #fff;
+    font: 300 100.1% Fontin-Sans, "Gill Sans", Calibri, "Trebuchet MS", sans-serif;
+}
+
+a, a:visited {
+    outline: none;
+    color: #7197B9;
+}
+h1 {
+    font-weight: 400;
+    height: 5%;
+}
+.canvas {
+    height: 480px;
+    margin: 0 auto;
+    text-align: left;
+    width: 640px !important;
+    background-color: #fff;
+    -moz-border-radius: 10px; 
+    -webkit-border-radius: 10px;
+    border: 1px solid #fff;
+    overflow: hidden;
+}
+.code {
+    font-family: Consolas, Monaco, "Lucida Console", monospace;
+    height: 150px;
+    margin: 10px 5px;
+    padding: 4px;
+    width: 84%;
+    font-size: 16px;
+    float: left;
+}
+.run {
+    margin: 10px 10px 10px 0;
+    font-size: 2em;
+    width: 11%;
+    height: 160px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* A font by Jos Buivenga (exljbris) -> www.exljbris.nl */
+@font-face {
+      font-family: "Fontin-Sans";
+      src: url(fontin-sans.otf) format("opentype");
+}
+
+/* ============ */
+/* =  Buttons = */
+/* ============ */
+
+.RP-slide-control {
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 230px;
+    font-size: 4em;
+    z-index: 100;
+}
+
+.RP-slide-control-previous {
+    left: 0;
+}
+
+.RP-slide-control-next {
+    right: 160px;
+}
+
+.RP-slide-control a {
+    text-decoration: none;
+    display: block;
+    width: 100px;
+    color: #7197B9;
+    padding: 300px 40px 180px;
+}
+
+.RP-slide-control a:hover {
+    color: #A197B9;
+}
+
+/* ======================= */
+/* = Presentation Slides = */
+/* ======================= */
+
+.RP-module {
+    position: relative;
+}
+
+.RP-slides {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20000em;
+    overflow: hidden;
+}
+
+.RP-slides .RP-slide {
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+/* ================ */
+/* = Slide - Text = */
+/* ================ */
+
+.title {
+    margin-top: 240px;
+    font-size: 48px;
+    position: relative;
+}
+h1.title {
+    height: auto;
+}
+.logo {
+    width: 100px;
+    vertical-align: middle;
+}
+.subtitle {
+    text-transform: uppercase;
+    color: #A0A0A0;
+    font-size: 14px;
+}
+.author {
+    margin: 0;
+    padding: 0;
+    font-size: 36px;
+}
+.conference {
+    margin-top: 200px;
+}
+.raphael_table {
+    font-size: 20px;
+    margin: 0 auto;
+    width: 75%;
+}
+
+.raphael_table th {
+    font-size: 24px;
+    padding: 8px;
+}
+.raphael_table td {
+    padding: 4px;
+    vertical-align: top;
+    line-height: 32px;
+}
+
+/* =================== */
+/* = Image Slideshow = */
+/* =================== */
+
+.DL-slideshow-page-controls {
+    position: absolute;
+    bottom: 10px;
+    margin: 0 auto;
+    color: black;
+}
+
+.DL-slideshow-page-controls li {
+    float: left;
+    padding: 4px;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.DL-slideshow-page-controls li.DL-active {
+    border: 1px solid #9b2c3c;
+    background-color: #E0F0E0;
+}
+
+/* ===================== */
+/* = Topic Connections = */
+/* ===================== */
+
+#SO-connections-graph-wrapper .SO-name {
+            display:block;
+            font-size: 10px;
+            line-height: 11px;
+            margin: 5px 0;
+            position: absolute;
+            text-align: center;
+            visibility: hidden;
+            width: 80px;
+            color: #416799;
+            font-family: "Lucida Grande";
+        }
+        
+#SO-connections-graph-wrapper a {
+            text-decoration: none;
+        }
+        
+#SO-connections-graph-wrapper .SO-active a {
+            text-decoration: underline;
+        }
+        
+#SO-connections-graph-wrapper ol {
+            list-style: none;
+        }
+        
+#SO-connections-graph-wrapper #SO-module {
+            margin: 20px;
+            position: relative;
+        }

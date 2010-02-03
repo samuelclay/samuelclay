@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en">
+<head>
+    
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Raphaël - SVG Open 2009 - Samuel Clay</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Samuel Clay">
+
+    <link rel="stylesheet" href="common.css" type="text/css" media="screen" charset="utf-8" />
+    
+    <script src="raphael.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery-easing.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery-newsblur.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery-scrollTo.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery-topicconnections.js" type="text/javascript" charset="utf-8"></script>
+    <script src="image_slideshow.js" type="text/javascript" charset="utf-8"></script>
+    <script src="demo.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            var demo = new Demo();
+            demo.init();
+        });
+    </script>
+</head>
+<body>
+
+    <div class="RP-module">
+    
+    
+        <ul class="RP-slides">
+
+        
+        
+            <li class="RP-slide RP-active">
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1 class="title">
+                    <img src="Raphael-white-bg.png" class="logo" />
+                    Raphaël JavaScript Library
+                </h1>
+                <h2 class="subtitle">presented by:</h2>
+                <h1 class="author">Samuel Clay</h1>
+            
+                <h2 class="conference"><b>SVG Open 2009</b> - Friday, October 2nd, 2009</h2>
+            </li>
+        
+            <li class="RP-slide">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1 style="margin:10px">Firefox / Safari / Opera</h1>
+                <img src="map-svg.png" height="300" />
+                <h1 style="margin:10px">Internet Explorer</h1>
+                <img src="map-vml.png" height="300" />
+            </li>
+
+        
+            <li class="RP-slide">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1>Raphaël - Vector Objects</h1>
+                <div class="canvas"></div>
+                <div><textarea class="code">var R = paper, x = 310, y = 210, r = 150;
+R.ellipse(x, y + r - 3, r + 10, r / 2)
+ .attr({fill: "r#000-#000", stroke: "none", opacity: 0});
+R.circle(x, y, r)
+ .attr({fill: "r(.5,.9)#39c-#036", stroke: "none"});
+R.ellipse(x, y, r - 10, r - 3)
+ .attr({stroke: "none", fill: "r(.5,.1)#ccc-#ccc", opacity: 0});</textarea></div>
+                <div><button class="run" type="button">Run</button></div>
+            </li>
+        
+            <li class="RP-slide">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1 style="margin:10px">Firefox / Safari / Opera</h1>
+                <img src="ball-svg.png" />
+                <h1 style="margin:10px">Internet Explorer</h1>
+                <img src="ball-vml.png" />
+            </li>
+
+            <li class="RP-slide">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1>Raphaël - Objects, Methods, and Attributes</h1>
+                <table class="raphael_table">
+                    <tr>
+                        <th>Vector Objects</th>
+                        <th>Object Methods</th>
+                        <th>Object Properties</th>
+                        <th>Object Attributes</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            circle<br />
+                            ellipse<br />
+                            image<br />
+                            path<br />
+                            rect<br />
+                            text<br />
+                        </td>
+
+                        <td>
+                            animate<br />
+                            attr<br />
+                            getBBox<br />
+                            hide<br />
+                            insertAfter<br />
+                            insertBefore<br />
+                            remove<br />
+                            rotate<br />
+                            scale<br />
+                            show<br />
+                            stop<br />
+                            toBack<br />
+                            toFront<br />
+                            translate
+                        </td>
+
+                        <td>
+                            fill<br />
+                            fill-opacity<br />
+                            font<br />
+                            font-family<br />
+                            font-size<br />
+                            gradient<br />
+                            opacity<br />
+                            rotation<br />
+                            scale<br />
+                            stroke<br />
+                            stroke-fasharray<br />
+                            stroke-linecap<br />
+                            stroke-linejoin<br />
+                            stroke-miterlimit<br />
+                            stroke-opacity<br />
+                            stroke-width<br />
+                            translation
+                        </td>
+
+                        <td>
+                            cx<br />
+                            cy<br />
+                            height<br />
+                            path<br />
+                            r<br />
+                            rx<br />
+                            ry<br />
+                            src<br />
+                            width<br />
+                            x<br />
+                            y
+                        </td>
+                    </tr>
+                </table>
+            </li>
+
+
+        
+            <li class="RP-slide">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1>Raphaël - JavaScript Interaction</h1>
+            
+            
+
+                <div class="DL-slideshow-container DL-slideshow DL-module" style="height: 480px; width: 640px; position: relative; overflow: hidden;margin: 0 auto;">
+            	    <div id="slideshow" class="DL-svg-image-slideshow-container canvas" style="position: relative;overflow: hidden;"></div>
+	
+                    <a href="#" class="DL-next-photo" style="position: absolute; top:0; right:0;">Next Photo</a>
+                    <a href="#" class="DL-previous-photo" style="position: absolute; top:0; left:0;">Previous Photo</a>
+    
+                </div>
+
+
+                <div><textarea class="code">
+var images = [
+        {
+         	'src': "images-tomato1.jpg"
+        },
+        {
+         	'src': "images-tomato2.jpg"
+        },
+        {
+         	'src': "images-tomato3.jpg"
+        },
+        {
+         	'src': "images-tomato4.jpg"
+        },
+        {
+         	'src': "images-tomato5.jpg"
+        },
+        {
+         	'src': "images-tomato6.jpg"
+        }
+];
+
+var slideshow_id = "slideshow";
+
+var options = {
+    slideshow_id: slideshow_id, 
+    canvas_width: 640,
+    canvas_height: 480,
+    image_width: 400,
+    image_height: 300,
+    image_transition_time: 850,
+    image_transition_type: 'bounce',
+    slideshow_type: 'svg'
+};
+
+var slideshow = new ImageSlideshow(paper, options, images);
+setTimeout(function() {
+    slideshow.runner(images);
+}, 100);
+
+                </textarea></div>
+                <div><button class="run" type="button">Run</button></div>
+            </li>
+        
+        
+
+
+            <li class="RP-slide">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1>Raphaël - All Together</h1>
+            
+            
+
+                <div class="SO-module">
+
+                    <div id="SO-connections-graph-wrapper">
+                        <div id="connections_graph_186817" class="SO-connections-graph canvas"></div>
+
+
+                        <ol class="SO-topics">
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/White_House">White House</a>
+                            </li>
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/U.S._Republican_Party">U.S. Republican Party</a>
+                            </li>
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/U.S._Democratic_Party">U.S. Democratic Party</a>
+                            </li>
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/U.S._Congress">U.S. Congress</a>
+                            </li>
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/George_W._Bush">George W. Bush</a>
+                            </li>
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/U.S._Senate">U.S. Senate</a>
+                            </li>
+                            <li class="SO-topic">
+                                <a class="SO-name" href="http://beta.daylife.com/topic/Economic_Recession">Economic Recession</a>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+
+
+
+                <div><textarea class="code">
+var images = [
+    {
+        'img': "images-whitehouse.jpg",
+        'text': "White House",
+        'link': "http://beta.daylife.com/topic/White_House",
+        's': "large"
+    },		                    			                            {
+        'img': "images-repub.jpg",
+        'text': "U.S. Republican Party",
+        'link': "http://beta.daylife.com/topic/U.S._Republican_Party",
+        's': "large"
+    },		                    			                            {
+        'img': "images-demo.jpg",
+        'text': "U.S. Democratic Party",
+        'link': "http://beta.daylife.com/topic/U.S._Democratic_Party",
+        's': "large"
+    },		                    			                            {
+        'img': "images-congress.jpg",
+        'text': "U.S. Congress",
+        'link': "http://beta.daylife.com/topic/U.S._Congress",
+        's': "medium"
+    },		                    			                            {
+        'img': "images-bush.jpg",
+        'text': "George W. Bush",
+        'link': "http://beta.daylife.com/topic/George_W._Bush",
+        's': "medium"
+    },		                    			                            {
+        'img': "images-senate.jpg",
+        'text': "U.S. Senate",
+        'link': "http://beta.daylife.com/topic/U.S._Senate",
+        's': "small"
+    },		                    			                            {
+        'img': "images-econ.jpg",
+        'text': "Economic Recession",
+        'link': "http://beta.daylife.com/topic/Economic_Recession",
+        's': "small"
+    }
+];
+
+var topic_image = {
+    'img': "images-obama.jpg",
+    's': 'xlarge'
+};
+
+var center_x = 180;
+var center_y = 180;
+var offset_x = 125;
+var offset_y = 75;
+var graph_id = "connections_graph_186817";
+var graph_x = 840;
+var graph_y = 680;
+
+var sizes = {
+    'small': 35,
+    'medium': 55,
+    'large': 75,
+    'xlarge': 100
+}
+
+setTimeout(function() {
+    var topic_graph = new TopicConnectionGraph(paper, graph_id, graph_x, graph_y, center_x, center_y, offset_x, offset_y, sizes);
+    topic_graph.runner(images, topic_image);
+}, 1000);
+
+                </textarea></div>
+                <div><button class="run" type="button">Run</button></div>
+            </li>
+        
+
+        
+        
+            <li class="RP-slide RP-active">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1 class="title raphael-title">
+                    <img src="Raphael-white-bg.png" class="logo" />
+                    Raphaël JavaScript Library
+                </h1>
+                <h1 class="author"><a href="http://raphaeljs.com">Version 1.0 - Released October 2nd, 2009</a></h1>
+            
+            </li>
+        
+        
+            <li class="RP-slide RP-active">
+                <div class="RP-slide-control-previous RP-slide-control"><a href='#'>&laquo;</a></div>
+                <div class="RP-slide-control-next RP-slide-control"><a href='#'>&raquo;</a></div>
+                <h1 class="title raphael-title">
+                    <img src="Raphael-white-bg.png" class="logo" />
+                    Raphaël JavaScript Library
+                </h1>
+                <h1 class="author"><a href="http://raphaeljs.com">http://raphaeljs.com</a></h1>
+            
+                <h2 class="conference"><b>SVG Open 2009</b> - Friday, October 2nd, 2009</h2>
+            </li>
+        
+        
+        </ul>
+    </div>
+
+</body>
+</html>
