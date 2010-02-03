@@ -23,7 +23,7 @@ def index(request):
     })
     
 def _fetch_and_parse_blog():
-    blog = feedparser.parse('http://www.ofbrooklyn.com/sunraylab/blog/rss/')
+    blog = feedparser.parse('http://www.ofbrooklyn.com/feeds/all/')
     for b in blog['entries']:
         b.updated_parsed = datetime.datetime(*b.updated_parsed[:-3])
     return blog
@@ -31,9 +31,6 @@ def _fetch_and_parse_blog():
 def _fetch_and_parse_twitter():
     twitter_api = twitter.Api()
     tweets = twitter_api.GetUserTimeline('samuelclay')
-    shown_tweets = []
-    for t in tweets:
-        if t.text.find('@') != 0:
-            shown_tweets.append(t)
-    
+    shown_tweets = [t for t in tweets if not t.text.startswith('@')]
+
     return shown_tweets
