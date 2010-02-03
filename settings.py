@@ -74,7 +74,7 @@ MIDDLEWARE_CLASSES = (
 
 CACHE_MIDDLEWARE_SECONDS = 600
 
-ROOT_URLCONF = 'samuelclay.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     here('templates')
