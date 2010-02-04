@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="topbar"></div>
+
+<div id="wrapper">
+    
+    <div id="nav">
+      &laquo; <a href="{% url index %}" class="subtitle">Samuel Clay</a>
+    </div>
+      
+    <div class="header">
+      <div class="title">Scheduler Jones</div>
+    </div>
+    <div class="content block-intro">
+        <ul>
+            <li class="last">
+                A graphical scheduling application for students to plan and share their next semester schedule, written in <code>Microsoft Visual C++</code>.
+                <small>2003 - 2007</small>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="header">Screenshot</div>
+    <div class="content block-projects">
+      <img src="/static/images/schedulerjones_medium.png" width="575" height="574" />
+    </div>
+    
+    
+    <div class="header">Code View</div>
+    <div class="content block-code">
+      <img src="/static/images/schedulerjones_main_medium.png" width="575" height="443" />
+    </div>
+    
+    
+    <div class="header">About View</div>
+    <div class="content block-photos">
+      <img src="/static/images/schedulerjones_about_medium.png" width="575" height="443" />
+    </div>
+    
+    
+    <div class="header"></div>
+    <div class="content block-blog">
+      
+    </div>
+    
+    
+    <div class="header"></div>
+    <div class="content block-twitter">
+      
+    </div>
+
+    
+    <div id="bottom_nav">
+      &laquo; <a href="{% url index %}" class="subtitle">Samuel Clay</a>
+    </div>
+    
+</div>
+
+<div id="bottombar"></div>
+{% endblock %}
