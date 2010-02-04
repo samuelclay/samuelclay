@@ -19,8 +19,8 @@ DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
-# CACHE_BACKEND = 'dummy://'
-CACHE_BACKEND = 'locmem://'
+CACHE_BACKEND = 'dummy://'
+# CACHE_BACKEND = 'memcached://127.0.0.1:35098'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -88,3 +88,5 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
 )
+
+from local_settings import *
