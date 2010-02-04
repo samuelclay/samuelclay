@@ -21,7 +21,6 @@ def index(request):
         cache.set('tweets', tweets, 60 * 10)
     
     photos = cache.get('photos')
-    print photos
     if not photos:
         photos = _fetch_and_parse_flickr()
         cache.set('photos', photos, 60 * 10)
