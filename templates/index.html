@@ -68,6 +68,13 @@
         </ul>
     </div>
     
+    <div class="header">Photos</div>
+    <div class="content block-photos">
+      
+                  {% for photo in photos %}
+                    {{ photo|safe }}
+                  {% endfor %}
+    </div>
     <div class="header"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span> .com Blog</a></div>
     <div class="content block-blog">
         <ul class="blog">

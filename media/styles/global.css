@@ -107,3 +107,27 @@ small {
 .block-twitter {
     border-left: 20px solid #32BEBC;
 }
+
+.block-photos {
+    border-left: 20px solid #6C71C0;
+}
+
+.block-photos table {
+    overflow: hidden;
+}
+
+.block-photos .setThumbs-indv {
+    padding: 0 12px 12px 0;
+    float: left;
+}
+
+.block-photos .setThumbs-indv.first {
+    clear: both;
+}
+.block-photos .setThumbs-indv.last {
+    padding-bottom: 0;
+}
+
+.block-photos img {
+    border: 1px solid #909090;
+}
