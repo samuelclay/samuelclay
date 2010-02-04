@@ -123,6 +123,7 @@ small {
 }
 
 .block-intro {
+    min-height: 26px;
     border-left: 20px solid #F5EE4F;
 }
 .block-projects {
