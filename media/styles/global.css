@@ -140,6 +140,8 @@ small {
 }
 
 .block-photos {
+    width: 700px;
+    margin-right: 0px;
     border-left: 20px solid #6C71C0;
 }
 

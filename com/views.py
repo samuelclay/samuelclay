@@ -8,6 +8,8 @@ import urllib2
 from BeautifulSoup import BeautifulSoup 
 from util import twitter
 
+NUM_PHOTOS_PER_ROW = 7
+
 @cache_page(60 * 15)
 def index(request):
     blog = cache.get('blog')
@@ -49,11 +51,14 @@ def _fetch_and_parse_flickr():
     soup = BeautifulSoup(flickr)
     photos = soup.findAll('div', 'setThumbs-indv')
     random.shuffle(photos)
+    photos_count = len(photos)
+    photos = photos[:photos_count - (photos_count%NUM_PHOTOS_PER_ROW)]
+    
     for photo in photos:
         photo.find('a')['href'] = 'http://flickr.com' + photo.find('a')['href']
-    for photo in photos[-5:]:
+    for photo in photos[-NUM_PHOTOS_PER_ROW:]:
         photo['class'] += ' last'
-    for photo in photos[::5]:
+    for photo in photos[::NUM_PHOTOS_PER_ROW]:
         photo['class'] += ' first'
     # photos = [str(BeautifulSoup(photo).findAll('a')[1]) for photo in photos]
     
