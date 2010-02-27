@@ -87,6 +87,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'com',
+    'syncr.flickr',
+    'tagging',
 )
 
 from local_settings import *

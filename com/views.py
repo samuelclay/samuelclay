@@ -7,6 +7,7 @@ import random
 import urllib2
 from BeautifulSoup import BeautifulSoup 
 from util import twitter
+from syncr.flickr.models import Photo
 
 NUM_PHOTOS_PER_ROW = 7
 
@@ -24,7 +25,8 @@ def index(request):
     
     photos = cache.get('photos')
     if not photos:
-        photos = _fetch_and_parse_flickr()
+        # photos = _fetch_and_parse_flickr()
+        photos = Photo.objects.all().order_by('?')
         cache.set('photos', photos, 60 * 10)
         
     return render_to_response('index.html', {

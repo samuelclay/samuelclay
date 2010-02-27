@@ -10,9 +10,13 @@
     </div>
     <div class="content block-intro">
         <ul>
-            <li class="last">
+            <li>
                 <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog  as a public record of my work.
                 <small>2007 - 2010</small>
+            </li>
+            <li class="last">
+                <strong><a href="http://www.newyorkfieldguide.com">New York Field Guide</a>:</strong> An ongoing photoblog of New York City's 90 historic districts. Each photo taken using a Panasonic Lumix GF1 with a 20mm f/1.7 lens.
+                <small>2010</small>
             </li>
         </ul>
     </div>
@@ -73,8 +77,8 @@
     <div class="header">Photos</div>
     <div class="content block-photos">
       
-                  {% for photo in photos %}
-                    {{ photo|safe }}
+                  {% for photo in photos|slice:":48" %}
+                    <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}" alt="{{ photo.title }}" /></a>
                   {% endfor %}
     </div>
     <div class="header"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span> .com Blog</a></div>
