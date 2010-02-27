@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/101/trunk/syncr/googlecode
+END
+admin.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/101/trunk/syncr/googlecode/admin.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/101/trunk/syncr/googlecode/__init__.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/101/trunk/syncr/googlecode/models.py
+END

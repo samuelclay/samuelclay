@@ -1,0 +1,143 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package syncr</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>syncr</strong></big></big> (version 0.36)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/jesse/src/python-local/syncr/__init__.py">/Users/jesse/src/python-local/syncr/__init__.py</a></font></td></tr></table>
+    <p><tt>django-syncr:&nbsp;Synchronize&nbsp;Django&nbsp;with&nbsp;the&nbsp;web.<br>
+&nbsp;<br>
+This&nbsp;project&nbsp;supplies&nbsp;everything&nbsp;needed&nbsp;to&nbsp;sync&nbsp;a&nbsp;Django&nbsp;project<br>
+with&nbsp;several&nbsp;web&nbsp;APIs.&nbsp;It&nbsp;currently&nbsp;supports&nbsp;4&nbsp;services:<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;Flickr&nbsp;(<a href="http://flickr.com">http://flickr.com</a>)<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;YouTube&nbsp;(<a href="http://youtube.com">http://youtube.com</a>)<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;del.icio.us&nbsp;(<a href="http://del.icio.us">http://del.icio.us</a>)<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;Twitter&nbsp;(<a href="http://twitter.com">http://twitter.com</a>)<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;Ma.gnolia&nbsp;(<a href="http://ma.gnolia.com">http://ma.gnolia.com</a>)<br>
+&nbsp;<br>
+Additional&nbsp;web&nbsp;services&nbsp;can&nbsp;be&nbsp;added&nbsp;easily.&nbsp;Suggestions&nbsp;for<br>
+more&nbsp;services&nbsp;and/or&nbsp;patches&nbsp;welcome!<br>
+&nbsp;<br>
+DEPENDENCIES<br>
+&nbsp;<br>
+Each&nbsp;syncr&nbsp;app&nbsp;has&nbsp;different&nbsp;dependencies,&nbsp;but&nbsp;generally&nbsp;you&nbsp;should<br>
+have&nbsp;ElementTree.&nbsp;ET&nbsp;is&nbsp;included&nbsp;in&nbsp;Python&nbsp;2.5,&nbsp;but&nbsp;for&nbsp;older&nbsp;versions<br>
+you&nbsp;need&nbsp;to&nbsp;download&nbsp;it&nbsp;from&nbsp;<a href="http://effbot.org/zone/element-index.htm">http://effbot.org/zone/element-index.htm</a>.<br>
+&nbsp;<br>
+The&nbsp;twitter&nbsp;app&nbsp;depends&nbsp;on&nbsp;python-twitter,&nbsp;available&nbsp;at:<br>
+<a href="http://code.google.com/p/python-twitter/">http://code.google.com/p/python-twitter/</a><br>
+&nbsp;<br>
+The&nbsp;magnolia&nbsp;app&nbsp;depends&nbsp;on&nbsp;pymagnolia,&nbsp;available&nbsp;at:<br>
+<a href="http://www.everes.net/pymagnolia/">http://www.everes.net/pymagnolia/</a><br>
+For&nbsp;working&nbsp;I&nbsp;have&nbsp;place&nbsp;the&nbsp;pymagnolia.py&nbsp;in&nbsp;magnolia&nbsp;app.<br>
+&nbsp;<br>
+The&nbsp;flickr&nbsp;app&nbsp;depends&nbsp;on&nbsp;Beej's&nbsp;Python&nbsp;flickrapi,&nbsp;available&nbsp;at:<br>
+<a href="http://flickrapi.sourceforge.net/">http://flickrapi.sourceforge.net/</a><br>
+&nbsp;<br>
+INSTALLATION&nbsp;/&nbsp;USAGE<br>
+&nbsp;<br>
+1.&nbsp;Add&nbsp;the&nbsp;syncr&nbsp;app&nbsp;to&nbsp;your&nbsp;PYTHONPATH.&nbsp;I&nbsp;recommend&nbsp;creating&nbsp;a&nbsp;directory<br>
+&nbsp;&nbsp;&nbsp;for&nbsp;local&nbsp;python&nbsp;packages&nbsp;(like&nbsp;/Users/jesse/python-local/),&nbsp;copying&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;'syncr'&nbsp;folder&nbsp;(and&nbsp;other&nbsp;"local"&nbsp;apps)&nbsp;there,&nbsp;then&nbsp;adding&nbsp;python-local&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;your&nbsp;PYTHONPATH.<br>
+2.&nbsp;Modify&nbsp;your&nbsp;Django&nbsp;settings&nbsp;file&nbsp;for&nbsp;your&nbsp;project.&nbsp;Add&nbsp;the&nbsp;appropriate<br>
+&nbsp;&nbsp;&nbsp;syncr&nbsp;modules&nbsp;to&nbsp;INSTALLED_APPS.&nbsp;Available&nbsp;modules&nbsp;are:<br>
+&nbsp;&nbsp;&nbsp;'syncr.flickr'<br>
+&nbsp;&nbsp;&nbsp;'syncr.youtube'<br>
+&nbsp;&nbsp;&nbsp;'syncr.twitter'<br>
+&nbsp;&nbsp;&nbsp;'syncr.delicious'<br>
+&nbsp;&nbsp;&nbsp;'syncr.magnolia'<br>
+3.&nbsp;Use&nbsp;the&nbsp;interfaces&nbsp;provided&nbsp;in&nbsp;syncr.app&nbsp;to&nbsp;write&nbsp;scripts<br>
+&nbsp;&nbsp;&nbsp;for&nbsp;synchronizing&nbsp;the&nbsp;web&nbsp;service&nbsp;data&nbsp;with&nbsp;the&nbsp;Django&nbsp;backend.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;For&nbsp;example:<br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;from&nbsp;syncr.app.flickr&nbsp;import&nbsp;FlickrSyncr<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;f&nbsp;=&nbsp;FlickrSyncr(API_KEY,&nbsp;API_SECRET)<br>
+&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;#&nbsp;sync&nbsp;all&nbsp;my&nbsp;photos&nbsp;from&nbsp;the&nbsp;past&nbsp;week...<br>
+&nbsp;&nbsp;&nbsp;f.syncRecentPhotos('jesselegg',&nbsp;days=7)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;#&nbsp;sync&nbsp;my&nbsp;favorite&nbsp;photos<br>
+&nbsp;&nbsp;&nbsp;f.syncPublicFavorites('jesselegg')<br>
+&nbsp;<br>
+4.&nbsp;Explore&nbsp;the&nbsp;results&nbsp;in&nbsp;the&nbsp;Django&nbsp;admin&nbsp;interface.<br>
+&nbsp;<br>
+CHANGELOG<br>
+&nbsp;<br>
+v0.41&nbsp;(Dec&nbsp;14,&nbsp;2008)<br>
+&nbsp;*&nbsp;Numerous&nbsp;updates&nbsp;and&nbsp;new&nbsp;services&nbsp;integrated&nbsp;(please&nbsp;see&nbsp;changelog&nbsp;at<br>
+&nbsp;&nbsp;&nbsp;<a href="http://code.google.com/p/django-syncr/source/list">http://code.google.com/p/django-syncr/source/list</a>)&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+v0.37&nbsp;(August&nbsp;3,&nbsp;2008)<br>
+&nbsp;*&nbsp;Added&nbsp;magnolia&nbsp;syncr&nbsp;app&nbsp;to&nbsp;sync&nbsp;magnolia&nbsp;bookmarks&nbsp;to&nbsp;you&nbsp;django&nbsp;project.<br>
+&nbsp;*&nbsp;Supports&nbsp;all&nbsp;the&nbsp;features&nbsp;provided&nbsp;by&nbsp;magnolia.<br>
+&nbsp;*&nbsp;Include&nbsp;rating&nbsp;for&nbsp;each&nbsp;bookmark&nbsp;and&nbsp;also&nbsp;screenshot&nbsp;of&nbsp;the&nbsp;link.<br>
+&nbsp;*&nbsp;check&nbsp;out&nbsp;the&nbsp;magnolia-syncr&nbsp;documentation&nbsp;in&nbsp;doc&nbsp;folder.<br>
+&nbsp;<br>
+v0.36&nbsp;(May&nbsp;30,&nbsp;2008)<br>
+&nbsp;*&nbsp;Added&nbsp;syncUserUploads&nbsp;method&nbsp;to&nbsp;YoutubeSyncr&nbsp;class<br>
+&nbsp;*&nbsp;Added&nbsp;uploads&nbsp;field&nbsp;to&nbsp;YoutubeUser&nbsp;model&nbsp;as&nbsp;M2M&nbsp;with&nbsp;related&nbsp;name&nbsp;'uploaded_by'<br>
+&nbsp;*&nbsp;Changed&nbsp;related&nbsp;name&nbsp;of&nbsp;favorites&nbsp;field&nbsp;in&nbsp;YoutubeUser&nbsp;model&nbsp;to&nbsp;'favorited_by'<br>
+&nbsp;*&nbsp;Fixed&nbsp;a&nbsp;bug&nbsp;in&nbsp;timedelta&nbsp;usage&nbsp;with&nbsp;FlickrSyncr<br>
+&nbsp;<br>
+v0.35&nbsp;(April&nbsp;17,&nbsp;2008)<br>
+&nbsp;*&nbsp;FlickrSyncr&nbsp;requires&nbsp;the&nbsp;use&nbsp;of&nbsp;flickrapi&nbsp;1.2&nbsp;(<a href="http://flickrapi.sourceforge.net/">http://flickrapi.sourceforge.net/</a>)<br>
+&nbsp;*&nbsp;Fixed&nbsp;a&nbsp;bunch&nbsp;of&nbsp;bugs&nbsp;related&nbsp;to&nbsp;Flickr&nbsp;syncing&nbsp;(or&nbsp;not)&nbsp;exif&nbsp;and&nbsp;other&nbsp;data<br>
+&nbsp;*&nbsp;Fixed&nbsp;miscellaneous&nbsp;typos&nbsp;that&nbsp;people&nbsp;submitted&nbsp;(THANKS&nbsp;GUYS!)<br>
+&nbsp;<br>
+v0.31&nbsp;(Mar&nbsp;18,&nbsp;2008)<br>
+&nbsp;&nbsp;*&nbsp;Bug&nbsp;fixes;&nbsp;now&nbsp;works&nbsp;with&nbsp;Python&nbsp;2.3<br>
+&nbsp;&nbsp;*&nbsp;Changed&nbsp;User&nbsp;models&nbsp;for&nbsp;Twitter&nbsp;and&nbsp;Youtube,&nbsp;now&nbsp;users&nbsp;TwitterUser&nbsp;and&nbsp;YoutubeUser<br>
+&nbsp;<br>
+v0.30&nbsp;(Mar&nbsp;18,&nbsp;2008)<br>
+&nbsp;&nbsp;*&nbsp;Added&nbsp;support&nbsp;for&nbsp;Flickr&nbsp;EXIF&nbsp;data&nbsp;(Thanks&nbsp;Yash!)<br>
+&nbsp;&nbsp;*&nbsp;Added&nbsp;Flickr&nbsp;Geo&nbsp;data&nbsp;(latitutde,&nbsp;longitude&nbsp;and&nbsp;accuracy)<br>
+&nbsp;&nbsp;*&nbsp;These&nbsp;two&nbsp;changes&nbsp;will&nbsp;break&nbsp;your&nbsp;models.<br>
+&nbsp;&nbsp;*&nbsp;Changed&nbsp;Twitter&nbsp;User&nbsp;model&nbsp;to&nbsp;allow&nbsp;Followers&nbsp;and&nbsp;Friends&nbsp;to&nbsp;be&nbsp;null<br>
+&nbsp;&nbsp;*&nbsp;Added&nbsp;syncPhoto&nbsp;method&nbsp;to&nbsp;FlickrSyncr&nbsp;to&nbsp;sync&nbsp;an&nbsp;individual&nbsp;photo<br>
+&nbsp;&nbsp;*&nbsp;Added&nbsp;ability&nbsp;to&nbsp;refresh&nbsp;individual&nbsp;photos&nbsp;by&nbsp;passing&nbsp;refresh=True&nbsp;to&nbsp;the&nbsp;new&nbsp;syncPhoto&nbsp;method<br>
+&nbsp;<br>
+v0.21&nbsp;(Feb&nbsp;20,&nbsp;2008)<br>
+&nbsp;&nbsp;*&nbsp;Bug&nbsp;fixes&nbsp;with&nbsp;FlickrSyncr&nbsp;and&nbsp;YoutubeSyncr<br>
+&nbsp;<br>
+v0.20&nbsp;(Feb&nbsp;19,&nbsp;2008)<br>
+&nbsp;&nbsp;*Initial&nbsp;release</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="syncr.app.html"><strong>app</strong>&nbsp;(package)</a><br>
+<a href="syncr.delicious.html"><strong>delicious</strong>&nbsp;(package)</a><br>
+<a href="syncr.flickr.html"><strong>flickr</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="syncr.lastfm.html"><strong>lastfm</strong>&nbsp;(package)</a><br>
+<a href="syncr.magnolia.html"><strong>magnolia</strong>&nbsp;(package)</a><br>
+<a href="syncr.picasaweb.html"><strong>picasaweb</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="syncr.readernaut.html"><strong>readernaut</strong>&nbsp;(package)</a><br>
+<a href="syncr.twitter.html"><strong>twitter</strong>&nbsp;(package)</a><br>
+<a href="syncr.youtube.html"><strong>youtube</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'jesse@jesselegg.com'<br>
+<strong>__version__</strong> = '0.36'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">jesse@jesselegg.com</td></tr></table>
+</body></html>

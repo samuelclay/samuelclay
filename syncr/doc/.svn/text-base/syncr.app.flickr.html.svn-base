@@ -1,0 +1,150 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module syncr.app.flickr</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="syncr.html"><font color="#ffffff">syncr</font></a>.<a href="syncr.app.html"><font color="#ffffff">app</font></a>.flickr</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/jesse/src/python-local/syncr/app/flickr.py">/Users/jesse/src/python-local/syncr/app/flickr.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="calendar.html">calendar</a><br>
+<a href="django.template.defaultfilters.html">django.template.defaultfilters</a><br>
+</td><td width="25%" valign=top><a href="flickrapi.html">flickrapi</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="django.db.models.html">django.db.models</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="syncr.app.flickr.html#FlickrSyncr">FlickrSyncr</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FlickrSyncr">class <strong>FlickrSyncr</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#FlickrSyncr">FlickrSyncr</a>&nbsp;objects&nbsp;sync&nbsp;flickr&nbsp;photos,&nbsp;photo&nbsp;sets,&nbsp;and&nbsp;favorites<br>
+lists&nbsp;with&nbsp;the&nbsp;Django&nbsp;backend.<br>
+&nbsp;<br>
+It&nbsp;does&nbsp;not&nbsp;currently&nbsp;sync&nbsp;user&nbsp;meta-data.&nbsp;Photo,&nbsp;PhotoSet,&nbsp;and<br>
+FavoriteList&nbsp;objects&nbsp;include&nbsp;some&nbsp;meta-data,&nbsp;but&nbsp;are&nbsp;mostly&nbsp;Django<br>
+ManyToManyFields&nbsp;to&nbsp;Photo&nbsp;objects.<br>
+&nbsp;<br>
+This&nbsp;app&nbsp;requires&nbsp;Beej's&nbsp;flickrapi&nbsp;library.&nbsp;Available&nbsp;at:<br>
+<a href="http://flickrapi.sourceforge.net/">http://flickrapi.sourceforge.net/</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="FlickrSyncr-__init__"><strong>__init__</strong></a>(self, flickr_key, flickr_secret)</dt><dd><tt>Construct&nbsp;a&nbsp;new&nbsp;<a href="#FlickrSyncr">FlickrSyncr</a>&nbsp;object.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;flickr_key:&nbsp;a&nbsp;Flickr&nbsp;API&nbsp;key&nbsp;string<br>
+&nbsp;&nbsp;flickr_secret:&nbsp;a&nbsp;Flickr&nbsp;secret&nbsp;key&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-getExifInfo"><strong>getExifInfo</strong></a>(self, photo_id)</dt><dd><tt>Obtain&nbsp;the&nbsp;exif&nbsp;information&nbsp;for&nbsp;a&nbsp;photo_id<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;photo_id:&nbsp;a&nbsp;flickr&nbsp;photo&nbsp;id&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-getExifKey"><strong>getExifKey</strong></a>(self, exif_data, key)</dt></dl>
+
+<dl><dt><a name="FlickrSyncr-getGeoLocation"><strong>getGeoLocation</strong></a>(self, photo_id)</dt><dd><tt>Obtain&nbsp;the&nbsp;geographical&nbsp;location&nbsp;information&nbsp;for&nbsp;a&nbsp;photo_id<br>
+&nbsp;<br>
+Required&nbsp;Arguments<br>
+&nbsp;&nbsp;photo_id:&nbsp;A&nbsp;flickr&nbsp;photo&nbsp;id</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-getPhotoComments"><strong>getPhotoComments</strong></a>(self, photo_id)</dt><dd><tt>Return&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;comments.<br>
+&nbsp;<br>
+Each&nbsp;comment&nbsp;is&nbsp;represented&nbsp;as&nbsp;dictionary&nbsp;in&nbsp;this&nbsp;format::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;comment&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'flickr_id':&nbsp;'1132823-183689226-72157594258079061'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'author_nsid':&nbsp;'72875139@N00',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'author':&nbsp;'Ehudphilip',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pub_date':&nbsp;datetime.fromtimestamp(int('1156878239')),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'permanent_url':&nbsp;'<a href="http://www.flickr.com/photos/rappensuncle/183689226/#comment72157594258079061">http://www.flickr.com/photos/rappensuncle/183689226/#comment72157594258079061</a>',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'comment':&nbsp;'Great&nbsp;shot!!'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;photo_id:&nbsp;a&nbsp;flickr&nbsp;photo&nbsp;id&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-getPhotoSizes"><strong>getPhotoSizes</strong></a>(self, photo_id)</dt><dd><tt>Return&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;image&nbsp;sizes&nbsp;for&nbsp;a&nbsp;flickr&nbsp;photo.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;photo_id:&nbsp;a&nbsp;flickr&nbsp;photo&nbsp;id&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-syncAllPhotoSets"><strong>syncAllPhotoSets</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;all&nbsp;photo&nbsp;sets&nbsp;for&nbsp;a&nbsp;flickr&nbsp;user.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;flickr&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-syncAllPublic"><strong>syncAllPublic</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;all&nbsp;of&nbsp;a&nbsp;flickr&nbsp;user's&nbsp;photos&nbsp;with&nbsp;Django.<br>
+WARNING:&nbsp;This&nbsp;could&nbsp;take&nbsp;a&nbsp;while!<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;flickr&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-syncPhoto"><strong>syncPhoto</strong></a>(self, photo_id, refresh<font color="#909090">=False</font>)</dt><dd><tt>Synchronize&nbsp;a&nbsp;single&nbsp;flickr&nbsp;photo&nbsp;with&nbsp;Django&nbsp;ORM.<br>
+&nbsp;<br>
+Required&nbsp;Arguments<br>
+&nbsp;&nbsp;photo_id:&nbsp;A&nbsp;flickr&nbsp;photo_id<br>
+Optional&nbsp;Arguments<br>
+&nbsp;&nbsp;refresh:&nbsp;A&nbsp;boolean,&nbsp;if&nbsp;true&nbsp;the&nbsp;Photo&nbsp;will&nbsp;be&nbsp;re-sync'd&nbsp;with&nbsp;flickr</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-syncPhotoSet"><strong>syncPhotoSet</strong></a>(self, photoset_id, order<font color="#909090">=None</font>)</dt><dd><tt>Synchronize&nbsp;a&nbsp;single&nbsp;flickr&nbsp;photo&nbsp;set&nbsp;based&nbsp;on&nbsp;the&nbsp;set&nbsp;id.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;photoset_id:&nbsp;a&nbsp;flickr&nbsp;photoset&nbsp;id&nbsp;number&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-syncPublicFavorites"><strong>syncPublicFavorites</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;a&nbsp;flickr&nbsp;user's&nbsp;public&nbsp;favorites.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;flickr&nbsp;user&nbsp;name&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-syncRecentPhotos"><strong>syncRecentPhotos</strong></a>(self, username, days<font color="#909090">=1</font>)</dt><dd><tt>Synchronize&nbsp;recent&nbsp;public&nbsp;photos&nbsp;from&nbsp;a&nbsp;flickr&nbsp;user.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;flickr&nbsp;username&nbsp;as&nbsp;a&nbsp;string<br>
+Optional&nbsp;arguments<br>
+&nbsp;&nbsp;days:&nbsp;sync&nbsp;photos&nbsp;since&nbsp;this&nbsp;number&nbsp;of&nbsp;days,&nbsp;defaults<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;1&nbsp;(yesterday)</tt></dd></dl>
+
+<dl><dt><a name="FlickrSyncr-user2nsid"><strong>user2nsid</strong></a>(self, username)</dt><dd><tt>Convert&nbsp;a&nbsp;flickr&nbsp;username&nbsp;to&nbsp;an&nbsp;NSID</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-strptime"><strong>strptime</strong></a>(...)</dt><dd><tt><a href="#-strptime">strptime</a>(string,&nbsp;format)&nbsp;-&gt;&nbsp;struct_time<br>
+&nbsp;<br>
+Parse&nbsp;a&nbsp;string&nbsp;to&nbsp;a&nbsp;time&nbsp;tuple&nbsp;according&nbsp;to&nbsp;a&nbsp;format&nbsp;specification.<br>
+See&nbsp;the&nbsp;library&nbsp;reference&nbsp;manual&nbsp;for&nbsp;formatting&nbsp;codes&nbsp;(same&nbsp;as&nbsp;strftime()).</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>FLICKR_LICENSES</strong> = (('0', 'All Rights Reserved'), ('1', 'Attribution-NonCommercial-ShareAlike License'), ('2', 'Attribution-NonCommercial License'), ('3', 'Attribution-NonCommercial-NoDerivs License'), ('4', 'Attribution License'), ('5', 'Attribution-ShareAlike License'), ('6', 'Attribution-NoDerivs License'))<br>
+<strong>settings</strong> = &lt;django.conf.LazySettings object at 0x5b2350&gt;</td></tr></table>
+</body></html>

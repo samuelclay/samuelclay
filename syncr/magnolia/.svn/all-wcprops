@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/101/trunk/syncr/magnolia
+END
+admin.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/101/trunk/syncr/magnolia/admin.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/101/trunk/syncr/magnolia/__init__.py
+END
+pymagnolia.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/101/trunk/syncr/magnolia/pymagnolia.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/101/trunk/syncr/magnolia/models.py
+END

@@ -1,0 +1,118 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module syncr.app.delicious</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="syncr.html"><font color="#ffffff">syncr</font></a>.<a href="syncr.app.html"><font color="#ffffff">app</font></a>.delicious</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/jesse/src/python-local/syncr/app/delicious.py">/Users/jesse/src/python-local/syncr/app/delicious.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="calendar.html">calendar</a><br>
+<a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+<a href="urllib2.html">urllib2</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="syncr.app.delicious.html#DeliciousAPI">DeliciousAPI</a>
+</font></dt><dt><font face="helvetica, arial"><a href="syncr.app.delicious.html#DeliciousSyncr">DeliciousSyncr</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DeliciousAPI">class <strong>DeliciousAPI</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#DeliciousAPI">DeliciousAPI</a>&nbsp;is&nbsp;a&nbsp;bare-bones&nbsp;interface&nbsp;to&nbsp;the&nbsp;del.icio.us&nbsp;API.&nbsp;It's<br>
+used&nbsp;by&nbsp;<a href="#DeliciousSyncr">DeliciousSyncr</a>&nbsp;objects&nbsp;and&nbsp;it's&nbsp;not&nbsp;recommended&nbsp;to&nbsp;use&nbsp;it<br>
+directly.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DeliciousAPI-__init__"><strong>__init__</strong></a>(self, user, passwd)</dt><dd><tt>Initialize&nbsp;a&nbsp;<a href="#DeliciousAPI">DeliciousAPI</a>&nbsp;object.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;user:&nbsp;The&nbsp;del.icio.us&nbsp;username&nbsp;as&nbsp;a&nbsp;string.<br>
+&nbsp;&nbsp;passwd:&nbsp;The&nbsp;username's&nbsp;password&nbsp;as&nbsp;a&nbsp;string.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DeliciousSyncr">class <strong>DeliciousSyncr</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#DeliciousSyncr">DeliciousSyncr</a>&nbsp;objects&nbsp;sync&nbsp;del.icio.us&nbsp;bookmarks&nbsp;to&nbsp;the&nbsp;Django<br>
+backend.&nbsp;The&nbsp;constructor&nbsp;requires&nbsp;a&nbsp;username&nbsp;and&nbsp;password&nbsp;for<br>
+authenticated&nbsp;access&nbsp;to&nbsp;the&nbsp;API.<br>
+&nbsp;<br>
+There&nbsp;are&nbsp;three&nbsp;ways&nbsp;to&nbsp;sync:<br>
+-&nbsp;All&nbsp;bookmarks&nbsp;for&nbsp;the&nbsp;user<br>
+-&nbsp;Only&nbsp;recent&nbsp;bookmarks&nbsp;for&nbsp;the&nbsp;user<br>
+-&nbsp;Bookmarks&nbsp;based&nbsp;on&nbsp;a&nbsp;limited&nbsp;search/query&nbsp;functionality.&nbsp;Currently<br>
+&nbsp;&nbsp;based&nbsp;on&nbsp;date,&nbsp;tag,&nbsp;and&nbsp;URL.<br>
+&nbsp;<br>
+This&nbsp;app&nbsp;requires&nbsp;the&nbsp;excellent&nbsp;ElementTree,&nbsp;which&nbsp;is&nbsp;included&nbsp;in<br>
+Python&nbsp;2.5.&nbsp;&nbsp;Otherwise&nbsp;available&nbsp;at:<br>
+<a href="http://effbot.org/zone/element-index.htm">http://effbot.org/zone/element-index.htm</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DeliciousSyncr-__init__"><strong>__init__</strong></a>(self, username, password)</dt><dd><tt>Construct&nbsp;a&nbsp;new&nbsp;<a href="#DeliciousSyncr">DeliciousSyncr</a>.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;del.icio.us&nbsp;username<br>
+&nbsp;&nbsp;password:&nbsp;the&nbsp;user's&nbsp;password</tt></dd></dl>
+
+<dl><dt><a name="DeliciousSyncr-clean_tags"><strong>clean_tags</strong></a>(self, tags)</dt><dd><tt>Utility&nbsp;method&nbsp;to&nbsp;clean&nbsp;up&nbsp;del.icio.us&nbsp;tags,&nbsp;removing&nbsp;double<br>
+quotes,&nbsp;duplicate&nbsp;tags&nbsp;and&nbsp;return&nbsp;a&nbsp;unicode&nbsp;string.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;tags:&nbsp;a&nbsp;tag&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="DeliciousSyncr-datetime2delicious"><strong>datetime2delicious</strong></a>(self, dt)</dt><dd><tt>Utility&nbsp;method&nbsp;to&nbsp;convert&nbsp;a&nbsp;Python&nbsp;datetime&nbsp;to&nbsp;a&nbsp;string&nbsp;format<br>
+suitable&nbsp;for&nbsp;the&nbsp;del.icio.us&nbsp;API.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;dt:&nbsp;a&nbsp;datetime&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="DeliciousSyncr-syncAll"><strong>syncAll</strong></a>(self, tag<font color="#909090">=None</font>)</dt><dd><tt>Synchronize&nbsp;all&nbsp;of&nbsp;the&nbsp;user's&nbsp;bookmarks.&nbsp;WARNING&nbsp;this&nbsp;may&nbsp;take<br>
+a&nbsp;while!&nbsp;Excessive&nbsp;use&nbsp;may&nbsp;get&nbsp;you&nbsp;throttled.<br>
+&nbsp;<br>
+Optional&nbsp;arguments<br>
+&nbsp;&nbsp;tag:&nbsp;A&nbsp;string.&nbsp;Limit&nbsp;to&nbsp;all&nbsp;bookmarks&nbsp;that&nbsp;match&nbsp;this&nbsp;tag.</tt></dd></dl>
+
+<dl><dt><a name="DeliciousSyncr-syncBookmarks"><strong>syncBookmarks</strong></a>(self, **kwargs)</dt><dd><tt>Synchronize&nbsp;bookmarks.&nbsp;If&nbsp;no&nbsp;arguments&nbsp;are&nbsp;used,&nbsp;today's<br>
+bookmarks&nbsp;will&nbsp;be&nbsp;sync'd.<br>
+&nbsp;<br>
+Optional&nbsp;keyword&nbsp;arguments<br>
+&nbsp;&nbsp;date:&nbsp;A&nbsp;datetime&nbsp;object.&nbsp;Sync&nbsp;only&nbsp;bookmarks&nbsp;from&nbsp;this&nbsp;date.<br>
+&nbsp;&nbsp;tag:&nbsp;A&nbsp;string.&nbsp;Limit&nbsp;to&nbsp;bookmarks&nbsp;matching&nbsp;this&nbsp;tag.<br>
+&nbsp;&nbsp;url:&nbsp;A&nbsp;string.&nbsp;Limit&nbsp;to&nbsp;bookmarks&nbsp;matching&nbsp;this&nbsp;URL.</tt></dd></dl>
+
+<dl><dt><a name="DeliciousSyncr-syncRecent"><strong>syncRecent</strong></a>(self, count<font color="#909090">=15</font>, tag<font color="#909090">=None</font>)</dt><dd><tt>Synchronize&nbsp;the&nbsp;user's&nbsp;recent&nbsp;bookmarks.<br>
+&nbsp;<br>
+Optional&nbsp;arguments:<br>
+&nbsp;&nbsp;count:&nbsp;The&nbsp;number&nbsp;of&nbsp;bookmarks&nbsp;to&nbsp;return,&nbsp;default&nbsp;15,&nbsp;max&nbsp;100.<br>
+&nbsp;&nbsp;tag:&nbsp;A&nbsp;string.&nbsp;Limit&nbsp;to&nbsp;recent&nbsp;bookmarks&nbsp;that&nbsp;match&nbsp;this&nbsp;tag.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

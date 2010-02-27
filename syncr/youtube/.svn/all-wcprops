@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/106/trunk/syncr/youtube
+END
+admin.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/101/trunk/syncr/youtube/admin.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/101/trunk/syncr/youtube/__init__.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/106/trunk/syncr/youtube/models.py
+END

@@ -1,0 +1,119 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module syncr.app.youtube</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="syncr.html"><font color="#ffffff">syncr</font></a>.<a href="syncr.app.html"><font color="#ffffff">app</font></a>.youtube</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/jesse/src/python-local/syncr/app/youtube.py">/Users/jesse/src/python-local/syncr/app/youtube.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="xml.etree.ElementTree.html">xml.etree.ElementTree</a><br>
+</td><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="syncr.app.youtube.html#YoutubeSyncr">YoutubeSyncr</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="YoutubeSyncr">class <strong>YoutubeSyncr</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#YoutubeSyncr">YoutubeSyncr</a>&nbsp;objects&nbsp;synchronize&nbsp;Youtube&nbsp;information&nbsp;with&nbsp;Django<br>
+via&nbsp;the&nbsp;GData&nbsp;API.&nbsp;The&nbsp;Youtube&nbsp;API&nbsp;requires&nbsp;no&nbsp;authentication,&nbsp;so<br>
+the&nbsp;construction&nbsp;method&nbsp;requires&nbsp;no&nbsp;parameters.<br>
+&nbsp;<br>
+<a href="#YoutubeSyncr">YoutubeSyncr</a>&nbsp;creates&nbsp;four&nbsp;kinds&nbsp;of&nbsp;data&nbsp;in&nbsp;the&nbsp;Django&nbsp;database.&nbsp;These<br>
+are:&nbsp;Users,&nbsp;Videos,&nbsp;Playlists,&nbsp;and&nbsp;PlaylistVideos.<br>
+&nbsp;<br>
+User:&nbsp;contains&nbsp;the&nbsp;profile&nbsp;information&nbsp;for&nbsp;a&nbsp;Youtube&nbsp;user<br>
+Video:&nbsp;contains&nbsp;the&nbsp;meta-data&nbsp;and&nbsp;URL&nbsp;information&nbsp;for&nbsp;a&nbsp;Youtube&nbsp;video<br>
+Playlist:&nbsp;contains&nbsp;a&nbsp;list&nbsp;of&nbsp;Video&nbsp;objects,&nbsp;with&nbsp;some&nbsp;meta-data<br>
+PlaylistVideo:&nbsp;a&nbsp;special&nbsp;Video&nbsp;object.&nbsp;See&nbsp;doc&nbsp;string&nbsp;for&nbsp;_syncPlaylistVideo<br>
+&nbsp;<br>
+The&nbsp;Youtube&nbsp;API&nbsp;provides&nbsp;a&nbsp;wealth&nbsp;of&nbsp;data,&nbsp;easily&nbsp;accessible.&nbsp;Thus<br>
+this&nbsp;Syncr&nbsp;module&nbsp;is&nbsp;more&nbsp;sophisticated&nbsp;than&nbsp;the&nbsp;rest&nbsp;of&nbsp;django-syncr.<br>
+&nbsp;<br>
+This&nbsp;app&nbsp;requires&nbsp;the&nbsp;excellent&nbsp;ElementTree,&nbsp;which&nbsp;is&nbsp;included&nbsp;in<br>
+Python&nbsp;2.5.&nbsp;Otherwise&nbsp;available&nbsp;at:<br>
+<a href="http://effbot.org/zone/element-index.htm">http://effbot.org/zone/element-index.htm</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="YoutubeSyncr-gtime2datetime"><strong>gtime2datetime</strong></a>(self, gtime)</dt><dd><tt>Convert&nbsp;GData&nbsp;date&nbsp;and&nbsp;time&nbsp;to&nbsp;a&nbsp;Python&nbsp;datetime&nbsp;object.</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncPlaylist"><strong>syncPlaylist</strong></a>(self, playlist_id)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Youtube&nbsp;playlist&nbsp;based&nbsp;on&nbsp;playlist&nbsp;id<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;playlist_id:&nbsp;a&nbsp;Youtube&nbsp;playlist&nbsp;id&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncPlaylistFeed"><strong>syncPlaylistFeed</strong></a>(self, playlist_feed)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Youtube&nbsp;playlist&nbsp;based&nbsp;on&nbsp;GData&nbsp;URL<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;playlist_feed:&nbsp;a&nbsp;Youtube&nbsp;playlist&nbsp;GData&nbsp;feed&nbsp;URL</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncUser"><strong>syncUser</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Youtube&nbsp;user&nbsp;profile&nbsp;based&nbsp;on&nbsp;username<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;Youtube&nbsp;username&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncUserFavorites"><strong>syncUserFavorites</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;all&nbsp;favorite&nbsp;videos&nbsp;for&nbsp;a&nbsp;Youtube&nbsp;username<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;Youtube&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncUserFeed"><strong>syncUserFeed</strong></a>(self, user_feed)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Youtube&nbsp;user&nbsp;profile&nbsp;based&nbsp;on&nbsp;GData&nbsp;URL<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;user_feed:&nbsp;a&nbsp;Youtube&nbsp;user&nbsp;GData&nbsp;feed&nbsp;URL</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncUserPlaylists"><strong>syncUserPlaylists</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;all&nbsp;playlists&nbsp;for&nbsp;a&nbsp;Youtube&nbsp;username.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;Youtube&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncUserUploads"><strong>syncUserUploads</strong></a>(self, username)</dt><dd><tt>Synchronize&nbsp;a&nbsp;user's&nbsp;uploads&nbsp;feed<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;a&nbsp;Youtube&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncVideo"><strong>syncVideo</strong></a>(self, video_id)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Youtube&nbsp;video&nbsp;based&nbsp;on&nbsp;id<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;video_id:&nbsp;a&nbsp;Youtube&nbsp;video&nbsp;id&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="YoutubeSyncr-syncVideoFeed"><strong>syncVideoFeed</strong></a>(self, video_feed)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Youtube&nbsp;video&nbsp;based&nbsp;on&nbsp;GData&nbsp;URL<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;video_feed:&nbsp;a&nbsp;Youtube&nbsp;video&nbsp;GData&nbsp;feed&nbsp;URL</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>ATOM_NS</strong> = 'http://www.w3.org/2005/Atom'<br>
+<strong>GDATA_NS</strong> = 'http://schemas.google.com/g/2005'<br>
+<strong>MRSS_NS</strong> = 'http://search.yahoo.com/mrss/'<br>
+<strong>YOUTUBE_NS</strong> = 'http://gdata.youtube.com/schemas/2007'</td></tr></table>
+</body></html>

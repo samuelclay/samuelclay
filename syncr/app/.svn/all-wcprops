@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/105/trunk/syncr/app
+END
+tweet.py
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/101/trunk/syncr/app/tweet.py
+END
+syncbk.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/101/trunk/syncr/app/syncbk.py
+END
+flickr.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/101/trunk/syncr/app/flickr.py
+END
+youtube.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/101/trunk/syncr/app/youtube.py
+END
+picasaweb.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/101/trunk/syncr/app/picasaweb.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/101/trunk/syncr/app/__init__.py
+END
+delicious.py
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/101/trunk/syncr/app/delicious.py
+END
+genericfeed.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/105/trunk/syncr/app/genericfeed.py
+END
+tumblr.py
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/101/trunk/syncr/app/tumblr.py
+END
+syncreadernaut.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/101/trunk/syncr/app/syncreadernaut.py
+END
+googlecode.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/101/trunk/syncr/app/googlecode.py
+END
+magnolia.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/101/trunk/syncr/app/magnolia.py
+END

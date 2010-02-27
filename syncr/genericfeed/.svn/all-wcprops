@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/105/trunk/syncr/genericfeed
+END
+admin.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/105/trunk/syncr/genericfeed/admin.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/105/trunk/syncr/genericfeed/__init__.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/105/trunk/syncr/genericfeed/models.py
+END

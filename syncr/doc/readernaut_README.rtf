@@ -1,0 +1,23 @@
+To use readernaut app from django syncr, make sure you put
+
+READERNAUT_USERNAME = your_username
+
+in your settings.py.
+
+To perform an initial import log into django shell
+
+$python manage.py shell
+
+>>> from app.syncrreadernaut import BookSyncr
+>>> b=BookSyncr()
+>>> b.readernautsyncr()
+
+
+This syncs all the books from your readernaut account. Make sure all the paths are right.
+
+Any problem please create an issue here
+
+http://code.google.com/p/django-syncr/issues/list
+
+
+11/10/08  Author: yashh (www.yashh.com)

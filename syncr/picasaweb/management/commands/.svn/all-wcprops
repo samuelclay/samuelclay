@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/101/trunk/syncr/picasaweb/management/commands
+END
+sync_picasaweb.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/101/trunk/syncr/picasaweb/management/commands/sync_picasaweb.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/101/trunk/syncr/picasaweb/management/commands/__init__.py
+END

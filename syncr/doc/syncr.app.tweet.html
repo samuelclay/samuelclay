@@ -1,0 +1,90 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module syncr.app.tweet</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="syncr.html"><font color="#ffffff">syncr</font></a>.<a href="syncr.app.html"><font color="#ffffff">app</font></a>.tweet</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/jesse/src/python-local/syncr/app/tweet.py">/Users/jesse/src/python-local/syncr/app/tweet.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="twitter.html">twitter</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="syncr.app.tweet.html#TwitterSyncr">TwitterSyncr</a>
+</font></dt></dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TwitterSyncr">class <strong>TwitterSyncr</strong></a></font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#TwitterSyncr">TwitterSyncr</a>&nbsp;objects&nbsp;sync&nbsp;Twitter&nbsp;information&nbsp;to&nbsp;the&nbsp;Django<br>
+backend.&nbsp;This&nbsp;includes&nbsp;meta&nbsp;data&nbsp;for&nbsp;Twitter&nbsp;users&nbsp;in&nbsp;addition&nbsp;to<br>
+Twitter&nbsp;status&nbsp;updates&nbsp;(Tweets).<br>
+&nbsp;<br>
+NOTE:&nbsp;Limitations&nbsp;of&nbsp;the&nbsp;Twitter&nbsp;API&nbsp;currently&nbsp;restricts&nbsp;API<br>
+access&nbsp;to&nbsp;only&nbsp;the&nbsp;most&nbsp;recent&nbsp;data&nbsp;in&nbsp;the&nbsp;Twitter&nbsp;system.&nbsp;This<br>
+is&nbsp;for&nbsp;performance&nbsp;reasons&nbsp;(per&nbsp;API&nbsp;docs).<br>
+&nbsp;<br>
+This&nbsp;app&nbsp;depends&nbsp;on&nbsp;python-twitter:<br>
+<a href="http://code.google.com/p/python-twitter/">http://code.google.com/p/python-twitter/</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="TwitterSyncr-__init__"><strong>__init__</strong></a>(self, username, password)</dt><dd><tt>Construct&nbsp;a&nbsp;new&nbsp;<a href="#TwitterSyncr">TwitterSyncr</a>&nbsp;object.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;username:&nbsp;the&nbsp;Twitter&nbsp;user&nbsp;to&nbsp;use&nbsp;for&nbsp;authentication<br>
+&nbsp;&nbsp;password:&nbsp;the&nbsp;Twitter&nbsp;user's&nbsp;password&nbsp;to&nbsp;use&nbsp;for&nbsp;auth</tt></dd></dl>
+
+<dl><dt><a name="TwitterSyncr-syncFollowers"><strong>syncFollowers</strong></a>(self)</dt><dd><tt>Synchronize&nbsp;the&nbsp;Twitter&nbsp;user's&nbsp;followers&nbsp;with&nbsp;Django.&nbsp;This<br>
+only&nbsp;works&nbsp;for&nbsp;the&nbsp;username&nbsp;who&nbsp;is&nbsp;authenticated&nbsp;in&nbsp;the&nbsp;API<br>
+object.</tt></dd></dl>
+
+<dl><dt><a name="TwitterSyncr-syncFriends"><strong>syncFriends</strong></a>(self, user)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Twitter&nbsp;user's&nbsp;friends&nbsp;with&nbsp;Django.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;user:&nbsp;the&nbsp;Twitter&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="TwitterSyncr-syncFriendsTweets"><strong>syncFriendsTweets</strong></a>(self, user)</dt><dd><tt>Synchronize&nbsp;the&nbsp;tweets&nbsp;of&nbsp;a&nbsp;Twitter&nbsp;user's&nbsp;friends&nbsp;(currently<br>
+only&nbsp;the&nbsp;last&nbsp;20&nbsp;updates).&nbsp;Also&nbsp;automatically&nbsp;add&nbsp;these&nbsp;users<br>
+as&nbsp;friends&nbsp;in&nbsp;the&nbsp;Django&nbsp;database,&nbsp;if&nbsp;they&nbsp;aren't&nbsp;already.<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;user:&nbsp;the&nbsp;Twitter&nbsp;username&nbsp;whose&nbsp;friend's&nbsp;tweets&nbsp;will&nbsp;sync</tt></dd></dl>
+
+<dl><dt><a name="TwitterSyncr-syncTweet"><strong>syncTweet</strong></a>(self, status_id)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Twitter&nbsp;status&nbsp;update&nbsp;by&nbsp;id<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;status_id:&nbsp;a&nbsp;Twitter&nbsp;status&nbsp;update&nbsp;id</tt></dd></dl>
+
+<dl><dt><a name="TwitterSyncr-syncTwitterUserTweets"><strong>syncTwitterUserTweets</strong></a>(self, user)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Twitter&nbsp;user's&nbsp;tweets&nbsp;with&nbsp;Django&nbsp;(currently<br>
+only&nbsp;the&nbsp;last&nbsp;20&nbsp;updates)<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;user:&nbsp;the&nbsp;Twitter&nbsp;user&nbsp;as&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="TwitterSyncr-syncUser"><strong>syncUser</strong></a>(self, user)</dt><dd><tt>Synchronize&nbsp;a&nbsp;Twitter&nbsp;user&nbsp;with&nbsp;the&nbsp;Django&nbsp;backend<br>
+&nbsp;<br>
+Required&nbsp;arguments<br>
+&nbsp;&nbsp;user:&nbsp;a&nbsp;Twitter&nbsp;username&nbsp;as&nbsp;a&nbsp;string</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>
