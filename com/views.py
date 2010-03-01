@@ -8,6 +8,7 @@ import urllib2
 from BeautifulSoup import BeautifulSoup 
 from util import twitter
 from syncr.flickr.models import Photo
+from com.common import respond
 
 NUM_PHOTOS_PER_ROW = 7
 
@@ -29,7 +30,7 @@ def index(request):
         photos = Photo.objects.all().order_by('?')
         cache.set('photos', photos, 60 * 10)
         
-    return render_to_response('index.html', {
+    return respond(request, 'index.html', {
         'blog_entries': blog.entries,
         'tweets': tweets,
         'photos': photos,

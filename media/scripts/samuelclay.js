@@ -204,5 +204,14 @@ SAMUELCLAY.log = function(msg) {
 (function($) {
 $(document).ready(function() {
     
+    $('.header-photo img').hover(function() {
+        var $link = $(this).parents('.header');
+        $link.addClass('hover');
+    }, function() {
+        var $link = $(this).parents('.header');
+        $link.removeClass('hover');
+        
+    });
+    
 });
 })(jQuery);

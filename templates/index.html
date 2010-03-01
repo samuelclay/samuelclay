@@ -52,12 +52,25 @@
         </ul>
     </div>
     
-    <div class="header">Code</div>
+    <div class="header">
+    
+      <div class="header-text"><a href="http://github.com/samuelclay">Code</a></div>
+      <div class="header-photo header-photo-borderless">
+        <a href="http://github.com/samuelclay">
+          <img src="{{ MEDIA_URL }}images/github-logo.png" width="73" height="73" />
+        </a>
+      </div>
+        
+    </div>
     <div class="content block-code">
         <ul>
             <li>
                 <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur @ GitHub</a>:</strong> The Django/Python code that powers the intelligent feed reader.
                 <small>2009 - 2010</small>
+            </li>
+            <li>
+                <strong><a href="http://github.com/samuelclay/newyorkfieldguide">newyorkfieldguide.com @ GitHub</a>:</strong> A stylish photoblog with annotations and per-photo commenting.
+                <small>2010</small>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/samuelclay">samuelclay.com @ GitHub</a>:</strong> The code that runs this page.
@@ -74,14 +87,31 @@
         </ul>
     </div>
     
-    <div class="header">Photos</div>
+    <div class="header">
+      <div class="header-text"><a href="http://flickr.com/photos/conesus/">Photos</a></div>
+    
+      <div class="header-photo header-photo-borderless">
+        <a href="http://flickr.com/photos/conesus/">
+          <img src="{{ MEDIA_URL }}images/flickr-logo.png" width="50" height="50" />
+        </a>
+      </div>  
+    </div>
     <div class="content block-photos">
       
                   {% for photo in photos|slice:":48" %}
                     <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}" alt="{{ photo.title }}" /></a>
                   {% endfor %}
     </div>
-    <div class="header"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span> .com Blog</a></div>
+    <div class="header">
+      <div class="header-text"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span> .com Blog</a></div>
+    
+      <div class="header-photo">
+        <a href="http://www.ofbrooklyn.com">
+          <img src="http://www.ofbrooklyn.com/media/photos/Profile_Photo.jpg" width="73" />
+        </a>
+      </div>
+        
+    </div>
     <div class="content block-blog">
         <ul class="blog">
             {% for entry in blog_entries %}
@@ -93,7 +123,14 @@
         </ul>
     </div>
     
-    <div class="header"><a href="http://twitter.com/samuelclay">@samuelclay</a> on Twitter</div>
+    <div class="header">
+      <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a> on Twitter</div>
+      <div class="header-photo">
+        <a href="http://twitter.com/samuelclay">
+          <img src="http://img.tweetimag.es/i/samuelclay_b" width="73" height="73" />
+        </a>
+      </div>
+    </div>
     <div class="content block-twitter">
         <ul class="tweets">
             {% for tweet in tweets %}

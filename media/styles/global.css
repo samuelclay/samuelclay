@@ -84,6 +84,19 @@ body {
 .header .subtitle {
     font-size: 18px;
 }
+.header .header-photo img {
+    margin: 12px auto;
+    border: 1px solid #303030;
+}
+
+.header.hover .header-text a {
+    text-decoration: underline;
+}
+
+.header .header-photo.header-photo-borderless img {
+    border: none;
+}
+
 .content {
     float: right;
     width: 460px;
