@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="topbar"></div>
+
+<div id="wrapper">
+    
+    <div id="nav">
+      &laquo; <a href="{% url index %}" class="subtitle">Samuel Clay</a>
+    </div>
+      
+    <div class="header">
+      <div class="title">SunRayLab</div>
+    </div>
+    <div class="content block-intro">
+        <ul>
+            <li class="last">
+                A CMS for projects. Originally built to connect creative people together to work on projects. <code>PHP</code>, but I know better now.
+                <small>2007 - 2008</small>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="header">Project Home</div>
+    <div class="content block-projects">
+      <img src="/static/images/sunraylab_collaborate.png" width="575" />
+    </div>
+        
+    <div class="header">Profiles</div>
+    <div class="content block-code">
+      <img src="/static/images/sunraylab_profile.png" width="575" />
+    </div>
+    
+    
+    <div class="header">SunRayLab Blog</div>
+    <div class="content block-photos block-caselife">
+      <img src="/static/images/sunraylab_blog.png" width="575" />
+    </div>
+    
+    
+    <div class="header">Account Creation</div>
+    <div class="content block-blog">
+      <img src="/static/images/sunraylab_create.png" width="575" />
+    </div>
+    
+    
+    <div class="header">Landing Page</div>
+    <div class="content block-twitter">
+      <img src="/static/images/sunraylab_home.png" width="575" />
+    </div>
+    
+        
+    <div class="header"></div>
+    <div class="content block-twitter">
+      
+    </div>
+    
+    
+    <div class="header"></div>
+    <div class="content block-blog">
+      
+    </div>
+    
+    <div id="bottom_nav">
+      &laquo; <a href="{% url index %}" class="subtitle">Samuel Clay</a>
+    </div>
+
+</div>
+
+<div id="bottombar"></div>
+{% endblock %}
