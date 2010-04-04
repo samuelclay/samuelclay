@@ -1,5 +1,4 @@
 from django.shortcuts import render_to_response
-from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 import feedparser
 import datetime
@@ -12,7 +11,6 @@ from com.common import respond
 
 NUM_PHOTOS_PER_ROW = 7
 
-@cache_page(60 * 15)
 def index(request):
     blog = cache.get('blog')
     if not blog:
@@ -30,10 +28,13 @@ def index(request):
         photos = Photo.objects.all().order_by('?')
         cache.set('photos', photos, 60 * 10)
         
+    rand = random.randint(1, 11) 
+    
     return respond(request, 'index.html', {
         'blog_entries': blog.entries,
         'tweets': tweets,
         'photos': photos,
+        'rand': rand,
     })
     
 def _fetch_and_parse_blog():
