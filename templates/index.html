@@ -195,7 +195,7 @@
         <ul class="tweets">
             {% for tweet in tweets %}
                 <li {% if forloop.last %}class="last"{% endif %}>
-                    {{ tweet.text|safe|urlize }}
+                    {{ tweet.text|safe|urlize|linebreaksbr }}
                     <small>{{ tweet.relative_created_at }}</small>
                 </li>
             {% endfor %}
