@@ -52,7 +52,7 @@
     {% endifequal %}
     {% ifequal rand 10 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is finding more in the city.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is writing another line of code.
       </div>
     {% endifequal %}
     {% ifequal rand 11 %}
@@ -67,7 +67,7 @@
     <div class="content block-intro">
         <ul>
             <li>
-                <strong><a href="http://www.protopub.com">Protopub</a>:</strong> An RSS feed reader that lets you read and filter the original site. Written with <code>Django</code> in <code>Python</code>.
+                <strong><a href="http://www.newsblur.com">NewsBlur</a>:</strong> An RSS feed reader that lets you read and filter the original site. Written with <code>Django</code> in <code>Python</code>.
                 <small>2009 - 2010</small>
             </li>
             <li>
@@ -75,7 +75,7 @@
                 <small>2010</small>
             </li>
             <li>
-                <strong><a href="http://www.sammysamovar.com">Sammy Samovar</a>:</strong> A blog as a public record of my work.
+                <strong><a href="http://www.ofbrooklyn.com">Sammy Samovar</a>:</strong> A blog as a public record of my work.
                 <small>2007 - 2010</small>
             </li>
             <li class="last">
@@ -196,7 +196,13 @@
             {% for tweet in tweets %}
                 <li {% if forloop.last %}class="last"{% endif %}>
                     {{ tweet.text|safe|urlize|linebreaksbr }}
-                    <small>{{ tweet.relative_created_at }}</small>
+                    <small>
+                      {% ifequal tweet.relative_created_at 'about 1 days ago' %}
+                        about 1 day ago
+                      {% else %}
+                        {{ tweet.relative_created_at }}
+                      {% endifequal %}
+                    </small>
                 </li>
             {% endfor %}
         </ul>

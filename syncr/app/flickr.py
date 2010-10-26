@@ -61,8 +61,11 @@ class FlickrSyncr:
             sizes[label] = {'width': None, 'height': None}
         # Set values given by flickr
         for el in result.sizes[0].size:
-            sizes[el['label']]['width'] = el['width']
-            sizes[el['label']]['height'] = el['height']
+            size = el['label']
+            if size == 'Medium 640':
+                size = 'Medium'
+            sizes[size]['width'] = el['width']
+            sizes[size]['height'] = el['height']
         return sizes
 
     def getPhotoComments(self, photo_id):
