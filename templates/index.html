@@ -3,7 +3,7 @@
 {% block content %}
 <div id="topbar"></div>
 
-<div id="wrapper">
+<div id="wrapper" class=" ">
     
     {% ifequal rand 1 %}
       <div class="name-header">
@@ -62,25 +62,37 @@
     {% endifequal %}
     
     <div class="header">
+      <div class="title">For a Living</div>
+    </div>
+    <div class="content block-work">
+        <ul>
+            <li>
+                <strong><a href="http://www.documentcloud.org">DocumentCloud</a>:</strong> An open-source repository of primary source documents contributed by journalists.
+                <small>2010 - 2011</small>
+            </li>
+            <li class="last">
+                <strong><a href="http://storybird.com">Storybird</a>:</strong> Collaborative storytelling. We're a young publishing house with no roof. 
+                <small>2009 - 2011</small>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="header">
       <div class="title">Current Projects</div>
     </div>
     <div class="content block-intro">
         <ul>
             <li>
                 <strong><a href="http://www.newsblur.com">NewsBlur</a>:</strong> An RSS feed reader that lets you read and filter the original site. Witten with <code>Django</code> in <code>Python</code>.
-                <small>2009 - 2010</small>
+                <small>2009 - 2011</small>
             </li>
             <li>
                 <strong><a href="http://www.newyorkfieldguide.com">New York Field Guide</a>:</strong> An ongoing photoblog of New York City's 90 historic districts. Each photo taken using a Panasonic Lumix GF1 with a 20mm f/1.7 lens.
-                <small>2010</small>
-            </li>
-            <li>
-                <strong><a href="http://www.ofbrooklyn.com">Sammy Samovar</a>:</strong> A blog as a public record of my work.
-                <small>2007 - 2010</small>
+                <small>2010 - 2011</small>
             </li>
             <li class="last">
-                <strong><a href="http://storybird.com">Storybird</a>:</strong> Collaborative storytelling. We're a young publishing house with no roof. 
-                <small>2009 - 2010</small>
+                <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog as a public record of my work.
+                <small>2007 - 2011</small>
             </li>
         </ul>
     </div>
@@ -163,7 +175,7 @@
                   {% endfor %}
     </div>
     <div class="header">
-      <div class="header-text"><a href="http://www.ofbrooklyn.com"><span>ofBrooklyn</span> .com Blog</a></div>
+      <div class="header-text"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a><br />Blog</div>
     
       <div class="header-photo">
         <a href="http://www.ofbrooklyn.com">
@@ -184,7 +196,7 @@
     </div>
     
     <div class="header">
-      <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a> on Twitter</div>
+      <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a><br />on Twitter</div>
       <div class="header-photo">
         <a href="http://twitter.com/samuelclay">
           <img src="http://img.tweetimag.es/i/samuelclay_b" width="75" height="75" />
@@ -207,6 +219,8 @@
             {% endfor %}
         </ul>
     </div>
+  <div class="background-inner"></div>
+  <div class="background-outer"></div>
 
 </div>
 
