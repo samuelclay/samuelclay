@@ -150,6 +150,9 @@ body {
     font-family: "Lucida Grande", Helvetica, sans-serif;
 }
 
+.name-header-text {
+  line-height: 54px;
+}
 .header {
     float: left;
     width: 260px;

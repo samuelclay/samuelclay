@@ -47,8 +47,14 @@ def _fetch_and_parse_twitter():
     twitter_api = twitter.Api()
     tweets = twitter_api.GetUserTimeline('samuelclay')
     shown_tweets = [t for t in tweets if not t.text.startswith('@')]
+    fixed_tweets = []
+    for tweet in shown_tweets:
+        fixed_tweets.append({
+            'relative_created_at': tweet.relative_created_at.replace('about ', ''),
+            'text': tweet.text,
+        })
 
-    return shown_tweets
+    return fixed_tweets
     
 def _fetch_and_parse_flickr():
     flickr = urllib2.urlopen('http://www.flickr.com/photos/conesus/sets/72157623221750803/')
