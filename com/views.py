@@ -52,8 +52,12 @@ def _fetch_and_parse_twitter():
     shown_tweets = [t for t in tweets if not t.text.startswith('@')]
     fixed_tweets = []
     for tweet in shown_tweets:
+        created = tweet.relative_created_at
+        created = created.replace('about ', '')
+        created = created.replace('1 hours ago', '1 hour ago')
+        created = created.replace('1 days ago', '1 day ago')
         fixed_tweets.append({
-            'relative_created_at': tweet.relative_created_at.replace('about ', ''),
+            'relative_created_at': created,
             'text': tweet.text,
         })
 

@@ -191,11 +191,7 @@
                 <li {% if forloop.last %}class="last"{% endif %}>
                     {{ tweet.text|safe|urlize|linebreaksbr }}
                     <small>
-                      {% ifequal tweet.relative_created_at 'about 1 days ago' %}
-                        about 1 day ago
-                      {% else %}
-                        {{ tweet.relative_created_at }}
-                      {% endifequal %}
+                      {{ tweet.relative_created_at }}
                     </small>
                 </li>
             {% endfor %}
