@@ -4,10 +4,13 @@ import feedparser
 import datetime
 import random
 import urllib2
+import socket
 from BeautifulSoup import BeautifulSoup 
 from util import twitter
 from syncr.flickr.models import Photo
 from com.common import respond
+
+socket.setdefaulttimeout(10)
 
 NUM_PHOTOS_PER_ROW = 7
 
