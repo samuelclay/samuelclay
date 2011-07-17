@@ -7,57 +7,68 @@
     
     {% ifequal rand 1 %}
       <div class="name-header">
-       <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is a Brooklynite.
+       <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+       <span>is a Brooklynite.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 2 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is a historic preservationist.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is a historic preservationist.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 3 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is modern day geekery.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is modern day geekery.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 4 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is bespectacled today.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is bespectacled today.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 5 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is writing code. Right. Now.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is writing code. Right. Now.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 6 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is making out with his dog again.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is making out with his dog again.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 7 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is steeping another cup of tea.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is steeping another cup of tea.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 8 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is another former Clevelander.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is another former Clevelander.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 9 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is inexplicably biking in circles.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is inexplicably biking in circles.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 10 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is writing another line of code.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is writing another line of code.</span>
       </div>
     {% endifequal %}
     {% ifequal rand 11 %}
       <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> is driving in the countryside.
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
+        <span>is driving in the countryside.</span>
       </div>
     {% endifequal %}
     
@@ -74,10 +85,14 @@
                 <strong><a href="http://www.newyorkfieldguide.com">New York Field Guide</a>:</strong> An ongoing photoblog of New York City's 90 historic districts. Each photo taken using a Panasonic Lumix GF1 with a 20mm f/1.7 lens.
                 <small>2010 - 2011</small>
             </li>
+            </li>
+            <li class="">
+                <strong><a href="http://documentcloud.github.com/visualsearch">VisualSearch.js</a>:</strong> A faceted search box for real data.
+                <small>2011</small>
+            </li>
             <li class="last">
                 <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog as a public record of my work.
                 <small>2007 - 2011</small>
-            </li>
         </ul>
     </div>
     
@@ -87,8 +102,8 @@
     <div class="content block-work">
         <ul>
             <li class="last">
-                <strong><a href="http://www.documentcloud.org">DocumentCloud</a>:</strong> The future of journalism is transparency. Funded by the Knight Foundation. Home of <a href="http://documentcloud.github.com/backbone">Backbone.js</a>, <a href="http://documentcloud.github.com/underscore">Underscore.js</a>, and loads of <a href="http://github.com/documentcloud">open-source software</a>.
-                <small>2010 - 2011</small>
+                <strong><a href="http://www.tastylabs.com">Tasty Labs</a>:</strong> We're putting the useful back into social software. Our current project is <a href="http://www.jig.com">Jig</a>.
+                <small>2011</small>
             </li>
         </ul>
     </div>
@@ -96,6 +111,10 @@
     <div class="header">Past Projects</div>
     <div class="content block-projects">
         <ul>
+            <li class="">
+                <strong><a href="http://www.documentcloud.org">DocumentCloud</a>:</strong> The future of journalism is transparency. Funded by the Knight Foundation. Contributor to <a href="http://documentcloud.github.com/backbone">Backbone.js</a>, <a href="http://documentcloud.github.com/underscore">Underscore.js</a>, and much <a href="http://github.com/documentcloud">open-source software</a>.
+                <small>2010 - 2011</small>
+            </li>
             <li>
                 <strong><a href="http://storybird.com">Storybird</a>:</strong> Collaborative storytelling. We're a young publishing house with no roof. 
                 <small>2009 - 2011</small>
@@ -169,10 +188,9 @@
       </div>  
     </div>
     <div class="content block-photos">
-      
-                  {% for photo in photos|slice:":48" %}
-                    <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}" alt="{{ photo.title }}" /></a>
-                  {% endfor %}
+      {% for photo in photos|slice:":48" %}
+        <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}" alt="{{ photo.title }}" /></a>
+      {% endfor %}
     </div>
     <div class="header">
       <div class="header-text"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a><br />Blog</div>
