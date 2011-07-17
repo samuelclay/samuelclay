@@ -4,12 +4,29 @@ import feedparser
 import datetime
 import random
 import urllib2
+import socket
 from BeautifulSoup import BeautifulSoup 
 from util import twitter
 from syncr.flickr.models import Photo
 from com.common import respond
 
+socket.setdefaulttimeout(10)
+
 NUM_PHOTOS_PER_ROW = 7
+
+ISA_QUOTES = [
+    "is up on a hill in San Francisco.",
+    "is a historic preservationist.",
+    "is modern day geekery.",
+    "is bespectacled today.",
+    "is writing code. Right. Now.",
+    "is making out with his dog again.",
+    "is steeping another cup of tea.",
+    "is another former Clevelander.",
+    "is in his element.",
+    "is writing another line of code.",
+    "is out driving the countryside.",
+]
 
 def index(request):
     blog = cache.get('blog')
@@ -27,14 +44,14 @@ def index(request):
         # photos = _fetch_and_parse_flickr()
         photos = Photo.objects.all().order_by('?')
         cache.set('photos', photos, 60 * 10)
-        
-    rand = random.randint(1, 11) 
+    
+    isa_quote = random.choice(ISA_QUOTES) 
     
     return respond(request, 'index.html', {
         'blog_entries': blog.entries,
         'tweets': tweets,
         'photos': photos,
-        'rand': rand,
+        'isa_quote': isa_quote,
     })
     
 def _fetch_and_parse_blog():
@@ -47,8 +64,18 @@ def _fetch_and_parse_twitter():
     twitter_api = twitter.Api()
     tweets = twitter_api.GetUserTimeline('samuelclay')
     shown_tweets = [t for t in tweets if not t.text.startswith('@')]
+    fixed_tweets = []
+    for tweet in shown_tweets:
+        created = tweet.relative_created_at
+        created = created.replace('about ', '')
+        created = created.replace('1 hours ago', '1 hour ago')
+        created = created.replace('1 days ago', '1 day ago')
+        fixed_tweets.append({
+            'relative_created_at': created,
+            'text': tweet.text,
+        })
 
-    return shown_tweets
+    return fixed_tweets
     
 def _fetch_and_parse_flickr():
     flickr = urllib2.urlopen('http://www.flickr.com/photos/conesus/sets/72157623221750803/')
@@ -76,3 +103,4 @@ def chunks(l, n):
         new_l.append(l[i:i+n])
         
     return new_l
+    
