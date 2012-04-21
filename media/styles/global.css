@@ -207,7 +207,7 @@ ul li {
     margin: 0 0 14px;
     line-height: 19px;
     color: #383838;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 ul li.last {
@@ -225,6 +225,10 @@ small {
 /*     line-height: 24px;*/
 }
 
+.github {
+    text-transform: uppercase;
+    font-size: 10px;
+}
 .block-intro {
     min-height: 26px;
     border-left: 20px solid #6CC071;
