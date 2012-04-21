@@ -1,4 +1,3 @@
-from django.shortcuts import render_to_response
 from django.core.cache import cache
 import feedparser
 import datetime
@@ -16,16 +15,16 @@ NUM_PHOTOS_PER_ROW = 7
 
 ISA_QUOTES = [
     "is up on a hill in San Francisco.",
-    "is a historic preservationist.",
+    "is waiting to hear what you think.",
     "is modern day geekery.",
-    "is bespectacled today.",
+    "is going about it all wrong.",
     "is writing code. Right. Now.",
     "is making out with his dog again.",
-    "is steeping another cup of tea.",
+    "is on a tea-buying-spree.",
     "is another former Clevelander.",
     "is in his element.",
-    "is writing another line of code.",
-    "is out driving the countryside.",
+    "is randomizing fields.",
+    "is out driving with the top down.",
 ]
 
 def index(request):
