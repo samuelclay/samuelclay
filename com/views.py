@@ -15,7 +15,7 @@ NUM_PHOTOS_PER_ROW = 7
 
 ISA_QUOTES = [
     "is up on a hill in San Francisco.",
-    "is waiting to hear what you think.",
+    "is eager to hear what you think.",
     "is modern day geekery.",
     "is going about it all wrong.",
     "is writing code. Right. Now.",
@@ -24,7 +24,7 @@ ISA_QUOTES = [
     "is another former Clevelander.",
     "is in his element.",
     "is randomizing fields.",
-    "is out driving with the top down.",
+    "is driving with the top down.",
 ]
 
 def index(request):
