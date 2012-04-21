@@ -25,7 +25,10 @@ import calendar
 import httplib
 import os
 import rfc822
-import json as simplejson
+try:
+    import json as simplejson
+except ImportError:
+    import simplejson
 import sys
 import tempfile
 import textwrap
