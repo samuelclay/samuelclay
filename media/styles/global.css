@@ -209,8 +209,7 @@ ul li {
     color: #383838;
     font-size: 14px;
 }
-
-ul li.last {
+ul li:last-child {
     margin: 0;
 }
 
