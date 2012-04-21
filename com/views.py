@@ -20,7 +20,7 @@ ISA_QUOTES = [
     "is going about it all wrong.",
     "is writing code. Right. Now.",
     "is making out with his dog again.",
-    "is on a tea-buying-spree.",
+    "is on a tea buying spree.",
     "is another former Clevelander.",
     "is in his element.",
     "is randomizing fields.",
