@@ -7,6 +7,7 @@ import urllib2
 import socket
 from BeautifulSoup import BeautifulSoup 
 import tweepy
+import logging
 from syncr.flickr.models import Photo
 from com.common import respond
 from util.dates import relative_timesince
@@ -33,28 +34,28 @@ ISA_QUOTES = [
 def index(request):
     blog = cache.get('blog')
     if not blog:
-        print " ---> Fetching blog..."
+        logging.debug(" ---> Fetching blog...")
         blog = _fetch_and_parse_blog()
         cache.set('blog', blog, 60 * 10)
     else:
-        print " ---> Cached blog."
+        logging.debug(" ---> Cached blog.")
         
     tweets = cache.get('tweets')
     if not tweets:
-        print " ---> Fetching tweets..."
+        logging.debug(" ---> Fetching twitter...")
         tweets = _fetch_and_parse_twitter()
         cache.set('tweets', tweets, 60 * 10)
     else:
-        print " ---> Cached tweets."
+        logging.debug(" ---> Cached twitter.")
     
     photos = cache.get('photos')
     if not photos:
-        print " ---> Fetching flickr..."
+        logging.debug(" ---> Fetching flickr...")
         # photos = _fetch_and_parse_flickr()
         photos = Photo.objects.all().order_by('?')
         cache.set('photos', photos, 60 * 10)
     else:
-        print " ---> Cached flickr."
+        logging.debug(" ---> Cached flickr.")
     
     isa_quote = random.choice(ISA_QUOTES) 
     
