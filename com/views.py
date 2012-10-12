@@ -5,9 +5,10 @@ import random
 import urllib2
 import socket
 from BeautifulSoup import BeautifulSoup 
-from util import twitter
+import tweepy
 from syncr.flickr.models import Photo
 from com.common import respond
+from util.dates import relative_timesince
 
 socket.setdefaulttimeout(10)
 
@@ -60,17 +61,14 @@ def _fetch_and_parse_blog():
     return blog
 
 def _fetch_and_parse_twitter():
-    twitter_api = twitter.Api()
-    tweets = twitter_api.GetUserTimeline('samuelclay')
-    shown_tweets = [t for t in tweets if not t.text.startswith('@')]
+    twitter_api = tweepy.API()
+    tweets = twitter_api.user_timeline('samuelclay', exclude_replies=True, 
+                                       count=100, trim_user=True, include_rts=False)
+    # shown_tweets = [t for t in tweets if not t.text.startswith('@')]
     fixed_tweets = []
-    for tweet in shown_tweets:
-        created = tweet.relative_created_at
-        created = created.replace('about ', '')
-        created = created.replace('1 hours ago', '1 hour ago')
-        created = created.replace('1 days ago', '1 day ago')
+    for tweet in tweets:
         fixed_tweets.append({
-            'relative_created_at': created,
+            'relative_created_at': "%s ago" % relative_timesince(tweet.created_at),
             'text': tweet.text,
         })
 
