@@ -1,4 +1,5 @@
 from django.core.cache import cache
+# from django.views.decorators.cache import cache_page
 import feedparser
 import datetime
 import random
@@ -28,22 +29,32 @@ ISA_QUOTES = [
     "is driving with the top down.",
 ]
 
+# @cache_page(60)
 def index(request):
     blog = cache.get('blog')
     if not blog:
+        print " ---> Fetching blog..."
         blog = _fetch_and_parse_blog()
         cache.set('blog', blog, 60 * 10)
+    else:
+        print " ---> Cached blog."
         
     tweets = cache.get('tweets')
     if not tweets:
+        print " ---> Fetching tweets..."
         tweets = _fetch_and_parse_twitter()
         cache.set('tweets', tweets, 60 * 10)
+    else:
+        print " ---> Cached tweets."
     
     photos = cache.get('photos')
     if not photos:
+        print " ---> Fetching flickr..."
         # photos = _fetch_and_parse_flickr()
         photos = Photo.objects.all().order_by('?')
         cache.set('photos', photos, 60 * 10)
+    else:
+        print " ---> Cached flickr."
     
     isa_quote = random.choice(ISA_QUOTES) 
     
@@ -66,7 +77,7 @@ def _fetch_and_parse_twitter():
                                        count=100, trim_user=True, include_rts=False)
     # shown_tweets = [t for t in tweets if not t.text.startswith('@')]
     fixed_tweets = []
-    for tweet in tweets:
+    for tweet in tweets[:12]:
         fixed_tweets.append({
             'relative_created_at': "%s ago" % relative_timesince(tweet.created_at),
             'text': tweet.text,
