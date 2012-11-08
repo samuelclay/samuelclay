@@ -41,7 +41,7 @@ def index(request):
         logging.debug(" ---> Cached blog.")
         
     tweets = cache.get('tweets')
-    if not tweets:
+    if not tweets and tweets != []:
         logging.debug(" ---> Fetching twitter...")
         tweets = _fetch_and_parse_twitter()
         cache.set('tweets', tweets, 60 * 10)
