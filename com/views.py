@@ -73,9 +73,13 @@ def _fetch_and_parse_blog():
     return blog
 
 def _fetch_and_parse_twitter():
-    twitter_api = tweepy.API()
-    tweets = twitter_api.user_timeline('samuelclay', exclude_replies=True, 
-                                       count=100, trim_user=True, include_rts=False)
+    try:
+        twitter_api = tweepy.API()
+        tweets = twitter_api.user_timeline('samuelclay', exclude_replies=True, 
+                                           count=100, trim_user=True, include_rts=False)
+    except tweepy.TweepError:
+        return []
+        
     # shown_tweets = [t for t in tweets if not t.text.startswith('@')]
     fixed_tweets = []
     for tweet in tweets[:12]:
