@@ -62,8 +62,12 @@ class FlickrSyncr:
         # Set values given by flickr
         for el in result.sizes[0].size:
             size = el['label']
-            if size == 'Medium 640':
+            if 'Medium' in size:
                 size = 'Medium'
+            elif 'Small' in size:
+                size = 'Small'
+            elif 'Large' in size:
+                size = 'Large'
             sizes[size]['width'] = el['width']
             sizes[size]['height'] = el['height']
         return sizes
