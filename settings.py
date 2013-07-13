@@ -1,8 +1,12 @@
 # Django settings for samuelclay project.
 import os
-ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+import sys
 
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
+sys.path.append(here('vendor'))
+sys.path.append(here('vendor/tagging'))
+sys.path.append(here('vendor/tweepy'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -65,11 +69,20 @@ ADMIN_MEDIA_PREFIX = '/media/'
 SECRET_KEY = 'v^p3t7s&oj=-*-@szb(y)-@7g@%$^7mni3o@+b_e*(qy)h3ls='
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-#     'django.template.loaders.eggs.load_template_source',
-)
+if DEBUG:
+    TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',      
+    ]
+else:
+    TEMPLATE_LOADERS = [
+        ('django.template.loaders.cached.Loader',(
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+            'forum.modules.template_loader.module_templates_loader',
+            'forum.skins.load_template_source',
+            )),
+    ]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',

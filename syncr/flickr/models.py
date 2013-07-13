@@ -268,7 +268,7 @@ class PhotoComment(models.Model):
     author_nsid = models.CharField(max_length=50)
     author = models.CharField(max_length=50)
     pub_date = models.DateTimeField()
-    permanent_url = models.URLField(verify_exists=False)
+    permanent_url = models.URLField()
     comment = models.TextField()
 
     class Meta:

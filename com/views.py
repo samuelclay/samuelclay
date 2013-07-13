@@ -1,4 +1,5 @@
 from django.core.cache import cache
+from django.conf import settings
 # from django.views.decorators.cache import cache_page
 import feedparser
 import datetime
@@ -74,7 +75,9 @@ def _fetch_and_parse_blog():
 
 def _fetch_and_parse_twitter():
     try:
-        twitter_api = tweepy.API()
+        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(settings.TWITTER_ACCESS_TOKEN, settings.TWITTER_ACCESS_TOKEN_SECRET)
+        twitter_api = tweepy.API(auth)
         tweets = twitter_api.user_timeline('samuelclay', exclude_replies=True, 
                                            count=100, trim_user=True, include_rts=False)
     except tweepy.TweepError:

@@ -1,14 +1,14 @@
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
+from django.conf.urls.defaults import patterns, url, include
+from django.views.generic import TemplateView
 from django.contrib import admin
 from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^/?$', 'com.views.index', name="index"),
-    url(r'^schedulerjones/?$', direct_to_template, {'template': 'schedulerjones.html'}, name="schedulerjones"),
-    url(r'^caselife/?$', direct_to_template, {'template': 'caselife.html'}, name="caselife"),
-    url(r'^sunraylab/?$', direct_to_template, {'template': 'sunraylab.html'}, name="sunraylab"),
+    url(r'^schedulerjones/?$', TemplateView.as_view(template_name='schedulerjones.html'), name="schedulerjones"),
+    url(r'^caselife/?$', TemplateView.as_view(template_name='caselife.html'), name="caselife"),
+    url(r'^sunraylab/?$', TemplateView.as_view(template_name='sunraylab.html'), name="sunraylab"),
     (r'^raphael/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT+'/../raphael'}),
     (r'^schedulerjones/(?P<path>.*)$', 'django.views.static.serve',
