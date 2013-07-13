@@ -100,8 +100,8 @@ class TagField(CharField):
     def get_internal_type(self):
         return 'CharField'
 
-    def db_type(self, connection):
-        return "varchar"
+    def db_type(self, connection=None):
+        return "VARCHAR"
         
     def formfield(self, **kwargs):
         from tagging import forms
