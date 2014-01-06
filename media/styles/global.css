@@ -248,6 +248,9 @@ small {
 .block-twitter {
     border-left: 20px solid #32BEBC;
 }
+.block-press {
+    border-left: 20px solid #E6C652;
+}
 
 .block-photos {
     width: 700px;
@@ -285,4 +288,11 @@ img {
 }
 .block-caselife img.last {
     margin-bottom: 0;
+}
+
+.block-press img {
+    width: 16px;
+    height: 16px;
+    vertical-align: bottom;
+    border: none;
 }
