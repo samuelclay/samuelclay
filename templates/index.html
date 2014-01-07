@@ -23,27 +23,27 @@
         <ul>
             <li>
                 <strong><a href="http://www.newsblur.com">NewsBlur</a>:</strong> A personal news reader that brings people together to talk about the world. A new sound of an old instrument.
-                <small>2009 - 2013</small>
+                <small>2009 - 2014</small>
             </li>
             <li>
                 <strong><a href="http://samuel.newsblur.com">Blurblog</a>:</strong> My shared stories on NewsBlur.
-                <small>2012 - 2013</small>
+                <small>2012 - 2014</small>
             </li>
             {# <li> #}
             {#     <strong><a href="http://www.turntouch.com">The Do Club</a>:</strong> <i>Secret project in the works...</i> #}
-            {#     <small>2013</small> #}
+            {#     <small>2014</small> #}
             {# </li> #}
             <li>
                 <strong><a href="https://github.com/samuelclay/HACKERSMACKER">Hacker Smacker</a>:</strong> Browser extension used to friend and foe individual writers on Hacker News.
-                <small>2012 - 2013</small>
+                <small>2012 - 2014</small>
             </li>
             <li>
                 <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a>:</strong> A blog as a public record of my work.
-                <small>2007 - 2013</small>
+                <small>2007 - 2014</small>
             </li>
             <li>
                 <strong><a href="http://documentcloud.github.com/visualsearch">VisualSearch.js</a>:</strong> A faceted search box for real data.
-                <small>2011 - 2013</small>
+                <small>2011 - 2014</small>
             </li>
         </ul>
     </div>
@@ -117,18 +117,18 @@
         <ul>
             <li>
                 <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on GitHub</span></a>:</strong> The Django/Python code that powers the intelligent visual feed reader.
-                <small>2009 - 2013</small>
+                <small>2009 - 2014</small>
             </li>
             <li>
                 <strong><a href="http://github.com/documentcloud/visualsearch">VisualSearch.js <span class="github">on GitHub</span></a>:</strong> Creator of a JavaScript library that creates an auto-completing faceted search box.
-                <small>2011 - 2013</small>
-            </li>
-            <li>
-                <strong><a href="http://github.com/samuelclay/donationparty">DonationParty <span class="github">on GitHub</span></a>:</strong> A four-man team working over two hackathons to create this fun Django-based charity donation site.
-                <small>2012 - 2013</small>
+                <small>2011 - 2014</small>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/HACKERSMACKER">HACKERSMACKER <span class="github">on GitHub</span></a>:</strong> Built this browser extension with Node.js and Redis for finding graph connections between comment authors (friend of a friend).
+                <small>2012 - 2014</small>
+            </li>
+            <li>
+                <strong><a href="http://github.com/samuelclay/donationparty">DonationParty <span class="github">on GitHub</span></a>:</strong> A four-man team working over two hackathons to create this fun Django-based charity donation site.
                 <small>2012 - 2013</small>
             </li>
             <li>
@@ -219,7 +219,7 @@
                 <li {% if forloop.last %}class="last"{% endif %}>
                     {{ tweet.text|safe|urlize|linebreaksbr }}
                     <small>
-                      {{ tweet.relative_created_at }}
+                        <a href="https://twitter.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
                     </small>
                 </li>
             {% endfor %}
@@ -278,6 +278,28 @@
             </li>
             <li>
                 <strong>
+                    <img src="http://www.pcworld.com/www.idgcsmb.pcw/favicon.ico">
+                    PCWorld: 
+                    <a href="http://www.pcworld.com/article/2041011/review-newsblur-is-a-worthy-powerful-google-reader-replacement.html">
+                        NewsBlur is a worthy, powerful Google Reader replacement
+                    </a>
+                </strong> 
+                by Erez Zukerman
+                <small>June 24th, 2013</small>
+            </li>
+            <li>
+                <strong>
+                    <img src="http://cdn1.sbnation.com/images/verge/favicon.vc44a54f.ico">
+                    The Verge: 
+                    <a href="http://www.theverge.com/2013/5/21/4350208/how-sam-clay-and-newsblur-survived-the-google-reader-shutdown-redesign">
+                        NewsBlur, flush with Google Reader refugees, rolls out redesign
+                    </a>
+                </strong> 
+                by Adrianne Jeffries
+                <small>May 21st, 2013</small>
+            </li>
+            <li>
+                <strong>
                     <img src="http://www.wired.com/favicon.ico">
                     Wired: 
                     <a href="http://www.webmonkey.com/2013/03/scaling-on-a-shoestring-lessons-from-newsblur/">
@@ -286,6 +308,17 @@
                 </strong> 
                 by Scott Gilbertson
                 <small>March 20th, 2013</small>
+            </li>
+            <li>
+                <strong>
+                    <img src="http://0.gravatar.com/blavatar/6a5449d7551fc1e8f149b0920ca4b6f6?s=16">
+                    VentureBeat: 
+                    <a href="http://venturebeat.com/2012/09/05/newsblur-ipad/">
+                        NewsBlur launches iPad app, aims to compete with Google Reader (exclusive)
+                    </a>
+                </strong> 
+                by Christina Farr
+                <small>September 5th, 2012</small>
             </li>
         </ul>
     </div>

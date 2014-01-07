@@ -89,6 +89,7 @@ def _fetch_and_parse_twitter():
         fixed_tweets.append({
             'relative_created_at': "%s ago" % relative_timesince(tweet.created_at),
             'text': tweet.text,
+            'id': tweet.id,
         })
 
     return fixed_tweets
