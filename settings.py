@@ -9,11 +9,13 @@ sys.path.append(here('vendor/tagging'))
 sys.path.append(here('vendor/tweepy'))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     ('Samuel Clay', 'samuel@ofbrooklyn.com'),
 )
+
+INTERNAL_IPS = ('127.0.0.1', '*')
 
 MANAGERS = ADMINS
 
@@ -31,8 +33,9 @@ DATABASES = {
 # DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 # DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 # CACHE_BACKEND = 'dummy://'
-CACHE_BACKEND = 'local://'
+# CACHE_BACKEND = 'localmem://'
 # CACHE_BACKEND = 'memcached://127.0.0.1:35098'
+CACHE_BACKEND = "db://cache"
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -69,25 +72,20 @@ ADMIN_MEDIA_PREFIX = '/media/'
 SECRET_KEY = 'v^p3t7s&oj=-*-@szb(y)-@7g@%$^7mni3o@+b_e*(qy)h3ls='
 
 # List of callables that know how to import templates from various sources.
-if DEBUG:
-    TEMPLATE_LOADERS = [
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',      
-    ]
-else:
-    TEMPLATE_LOADERS = [
-        ('django.template.loaders.cached.Loader',(
-            'django.template.loaders.filesystem.Loader',
-            'django.template.loaders.app_directories.Loader',
-            'forum.modules.template_loader.module_templates_loader',
-            'forum.skins.load_template_source',
-            )),
-    ]
+TEMPLATE_LOADERS = [
+'django.template.loaders.filesystem.Loader',
+'django.template.loaders.app_directories.Loader',      
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.contrib.auth.context_processors.auth',
 )
 
 CACHE_MIDDLEWARE_SECONDS = 600
