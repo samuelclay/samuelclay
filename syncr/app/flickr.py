@@ -203,7 +203,7 @@ class FlickrSyncr:
 
         sizes = self.getPhotoSizes(photo_id)
         # Removed urls = self.getPhotoSizeURLs(photo_id)
-        exif_data = self.getExifInfo(photo_id)
+        # exif_data = self.getExifInfo(photo_id)
         # geo_data = self.getGeoLocation(photo_id)
 
         taken_date = datetime(*strptime(photo_xml.photo[0].dates[0]['taken'], "%Y-%m-%d %H:%M:%S")[:7])
@@ -267,17 +267,17 @@ class FlickrSyncr:
             # 'geo_county': geo_data['county'],
             # 'geo_region': geo_data['region'],
             # 'geo_country': geo_data['country'],
-            'exif_model': self.getExifKey(exif_data, 'Model'),
-            'exif_make': self.getExifKey(exif_data, 'Make'),
-            'exif_orientation': self.getExifKey(exif_data, 'Orientation'),
-            'exif_exposure': self.getExifKey(exif_data, 'Exposure'),
-            'exif_software': self.getExifKey(exif_data, 'Software'),
-            'exif_aperture': self.getExifKey(exif_data, 'Aperture'),
-            'exif_iso': self.getExifKey(exif_data, 'ISO Speed'),
-            'exif_metering_mode': self.getExifKey(exif_data, 'Metering Mode'),
-            'exif_flash': self.getExifKey(exif_data, 'Flash'),
-            'exif_focal_length': self.getExifKey(exif_data, 'Focal Length'),
-            'exif_color_space': self.getExifKey(exif_data, 'Color Space'),
+            # 'exif_model': self.getExifKey(exif_data, 'Model'),
+            # 'exif_make': self.getExifKey(exif_data, 'Make'),
+            # 'exif_orientation': self.getExifKey(exif_data, 'Orientation'),
+            # 'exif_exposure': self.getExifKey(exif_data, 'Exposure'),
+            # 'exif_software': self.getExifKey(exif_data, 'Software'),
+            # 'exif_aperture': self.getExifKey(exif_data, 'Aperture'),
+            # 'exif_iso': self.getExifKey(exif_data, 'ISO Speed'),
+            # 'exif_metering_mode': self.getExifKey(exif_data, 'Metering Mode'),
+            # 'exif_flash': self.getExifKey(exif_data, 'Flash'),
+            # 'exif_focal_length': self.getExifKey(exif_data, 'Focal Length'),
+            # 'exif_color_space': self.getExifKey(exif_data, 'Color Space'),
         }
 
         obj, created = Photo.objects.get_or_create(
@@ -310,11 +310,9 @@ class FlickrSyncr:
         """
         photo_list = []
         for photo in photos_xml:
-            try:
-                photo_result = self.flickr.photos_getInfo(photo_id = photo['id'])
-                photo_list.append(self._syncPhoto(photo_result))
-            except Exception, e:
-                print " ***> Exception: %s" % e
+            photo_result = self.flickr.photos_getInfo(photo_id = photo['id'])
+            photo_list.append(self._syncPhoto(photo_result))
+            print " ---> Photo: %s" % photo_result
         return photo_list
 
     def syncPhoto(self, photo_id, refresh=False):
