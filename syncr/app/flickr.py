@@ -204,7 +204,7 @@ class FlickrSyncr:
         sizes = self.getPhotoSizes(photo_id)
         # Removed urls = self.getPhotoSizeURLs(photo_id)
         exif_data = self.getExifInfo(photo_id)
-        geo_data = self.getGeoLocation(photo_id)
+        # geo_data = self.getGeoLocation(photo_id)
 
         taken_date = datetime(*strptime(photo_xml.photo[0].dates[0]['taken'], "%Y-%m-%d %H:%M:%S")[:7])
         upload_date = datetime.fromtimestamp(int(photo_xml.photo[0].dates[0]['posted']))
@@ -260,13 +260,13 @@ class FlickrSyncr:
             # Removed 'thumbnail_url': urls['Thumbnail'],
             'tags': tags,
             'license': photo_xml.photo[0]['license'],
-            'geo_latitude': geo_data['latitude'],
-            'geo_longitude': geo_data['longitude'],
-            'geo_accuracy': geo_data['accuracy'],
-            'geo_locality': geo_data['locality'],
-            'geo_county': geo_data['county'],
-            'geo_region': geo_data['region'],
-            'geo_country': geo_data['country'],
+            # 'geo_latitude': geo_data['latitude'],
+            # 'geo_longitude': geo_data['longitude'],
+            # 'geo_accuracy': geo_data['accuracy'],
+            # 'geo_locality': geo_data['locality'],
+            # 'geo_county': geo_data['county'],
+            # 'geo_region': geo_data['region'],
+            # 'geo_country': geo_data['country'],
             'exif_model': self.getExifKey(exif_data, 'Model'),
             'exif_make': self.getExifKey(exif_data, 'Make'),
             'exif_orientation': self.getExifKey(exif_data, 'Orientation'),
