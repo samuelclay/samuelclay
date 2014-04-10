@@ -393,13 +393,13 @@ class FlickrSyncr:
         for page in range(1, int(page_count)+1):
             for photo in result.photos[0].photo:
                 default_dict = {
-                    'title': photo['attrib']['title'],
-                    'farm': photo['attrib']['farm'],
-                    'server': photo['attrib']['server'],
-                    'secret': photo['attrib']['secret'],
+                    'title': photo['title'],
+                    'farm': photo['farm'],
+                    'server': photo['server'],
+                    'secret': photo['secret'],
                 }
                 photo_db, created = Photo.objects.get_or_create(
-                    flickr_id = photo['attrib']['id'],
+                    flickr_id = photo['id'],
                     defaults=default_dict)
                 print " ---> %s: %s" % (photo_db.title, "NEW" if created else "already saved")
 
