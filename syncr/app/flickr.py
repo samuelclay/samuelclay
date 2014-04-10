@@ -310,8 +310,11 @@ class FlickrSyncr:
         """
         photo_list = []
         for photo in photos_xml:
-            photo_result = self.flickr.photos_getInfo(photo_id = photo['id'])
-            photo_list.append(self._syncPhoto(photo_result))
+            try:
+                photo_result = self.flickr.photos_getInfo(photo_id = photo['id'])
+                photo_list.append(self._syncPhoto(photo_result))
+            except Exception, e:
+                print " ***> Exception: %s" % e
         return photo_list
 
     def syncPhoto(self, photo_id, refresh=False):
