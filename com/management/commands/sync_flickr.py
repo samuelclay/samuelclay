@@ -12,4 +12,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         
         f = FlickrSyncr(settings.API_KEY, settings.API_SECRET)
-        f.syncRecentPhotos('samuelclay', days=7)
+        f.syncMinimal('samuelclay', days=365)

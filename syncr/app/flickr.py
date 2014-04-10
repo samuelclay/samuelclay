@@ -310,6 +310,7 @@ class FlickrSyncr:
         """
         photo_list = []
         for photo in photos_xml:
+            print photo
             photo_result = self.flickr.photos_getInfo(photo_id = photo['id'])
             photo_list.append(self._syncPhoto(photo_result))
             print " ---> Photo: %s" % photo_result
@@ -370,6 +371,37 @@ class FlickrSyncr:
             photo_list = self._syncPhotoXMLList(result.photos[0].photo)
             result = self.flickr.photos_search(user_id=nsid, page=page+1,
                         per_page=500, min_upload_date=timestamp)
+
+    def syncMinimal(self, username, days=1):
+        """
+        Synchronize recent public photos from a flickr user.
+
+        Required arguments
+          username: a flickr username as a string
+        Optional arguments
+          days: sync photos since this number of days, defaults
+                to 1 (yesterday)
+        """
+        syncSince = datetime.now() - timedelta(days=days)
+        timestamp = calendar.timegm(syncSince.timetuple())
+        nsid = self.user2nsid(username)
+
+        result = self.flickr.photos_search(user_id=nsid, per_page=500,
+                                           min_upload_date=timestamp)
+        page_count = result.photos[0]['pages']
+
+        for page in range(1, int(page_count)+1):
+            for photo in result.photos[0].photo:
+                default_dict = {
+                    'title': photo['attrib']['title'],
+                    'farm': photo['attrib']['farm'],
+                    'server': photo['attrib']['server'],
+                    'secret': photo['attrib']['secret'],
+                }
+                photo_db, created = Photo.objects.get_or_create(
+                    flickr_id = photo['attrib']['id'],
+                    defaults=default_dict)
+                print " ---> %s: %s" % (photo_db.title, "NEW" if created else "already saved")
 
     def syncPublicFavorites(self, username):
         """Synchronize a flickr user's public favorites.
