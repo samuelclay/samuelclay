@@ -397,6 +397,23 @@ class FlickrSyncr:
                     'farm': photo['farm'],
                     'server': photo['server'],
                     'secret': photo['secret'],
+                    'taken_date': datetime.now(),
+                    'upload_date': datetime.now(),
+                    'update_date': datetime.now(),
+                    'photopage_url': "http://www.flickr.com/photos/conesus/%s" % photo['id'],
+                    'original_secret': "",
+                    'thumbnail_width': 0,
+                    'thumbnail_height': 0,
+                    'small_width': 0,
+                    'small_height': 0,
+                    'medium_width': 0,
+                    'medium_height': 0,
+                    'large_width': 0,
+                    'large_height': 0,
+                    'original_width': 0,
+                    'original_height': 0,
+                    'license': 0,
+                    
                 }
                 photo_db, created = Photo.objects.get_or_create(
                     flickr_id = photo['id'],
