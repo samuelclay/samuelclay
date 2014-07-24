@@ -192,7 +192,7 @@ body {
 
 .content {
     width: 460px;
-    margin: 0 240px 24px 298px;
+    margin: 0 240px 54px 298px;
     padding-left: 16px;
     position: relative;
 }
@@ -217,6 +217,9 @@ ul li {
 }
 ul li:last-child {
     margin: 0;
+}
+ul li:last-child img.screenshot {
+    margin-bottom: 0;
 }
 
 small {
