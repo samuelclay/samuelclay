@@ -205,10 +205,19 @@ SAMUELCLAY.log = function(msg) {
 $(document).ready(function() {
     
     $('.header-photo img').hover(function() {
-        var $link = $(this).parents('.header');
+        var $link = $(this).closest('.header');
         $link.addClass('hover');
     }, function() {
-        var $link = $(this).parents('.header');
+        var $link = $(this).closest('.header');
+        $link.removeClass('hover');
+        
+    });
+    
+    $('.content img.screenshot').hover(function() {
+        var $link = $(this).closest('li');
+        $link.addClass('hover');
+    }, function() {
+        var $link = $(this).closest('li');
         $link.removeClass('hover');
         
     });

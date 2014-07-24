@@ -15,6 +15,7 @@ a, a:visited, a:link {
 a:hover,
 .header.hover .header-text a,
 .name-header a:hover,
+.content li.hover a,
 .content small a:hover {
     color: #162464;
 }
@@ -74,25 +75,28 @@ body {
     padding: 80px 0 40px;
     position: relative;
 }
+#wrapper.subview {
+    padding: 140px 0 140px;
+}
 
 #nav {
     position: absolute;
     top: 30px;
     left: 0px;
-    font-family: Helvetica;
     color: #A0A0A0;
     text-transform: uppercase;
     z-index: 1;
+    font-size: 18px;
 }
 
 #bottom_nav {
     position: absolute;
     bottom: 50px;
     left: 0px;
-    font-family: Helvetica;
     color: #A0A0A0;
     text-transform: uppercase;    
     z-index: 1;
+    font-size: 18px;
 }
 
 .background {
@@ -193,6 +197,10 @@ body {
     position: relative;
 }
 
+.content .screenshot {
+    width: 450px;
+    margin: 24px 0;
+}
 h2 {
     margin: 0 0 1em;
 }
@@ -216,22 +224,23 @@ small {
      left: 520px;
      top: 0;
      width: 180px;
-/*     text-transform: uppercase;*/
-    font-size: 14px;
-/*     line-height: 24px;*/
+    font-size: 16px;
 }
 small, small a, small a:link, small a:visited {
      color: #A6A6A6;
 }
 .github {
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 /* ========== */
 /* = Blocks = */
 /* ========== */
 
+.block-intro {
+    border-left: 20px solid #0B455F;    
+}
 .block-photo {
     border-left: 20px solid #054960;
 }
@@ -265,7 +274,7 @@ small, small a, small a:link, small a:visited {
     width: 700px;
     margin-right: 0px;
 }
-.block-photos img {
+.block-photos.img-75 img {
     width: 75px;
     height: 75px;
 }
@@ -297,9 +306,11 @@ img {
     margin-bottom: 0;
 }
 
-.block-press img {
+.block-press strong img,
+.favicon {
     width: 16px;
     height: 16px;
-    vertical-align: bottom;
+    vertical-align: middle;
+    margin-top: -4px;
     border: none;
 }
