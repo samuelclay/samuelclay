@@ -23,7 +23,7 @@ a:hover,
 body {
 	-webkit-text-stroke:1px transparent;
 /*  background: white url('/static/images/400bg.png') repeat-y 0 0; */
-	font-family: "Lucida Grande", "Helvetica", sans-serif;
+	font-family: "Whitney", "Lucida Grande", "Helvetica", sans-serif;
 	font-size: 16px;
 }
 
@@ -109,7 +109,7 @@ body {
     width: 280px;
     position: absolute;
     background-color: #ECECEC;
-    border-right: 2px solid #CECECE;
+    border-right: 1px solid #CECECE;
     top: 0;
     left: 0;
     bottom: 0;
@@ -230,36 +230,44 @@ small, small a, small a:link, small a:visited {
     text-transform: uppercase;
     font-size: 10px;
 }
-.block-intro {
-    min-height: 26px;
-    border-left: 20px solid #6CC071;
+
+/* ========== */
+/* = Blocks = */
+/* ========== */
+
+.block-photo {
+    border-left: 20px solid #054960;
 }
 .block-work {
-    min-height: 26px;
-    border-left: 20px solid #F5EE4F;
+    border-left: 20px solid #05485F;
 }
 .block-projects {
-    border-left: 20px solid #6C71C0;
+    border-left: 20px solid #054C57;
+}
+.block-past-projects {
+    border-left: 20px solid #054E54;
 }
 .block-code {
-    border-left: 20px solid #AC3011;
+    border-left: 20px solid #05524E;
+}
+.block-photos {
+    border-left: 20px solid #055547;
 }
 .block-blog {
-    border-left: 20px solid #DB6E00;
+    border-left: 20px solid #065745;
 }
 .block-twitter {
-    border-left: 20px solid #32BEBC;
+    border-left: 20px solid #055A3E;
 }
 .block-press {
-    border-left: 20px solid #E6C652;
+    border-left: 20px solid #065E39;
 }
+
 
 .block-photos {
     width: 700px;
     margin-right: 0px;
-    border-left: 20px solid #A957C8;
 }
-
 .block-photos img {
     width: 75px;
     height: 75px;
