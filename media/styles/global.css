@@ -190,53 +190,6 @@ body {
     border: none;
 }
 
-.content {
-    width: 460px;
-    margin: 0 240px 54px 298px;
-    padding-left: 16px;
-    position: relative;
-}
-
-.content .screenshot {
-    width: 450px;
-    margin: 24px 0;
-}
-h2 {
-    margin: 0 0 1em;
-}
-
-ul {
-}
-
-ul li {
-    position: relative;
-    margin: 0 0 14px;
-    line-height: 21px;
-    color: #383838;
-    font-size: 17px;
-}
-ul li:last-child {
-    margin: 0;
-}
-ul li:last-child img.screenshot {
-    margin-bottom: 0;
-}
-
-small {
-     position: absolute;
-     left: 520px;
-     top: 0;
-     width: 180px;
-    font-size: 16px;
-}
-small, small a, small a:link, small a:visited {
-     color: #A6A6A6;
-}
-.github {
-    text-transform: uppercase;
-    font-size: 13px;
-}
-
 /* ========== */
 /* = Blocks = */
 /* ========== */
@@ -273,7 +226,7 @@ small, small a, small a:link, small a:visited {
 }
 
 
-.block-photos {
+.content.block-photos {
     width: 700px;
     margin-right: 0px;
 }
@@ -309,6 +262,10 @@ img {
     margin-bottom: 0;
 }
 
+/* =========== */
+/* = Content = */
+/* =========== */
+
 .block-press strong img,
 .favicon {
     width: 16px;
@@ -316,4 +273,71 @@ img {
     vertical-align: middle;
     margin-top: -4px;
     border: none;
+}
+
+strong {
+    display: block;
+    font-size: 22px;
+}
+.block-blog strong {
+    font-size: 18px;
+}
+.block-press strong {
+    font-size: 18px;
+    display: inline;
+}
+.desc {
+    margin: 0 0 64px;
+}
+
+
+.content {
+    width: 460px;
+    margin: 0 240px 54px 298px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.content .screenshot {
+    width: 450px;
+    margin: 18px 0;
+}
+h2 {
+    margin: 0 0 1em;
+}
+
+ul {
+}
+
+ul li {
+    position: relative;
+    margin: 0 0 24px;
+    line-height: 21px;
+    color: #383838;
+    font-size: 17px;
+}
+.block-twitter ul li,
+.block-blog ul li {
+    margin-bottom: 12px;
+}
+ul li:last-child {
+    margin: 0;
+}
+ul li:last-child img.screenshot {
+/*    margin-bottom: 0;*/
+}
+
+small {
+     position: absolute;
+     left: 520px;
+     top: 0;
+     width: 180px;
+    font-size: 16px;
+}
+small, small a, small a:link, small a:visited {
+     color: #A6A6A6;
+}
+.github {
+    text-transform: uppercase;
+    font-size: 13px;
 }
