@@ -317,7 +317,8 @@ ul li {
     font-size: 17px;
 }
 .block-twitter ul li,
-.block-blog ul li {
+.block-blog ul li,
+.block-press ul li {
     margin-bottom: 12px;
 }
 ul li:last-child {
