@@ -278,6 +278,7 @@ img {
 strong {
     display: block;
     font-size: 22px;
+    margin: 0 0 12px;
 }
 .block-blog strong {
     font-size: 18px;
@@ -300,7 +301,7 @@ strong {
 
 .content .screenshot {
     width: 450px;
-    margin: 18px 0;
+    margin: 0 0 18px;
 }
 h2 {
     margin: 0 0 1em;
