@@ -1,9 +1,3 @@
-import psutil
-import math
-
-GIGS_OF_MEMORY = psutil.TOTAL_PHYMEM/1024/1024/1024.
-NUM_CPUS = psutil.NUM_CPUS
-
 bind = "0.0.0.0:3000"
 pidfile = "/srv/samuelclay/logs/gunicorn.pid"
 logfile = "/srv/samuelclay/logs/production.log"
