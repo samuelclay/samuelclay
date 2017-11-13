@@ -1,0 +1,56 @@
+.grey {
+    font-weight: 800;
+}
+.thumbnails {
+    margin: 92px 0;
+/*    text-align: center;*/
+}
+
+a.anchor {
+    text-decoration: none;
+    color: black;
+}
+a.anchor:hover {
+    color: #0FA0CE;
+}
+a.anchor:active {
+    color: #0A7595;
+}
+
+.thumbnail {
+    margin-bottom: 12px;
+}
+
+.section {
+    margin-top: 96px;
+    clear: both;
+}
+
+.hero {
+    padding: 36px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+video {
+    padding: 24px 0;
+}
+
+.photo {
+    padding: 24px 0;
+}
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}
+
