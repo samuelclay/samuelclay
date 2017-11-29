@@ -120,4 +120,8 @@ def chunks(l, n):
         new_l.append(l[i:i+n])
         
     return new_l
-    
+
+
+def portfolio(request):
+    return respond(request, 'portfolio.html', {
+    })

@@ -94,7 +94,8 @@ CACHE_MIDDLEWARE_SECONDS = 600
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    here('templates')
+    here('templates'),
+    here('portfolio'),
 )
 
 INSTALLED_APPS = (

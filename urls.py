@@ -18,6 +18,9 @@ urlpatterns = patterns('',
         {'document_root': settings.MEDIA_ROOT+'/../caselife'}),
     (r'^sunraylab/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT+'/../sunraylab'}),
+    url(r'^portfolio/?$', 'com.views.portfolio', name="portfolio"),
+    (r'^portfolio/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT+'/../portfolio'}),
     (r'^admin/', include(admin.site.urls)),
 )
 
