@@ -37,6 +37,9 @@ video {
 
 .photo {
     padding: 24px 0;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
 }
 
 /* Larger than mobile */

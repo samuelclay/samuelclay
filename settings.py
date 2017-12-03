@@ -68,6 +68,8 @@ MEDIA_URL = '/static/'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
 
+APPEND_SLASH = True
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'v^p3t7s&oj=-*-@szb(y)-@7g@%$^7mni3o@+b_e*(qy)h3ls='
 
@@ -94,7 +96,8 @@ CACHE_MIDDLEWARE_SECONDS = 600
 ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
-    here('templates')
+    here('templates'),
+    here('portfolio'),
 )
 
 INSTALLED_APPS = (
