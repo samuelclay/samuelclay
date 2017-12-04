@@ -59,6 +59,13 @@ p {
     margin-top: 12px;
 }
 
+.photo.center-photo {
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    float: none;
+}
+
 /* Larger than mobile */
 @media (min-width: 400px) {}
 

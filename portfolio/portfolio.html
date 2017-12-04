@@ -186,43 +186,47 @@
     
         <img src="newsblur-devices.png" class="u-max-full-width hero">
         
-        <p>NewsBlur is a mature RSS news reader that I've worked on for nearly a decade. It's quite popular, especially since Google sunset Google Reader in 2013. The design process for NewsBlur involved user research, ongoing user feedback, designing for multiple platforms (web, iOS, and Android), and a deep technical dive into the many technologies that make a real-time, continuously updated news reader work.</p>
+        <p>NewsBlur is a mature RSS news reader that I've worked on for nearly a decade. It's quite popular, especially since the competing Google Reader was sunset in 2013. The design process for NewsBlur involved user research, ongoing user feedback, designing for multiple platforms (web, iOS, and Android, pictured above), and a deep technical dive into the many technologies that make a real-time, continuously updated news reader work.</p>
         
-        <p>My role was expansive and full stack. The backend consisted of distributed feed fetchers written in python, capable of fetching and processing 100 RSS feeds a second every single second of the day. The web frontend was <a href="http://ofbrooklyn.com/2012/11/13/backbonification-migrating-javascript-to-backbone/">built in JavaScript using Backbone.js</a> and went through <a href="http://blog.newsblur.com/post/50689286246/the-newsblur-redesign">two major design iterations</a>. The iOS app and the Android app are tightly integrated and present a consistent and synchronized user interface for readers.</p>
+        <p>My role was expansive and full stack. The backend consists of distributed feed fetchers written in python, capable of fetching and processing one hundred RSS feeds a second, every single second of the day. The web frontend was <a href="http://ofbrooklyn.com/2012/11/13/backbonification-migrating-javascript-to-backbone/">built in JavaScript using Backbone.js</a> and went through <a href="http://blog.newsblur.com/post/50689286246/the-newsblur-redesign">two major design iterations</a>. The iOS app and the Android app are tightly integrated and present a consistent and synchronized user interface for readers. For a user, switching between platforms throughout the day presents no context switching costs.</p>
         
-        <p>The problem that NewsBlur is intended to solve is that well-informed readers of the news have to do a lot of work to stay on top of journalism and writing. Readers have to visit individual websites, which is tedious and leads to a vicious cycle of endlessly refreshing and revisiting websites, or rely on news stories shared over social media, which holds readers hostage to filter bubbles. An RSS news reader like NewsBlur is designed to offer control and advanced customization while still retaining the ease of use of reading news sites directly.</p>
+        <p>The problem that NewsBlur is intended to solve is that well-informed readers of the news have to do a lot of work to stay on top of journalism and good writing. For the most part, people have only a few choices. One is to visit individual websites, which is tedious and leads to a vicious cycle of endlessly refreshing and revisiting websites. Alternatively, many people now rely on reading news stories shared exclusively over social media, which holds readers hostage to filter bubbles. An RSS news reader like NewsBlur is designed to offer control and advanced customization while still retaining the ease of use of reading news sites directly.</p>
         
         <div class="row">
-            <div class="columns four">
-                <img src="newsblur-training.png" class="u-max-full-width photo">
-            </div>
-            <div class="columns four">
-                <img src="newsblur-stats2.png" class="u-max-full-width photo">
-            </div>
-            <div class="columns four">
-                <img src="newsblur-stats1.png" class="u-max-full-width photo">
-            </div>
+            <img src="newsblur-training.png" class="u-max-full-width photo columns five center-photo">
         </div>
         
-        <p>One powerful way to keep track of multiple news sources is to filter out the stories on subjects you don't want to read while highlighting the stories you do. Rather than asking the user to set complicated filter rules, I designed a trainer, pictured above to the left, that automatically categorized stories, authors, and subjects into easily clickable/tapable thumbs up and thumbs down controls. Using this flexible system gave users an advanced level of control with a minimal amount of work.</p>
+        <p>One powerful way to keep track of multiple news sources is to filter out the stories on subjects you don't want to read while highlighting the stories you do. Rather than asking the user to set complicated filter rules, I designed a trainer, pictured above, that automatically categorized stories, authors, and subjects into easily clickable/tapable thumbs up and thumbs down controls. Using this flexible system gave users an advanced level of control with a minimal investment of work.</p>
         
-        <p>Above, pictured center, is a statistics dialog that gave insights into how often news sources were being updated. This is tied into an organizer that lets people cull and manage news sources, offering users a high level overview of their subscriptions.</p>
+        <div class="row">
+            <img src="newsblur-stats2.png" class="u-max-full-width photo columns five center-photo">
+        </div>
         
-        <p>On the right is the aggregated training data, condensed and displayed to users to see how a news source is viewed by other readers. This gives insights into the news reading experience that reader would not otherwise experience. By knowing what's popular and what's disliked, users can make better adjustments to their own news subscriptions and training filters.</p>
+        <p>Above is a statistics dialog that gave insights into how often news sources are being updated. This is tied to an organizer that lets people cull and manage news sources, offering users a high level overview of their subscriptions.</p>
+        
+        <div class="row">
+            <img src="newsblur-stats1.png" class="u-max-full-width photo columns five center-photo">
+        </div>
+        
+        <p>Above is aggregated training data, condensed and ordered, showing users how a news source is viewed by other readers. This gives insights into the news reading experience that reader would not otherwise experience. By knowing what's popular and what's disliked, users can make better adjustments to their own news subscriptions and training filters.</p>
         
         <div class="row">
             <div class="columns four">
-                <img src="newsblur-feature_3.png" class="u-max-full-width photo">
+                <img src="newsblur-feature_6.png" class="u-max-full-width photo">
             </div>
             <div class="columns four">
                 <img src="newsblur-feature_5.jpg" class="u-max-full-width photo">
             </div>
             <div class="columns four">
-                <img src="newsblur-feature_6.png" class="u-max-full-width photo">
+                <img src="newsblur-feature_3.png" class="u-max-full-width photo">
             </div>
         </div>
         
-        <p></p>
+        <p>There's quite a lot more that goes into building a world-class news reader. NewsBlur acts as an archive, saving tagged stories for later retrieval. It's a comprehensive news search engine, offering the ability to search every news site for events, products, and people. And it's a social platform, where people can share stories and form communities around shared interests.</p>
+        
+        <img src="newsblur-community-highlight.png" class="u-max-full-width photo">
+        
+        <p>The research and design process that went into each of these features was the result of communicating early and often with users. I added something I've never seen before in a tech product. I integrated the support forums directly into the homepage dashboard of every user, pictured above. In other words, when somebody has an idea or something goes wrong, everybody benefits because it's visible to everybody and encourages people to expand on ideas, corroborate bugs, and build test cases. </p>
         
     </div>
 
