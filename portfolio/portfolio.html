@@ -142,16 +142,21 @@
         
         <p>Soldering is at the heart of electronics design. Learning how to solder with hot air and reflow techniques, coupled with board stencils and steady hands, was crucial to designing a better board. Part of the process is knowing the constraints and discovering the limitations that allow for a miniature design to fits comfortably into a miniature package.</p>
 
-        <img src="turntouch-pcb-solder.jpg" class="u-max-full-width photo" style="margin-bottom: 12px">
-        <img src="turntouch-pcb-assembled.jpg" class="u-max-full-width photo" style="margin-top: 12px">
+        <div class="row">
+            <div class="columns six">
+                <img src="turntouch-pcb-solder.jpg" class="u-max-full-width photo">
+            </div>
+            <div class="columns six">
+                <img src="turntouch-pcb-assembled.jpg" class="u-max-full-width photo">
+            </div>
+        </div>
         
         <p>Part of the manufacturing process involves optimization techniques. Pictured below are changes made in revisions that reduce the amount of material used in an additive process and decrease the amount of material removed in a subtractive process. Increase the size of the wood to perform less work while on the CNC machine and decrease the size and coverage of the black plastic button holders to reduce cost.</p>
         
         <img src="turntouch-revisions.jpg" class="u-max-full-width photo">        
         
-        
-        <img src="turntouch-button1.jpeg" class="u-full-width photo">
-
+        <p>All of the wood is pattern matched. This means that individual pieces are cut from the same board and are then ensured to be assembled together in the same configuration before they were machined. This creates a beautiful pattern on the buttons and the case which must be accounted for during the machining process.</p>
+                
         <div class="row">
             <div class="columns six">
                 <img src="turntouch-hammering.gif" class="u-max-full-width photo">
@@ -161,8 +166,9 @@
             </div>
         </div>
 
-        <img src="turntouch-button3.jpg" class="u-full-width photo">
-
+        <img src="turntouch-button3.jpg" class="u-full-width photo" style="margin-top: 0">
+        
+        <p>Making a museum quality product means making hundreds of prototypes in the pursuit of perfection. Turn Touch involved many messy prototypes, each of which pushed the envelope of what was achievable and what was known to work. Building up enough of these little victories, even on a prototype that was not usable as a final piece, gradually created a process with a high yield and low margin of error.</p> 
         
         <img src="turntouch-prototypes.jpg" class="u-max-full-width photo">
         
@@ -180,6 +186,29 @@
     
         <img src="newsblur-devices.png" class="u-max-full-width hero">
         
+        <p>NewsBlur is a mature RSS news reader that I've worked on for nearly a decade. It's quite popular, especially since Google sunset Google Reader in 2013. The design process for NewsBlur involved user research, ongoing user feedback, designing for multiple platforms (web, iOS, and Android), and a deep technical dive into the many technologies that make a real-time, continuously updated news reader work.</p>
+        
+        <p>My role was expansive and full stack. The backend consisted of distributed feed fetchers written in python, capable of fetching and processing 100 RSS feeds a second every single second of the day. The web frontend was <a href="http://ofbrooklyn.com/2012/11/13/backbonification-migrating-javascript-to-backbone/">built in JavaScript using Backbone.js</a> and went through <a href="http://blog.newsblur.com/post/50689286246/the-newsblur-redesign">two major design iterations</a>. The iOS app and the Android app are tightly integrated and present a consistent and synchronized user interface for readers.</p>
+        
+        <p>The problem that NewsBlur is intended to solve is that well-informed readers of the news have to do a lot of work to stay on top of journalism and writing. Readers have to visit individual websites, which is tedious and leads to a vicious cycle of endlessly refreshing and revisiting websites, or rely on news stories shared over social media, which holds readers hostage to filter bubbles. An RSS news reader like NewsBlur is designed to offer control and advanced customization while still retaining the ease of use of reading news sites directly.</p>
+        
+        <div class="row">
+            <div class="columns four">
+                <img src="newsblur-training.png" class="u-max-full-width photo">
+            </div>
+            <div class="columns four">
+                <img src="newsblur-stats2.png" class="u-max-full-width photo">
+            </div>
+            <div class="columns four">
+                <img src="newsblur-stats1.png" class="u-max-full-width photo">
+            </div>
+        </div>
+        
+        <p>One powerful way to keep track of multiple news sources is to filter out the stories on subjects you don't want to read while highlighting the stories you do. Rather than asking the user to set complicated filter rules, I designed a trainer, pictured above to the left, that automatically categorized stories, authors, and subjects into easily clickable/tapable thumbs up and thumbs down controls. Using this flexible system gave users an advanced level of control with a minimal amount of work.</p>
+        
+        <p>Above, pictured center, is a statistics dialog that gave insights into how often news sources were being updated. This is tied into an organizer that lets people cull and manage news sources, offering users a high level overview of their subscriptions.</p>
+        
+        <p>On the right is the aggregated training data, condensed and displayed to users to see how a news source is viewed by other readers. This gives insights into the news reading experience that reader would not otherwise experience. By knowing what's popular and what's disliked, users can make better adjustments to their own news subscriptions and training filters.</p>
         
         <div class="row">
             <div class="columns four">
@@ -193,17 +222,8 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="columns four">
-                <img src="newsblur-training.png" class="u-max-full-width photo">
-            </div>
-            <div class="columns four">
-                <img src="newsblur-stats2.png" class="u-max-full-width photo">
-            </div>
-            <div class="columns four">
-                <img src="newsblur-stats1.png" class="u-max-full-width photo">
-            </div>
-        </div>
+        <p></p>
+        
     </div>
 
 
