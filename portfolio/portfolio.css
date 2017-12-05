@@ -10,6 +10,10 @@ h5.subtitle {
     font-weight: 400;
     font-size: 1em;
 }
+ul {
+    list-style: circle outside;
+    margin-left: 2rem;
+}
 .grey {
     font-weight: 800;
 }
@@ -44,7 +48,7 @@ a.anchor:active {
 }
 
 video {
-    padding: 24px 0;
+    margin: 24px 0;
 }
 
 p {
@@ -55,7 +59,8 @@ p {
     display: block;
     text-align: center;
 }
-.row .photo {
+.row .photo,
+.row video {
     margin-top: 12px;
 }
 

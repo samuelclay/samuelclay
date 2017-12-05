@@ -243,9 +243,19 @@
         
         <p>Furthermore, when more than one person places their hand upon the pulse sensors, the stem starts to pulse with both participants’ heartbeats, making it possible to watch how heart rates of diffrent people in intimate spaces start to beat in sync, much like fireflies flashing in patterns.</p>
         
+        <p>My role on this project was to design and build the electronics and lighting as well as figure out how to power the installation off a silent battery and not a loud generator. The electronics consisted of a main circuit board, two peripheral pulse sensors, and hundreds of LEDs along with a dozen high current LEDs at the top of the lotus flower.</p>
+
         <video src="http://static.newsblur.com.s3.amazonaws.com/ofbrooklyn/Pulse%20%26%20Bloom.mp4" autoplay="" loop="" muted="" class="u-max-full-width"></video>
         
-        <img src="pulse-bloom-hands.jpg" class="u-max-full-width photo">
+        <img src="pulse-bloom-hands.jpg" class="u-max-full-width photo" style="margin-top: 0">
+        
+        <p>The pulse sensor is both the riskiest piece of the puzzle and also the most fun to build. In order to show your heartbeat on the lotus, I need to have a clear reading of your pulse. There are a fair number of issues with most off-the-shelf heartbeat sensors, including:</p>
+        <ul>
+          <li><strong>Cost</strong>: While a $50 pulse sensor is nice, it’s way out of our budget. We spent $6 in components to make each of our pulse sensors for a total of 40 sensors (two per lotus).</li>
+          <li><strong>Design affordance</strong>: There were a fair number of pulse sensors that required an infrared light on one side of your finger and an infrared detector/receiver on the other. This clamping of your finger wasn’t something we could get away with in the desert. We needed a sensor you could just touch and hold on one side. It needed to be a simple interface so we wouldn’t have to show any instructions.</li>
+          <li><strong>Reliability</strong>: When a sensor gets covered in dust, will it still work? Infrared light, thankfully, passes through a layer of dust and can read the changes in blood flow in your finger. Some options were entirely visual and they would have performed quite poorly out on the playa.</li>
+        </ul>
+        <p>The first prototype I built suffered from the design affordance and reliability issues, although it worked pretty well in ideal conditions. I ended up finding an IC by Silicon Labs called the Si114x, which uses three LEDs — two infrared and one visible — and a small QFN-10 sized light sensor. </p>
         
         <div class="row">
             <div class="columns eight">            
@@ -256,6 +266,9 @@
             </div>
         </div>
         
+        <p>This tiny IC is a bit tricky to solder as it has no leads and the pins are extremely close together. My yield dropped to about 80%, but 4 out of every 5 pulse sensors I built worked perfectly the first time. If they failed, I would remount them on the hot plate and try wicking away any solder bridges I could find. This worked only about half the time. After that I gave up and now have a plastic cup full of broken pulse sensors.</p>
+        
+        
         <div class="row">
             <div class="columns six">            
                 <img src="pulse-cooking-main.jpg" class="u-max-full-width photo">
@@ -265,13 +278,24 @@
             </div>
         </div>
         
+        <p>The main circuit board controls all of the lighting, sensors, timing, and debugging sequences. A reliable circuit board couldn’t just be an Arduino and a breadboard. I decided to use OSH Park and OSH Stencils to fabricate inexpensive circuit boards. I ultimately went through seven revisions while we worked out the final design of the lotuses. This included adding additional lights, additional sensors, controls for EL wire, and better power management using an external buck converter.</p>
+
+        <p>All of the wire terminations were made using 2.5mm and 3.5mm pitch screw terminals. In hindsight I would have used female JST-SM mounted connectors and ordered custom wires with JST-SM male connectors. I assumed the lowest common denominator would be bare tinned wire, but all of the bare wires could easily have been switched over to polarized, latching connectors. This would have reduced over 90% of the field work I had to perform on boards, as their wire would fall out of the screw terminals due to not being screwed in with enough force.</p>
+                
         <img src="pulse-dusty.jpg" class="u-max-full-width photo">
+        
+        <p>Wiring connectors were one of the biggest issues we faced and we fixed it in Grove, the art installation we would go on to build at Burning Man 2016. As you can see below, much of my week was spent performing minor surgery on the art during the day so that it would be ready for the evening mayhem.</p>
+        
         <img src="pulse-glue.jpg" class="u-max-full-width photo">
                 
+        <p>The boards would accumulate dust on them everyday. Our plastic enclosures turned out to be too big for the holes we made in the platform. So we ended up using ziploc bags. These baggies stayed attached, but the only reason they didn’t cause any issues is that the boards worked just fine in the dust, as you can see here.</p>
+
+        <p>If dust was a real problem for the boards, then I would have spent a whole lot more time making a tight fitting enclosure and a hole for it that protects it both from the elements and from people. The playa gets covered in dust storms regularly throughout the week. A particularly nasty dust storm is pictured here, eating our poor lotus flowers alive.</p>
+        
+        <img src="pulse-dust.jpg" class="u-max-full-width photo">
+        
+        <p>The entire process lasted 4 months with 2.5 months of nearly full-time work on my part. I’m thrilled that I get to open-source both the process and the firmware. There were a number of issues around the reliability of wire connections, fluctuating power constraints, and tight deadlines eating into the desire for more revisions. And while we shipped on time there were many changes that I wanted to make and had the chance to make for Grove in 2016.</p>
     </div>
-
-    
-
 
     <div class="section grove" id="grove">
         <h2 class="u-pull-right grey">2016</h2>
@@ -283,9 +307,15 @@
         
         <p>Here’s how Grove works: you sit down at the base of a tree and a flower opens up in front of you as it senses your presence. As you breathe into a pink flower lit from inside, the tree fills up with your breath, rising white streams overtaking multiple slowly descending green lines. As you breathe, the tree shimmers with light as it becomes a nighttime desert oasis.</p>
         
+        <p>My role on this project was to build out an electronics team and make the interaction work with thousands of individual LEDs. I brought on three electrical engineers to design and build the three boards: a main control board, a breathing sensor board, and a dispatcher board for the many high current LEDs. I personally wrote the firmware for the sensor and control board. As the team lead I also kept the team in sync and on track to hit the deadlines.</p>
+        
         <video src="http://static.newsblur.com.s3.amazonaws.com/ofbrooklyn/grove/Grove.mp4" autoplay="" loop="" muted="" class="u-max-full-width"></video>
         
         <img src="grove-breathing-couple.jpg" class="u-max-full-width photo">
+        
+        <p>The flower has a proximity sensor embedded inside that is more commonly used by paper towel dispensers to detect hand movement. We used the Si1143, same as in the pulse sensor in Pulse & Bloom, to detect proximity. When we detect that a person is positioned directly in front of the flower, we then allow the breath measurements to light up the tree. Otherwise wind would take over and the tree would be constantly lit.</p>
+        
+        <p>Here you can see the board that is placed inside the flower. There is a trumpet that fits directly over the board and directs airflow over the board. There are two slots in the board that allow your breath to flow over the hot-wire thermistors and out the back of the flower. Otherwise when you breathed into the flower, the flower would send your last breath back out.</p>
         
         <div class="row">
             <div class="columns six">
@@ -297,13 +327,45 @@
             </div>
         </div>
         
+        <p>There are a number of lessons learned that I applied from Pulse &amp; Bloom. The wire connectors that caused most of the headaches were replaced with new snap-fit connectors. All of the wire-to-board connectors are MTA100 Series female and male pin headers. They are an inexpensive connector that you can crimp onto AWG 22 gauge wires and then easily insert into 0.1” male header pins. They even include an optional polarity wedge on the side so that you can ensure the wires are always plugged in the right direction, which is especially helpful when you have people helping you out and you want to ensure that no mistakes are even possible.</p>
+        
+        <p>The best part about the MTA100 is that the wires are removable, so if you make a mistake you can just pull the wire out of the crimped head and try again. Sometimes the connections wouldn’t take and they would have to be re-crimped. This happened on a few of the trees. In the future what we would have done is add circuit testing to the mainboard. This would be an in circuit current measurement sensor. On boot we would turn each of the LEDs on individually, sensing whether or not the LEDs are actually drawing current. This way we can identify improperly crimped LEDs (or just plain old broken LEDs) and turn on a status LED on the board to quickly check.</p>
+        
+        <img src="grove-crimp.jpg" class="u-max-full-width photo" style="width: 600px;">
+        
+        <p>Another big difference from Pulse &amp; Bloom is that we decided instead to make a board that not only could handle all of this wiring mess but also allow us to easily change out the high current PicoBucks if they shorted, which is something that happened surprisingly often until we realized that the factory solder jobs on the LEDs themselves could sometimes short.</p>
+        
+        <p>While out in the field we also discovered that the plastic trumpet, which is used to channel your breath toward the sensor while keeping out wind, would cover a bit too much of the proximity sensor. We solved this problem by adding ultrasonic sensors (thanks to Frys for letting us buy out their collection of ultrasonic sensors on the way to the burn), pictured below on top of the orange trumpet. Not bad for a last minute fix. </p>
+        
+        <p>We spent a couple days adding these ultrasonic sensors into the boards, soldering in the desert and making do with what we had. Thankfully we left a few pins open that we could then use for the new and improved proximity sensors.</p>
+        
         <img src="grove-flower.jpg" class="u-max-full-width photo">
+        
+        <p>Running an electronics installation out in the desert presents a few power problems. Frankly, there is nowhere to plug in, so all of the energy you’re going to need, whether it is stored or rechargeable, is going to have to be brought out there on the playa with you.</p>
+        
+        <p>We quickly decided on running the installation on solar-powered deep cycle batteries. The cost for the batteries was mitigated slightly by the fact that we already had a 1.2 kW solar array handy. The other option is to use a generator, but while relatively cheap, they are loud and would detract from the serenity of the installation. We could instead choose to run a generator in a baffle box and run AC power over a length 50 meter distance, but that was deemed un-Grove-like and we stuck with batteries.</p>
+        
+        <img src="grove-batteries.png" class="u-max-full-width photo" style="width: 600px">
+        
+        <p>Alas, as much as we try to avoid it, there’s plenty of firmware debugging to be done on the playa.</p>
+        
+        <div class="row">
+            <div class="columns six">
+                <img src="grove-debugging.jpg" class="u-max-full-width photo">
+            </div>
+            <div class="columns six">
+                <img src="grove-solar.jpg" class="u-max-full-width photo">
+            </div>
+        </div>
+
+        <p>The entire process lasted 3 months and involved 5 people on the electronics team, a half dozen people on fabrication, and another dozen people on assembly and installation. My hope is that others learn from our work and use some of the <a href="https://github.com/samuelclay/grove/">open-source firmware and designs</a> for their own art installations.</p>
+        
+        <img src="grove-party-dusty.jpg" class="u-max-full-width photo" style="margin-bottom: 96px;">
+        
         
     </div>
     
 </div>
-
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 </body>
 </html>
