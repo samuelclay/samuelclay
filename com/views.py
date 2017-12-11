@@ -36,7 +36,7 @@ def index(request):
     if not blog:
         logging.debug(" ---> Fetching blog...")
         blog_entries = _fetch_and_parse_blog()
-        cache.set('blog', blog, 60 * 10)
+        cache.set('blog', blog, 60 * 60 * 24)
     else:
         logging.debug(" ---> Cached blog.")
         
@@ -44,7 +44,7 @@ def index(request):
     if not tweets and tweets != []:
         logging.debug(" ---> Fetching twitter...")
         tweets = _fetch_and_parse_twitter()
-        cache.set('tweets', tweets, 60 * 10)
+        cache.set('tweets', tweets, 60 * 60 * 24)
     else:
         logging.debug(" ---> Cached twitter.")
     
@@ -53,7 +53,7 @@ def index(request):
         logging.debug(" ---> Fetching flickr...")
         # photos = _fetch_and_parse_flickr()
         photos = Photo.objects.all().order_by('?')
-        cache.set('photos', photos, 60 * 10)
+        cache.set('photos', photos, 60 * 60 * 24)
     else:
         logging.debug(" ---> Cached flickr.")
     
