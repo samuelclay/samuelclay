@@ -1,6 +1,12 @@
 # Django settings for samuelclay project.
 import os
 import sys
+import logging
+
+logging.basicConfig(
+    level = logging.DEBUG,
+    format = " %(levelname)s %(name)s: %(message)s",
+)
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
