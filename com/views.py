@@ -32,15 +32,13 @@ ISA_QUOTES = [
 
 # @cache_page(60)
 def index(request):
-    blog = cache.get('blog')
-    if not blog:
+    blog_entries = cache.get('blog_entries')
+    if not blog_entries:
         logging.debug(" ---> Fetching blog...")
-        print " ---> Fetching blog..."
         blog_entries = _fetch_and_parse_blog()
-        cache.set('blog', blog, 60 * 60 * 24)
+        cache.set('blog_entries', blog_entries, 60 * 60 * 24)
     else:
         logging.debug(" ---> Cached blog.")
-        print " ---> Cached blog."
         
     tweets = cache.get('tweets')
     if not tweets and tweets != []:
