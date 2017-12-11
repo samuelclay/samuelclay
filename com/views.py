@@ -3,6 +3,7 @@ from django.conf import settings
 # from django.views.decorators.cache import cache_page
 import feedparser
 import datetime
+import time
 import random
 import urllib2
 import socket
@@ -19,13 +20,11 @@ NUM_PHOTOS_PER_ROW = 7
 
 ISA_QUOTES = [
     "is up on a hill in San Francisco.",
-    "is eager to hear what you think.",
-    "is modern day geekery.",
     "is going about it all wrong.",
     "is writing code. Right. Now.",
     "is making out with his dog again.",
     "is on a tea buying spree.",
-    "is another former Clevelander.",
+    "is a Clevelander outside Ohio.",
     "is in his element.",
     "is randomizing fields.",
     "is driving with the top down.",
@@ -36,7 +35,7 @@ def index(request):
     blog = cache.get('blog')
     if not blog:
         logging.debug(" ---> Fetching blog...")
-        blog = _fetch_and_parse_blog()
+        blog_entries = _fetch_and_parse_blog()
         cache.set('blog', blog, 60 * 10)
     else:
         logging.debug(" ---> Cached blog.")
@@ -59,19 +58,28 @@ def index(request):
         logging.debug(" ---> Cached flickr.")
     
     isa_quote = random.choice(ISA_QUOTES) 
+    year = datetime.datetime.now().year
     
     return respond(request, 'index.html', {
-        'blog_entries': blog.entries,
+        'blog_entries': blog_entries,
         'tweets': tweets,
         'photos': photos,
         'isa_quote': isa_quote,
+        'year': year,
     })
     
 def _fetch_and_parse_blog():
     blog = feedparser.parse('http://www.ofbrooklyn.com/feeds/all/')
-    for b in blog['entries']:
-        b.updated_parsed = datetime.datetime(*b.updated_parsed[:-3])
-    return blog
+    entries = []
+    
+    for entry in blog['entries']:
+        entries.append({
+            'link': entry.link,
+            'title': entry.title,
+            'date': datetime.datetime.fromtimestamp(time.mktime(entry.updated_parsed)),
+        })
+        
+    return entries
 
 def _fetch_and_parse_twitter():
     try:

@@ -15,8 +15,8 @@
       <div class="title">A visual</div>
     </div>
     <div class="content block-photo">
-        <small>2014</small>
-        <img src="{{ MEDIA_URL }}images/2014 - Big Sur.jpg" width="450" height="450">
+        <small>2017</small>
+        <img src="{{ MEDIA_URL }}images/samuel-clay-canyon-beard.jpg" width="450" height="300">
     </div>
     
     <div class="header">
@@ -25,13 +25,13 @@
     <div class="content block-work">
         <ul>
             <li>
-                <small>2013 - 2017</small>                                                                                                                 
+                <small>2013 - {{ year }}</small>                                                                                                                 
                 <a href="http://www.turntouch.com"><img src="{{ MEDIA_URL }}images/turntouch.jpg" class="screenshot"></a>
                 <strong><a href="http://www.turntouch.com"><img src="{{ MEDIA_URL }}images/favicon_turntouch.png" class="favicon"> Turn Touch</a></strong> 
                 <div class="desc">Beautiful control for your smart home. Small flowers crack concrete.</div>
             </li>  
             <li>
-                <small>2009 - 2017</small>
+                <small>2009 - {{ year }}</small>
                 <a href="http://www.newsblur.com"><img src="{{ MEDIA_URL }}images/screenshot_newsblur.png" class="screenshot"></a>
                 <strong><a href="http://www.newsblur.com"><img src="{{ MEDIA_URL }}images/favicon_newsblur.png" class="favicon"> NewsBlur</a></strong>
                 <div class="desc">A personal news reader that brings people together to talk about the world. A new sound of an old instrument.</div>
@@ -49,19 +49,19 @@
     <div class="content block-projects">
         <ul>
             <li>
-                <small>2012 - 2017</small>
-                <a href="https://github.com/samuelclay/hackersmacker"><img src="{{ MEDIA_URL }}images/screenshot_hackersmacker.png" class="screenshot"></a>
-                <strong><a href="https://github.com/samuelclay/hackersmacker">Hacker Smacker</a></strong> 
+                <small>2012 - {{ year }}</small>
+                <a href="https://hackersmacker.org"><img src="{{ MEDIA_URL }}images/screenshot_hackersmacker.png" class="screenshot"></a>
+                <strong><a href="https://hackersmacker.org">Hacker Smacker</a></strong> 
                 <div class="desc">Browser extension used to friend and foe individual writers on Hacker News.</div>
             </li>
             <li>
-                <small>2007 - 2017</small>
+                <small>2007 - {{ year }}</small>
                 <a href="http://www.ofbrooklyn.com"><img src="{{ MEDIA_URL }}images/screenshot_ofbrooklyn.png" class="screenshot"></a>
                 <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a></strong> 
                 <div class="desc">A blog as a public record of my work.</div>
             </li>
             <li>
-                <small>2012 - 2017</small>
+                <small>2012 - {{ year }}</small>
                 <a href="http://samuel.newsblur.com"><img src="{{ MEDIA_URL }}images/screenshot_blurblog.png" class="screenshot"></a>
                 <strong><a href="http://samuel.newsblur.com">Blurblog</a></strong>
                 <div class="desc"> My shared stories on NewsBlur.</div>
@@ -167,15 +167,15 @@
         <ul>
             <li>
                 <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on GitHub</span></a></strong> The Django/Python code that powers the intelligent visual feed reader.
-                <small>2009 - 2017</small>
+                <small>2009 - {{ year }}</small>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/turntouch-remote">Turn Touch remote <span class="github">on GitHub</span></a></strong> Firmware and the custom circuit board for the four button Turn Touch remote.
-                <small>2015 - 2017</small>
+                <small>2015 - {{ year }}</small>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/turntouch-enclosure">Turn Touch CAD and CAM <span class="github">on GitHub</span></a></strong> Models and CNC machining design files for the solid wood Turn Touch remote.
-                <small>2015 - 2017</small>
+                <small>2015 - {{ year }}</small>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/grove">Grove <span class="github">on GitHub</span></a></strong> Firmware and three custom circuit boards for an interactive biofeedback installation at Burning Man. Measures breathing.
@@ -265,7 +265,7 @@
             {% for entry in blog_entries %}
                 <li {% if forloop.last %}class="last"{% endif %}>
                     <strong><a href="{{ entry.link }}">{{ entry.title|safe }}</a></strong>
-                    <small>{{ entry.updated_parsed|date:"F jS, Y" }}</small>
+                    <small>{{ entry.date|date:"F jS, Y" }}</small>
                 </li>
             {% endfor %}
         </ul>
