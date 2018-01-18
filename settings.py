@@ -1,6 +1,12 @@
 # Django settings for samuelclay project.
 import os
 import sys
+import logging
+
+logging.basicConfig(
+    level = logging.DEBUG,
+    format = " %(levelname)s %(name)s: %(message)s",
+)
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 here = lambda x: os.path.join(os.path.abspath(os.path.dirname(__file__)), x)
@@ -37,6 +43,12 @@ DATABASES = {
 # CACHE_BACKEND = 'memcached://127.0.0.1:35098'
 CACHE_BACKEND = "db://cache"
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache',
+    }
+}
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
