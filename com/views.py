@@ -133,3 +133,6 @@ def chunks(l, n):
 def portfolio(request):
     return respond(request, 'portfolio.html', {
     })
+
+def bikes(request):
+    return respond(request, settings.MEDIA_ROOT + '/../bikes/index.html', {})

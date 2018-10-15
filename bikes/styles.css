@@ -1,0 +1,180 @@
+body {
+    background-color: #0C2639;
+    color: white;
+    font-family: 'Lora', serif;
+}
+.author {
+  color: rgba(255, 255, 255, 0.5);
+}
+a, a:visited {
+    color: #D5EDF8;
+}
+#sections > div{
+	opacity: .3;
+    transition: opacity 1s;
+} 
+
+#sections div.graph-scroll-active{
+	opacity: 1;
+}
+#container{
+  position: relative;
+}
+
+#sections {
+  width: 25vw;
+  padding: 5vh 0 0 1vw;
+  font-size: 24px;
+}
+
+#sections > div {
+    margin-bottom: 75vh;
+}
+#sections > div:last-child {
+  margin-bottom: 15vh;
+}
+
+.streetview {
+    position: fixed;
+    width: 25vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+}
+
+.map {
+    float: right;
+    position: fixed;
+    width: 70vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+.map-key {
+    position: absolute;
+    top: 30px;
+    left: 12px;
+    width: 200px;
+}
+.streetview {
+    transition: opacity 1s;
+    opacity: 0;
+}
+.streetview-photo-label {
+  position: absolute;
+  bottom: 2px;
+  left: 1vw;
+  padding: 6px 12px;
+  background-color: #0C1C2A;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  text-align: center;
+  width: 70px;
+}
+.streetview-photo {  
+    position: relative;
+    padding-left: 1vw;
+    background-color: #132637;
+    margin-left: -1vw;
+}
+.streetview-photo img {  
+  border-bottom: 2px solid #132637;
+}
+
+.bike-requests circle {
+  cursor: pointer;
+}
+.bike-request-point {
+    fill: #FCB52F;
+/*    transform: scale(1);*/
+}
+.bike-crash {
+    fill: #FB4D42;
+    cursor: pointer;
+/*    transform: scale(1);*/
+}
+.bike-request-point.selected {
+    transform: scale(3);
+    fill: #FCA707;
+    stroke: #B38021;
+    stroke-width: 0.25px;
+}
+
+.legend-text {
+  fill: #D6E2E2;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 70%;
+  text-transform: uppercase;
+}
+
+/* ====================== */
+/* = Zoom in on Streets = */
+/* ====================== */
+
+.zoom-street {
+    clear: both;
+    margin: 0 0 6px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 2px 6px;
+    width: 80%;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+.zoom-street:hover {
+    background-color: rgba(0, 0, 0, 0.4);    
+}
+.zoom-street.active {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.zoom-street-number {
+    float: left;
+    margin: -2px 8px 0 0;
+    color: rgba(255, 255, 255, 0.4);
+}
+.zoom-street-name {
+    font-size: 80%;
+    padding: 2px 0;
+}
+
+.note {
+    font-size: 50%;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    margin: 0 0 0 24px;
+}
+span.bike-request-point {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #FCB52F;
+    border-radius: 8px;
+    margin: -4px 4px 0;
+    vertical-align: middle;
+    opacity: 0.8;
+}
+.driver.off {
+  display: none;
+}
+.live-driving {
+  cursor: pointer;
+  transition: all .15s;
+}
+.live-driving.off span.live-driving-icon {
+  filter: grayscale(100%);
+}
+span.live-driving-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: -4px 4px 0;
+    vertical-align: middle;
+    opacity: 0.8;
+    background: transparent url(gps.png) no-repeat 0 0;
+    background-size: 16px;
+}
