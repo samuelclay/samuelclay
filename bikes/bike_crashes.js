@@ -219,7 +219,7 @@ window.BC = {
     //     .attr("stroke", "#999")
     //     .attr("d", geoPath);
 
-    d3.csv("data/Vision_Zero_entry.csv", _.bind(function(error, data) {
+    d3.csv("data/Vision_Zero_Entry.csv", _.bind(function(error, data) {
       var requests = _.filter(data, function(d) { return d.REQUESTTYPE.indexOf("bike") != -1; });
       this.drawRequests(requests);
       if (BC.waitingDataLoads) BC.waitingDataLoads -= 1;
