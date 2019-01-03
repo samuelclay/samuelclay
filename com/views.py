@@ -19,15 +19,16 @@ socket.setdefaulttimeout(10)
 NUM_PHOTOS_PER_ROW = 7
 
 ISA_QUOTES = [
-    "is up on a hill in San Francisco.",
+    # "is up on a hill in San Francisco.",
     "is going about it all wrong.",
     "is writing code. Right. Now.",
-    "is making out with his dog again.",
-    "is on a tea buying spree.",
+    # "is making out with his dog again.", # Poor Shiloh
+    "is rewriting and rewriting.",
     "is a Clevelander outside Ohio.",
     "is in his element.",
     "is randomizing fields.",
-    "is driving with the top down.",
+    # "is .",
+    # "is driving with the top down.",
 ]
 
 # @cache_page(60)
@@ -57,6 +58,13 @@ def index(request):
     else:
         logging.debug(" ---> Cached flickr.")
     
+    quotes = ISA_QUOTES
+    now = datetime.datetime.now()
+    grad = datetime.datetime(2020, 05, 28)
+    if now < grad:
+        quotes.append("is %s days away from graduation." % (grad - now).days)
+    else:
+        quotes.append("is %s days past graduation." % (now - grad).days)
     isa_quote = random.choice(ISA_QUOTES) 
     year = datetime.datetime.now().year
     
