@@ -102,9 +102,13 @@ def _fetch_and_parse_twitter():
     # shown_tweets = [t for t in tweets if not t.text.startswith('@')]
     fixed_tweets = []
     for tweet in tweets[:12]:
+        text = tweet.text
+        for url in tweet.entities.get('urls', []):
+            if url['url'] in text:
+                text = text.replace(url['url'], url['expanded_url'])
         fixed_tweets.append({
             'relative_created_at': "%s ago" % relative_timesince(tweet.created_at),
-            'text': tweet.text,
+            'text': text,
             'id': tweet.id,
         })
 
