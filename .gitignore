@@ -2,4 +2,4 @@
 *.db
 local_settings.py
 logs
-
+.DS_Store

@@ -1,0 +1,122 @@
+<html>
+<head>
+  <title>MDE Studio Sketches</title>
+  <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+  <script src='https://d3js.org/d3.v4.min.js'></script>
+  <script src="https://underscorejs.org/underscore-min.js"></script>
+  <script src="graph-scroll.js"></script>
+  <script src='data/neighborhoods.js'></script>
+  <script src='data/bike_racks.js'></script>
+  <script src='data/Existing_Bike_Network.geojson'></script>
+  <script src='data/Hubway_Stations.geojson'></script> 
+  <script src="bike_crashes.js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Lora', 'Montserrat']
+      },
+      fontactive: function() {
+          console.log(['Fonts loaded']);
+          BC.fontsLoaded = true;
+          BC.setupScroll();
+      }
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+</head>
+<body>
+
+<div id='container'>
+    <div class="map">
+    </div>
+    <div class="streetview">
+        <div class="streetview-photo">
+          <div class="streetview-photo-label">Front</div>
+          <img class="streetview-img-heading-0" src="" />
+        </div>
+        <div class="streetview-photo">
+          <div class="streetview-photo-label">Side</div>
+          <img class="streetview-img-heading-90" src="" />
+        </div>
+        <div class="streetview-photo">
+          <div class="streetview-photo-label">Side</div>
+          <img class="streetview-img-heading-270" src="" />
+        </div>
+        <div class="streetview-photo">
+          <div class="streetview-photo-label">Behind</div>
+          <img class="streetview-img-heading-180" src="" />
+        </div>
+    </div>
+    <div id='sections'>
+        <div>
+            <h1>Boston's Missing Bike Lanes</h1>
+            <p>Boston is home to 670,000 people. The city has committed to increasing the share of commute trips by bike to <a href="https://www.cityofboston.gov/images_documents/Boston%20Bike%20Network%20Plan%2C%20Fall%202013_FINAL_tcm3-40525.pdf">10 percent by 2020</a>. Boston's Climate Action Plan also sets a goal of decreasing bike crashes by 50 percent.</p>
+
+            <p>This is the visual story of what that plan looks like today and where changes need to be made.</p>
+            <h6 class="author">Samuel Clay, October 1st, 2018</h6>
+        </div>
+        <div>
+            <h2>Bike Lanes of Today</h2>
+            <p>In 2018 there are 195 miles of bike lanes across the city of Boston. The <a href="https://www.cityofboston.gov/images_documents/Boston%20Bike%20Network%20Plan%2C%20Fall%202013_FINAL_tcm3-40525.pdf">Boston Bike Network Plan</a> calls for adding 75 more miles between 2013 and 2019. And reaching 350+ total miles by 2043.</p>
+
+            <p>Boston is attempting to create a world-class biking city, but to do that the city needs to do more than add bike lanes. Improving safety is what leads to increasing usage of the bike faciities in the city and to do that Boston needs to consider several problem areas.</p>
+        </div>
+        <div>
+            <h2>Complaints Tell a Story</h2>
+            <p>Public records show a pattern behind complaints around inadequate bike facilities and bike lanes. This map shows the spots where citizens complained about the street being hazardous for bikes.</p>
+        </div>
+        <div>
+            <h2>Crashes Also Tell a Story</h2>
+            <p>As part of the Vision Zero plan for Boston, every crash involving a bike that required a public safety response through 911 has been shown here.</p>
+            <p>Most crashes in Boston are caused by drivers not seeing bikes, whether or not the bike was in a bike lane.</p>
+        </div>
+        <div>
+            <p>Zooming in highlights streets with numerous complaints lacking bike lanes.</p>
+            <p class="note live-driving off">
+              <span class="live-driving-icon"></span> 
+              <span class="live-driving-text">Live driving is off</span>
+            </p>
+            <p><div class="zoom-streets">
+                <div class="zoom-street zoom-street-1 active">
+                    <div class="zoom-street-number">1</div>
+                    <div class="zoom-street-name">Washington St. in Roslindale</div>
+                </div>
+                <div class="zoom-street zoom-street-2">
+                    <div class="zoom-street-number">2</div>
+                    <div class="zoom-street-name">Massachusetts Ave.</div>
+                </div>
+                <div class="zoom-street zoom-street-3">
+                    <div class="zoom-street-number">3</div>
+                    <div class="zoom-street-name">Huntington St.</div>
+                </div>
+                <div class="zoom-street zoom-street-4">
+                    <div class="zoom-street-number">4</div>
+                    <div class="zoom-street-name">Seaport Blvd.</div>
+                </div>
+                <div class="zoom-street zoom-street-5">
+                    <div class="zoom-street-number">5</div>
+                    <div class="zoom-street-name">Tremont St.</div>
+                </div>
+                <div class="zoom-street zoom-street-6">
+                    <div class="zoom-street-number">6</div>
+                    <div class="zoom-street-name">W Roxbury Pkwy.</div>
+                </div>
+                <div class="zoom-street zoom-street-7">
+                    <div class="zoom-street-number">7</div>
+                    <div class="zoom-street-name">Washington St. in Dorchester</div>
+                </div>
+                <div class="zoom-street zoom-street-8">
+                    <div class="zoom-street-number">8</div>
+                    <div class="zoom-street-name">Charles St.</div>
+                </div>
+            </div>
+            </p>
+            <p class="note">Hover over <span class="bike-request-point"></span> for street view</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

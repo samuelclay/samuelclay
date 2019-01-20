@@ -194,34 +194,34 @@ body {
 /* = Blocks = */
 /* ========== */
 
-.block-intro {
+.block-intro, .block-1 {
     border-left: 20px solid #0B455F;    
 }
-.block-photo {
+.block-photo, .block-2 {
     border-left: 20px solid #054960;
 }
-.block-work {
+.block-work, .block-3 {
     border-left: 20px solid #05485F;
 }
-.block-projects {
+.block-projects, .block-4 {
     border-left: 20px solid #054C57;
 }
-.block-past-projects {
+.block-past-projects, .block-5 {
     border-left: 20px solid #054E54;
 }
-.block-code {
+.block-code, .block-6 {
     border-left: 20px solid #05524E;
 }
-.block-photos {
+.block-photos, .block-7 {
     border-left: 20px solid #055547;
 }
-.block-blog {
+.block-blog, .block-8 {
     border-left: 20px solid #065745;
 }
-.block-twitter {
+.block-twitter, .block-9 {
     border-left: 20px solid #055A3E;
 }
-.block-press {
+.block-press, .block-10 {
     border-left: 20px solid #065E39;
 }
 

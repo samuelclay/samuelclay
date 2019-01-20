@@ -110,6 +110,7 @@ ROOT_URLCONF = 'urls'
 TEMPLATE_DIRS = (
     here('templates'),
     here('portfolio'),
+    here('bikes'),
 )
 
 INSTALLED_APPS = (
