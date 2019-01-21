@@ -299,6 +299,9 @@ ul li:last-child img.screenshot {
 /*    margin-bottom: 0;*/
 }
 
+.dated-image {
+    position: relative;
+}
 small {
      position: absolute;
      left: 520px;
@@ -330,10 +333,13 @@ small, small a, small a:link, small a:visited {
         text-align: left;
         margin-left: 96px;
     }
-    
     .content {
         margin-top: 48px;
         margin-left: 64px;
+        margin-right: 0;
+    }
+    .content.block-photos {
+        width: auto;
     }
     .name-header {
         margin-left: 96px;
@@ -342,4 +348,28 @@ small, small a, small a:link, small a:visited {
     .name-header a {
         width: auto;
     }
+
+    small {
+         position: absolute;
+         text-align: right;
+         left: auto;
+         top: auto;
+         right: 0px;
+         bottom: -24px;
+         width: 180px;
+     }
+     .block-code small {
+         bottom: auto;
+         top: 0;
+     }
+     .block-blog strong,
+     .block-twitter strong,
+     .block-press strong {
+         margin-bottom: 2px;
+     }
+     .block-blog small,
+     .block-twitter small,
+     .block-press small {
+         position: static;
+     }
 }
