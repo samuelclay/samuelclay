@@ -332,6 +332,7 @@ small, small a, small a:link, small a:visited {
         width: auto;
         text-align: left;
         margin-left: 96px;
+        font-size: 32px;
     }
     .content {
         margin-top: 48px;
@@ -344,11 +345,15 @@ small, small a, small a:link, small a:visited {
     .name-header {
         margin-left: 96px;
         margin-right: 96px;
+        font-size: 56px;
     }
     .name-header a {
         width: auto;
     }
-
+    
+    strong {
+        font-size: 26px;
+    }
     small {
          position: absolute;
          text-align: right;
@@ -357,6 +362,7 @@ small, small a, small a:link, small a:visited {
          right: 0px;
          bottom: -24px;
          width: 180px;
+         font-size: 20px;
      }
      .block-code small {
          bottom: auto;
@@ -371,5 +377,9 @@ small, small a, small a:link, small a:visited {
      .block-twitter small,
      .block-press small {
          position: static;
+     }
+     ul li {
+         font-size: 20px;
+         line-height: 24px;
      }
 }
