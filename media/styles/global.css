@@ -193,11 +193,8 @@ body {
     background-size: cover;
 }
 
-.content.block-photo li {
-    line-height: 0;
-}
 .content.block-photos {
-    width: 700px;
+    max-width: 700px;
     margin-right: 0px;
 }
 .block-photos.img-75 img {
@@ -264,7 +261,7 @@ strong {
 
 .content {
     width: 454px;
-    margin: 0 260px 54px 312px;
+    margin: 0 0px 54px 312px;
     padding-left: 32px;
     position: relative;
 }
@@ -306,11 +303,11 @@ small {
      position: absolute;
      left: 520px;
      top: 0;
-     width: 180px;
-    font-size: 16px;
+     white-space: nowrap;
+     font-size: 20px;
 }
 small, small a, small a:link, small a:visited {
-     color: #776766;
+     color: #ada5a4;
 }
 .github {
     text-transform: uppercase;
@@ -360,7 +357,7 @@ small, small a, small a:link, small a:visited {
          left: auto;
          top: auto;
          right: 0px;
-         bottom: -24px;
+         bottom: -30px;
          width: 180px;
          font-size: 24px;
      }
