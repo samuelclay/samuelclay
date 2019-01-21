@@ -195,6 +195,7 @@ body {
 
 .content.block-photos {
     max-width: 700px;
+    width: auto;
     margin-right: 0px;
 }
 .block-photos.img-75 img {
@@ -264,6 +265,8 @@ strong {
     margin: 0 0px 54px 312px;
     padding-left: 32px;
     position: relative;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .content .screenshot {
