@@ -15,6 +15,7 @@
       <div class="title">A visual</div>
     </div>
     <div class="content block-photo">
+        <div class="block-border"></div>
         <ul>
             <li>
                 <small>2017</small>
@@ -27,6 +28,7 @@
       <div class="title">For a Living</div>
     </div>
     <div class="content block-work">
+        <div class="block-border"></div>
         <ul>
             <li>
                 <small>2013 - {{ year }}</small>                                                                                                                 
@@ -52,6 +54,7 @@
       </div>
     </div>
     <div class="content block-projects">
+        <div class="block-border"></div>
         <ul>
             <li>
                 <small>2012 - {{ year }}</small>
@@ -76,6 +79,7 @@
         
     <div class="header">Past Projects</div>
     <div class="content block-past-projects">
+        <div class="block-border"></div>
         <ul>
             <li>
                 <small>2018</small>
@@ -187,6 +191,7 @@
         
     </div>
     <div class="content block-code">
+        <div class="block-border"></div>
         <ul>
             <li>
                 <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on GitHub</span></a></strong> The Django/Python code that powers the intelligent visual feed reader.
@@ -269,6 +274,7 @@
       </div>  
     </div>
     <div class="content block-photos img-75">
+        <div class="block-border"></div>
       {% for photo in photos|slice:":48" %}
         <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}" alt="{{ photo.title }}" /></a>
       {% endfor %}
@@ -284,6 +290,7 @@
         
     </div>
     <div class="content block-blog">
+        <div class="block-border"></div>
         <ul class="blog">
             {% for entry in blog_entries %}
                 <li {% if forloop.last %}class="last"{% endif %}>
@@ -303,6 +310,7 @@
       </div>
     </div>
     <div class="content block-twitter">
+        <div class="block-border"></div>
         <ul class="tweets">
             {% for tweet in tweets %}
                 <li {% if forloop.last %}class="last"{% endif %}>
@@ -320,6 +328,7 @@
         <div class="title">Press</div>
     </div>
     <div class="content block-press">
+        <div class="block-border"></div>
         <ul class="press">
             <li>
                 <strong>
