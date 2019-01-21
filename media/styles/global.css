@@ -29,12 +29,6 @@ body {
     background-color: #EEECEA;
 }
 
-@media only screen and (max-device-width:480px) {
-	body {
-		-webkit-text-stroke:0 black;
-	}
-}
-
 #topbar {
     height: 42px;
     z-index: 1;
@@ -318,4 +312,34 @@ small, small a, small a:link, small a:visited {
 .github {
     text-transform: uppercase;
     font-size: 13px;
+}
+
+
+
+@media only screen and (max-width:1000px) {
+	body {
+		-webkit-text-stroke:0 black;
+	}
+    
+    #wrapper {
+        width: auto;
+    }
+    .header {
+        float: none;
+        width: auto;
+        text-align: left;
+        margin-left: 96px;
+    }
+    
+    .content {
+        margin-top: 48px;
+        margin-left: 64px;
+    }
+    .name-header {
+        margin-left: 96px;
+        margin-right: 96px;
+    }
+    .name-header a {
+        width: auto;
+    }
 }
