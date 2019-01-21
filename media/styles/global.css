@@ -290,7 +290,7 @@ ul li {
 .block-twitter ul li,
 .block-blog ul li,
 .block-press ul li {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 ul li:last-child {
     margin: 0;
@@ -371,7 +371,7 @@ small, small a, small a:link, small a:visited {
      .block-blog strong,
      .block-twitter strong,
      .block-press strong {
-         margin-bottom: 2px;
+         margin-bottom: 4px;
      }
      .block-blog small,
      .block-twitter small,
