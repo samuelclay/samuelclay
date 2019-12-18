@@ -229,6 +229,10 @@ img {
 .block-caselife img.last {
     margin-bottom: 0;
 }
+.block-code li strong a {
+    padding-right: 120px;
+    display: block;
+}
 
 /* =========== */
 /* = Content = */
