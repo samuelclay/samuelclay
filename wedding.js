@@ -9,4 +9,4 @@ http.createServer(function (req, res) {
         res.writeHead(301, {"Location": "https://withjoy.com/10ten20twenty"});
     }
     res.end();
-}).listen(8080);
+}).listen(2020);
