@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils.html import strip_tags
-from django.utils.text import truncate_words
-from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import truncatewords
 from django.conf import settings
+from django.urls import reverse
 
 from tagging.fields import TagField
 
@@ -87,9 +87,8 @@ class Photo(models.Model):
     def __unicode__(self):
         return u'%s' % self.title
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('photo_detail', (), { 'year': self.taken_date.strftime('%Y'),
+        return reverse('photo_detail', { 'year': self.taken_date.strftime('%Y'),
                                       'month': self.taken_date.strftime('%m'),
                                       'day': self.taken_date.strftime('%d'),
                                       'slug': self.slug })
@@ -184,7 +183,7 @@ class FavoriteList(models.Model):
     sync_date = models.DateTimeField()
     photos = models.ManyToManyField('Photo')
     primary = models.ForeignKey( \
-	'Photo', related_name='primary_in', null=True)
+	'Photo', related_name='primary_in', null=True, on_delete=models.SET_NULL)
 
     def numPhotos(self):
         return len(self.photo_list.objects.all())
@@ -195,7 +194,7 @@ class FavoriteList(models.Model):
 class PhotoSet(models.Model):
     flickr_id = models.CharField(primary_key=True, max_length=50)
     primary = models.ForeignKey('Photo', null=True, default=None,
-                                related_name='primary_photo_set')
+                                related_name='primary_photo_set', on_delete=models.SET_NULL)
     owner = models.CharField(max_length=50)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -208,9 +207,8 @@ class PhotoSet(models.Model):
     def __unicode__(self):
         return u"%s photo set by %s" % (self.title, self.owner)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('photoset_detail', (), { 'object_id': self.pk })
+        return reverse('photoset_detail', { 'object_id': self.pk })
 
     def get_photos_ordered_by_taken_date(self):
         """
@@ -257,11 +255,11 @@ class PhotoSet(models.Model):
             return '<a href="%s"><img src="%s" width="75" height="75" alt="%s" /></a>' % bits
         return None
     get_primary_photo.allow_tags = True
-    get_primary_photo.short_description = _(u'Highlight')
+    get_primary_photo.short_description = 'Highlight'
 
 class PhotoComment(models.Model):
     flickr_id = models.CharField(primary_key=True, max_length=128)
-    photo = models.ForeignKey('Photo')
+    photo = models.ForeignKey('Photo', on_delete=models.CASCADE)
     author_nsid = models.CharField(max_length=50)
     author = models.CharField(max_length=50)
     pub_date = models.DateTimeField()
@@ -272,13 +270,13 @@ class PhotoComment(models.Model):
         ordering = ('pub_date',)
 
     def __unicode__(self):
-        return _(u"%(author)s said: %(comment)s") % {
+        return "%(author)s said: %(comment)s" % {
             'author': self.author, 'comment': self.get_short_comment(4)}
 
     def get_absolute_url(self):
         return self.permanent_url
 
     def get_short_comment(self, num=6):
-        return truncate_words(strip_tags(self.comment), num)
-    get_short_comment.short_description = _(u'comment')
+        return truncatewords(strip_tags(self.comment), num)
+    get_short_comment.short_description = 'comment'
 

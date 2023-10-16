@@ -1,0 +1,5 @@
+django~=3.0
+django-tagging~=0.5.0
+feedparser~=6.0
+requests~=2.0
+BeautifulSoup4~=4.0

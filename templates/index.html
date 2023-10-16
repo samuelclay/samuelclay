@@ -5,14 +5,14 @@
 
 <div id="wrapper">
     <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a> 
+        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
         <div class="name-header-text">
             {{ isa_quote|safe }}
         </div>
     </div>
-    
+
     <div class="header">
-      <div class="title">A visual</div>
+        <div class="title">A visual</div>
     </div>
     <div class="content block-photo">
         <div class="block-border"></div>
@@ -20,44 +20,59 @@
             <li>
                 <div class="dated-image">
                     <small>2019</small>
-                    <img src="{{ MEDIA_URL }}images/2019 - Cuba.jpg" width="450" height="450">
+                    <img src="/static/images/2019 - Cuba.jpg" width="450" height="450">
                 </div>
             </li>
         </ul>
     </div>
-    
+
     <div class="header">
-      <div class="title">For a Living</div>
+        <div class="title">For a Living</div>
     </div>
     <div class="content block-work">
         <div class="block-border"></div>
         <ul>
             <li>
                 <div class="dated-image">
-                    <small>2013 - {{ year }}</small>                                                                                                                 
-                    <a href="http://www.turntouch.com"><img src="{{ MEDIA_URL }}images/turntouch.jpg" class="screenshot"></a>
+                    <small>2022 - {{ year }}</small>
+                    <a href="https://www.solreader.com"><img src="/static/images/solreader.jpg"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.turntouch.com"><img src="{{ MEDIA_URL }}images/favicon_turntouch.png" class="favicon"> Turn Touch</a></strong> 
+                <strong><a href="https://www.solreader.com"><img src="/static/images/solreader_favicon.svg"
+                            class="favicon"> Sol Reader</a></strong>
+                <div class="desc">Experience the next evolution in reading. Illuminate your mind.</div>
+            </li>
+            <li>
+                <div class="dated-image">
+                    <small>2013 - {{ year }}</small>
+                    <a href="http://www.turntouch.com"><img src="/static/images/turntouch.jpg"
+                            class="screenshot"></a>
+                </div>
+                <strong><a href="http://www.turntouch.com"><img src="/static/images/favicon_turntouch.png"
+                            class="favicon"> Turn Touch</a></strong>
                 <div class="desc">Beautiful control for your smart home. Small flowers crack concrete.</div>
-            </li>  
+            </li>
             <li>
                 <div class="dated-image">
                     <small>2009 - {{ year }}</small>
-                    <a href="http://www.newsblur.com"><img src="{{ MEDIA_URL }}images/screenshot_newsblur.png" class="screenshot"></a>
+                    <a href="http://www.newsblur.com"><img src="/static/images/screenshot_newsblur.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.newsblur.com"><img src="{{ MEDIA_URL }}images/favicon_newsblur.png" class="favicon"> NewsBlur</a></strong>
-                <div class="desc">A personal news reader that brings people together to talk about the world. A new sound of an old instrument.</div>
+                <strong><a href="http://www.newsblur.com"><img src="/static/images/favicon_newsblur.png"
+                            class="favicon"> NewsBlur</a></strong>
+                <div class="desc">A personal news reader that brings people together to talk about the world. A new
+                    sound of an old instrument.</div>
             </li>
         </ul>
     </div>
 
     <div class="header">
-      <div class="title">Current Projects</div>
-      <div class="header-photo">
-        <a href="http://en.wikipedia.org/wiki/Hacker_(programmer_subculture)">
-          <img src="{{ MEDIA_URL }}images/glider.png" width="62" height="62" />
-        </a>
-      </div>
+        <div class="title">Current Projects</div>
+        <div class="header-photo">
+            <a href="http://en.wikipedia.org/wiki/Hacker_(programmer_subculture)">
+                <img src="/static/images/glider.png" width="62" height="62" />
+            </a>
+        </div>
     </div>
     <div class="content block-projects">
         <div class="block-border"></div>
@@ -65,30 +80,33 @@
             <li>
                 <div class="dated-image">
                     <small>2012 - {{ year }}</small>
-                    <a href="https://hackersmacker.org"><img src="{{ MEDIA_URL }}images/screenshot_hackersmacker.png" class="screenshot"></a>
+                    <a href="https://hackersmacker.org"><img src="/static/images/screenshot_hackersmacker.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="https://hackersmacker.org">Hacker Smacker</a></strong> 
+                <strong><a href="https://hackersmacker.org">Hacker Smacker</a></strong>
                 <div class="desc">Browser extension used to friend and foe individual writers on Hacker News.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2007 - {{ year }}</small>
-                    <a href="http://www.ofbrooklyn.com"><img src="{{ MEDIA_URL }}images/screenshot_ofbrooklyn.png" class="screenshot"></a>
+                    <a href="http://www.ofbrooklyn.com"><img src="/static/images/screenshot_ofbrooklyn.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a></strong> 
+                <strong><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a></strong>
                 <div class="desc">A blog as a public record of my work.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2012 - {{ year }}</small>
-                    <a href="http://samuel.newsblur.com"><img src="{{ MEDIA_URL }}images/screenshot_blurblog.png" class="screenshot"></a>
+                    <a href="http://samuel.newsblur.com"><img src="/static/images/screenshot_blurblog.png"
+                            class="screenshot"></a>
                 </div>
                 <strong><a href="http://samuel.newsblur.com">Blurblog</a></strong>
                 <div class="desc"> My shared stories on NewsBlur.</div>
             </li>
         </ul>
     </div>
-        
+
     <div class="header">Past Projects</div>
     <div class="content block-past-projects">
         <div class="block-border"></div>
@@ -96,296 +114,375 @@
             <li>
                 <div class="dated-image">
                     <small>2020</small>
-                    <a href="https://comfortmaps.com"><img src="{{ MEDIA_URL }}images/comfortmaps.jpg" class="screenshot"></a>
+                    <a href="https://comfortmaps.com"><img src="/static/images/comfortmaps.jpg"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="https://comfortmaps.com">Comfort Maps</a></strong> 
-                <div class="desc">Comfort Maps make safer streets. Turn your two-wheeled commute into a call for action.</div>
+                <strong><a href="https://comfortmaps.com">Comfort Maps</a></strong>
+                <div class="desc">Comfort Maps make safer streets. Turn your two-wheeled commute into a call for action.
+                </div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2020</small>
-                    <a href="https://cda.wtf"><img src="{{ MEDIA_URL }}images/wtfiscda.jpg" class="screenshot"></a>
+                    <a href="https://cda.wtf"><img src="/static/images/wtfiscda.jpg" class="screenshot"></a>
                 </div>
-                <strong><a href="https://cda.wtf">WTF is CDA</a></strong> 
-                <div class="desc">An interactive explainer about the Communications Decency Act (“CDA 230”) and one of the most powerful laws shaping the Internet as we know it today.</div>
+                <strong><a href="https://cda.wtf">WTF is CDA</a></strong>
+                <div class="desc">An interactive explainer about the Communications Decency Act (“CDA 230”) and one of
+                    the most powerful laws shaping the Internet as we know it today.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2018</small>
-                    <a href="/boston-bikes"><img src="{{ MEDIA_URL }}images/screenshot_bikes.png" class="screenshot"></a>
+                    <a href="/boston-bikes"><img src="/static/images/screenshot_bikes.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="/boston-bikes">Boston Bike Lanes</a></strong> 
-                <div class="desc">An interactive visualization of where Boston should build its next bike lanes, backed by data.</div>
+                <strong><a href="/boston-bikes">Boston Bike Lanes</a></strong>
+                <div class="desc">An interactive visualization of where Boston should build its next bike lanes, backed
+                    by data.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2018</small>
-                    <a href="/podlife"><img src="{{ MEDIA_URL }}images/podlife-12.png" class="screenshot"></a>
+                    <a href="/podlife"><img src="/static/images/podlife-12.png" class="screenshot"></a>
                 </div>
-                <strong><a href="/podlife">Podlife</a></strong> 
-                <div class="desc">An augmented reality app that demoed a series of self-driving pods, part of a conceptual network envisioning the future of commuting.</div>
+                <strong><a href="/podlife">Podlife</a></strong>
+                <div class="desc">An augmented reality app that demoed a series of self-driving pods, part of a
+                    conceptual network envisioning the future of commuting.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2018</small>
-                    <a href="/kickpoint"><img src="{{ MEDIA_URL }}images/kickpoint-5.png" class="screenshot"></a>
+                    <a href="/kickpoint"><img src="/static/images/kickpoint-5.png" class="screenshot"></a>
                 </div>
-                <strong><a href="/kickpoint">Kickpoint</a></strong> 
-                <div class="desc">A device that allows for governments to provide a temporary infrastructure for citizens to communicate with their loved ones after natural disasters.</div>
+                <strong><a href="/kickpoint">Kickpoint</a></strong>
+                <div class="desc">A device that allows for governments to provide a temporary infrastructure for
+                    citizens to communicate with their loved ones after natural disasters.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2016</small>
-                    <a href="http://www.ofbrooklyn.com/2017/03/31/building-grove-burning-man-art-installation-2016/"><img src="{{ MEDIA_URL }}images/screenshot_grove.jpg" class="screenshot"></a>
+                    <a href="http://www.ofbrooklyn.com/2017/03/31/building-grove-burning-man-art-installation-2016/"><img
+                            src="/static/images/screenshot_grove.jpg" class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.ofbrooklyn.com/2017/03/31/building-grove-burning-man-art-installation-2016/">Grove</a></strong> 
+                <strong><a
+                        href="http://www.ofbrooklyn.com/2017/03/31/building-grove-burning-man-art-installation-2016/">Grove</a></strong>
                 <div class="desc">A second interactive biofeedback installation at Burning Man 2016.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2014</small>
-                    <a href="http://www.ofbrooklyn.com/2014/09/6/building-pulse-bloom-biofeedback-burning-man-2014/"><img src="{{ MEDIA_URL }}images/screenshot_pulsebloom.jpg" class="screenshot"></a>
+                    <a href="http://www.ofbrooklyn.com/2014/09/6/building-pulse-bloom-biofeedback-burning-man-2014/"><img
+                            src="/static/images/screenshot_pulsebloom.jpg" class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.ofbrooklyn.com/2014/09/6/building-pulse-bloom-biofeedback-burning-man-2014/">Pulse &amp; Bloom</a></strong> 
+                <strong><a
+                        href="http://www.ofbrooklyn.com/2014/09/6/building-pulse-bloom-biofeedback-burning-man-2014/">Pulse
+                        &amp; Bloom</a></strong>
                 <div class="desc">An interactive biofeedback installation at Burning Man 2014.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2014</small>
-                    <a href="http://www.ofbrooklyn.com/2014/01/15/adventures-in-wearable-electronics-light-up-dress/"><img src="{{ MEDIA_URL }}images/screenshot_dress.jpg" class="screenshot"></a>
+                    <a href="http://www.ofbrooklyn.com/2014/01/15/adventures-in-wearable-electronics-light-up-dress/"><img
+                            src="/static/images/screenshot_dress.jpg" class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.ofbrooklyn.com/2014/01/15/adventures-in-wearable-electronics-light-up-dress/">Adventures in Wearable Electronics</a></strong>
+                <strong><a
+                        href="http://www.ofbrooklyn.com/2014/01/15/adventures-in-wearable-electronics-light-up-dress/">Adventures
+                        in Wearable Electronics</a></strong>
                 <div class="desc">Combining sewing and electronics to make a light up dress.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2011 - 2014</small>
-                    <a href="http://documentcloud.github.com/visualsearch"><img src="{{ MEDIA_URL }}images/screenshot_visualsearch.png" class="screenshot"></a>
+                    <a href="http://documentcloud.github.io/visualsearch"><img
+                            src="/static/images/screenshot_visualsearch.png" class="screenshot"></a>
                 </div>
-                <strong><a href="http://documentcloud.github.com/visualsearch">VisualSearch.js</a></strong> 
+                <strong><a href="http://documentcloud.github.io/visualsearch">VisualSearch.js</a></strong>
                 <div class="desc">A faceted search box for real data.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2013</small>
-                    <a href="http://www.ofbrooklyn.com/2014/01/2/building-photo-frame-raspberry-pi-motion-detector/"><img src="{{ MEDIA_URL }}images/screenshot_photoframe.jpg" class="screenshot"></a>
+                    <a href="http://www.ofbrooklyn.com/2014/01/2/building-photo-frame-raspberry-pi-motion-detector/"><img
+                            src="/static/images/screenshot_photoframe.jpg" class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.ofbrooklyn.com/2014/01/2/building-photo-frame-raspberry-pi-motion-detector/">Living Photo Frame</a></strong>
-                <div class="desc">A photo frame that automatically downloads my latest Flickr and Instagram photos. Has a motion sensor for automatic shutoff when nobody's around. Amazingly has worked for years.</div>
+                <strong><a
+                        href="http://www.ofbrooklyn.com/2014/01/2/building-photo-frame-raspberry-pi-motion-detector/">Living
+                        Photo Frame</a></strong>
+                <div class="desc">A photo frame that automatically downloads my latest Flickr and Instagram photos. Has
+                    a motion sensor for automatic shutoff when nobody's around. Amazingly has worked for years.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2012</small>
-                    <a href="/donationparty"><img src="{{ MEDIA_URL }}images/screenshot_donationparty.png" class="screenshot"></a>
+                    <a href="/donationparty"><img src="/static/images/screenshot_donationparty.png"
+                            class="screenshot"></a>
                 </div>
                 <strong><a href="/donationparty">DonationParty</a></strong>
-                <div class="desc">Invite friends to donate a randomly selected amount (up to $10) to charity and one lucky winner will receive something awesome from Amazon.</div>
+                <div class="desc">Invite friends to donate a randomly selected amount (up to $10) to charity and one
+                    lucky winner will receive something awesome from Amazon.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2010 - 2012</small>
-                    <a href="http://www.newyorkfieldguide.com"><img src="{{ MEDIA_URL }}images/screenshot_newyorkfieldguide.png" class="screenshot"></a>
+                    <a href="http://www.newyorkfieldguide.com"><img
+                            src="/static/images/screenshot_newyorkfieldguide.png" class="screenshot"></a>
                 </div>
                 <strong><a href="http://www.newyorkfieldguide.com">New York Field Guide</a></strong>
-                <div class="desc"> An ongoing photoblog of New York City's 90 historic districts. Each photo taken using a Panasonic Lumix GF1 with a 20mm f/1.7 lens.</div>
+                <div class="desc"> An ongoing photoblog of New York City's 90 historic districts. Each photo taken using
+                    a Panasonic Lumix GF1 with a 20mm f/1.7 lens.</div>
             </li>
             <li class="">
                 <div class="dated-image">
                     <small>2010 - 2011</small>
-                    <a href="http://www.documentcloud.org"><img src="{{ MEDIA_URL }}images/screenshot_documentcloud.png" class="screenshot"></a>
+                    <a href="http://www.documentcloud.org"><img src="/static/images/screenshot_documentcloud.png"
+                            class="screenshot"></a>
                 </div>
                 <strong><a href="http://www.documentcloud.org">DocumentCloud</a></strong>
-                <div class="desc">The future of journalism is transparency. Funded by the Knight Foundation. Contributor to <a href="http://jashkenas.github.com/backbone">Backbone.js</a>, <a href="http://jashkenas.github.com/underscore">Underscore.js</a>, and much <a href="http://github.com/documentcloud">open-source software</a>.</div>
+                <div class="desc">The future of journalism is transparency. Funded by the Knight Foundation. Contributor
+                    to <a href="http://jashkenas.github.com/backbone">Backbone.js</a>, <a
+                        href="http://jashkenas.github.com/underscore">Underscore.js</a>, and much <a
+                        href="http://github.com/documentcloud">open-source software</a>.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2009</small>
-                    <a href="http://www.svgopen.org/2009/registration.php?section=workshops#Using_Raphael_Javascript_Library_to_write_cross-browser_interactive_SVG_and_VML"><img src="{{ MEDIA_URL }}images/screenshot_raphael.png" class="screenshot"></a>
+                    <a
+                        href="http://www.svgopen.org/2009/registration.php?section=workshops#Using_Raphael_Javascript_Library_to_write_cross-browser_interactive_SVG_and_VML"><img
+                            src="/static/images/screenshot_raphael.png" class="screenshot"></a>
                 </div>
-                <strong><a href="http://www.svgopen.org/2009/registration.php?section=workshops#Using_Raphael_Javascript_Library_to_write_cross-browser_interactive_SVG_and_VML">Raphaël Vector Library</a></strong>
-                <div class="desc"> A cross-browser <code>JavaScript</code> vector graphics library. I presented my minor contributions and the library with this paper and workshop at SVG Open 2009 at Google in California. <a href="/raphael/presentation/index.html">Presentation</a> and <a href="/raphael/svg_open_paper.pdf">Paper (PDF)</a>.</div>
+                <strong><a
+                        href="http://www.svgopen.org/2009/registration.php?section=workshops#Using_Raphael_Javascript_Library_to_write_cross-browser_interactive_SVG_and_VML">Raphaël
+                        Vector Library</a></strong>
+                <div class="desc"> A cross-browser <code>JavaScript</code> vector graphics library. I presented my minor
+                    contributions and the library with this paper and workshop at SVG Open 2009 at Google in California.
+                    <a href="/raphael/presentation/index.html">Presentation</a> and <a
+                        href="/raphael/svg_open_paper.pdf">Paper (PDF)</a>.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2007 - 2008</small>
-                    <a href="{% url "sunraylab" %}"><img src="{{ MEDIA_URL }}images/screenshot_sunraylab.png" class="screenshot"></a>
+                    <a href="{% url "sunraylab" %}"><img src="/static/images/screenshot_sunraylab.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="{% url "sunraylab" %}">SunRayLab</a></strong> 
-                <div class="desc">A CMS for projects. Originally built to connect creative people together to work on projects. <code>PHP</code>, sadly.</div>
+                <strong><a href="{% url "sunraylab" %}">SunRayLab</a></strong>
+                <div class="desc">A CMS for projects. Originally built to connect creative people together to work on
+                    projects. <code>PHP</code>, sadly.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2006 - 2007</small>
-                    <a href="{% url "caselife" %}"><img src="{{ MEDIA_URL }}images/screenshot_caselife.png" class="screenshot"></a>
+                    <a href="{% url "caselife" %}"><img src="/static/images/screenshot_caselife.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="{% url "caselife" %}">CaseLife</a></strong> 
-                <div class="desc">Student group communications systems built for campus groups in <code>PHP</code>.</div>
+                <strong><a href="{% url "caselife" %}">CaseLife</a></strong>
+                <div class="desc">Student group communications systems built for campus groups in <code>PHP</code>.
+                </div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2003 - 2007</small>
-                    <a href="{% url "schedulerjones" %}"><img src="{{ MEDIA_URL }}images/screenshot_schedulerjones.png" class="screenshot"></a>
+                    <a href="{% url "schedulerjones" %}"><img src="/static/images/screenshot_schedulerjones.png"
+                            class="screenshot"></a>
                 </div>
                 <strong><a href="{% url "schedulerjones" %}">Scheduler Jones</a></strong>
-                <div class="desc"> A graphical scheduling application for students to plan and share their next semester schedule, written with <code>Microsoft Visual C++</code>.</div>
+                <div class="desc"> A graphical scheduling application for students to plan and share their next semester
+                    schedule, written with <code>Microsoft Visual C++</code>.</div>
             </li>
             <li class="last">
                 <div class="dated-image">
                     <small>1999 - 2001</small>
-                    <a href="{% url "brainexplorer" %}"><img src="{{ MEDIA_URL }}images/brainexplorer.png" class="screenshot"></a>
+                    <a href="{% url "brainexplorer" %}"><img src="/static/images/brainexplorer.png"
+                            class="screenshot"></a>
                 </div>
-                <strong><a href="{% url "brainexplorer" %}">The Brain Explorer</a></strong> 
-                <div class="desc">In high school, I led an international team to build this educational site. Won as a semi-finalist in the ThinkQuest 2001 competition.</div>
+                <strong><a href="{% url "brainexplorer" %}">The Brain Explorer</a></strong>
+                <div class="desc">In high school, I led an international team to build this educational site. Won as a
+                    semi-finalist in the ThinkQuest 2001 competition.</div>
             </li>
         </ul>
     </div>
-    
+
     <div class="header">
-    
-      <div class="header-text"><a href="http://github.com/samuelclay">Code</a></div>
-      <div class="header-photo header-photo-borderless">
-        <a href="http://github.com/samuelclay">
-          <img src="{{ MEDIA_URL }}images/github-logo.png" width="73" height="73" />
-        </a>
-      </div>
-        
+
+        <div class="header-text"><a href="http://github.com/samuelclay">Code</a></div>
+        <div class="header-photo header-photo-borderless">
+            <a href="http://github.com/samuelclay">
+                <img src="/static/images/github-logo.png" width="73" height="73" />
+            </a>
+        </div>
+
     </div>
     <div class="content block-code">
         <div class="block-border"></div>
         <ul>
             <li>
                 <div class="dated-image">
-                    <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on GitHub</span></a></strong> The Django/Python code that powers the intelligent visual feed reader.
+                    <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on
+                                GitHub</span></a></strong> The Django/Python code that powers the intelligent visual
+                    feed reader.
                     <small>2009 - {{ year }}</small>
                 </div>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/turntouch-remote">Turn Touch remote <span class="github">on GitHub</span></a></strong> Firmware and the custom circuit board for the four button Turn Touch remote.
+                <strong><a href="http://github.com/samuelclay/turntouch-remote">Turn Touch remote <span
+                            class="github">on GitHub</span></a></strong> Firmware and the custom circuit board for the
+                four button Turn Touch remote.
                 <small>2015 - {{ year }}</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/turntouch-enclosure">Turn Touch CAD and CAM <span class="github">on GitHub</span></a></strong> Models and CNC machining design files for the solid wood Turn Touch remote.
+                <strong><a href="http://github.com/samuelclay/turntouch-enclosure">Turn Touch CAD and CAM <span
+                            class="github">on GitHub</span></a></strong> Models and CNC machining design files for the
+                solid wood Turn Touch remote.
                 <small>2015 - {{ year }}</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/grove">Grove <span class="github">on GitHub</span></a></strong> Firmware and three custom circuit boards for an interactive biofeedback installation at Burning Man. Measures breathing.
+                <strong><a href="http://github.com/samuelclay/grove">Grove <span class="github">on
+                            GitHub</span></a></strong> Firmware and three custom circuit boards for an interactive
+                biofeedback installation at Burning Man. Measures breathing.
                 <small>2016</small>
             </li>
             <li>
-                <strong><a href="http://github.com/documentcloud/visualsearch">VisualSearch.js <span class="github">on GitHub</span></a></strong> Creator of a JavaScript library that creates an auto-completing faceted search box.
+                <strong><a href="http://github.com/documentcloud/visualsearch">VisualSearch.js <span class="github">on
+                            GitHub</span></a></strong> Creator of a JavaScript library that creates an auto-completing
+                faceted search box.
                 <small>2011 - 2014</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/hackersmacker">Hacker Smacker <span class="github">on GitHub</span></a></strong> Built this browser extension with Node.js and Redis for finding graph connections between comment authors (friend of a friend).
+                <strong><a href="http://github.com/samuelclay/hackersmacker">Hacker Smacker <span class="github">on
+                            GitHub</span></a></strong> Built this browser extension with Node.js and Redis for finding
+                graph connections between comment authors (friend of a friend).
                 <small>2012 - 2014</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/pulse-bloom">Pulse &amp; Bloom <span class="github">on GitHub</span></a></strong> Firmware for an interactive biofeedback installation at Burning Man. Measures two heartbeats.
+                <strong><a href="http://github.com/samuelclay/pulse-bloom">Pulse &amp; Bloom <span class="github">on
+                            GitHub</span></a></strong> Firmware for an interactive biofeedback installation at Burning
+                Man. Measures two heartbeats.
                 <small>2014</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/donationparty">DonationParty <span class="github">on GitHub</span></a></strong> A four-man team working over two hackathons to create this fun Django-based charity donation site.
+                <strong><a href="http://github.com/samuelclay/donationparty">DonationParty <span class="github">on
+                            GitHub</span></a></strong> A four-man team working over two hackathons to create this fun
+                Django-based charity donation site.
                 <small>2012 - 2013</small>
             </li>
             <li>
-                <strong><a href="http://github.com/thedoclub/thedoclub">The Do Club <span class="github">on GitHub</span></a></strong> A two-man team built this presentation and event system for hackers to showcase their work.
+                <strong><a href="http://github.com/thedoclub/thedoclub">The Do Club <span class="github">on
+                            GitHub</span></a></strong> A two-man team built this presentation and event system for
+                hackers to showcase their work.
                 <small>2013</small>
             </li>
             <li>
-                <strong><a href="https://github.com/jashkenas/backbone/commits/master?author=samuelclay">Backbone.js <span class="github">on GitHub</span></a></strong> Contributor to this popular JavaScript library for creating model, view, collections, and tying them together with events.
+                <strong><a href="https://github.com/jashkenas/backbone/commits/master?author=samuelclay">Backbone.js
+                        <span class="github">on GitHub</span></a></strong> Contributor to this popular JavaScript
+                library for creating model, view, collections, and tying them together with events.
                 <small>2010 - 2011</small>
             </li>
             <li>
-                <strong><a href="https://github.com/jashkenas/underscore/commits/master?author=samuelclay">Underscore.js <span class="github">on GitHub</span></a></strong> Contributor to this popular JavaScript library used as a general toolkit. Based off of functional programming patterns.
+                <strong><a href="https://github.com/jashkenas/underscore/commits/master?author=samuelclay">Underscore.js
+                        <span class="github">on GitHub</span></a></strong> Contributor to this popular JavaScript
+                library used as a general toolkit. Based off of functional programming patterns.
                 <small>2010 - 2011</small>
             </li>
             <li>
-                <strong><a href="https://github.com/mongoengine/mongoengine/commits/master?author=samuelclay">Mongoengine <span class="github">on GitHub</span></a></strong> Contributor to this popular Python framework/ORM for MongoDB.
+                <strong><a
+                        href="https://github.com/mongoengine/mongoengine/commits/master?author=samuelclay">Mongoengine
+                        <span class="github">on GitHub</span></a></strong> Contributor to this popular Python
+                framework/ORM for MongoDB.
                 <small>2010 - 2011</small>
             </li>
             <li>
-                <strong><a href="https://github.com/documentcloud/document-viewer/commits/master?author=samuelclay">DocumentViewer.js <span class="github">on GitHub</span></a></strong> Major contributor to this JavaScript library used to embed PDFs as images on a website.
+                <strong><a
+                        href="https://github.com/documentcloud/document-viewer/commits/master?author=samuelclay">DocumentViewer.js
+                        <span class="github">on GitHub</span></a></strong> Major contributor to this JavaScript library
+                used to embed PDFs as images on a website.
                 <small>2010 - 2011</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/newyorkfieldguide">New York Field Guide <span class="github">on GitHub</span></a></strong> A stylish photoblog with annotations and per-photo commenting.
+                <strong><a href="http://github.com/samuelclay/newyorkfieldguide">New York Field Guide <span
+                            class="github">on GitHub</span></a></strong> A stylish photoblog with annotations and
+                per-photo commenting.
                 <small>2010</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/samuelclay">samuelclay.com <span class="github">on GitHub</span></a></strong> The code that runs this site here.
+                <strong><a href="http://github.com/samuelclay/samuelclay">samuelclay.com <span class="github">on
+                            GitHub</span></a></strong> The code that runs this site here.
                 <small>2009 - 2010</small>
             </li>
             <li>
-                <strong><a href="http://github.com/samuelclay/raphael">Raphaël JavaScript Library <span class="github">on GitHub</span></a></strong> My minor contributions to the Raphaël library are found on GitHub.
+                <strong><a href="http://github.com/samuelclay/raphael">Raphaël JavaScript Library <span
+                            class="github">on GitHub</span></a></strong> My minor contributions to the Raphaël library
+                are found on GitHub.
                 <small>2009</small>
             </li>
             <li class="last">
-                <strong><a href="http://github.com/samuelclay/raphael-easing">Raphaël animation easing formulas <span class="github">on GitHub</span></a></strong> Additional formulas used in animation easing in Raphaël. Includes easeInOutQuad to easeInOutQuint, bounces, elastic, and even easeInOutCirc.
+                <strong><a href="http://github.com/samuelclay/raphael-easing">Raphaël animation easing formulas <span
+                            class="github">on GitHub</span></a></strong> Additional formulas used in animation easing in
+                Raphaël. Includes easeInOutQuad to easeInOutQuint, bounces, elastic, and even easeInOutCirc.
                 <small>2009</small>
             </li>
         </ul>
     </div>
-    
+
     <div class="header">
-      <div class="header-text"><a href="http://flickr.com/photos/conesus/">Photos</a></div>
-    
-      <div class="header-photo header-photo-borderless">
-        <a href="http://flickr.com/photos/conesus/">
-          <img src="{{ MEDIA_URL }}images/flickr-logo.png" width="50" height="50" />
-        </a>
-      </div>  
+        <div class="header-text"><a href="http://flickr.com/photos/conesus/">Photos</a></div>
+
+        <div class="header-photo header-photo-borderless">
+            <a href="http://flickr.com/photos/conesus/">
+                <img src="/static/images/flickr-logo.png" width="50" height="50" />
+            </a>
+        </div>
     </div>
     <div class="content block-photos img-75">
         <div class="block-border"></div>
-      {% for photo in photos|slice:":48" %}
-        <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}" alt="{{ photo.title }}" /></a>
-      {% endfor %}
+        {% for photo in photos|slice:":48" %}
+        <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}"
+                alt="{{ photo.title }}" /></a>
+        {% endfor %}
     </div>
     <div class="header">
-      <div class="header-text"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a><br />Blog</div>
-    
-      <div class="header-photo">
-        <a href="http://www.ofbrooklyn.com">
-          <img src="http://farm5.static.flickr.com/4005/4482046088_682023dde7_s.jpg" width="75" height="75" />
-        </a>
-      </div>
-        
+        <div class="header-text"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a><br />Blog</div>
+
+        <div class="header-photo">
+            <a href="http://www.ofbrooklyn.com">
+                <img src="http://farm5.static.flickr.com/4005/4482046088_682023dde7_s.jpg" width="75" height="75" />
+            </a>
+        </div>
+
     </div>
     <div class="content block-blog">
         <div class="block-border"></div>
         <ul class="blog">
             {% for entry in blog_entries %}
-                <li {% if forloop.last %}class="last"{% endif %}>
-                    <strong><a href="{{ entry.link }}">{{ entry.title|safe }}</a></strong>
-                    <small>{{ entry.date|date:"F jS, Y" }}</small>
-                </li>
+            <li {% if forloop.last %}class="last" {% endif %}>
+                <strong><a href="{{ entry.link }}">{{ entry.title|safe }}</a></strong>
+                <small>{{ entry.date|date:"F jS, Y" }}</small>
+            </li>
             {% endfor %}
         </ul>
     </div>
-    
+
     <div class="header">
-      <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a><br />on Twitter</div>
-      <div class="header-photo">
-        <a href="http://twitter.com/samuelclay">
-          <img src="{{ MEDIA_URL }}images/Campeche Steps.jpg" width="77" height="63" />
-        </a>
-      </div>
+        <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a><br />on Twitter</div>
+        <div class="header-photo">
+            <a href="http://twitter.com/samuelclay">
+                <img src="/static/images/Campeche Steps.jpg" width="77" height="63" />
+            </a>
+        </div>
     </div>
-    <div class="content block-twitter">
+    {% comment %} <div class="content block-twitter">
         <div class="block-border"></div>
         <ul class="tweets">
             {% for tweet in tweets %}
-                <li {% if forloop.last %}class="last"{% endif %}>
-                    {{ tweet.text|safe|urlize|linebreaksbr }}
-                    <small>
-                        <a href="https://twitter.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
-                    </small>
-                </li>
+            <li {% if forloop.last %}class="last" {% endif %}>
+                {{ tweet.text|safe|urlize|linebreaksbr }}
+                <small>
+                    <a href="https://twitter.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
+                </small>
+            </li>
             {% endfor %}
         </ul>
     </div>
-    
-    
+    {% endcomment %}
+
     <div class="header">
         <div class="title">Press</div>
     </div>
@@ -396,83 +493,88 @@
                 <strong>
                     <img src="/static/images/press/adafruit.png">
                     Adafruit:
-                    <a href="https://blog.adafruit.com/2017/04/04/building-grove-interactive-trees-that-come-alive-to-your-breath-at-burning-man-2016-arttuesday/">
-                        Building Grove — interactive trees that come alive to your breath at Burning Man 2016 #ArtTuesday
+                    <a
+                        href="https://blog.adafruit.com/2017/04/04/building-grove-interactive-trees-that-come-alive-to-your-breath-at-burning-man-2016-arttuesday/">
+                        Building Grove — interactive trees that come alive to your breath at Burning Man 2016
+                        #ArtTuesday
                     </a>
-                </strong> 
+                </strong>
                 by Jessica Califano
                 <small>April 4th, 2017</small>
             </li>
             <li>
                 <strong>
                     <img src="/static/images/press/hackaday.png">
-                    Hack a Day: 
+                    Hack a Day:
                     <a href="http://hackaday.com/2014/09/10/biofeedback-flowers-at-burning-man/">
                         Biofeedback Flowers at Burning Man
                     </a>
-                </strong> 
+                </strong>
                 by Bryan Cockfield
                 <small>September 10th, 2014</small>
             </li>
             <li>
                 <strong>
-                    Pulse &amp; Bloom press roundup: 
-                    <a href="http://www.theguardian.com/artanddesign/gallery/2014/sep/06/photography-new-york-fashion-gaza-islamic-state">
+                    Pulse &amp; Bloom press roundup:
+                    <a
+                        href="http://www.theguardian.com/artanddesign/gallery/2014/sep/06/photography-new-york-fashion-gaza-islamic-state">
                         <img src="/static/images/press/guardian.png">
                         The Guardian</a>,
                     <a href="http://www.bbc.com/news/in-pictures-29059374">
-                        <img src="/static/images/press/bbc.png"> 
-                        The BBC</a>, 
-                    <a href="http://www.rollingstone.com/culture/pictures/burning-man-2014-trippiest-photos-20140910/flower-power-20140910">
+                        <img src="/static/images/press/bbc.png">
+                        The BBC</a>,
+                    <a
+                        href="http://www.rollingstone.com/culture/pictures/burning-man-2014-trippiest-photos-20140910/flower-power-20140910">
                         <img src="/static/images/press/rollingstone.png">
-                        Rolling Stone</a>, 
+                        Rolling Stone</a>,
                     <a href="http://www.theatlantic.com/infocus/2014/09/burning-man-2014/100802/#img07">
                         <img src="/static/images/press/atlantic.png">
                         The Atlantic's Big Picture
                     </a>
-                    <a href="http://www.theatlantic.com/infocus/2014/09/burning-man-2014/100802/#img22">twice</a>, 
+                    <a href="http://www.theatlantic.com/infocus/2014/09/burning-man-2014/100802/#img22">twice</a>,
                     <a href="http://www.cbsnews.com/pictures/burning-man-2014/9/">
                         <img src="/static/images/press/cbs.png">
-                        CBS News</a>, 
-                    <a href="http://www.nbcnews.com/pop-culture/pop-culture-news/desert-dwellers-burning-man-festival-full-swing-n192541#ember903">
+                        CBS News</a>,
+                    <a
+                        href="http://www.nbcnews.com/pop-culture/pop-culture-news/desert-dwellers-burning-man-festival-full-swing-n192541#ember903">
                         <img src="/static/images/press/nbc.png">
-                        NBC News</a>, and 
+                        NBC News</a>, and
                     <a href="http://on.msnbc.com/1qkUN4c">
                         <img src="/static/images/press/msnbc.png">
                         MSNBC</a>.</p>
-                </strong> 
+                </strong>
                 <small>September 6th, 2014</small>
             </li>
             <li>
                 <strong>
                     <img src="http://0.gravatar.com/blavatar/4f3e6b6daa090af416a1ba595885efd1?s=16">
-                    Hack a Day: 
+                    Hack a Day:
                     <a href="http://hackaday.com/2014/01/15/a-light-up-dress-for-a-new-years-dance-party/">
                         A Light-Up Dress for a New Year’s Dance Party
                     </a>
-                </strong> 
+                </strong>
                 by Josh Marsh
                 <small>January 15th, 2014</small>
             </li>
             <li>
                 <strong>
                     <img src="/static/images/press/lifehacker.png">
-                    Lifehacker: 
+                    Lifehacker:
                     <a href="http://lifehacker.com/build-a-smarter-digital-photo-frame-with-a-raspberry-pi-1495565726">
                         Build a Smarter Digital Photo Frame with a Raspberry Pi
                     </a>
-                </strong> 
+                </strong>
                 by Thorin Klosowski
                 <small>January 6th, 2014</small>
             </li>
             <li>
                 <strong>
                     <img src="http://0.gravatar.com/blavatar/4f3e6b6daa090af416a1ba595885efd1?s=16">
-                    Hack a Day: 
+                    Hack a Day:
                     <a href="http://hackaday.com/2014/01/04/building-a-raspberry-pi-digital-photo-frame/">
                         Building a Raspberry PI Digital Photo Frame
                     </a>
-                </strong> 
+                </strong>
                 by Kevin Darrah
                 <small>January 4th, 2014</small>
             </li>
@@ -480,10 +582,11 @@
                 <strong>
                     <img src="http://www.adafruit.com/favicon.ico">
                     Adafruit:
-                    <a href="http://www.adafruit.com/blog/2014/01/03/building-a-living-photo-frame-with-a-raspberry-pi-and-a-motion-detector-raspberry_pi-piday-raspberrypi/">
+                    <a
+                        href="http://www.adafruit.com/blog/2014/01/03/building-a-living-photo-frame-with-a-raspberry-pi-and-a-motion-detector-raspberry_pi-piday-raspberrypi/">
                         Building a living photo frame with a Raspberry Pi and a motion detector
                     </a>
-                </strong> 
+                </strong>
                 by Jessica Califano
                 <small>January 3rd, 2014</small>
             </li>
@@ -494,51 +597,53 @@
                     <a href="http://techcrunch.com/2013/12/31/the-best-ios-and-android-apps-of-2013/">
                         The Best iOS And Android Apps Of 2013 - NewsBlur
                     </a>
-                </strong> 
+                </strong>
                 by Greg Kumparak
                 <small>December 31st, 2013</small>
             </li>
             <li>
                 <strong>
                     <img src="/static/images/press/pcworld.png">
-                    PCWorld: 
-                    <a href="http://www.pcworld.com/article/2041011/review-newsblur-is-a-worthy-powerful-google-reader-replacement.html">
+                    PCWorld:
+                    <a
+                        href="http://www.pcworld.com/article/2041011/review-newsblur-is-a-worthy-powerful-google-reader-replacement.html">
                         NewsBlur is a worthy, powerful Google Reader replacement
                     </a>
-                </strong> 
+                </strong>
                 by Erez Zukerman
                 <small>June 24th, 2013</small>
             </li>
             <li>
                 <strong>
                     <img src="/static/images/press/theverge.png">
-                    The Verge: 
-                    <a href="http://www.theverge.com/2013/5/21/4350208/how-sam-clay-and-newsblur-survived-the-google-reader-shutdown-redesign">
+                    The Verge:
+                    <a
+                        href="http://www.theverge.com/2013/5/21/4350208/how-sam-clay-and-newsblur-survived-the-google-reader-shutdown-redesign">
                         NewsBlur, flush with Google Reader refugees, rolls out redesign
                     </a>
-                </strong> 
+                </strong>
                 by Adrianne Jeffries
                 <small>May 21st, 2013</small>
             </li>
             <li>
                 <strong>
                     <img src="/static/images/press/wired.jpg">
-                    Wired: 
+                    Wired:
                     <a href="http://www.webmonkey.com/2013/03/scaling-on-a-shoestring-lessons-from-newsblur/">
                         Scaling on a Shoestring, Lessons from NewsBlur
                     </a>
-                </strong> 
+                </strong>
                 by Scott Gilbertson
                 <small>March 20th, 2013</small>
             </li>
             <li>
                 <strong>
                     <img src="/static/images/press/venturebeat.png">
-                    VentureBeat: 
+                    VentureBeat:
                     <a href="http://venturebeat.com/2012/09/05/newsblur-ipad/">
                         NewsBlur launches iPad app, aims to compete with Google Reader (exclusive)
                     </a>
-                </strong> 
+                </strong>
                 by Christina Farr
                 <small>September 5th, 2012</small>
             </li>
