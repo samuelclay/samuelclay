@@ -25,6 +25,11 @@ urlpatterns = [
         r"^donationparty/?$", TemplateView.as_view(template_name="donationparty.html"), name="donationparty"
     ),
     re_path(r"^kickpoint/?$", TemplateView.as_view(template_name="kickpoint.html"), name="kickpoint"),
+    re_path(
+        r"^newyorkfieldguide/?$",
+        TemplateView.as_view(template_name="newyorkfieldguide.html"),
+        name="newyorkfieldguide",
+    ),
     re_path(r"^podlife/?$", TemplateView.as_view(template_name="podlife.html"), name="podlife"),
     re_path(
         r"^raphael/(?P<path>.*)$",
@@ -56,6 +61,11 @@ urlpatterns = [
         r"^kickpoint/(?P<path>.*)$",
         serve,
         {"document_root": settings.MEDIA_ROOT + "/../kickpoint"},
+    ),
+    re_path(
+        r"^newyorkfieldguide/(?P<path>.*)$",
+        serve,
+        {"document_root": settings.MEDIA_ROOT + "/../newyorkfieldguide"},
     ),
     re_path(
         r"^podlife/(?P<path>.*)$",
