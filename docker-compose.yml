@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    container_name: samuelclay-web
+    # command: python manage.py runserver 0.0.0.0:8882
+    command: ["gunicorn", "wsgi:application", "--bind", "0.0.0.0:8882"]
+    volumes:
+      - ${PWD}:/app
+    ports:
+      - "8882:8882"
+    restart: unless-stopped
+  nginx:
+    image: nginx:latest
+    container_name: samuelclay-nginx
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ${PWD}/media:/static
+      - ${PWD}/media:/media
+      - certs:/etc/letsencrypt
+    ports:
+      - "8883:80"
+      - "8443:443"
+    depends_on:
+      - web
+    restart: unless-stopped
+  certbot:
+    image: certbot/certbot
+    container_name: samuelclay-certbot
+    volumes:
+      - certs:/etc/letsencrypt
+      - ${PWD}:/var/www/certbot
+    restart: unless-stopped
+
+volumes:
+  certs:
+  webroot:
