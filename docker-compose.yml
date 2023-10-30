@@ -28,10 +28,11 @@ services:
   certbot:
     image: certbot/certbot
     container_name: samuelclay-certbot
+    command: certonly --webroot --webroot-path=/var/www/certbot -d samuelclay.com -d www.samuelclay.com --email samuel@ofbrooklyn.com --agree-tos --no-eff-email --keep-until-expiring
     volumes:
       - certs:/etc/letsencrypt
       - ${PWD}:/var/www/certbot
-    restart: unless-stopped
+    # restart: unless-stopped
 
 volumes:
   certs:
