@@ -24,6 +24,7 @@ services:
       - "8443:443"
     depends_on:
       - web
+      - certbot
     restart: unless-stopped
   certbot:
     image: certbot/dns-dnsimple
