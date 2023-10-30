@@ -27,6 +27,8 @@ DATABASES = {
     }
 }
 
+ALLOWED_HOSTS = ["*"]
+
 # DATABASE_ENGINE = 'django.db.backends.sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 # DATABASE_NAME = 'clay.db'             # Or path to database file if using sqlite3.
 # DATABASE_USER = ''             # Not used with sqlite3.
