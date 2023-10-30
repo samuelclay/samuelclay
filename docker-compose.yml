@@ -20,8 +20,10 @@ services:
       - ${PWD}/media:/media
       - certs:/etc/letsencrypt
     ports:
-      - "8883:80"
-      - "8443:443"
+      # - "8883:80" # For local dev
+      # - "8443:443" # For local dev
+      - "80:80"
+      - "443:443"
     depends_on:
       - web
       - certbot
