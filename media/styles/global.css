@@ -1,11 +1,11 @@
 * {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	text-decoration: none;
-	border: 0;
-	outline: none;
-	font-size: 1em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    border: 0;
+    outline: none;
+    font-size: 1em;
 }
 
 a, a:visited, a:link {
@@ -19,13 +19,14 @@ a:hover,
 .content small a:hover {
     color: #B33009;
 }
+
 /* http://orderedlist.com/articles/thining-text-in-safari-under-snow-leopard */
 
 body {
-	-webkit-text-stroke:1px transparent;
-/*  background: white url('/static/images/400bg.png') repeat-y 0 0; */
-	font-family: "Whitney A", "Whitney B", "Lucida Grande", "Helvetica", sans-serif;
-	font-size: 16px;
+    -webkit-text-stroke: 1px transparent;
+    /*  background: white url('/static/images/400bg.png') repeat-y 0 0; */
+    font-family: "Whitney A", "Whitney B", "Lucida Grande", "Helvetica", sans-serif;
+    font-size: 16px;
     background-color: #EEECEA;
 }
 
@@ -33,7 +34,7 @@ body {
     height: 42px;
     z-index: 1;
     position: relative;
-/*    background-image: -webkit-gradient(
+    /*    background-image: -webkit-gradient(
         linear,
         left bottom,
         left top,
@@ -48,11 +49,12 @@ body {
     background: url(/static/images/artdots-horizontal.jpg) repeat-x top center;
     background-size: cover;
 }
+
 #bottombar {
     height: 42px;
     z-index: 1;
     position: relative;
-/*    background-image: -webkit-gradient(
+    /*    background-image: -webkit-gradient(
         linear,
         left bottom,
         left top,
@@ -74,6 +76,7 @@ body {
     padding: 80px 0 40px;
     position: relative;
 }
+
 #wrapper.subview {
     padding: 140px 0 140px;
 }
@@ -93,7 +96,7 @@ body {
     bottom: 50px;
     left: 0px;
     color: #A0A0A0;
-    text-transform: uppercase;    
+    text-transform: uppercase;
     z-index: 1;
     font-size: 18px;
 }
@@ -106,6 +109,7 @@ body {
     bottom: 0;
     z-index: 0;
 }
+
 .background-inner {
     width: 280px;
     position: absolute;
@@ -114,6 +118,7 @@ body {
     bottom: 0;
     z-index: 0;
 }
+
 .background-outer {
     width: 5000px;
     position: absolute;
@@ -130,7 +135,7 @@ body {
 .name-header {
     margin: 0 0 24px;
     padding: 0 0 18px;
-/*     border-bottom: 6px solid #4A6FC0; */
+    /*     border-bottom: 6px solid #4A6FC0; */
     color: #623734;
     font-size: 42px;
     font-weight: bold;
@@ -144,7 +149,7 @@ body {
     float: left;
     width: 266px;
     text-align: right;
-    margin: 0 12px 0 0 ;
+    margin: 0 12px 0 0;
 }
 
 .header {
@@ -166,9 +171,11 @@ body {
     color: #602e2b;
     font-weight: bold;
 }
+
 .header .subtitle {
     font-size: 18px;
 }
+
 .header .header-photo img {
     margin: 12px auto;
     border: 1px solid #303030;
@@ -198,6 +205,7 @@ body {
     width: auto;
     margin-right: 0px;
 }
+
 .block-photos.img-75 img {
     width: 75px;
     height: 75px;
@@ -215,6 +223,7 @@ body {
 .block-photos .setThumbs-indv.first {
     clear: both;
 }
+
 .block-photos .setThumbs-indv.last {
     padding-bottom: 0;
 }
@@ -226,9 +235,11 @@ img {
 .block-caselife img {
     margin-bottom: 12px;
 }
+
 .block-caselife img.last {
     margin-bottom: 0;
 }
+
 .block-code li strong a {
     padding-right: 120px;
     display: block;
@@ -252,13 +263,16 @@ strong {
     font-size: 22px;
     margin: 0 0 12px;
 }
+
 .block-blog strong {
     font-size: 18px;
 }
+
 .block-press strong {
     font-size: 18px;
     display: inline;
 }
+
 .desc {
     margin: 0 0 64px;
 }
@@ -276,13 +290,15 @@ strong {
 .content .screenshot {
     width: 450px;
     margin: 0 0 18px;
+    max-height: 200px;
+    object-fit: cover;
 }
+
 h2 {
     margin: 0 0 1em;
 }
 
-ul {
-}
+ul {}
 
 ul li {
     position: relative;
@@ -291,31 +307,37 @@ ul li {
     color: #381f1d;
     font-size: 17px;
 }
+
 .block-twitter ul li,
 .block-blog ul li,
 .block-press ul li {
     margin-bottom: 16px;
 }
+
 ul li:last-child {
     margin: 0;
 }
+
 ul li:last-child img.screenshot {
-/*    margin-bottom: 0;*/
+    /*    margin-bottom: 0;*/
 }
 
 .dated-image {
     position: relative;
 }
+
 small {
-     position: absolute;
-     left: 520px;
-     top: 0;
-     white-space: nowrap;
-     font-size: 20px;
+    position: absolute;
+    left: 520px;
+    top: 0;
+    white-space: nowrap;
+    font-size: 20px;
 }
+
 small, small a, small a:link, small a:visited {
-     color: #ada5a4;
+    color: #ada5a4;
 }
+
 .github {
     text-transform: uppercase;
     font-size: 13px;
@@ -324,13 +346,14 @@ small, small a, small a:link, small a:visited {
 
 
 @media only screen and (max-width:1000px) {
-	body {
-		-webkit-text-stroke:0 black;
-	}
-    
+    body {
+        -webkit-text-stroke: 0 black;
+    }
+
     #wrapper {
         width: auto;
     }
+
     .header {
         float: none;
         width: auto;
@@ -338,60 +361,69 @@ small, small a, small a:link, small a:visited {
         margin-left: 96px;
         font-size: 32px;
     }
+
     .content {
         margin-top: 48px;
         margin-left: 64px;
         margin-right: 0;
     }
+
     .content.block-photos {
         width: auto;
     }
+
     .name-header {
         margin-left: 96px;
         margin-right: 96px;
         font-size: 56px;
     }
+
     .name-header a {
         width: auto;
     }
-    
+
     strong {
         font-size: 30px;
     }
+
     small {
-         position: absolute;
-         text-align: right;
-         left: auto;
-         top: auto;
-         right: 0px;
-         bottom: -30px;
-         width: 180px;
-         font-size: 24px;
-     }
-     .block-code small {
-         bottom: auto;
-         top: 0;
-     }
-     .block-blog strong,
-     .block-twitter strong,
-     .block-press strong {
-         margin-bottom: 4px;
-     }
-     .block-blog small,
-     .block-twitter small,
-     .block-press small {
-         position: static;
-         display: block;
-         width: 100%;
-         text-align: left;
-     }
-     .block-blog strong,
-     .block-press strong {
-         font-size: 24px;
-     }
-     
-     ul li {
-         font-size: 24px;
-         line-height: 28px;
-     }
+        position: absolute;
+        text-align: right;
+        left: auto;
+        top: auto;
+        right: 0px;
+        bottom: -30px;
+        width: 180px;
+        font-size: 24px;
+    }
+
+    .block-code small {
+        bottom: auto;
+        top: 0;
+    }
+
+    .block-blog strong,
+    .block-twitter strong,
+    .block-press strong {
+        margin-bottom: 4px;
+    }
+
+    .block-blog small,
+    .block-twitter small,
+    .block-press small {
+        position: static;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .block-blog strong,
+    .block-press strong {
+        font-size: 24px;
+    }
+
+    ul li {
+        font-size: 24px;
+        line-height: 28px;
+    }
 }
