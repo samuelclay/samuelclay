@@ -146,7 +146,6 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.messages",
     "com",
-    "syncr.flickr",
     "tagging",
 )
 

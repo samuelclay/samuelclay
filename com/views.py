@@ -12,7 +12,6 @@ from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render
 
-from syncr.flickr.models import Photo
 from util.dates import relative_timesince
 
 socket.setdefaulttimeout(10)
@@ -38,14 +37,14 @@ def index(request):
     # else:
     #     logging.debug(" ---> Cached twitter.")
 
-    photos = cache.get("photos")
-    if not photos:
-        logging.debug(" ---> Fetching flickr...")
-        # photos = _fetch_and_parse_flickr()
-        photos = Photo.objects.all().order_by("?")
-        cache.set("photos", photos, 60 * 60 * 24)
-    else:
-        logging.debug(" ---> Cached flickr.")
+    # photos = cache.get("photos")
+    # if not photos:
+    #     logging.debug(" ---> Fetching flickr...")
+    #     # photos = _fetch_and_parse_flickr()
+    #     photos = Photo.objects.all().order_by("?")
+    #     cache.set("photos", photos, 60 * 60 * 24)
+    # else:
+    #     logging.debug(" ---> Cached flickr.")
 
     isa_quote = _choose_is_a_quote()
     year = datetime.datetime.now().year
@@ -56,7 +55,7 @@ def index(request):
         {
             "blog_entries": blog_entries,
             # 'tweets': tweets,
-            "photos": photos,
+            # "photos": photos,
             "isa_quote": isa_quote,
             "year": year,
         },
@@ -131,23 +130,23 @@ def _fetch_and_parse_blog():
 #     return fixed_tweets
 
 
-def _fetch_and_parse_flickr():
-    flickr = requests.get("http://www.flickr.com/photos/conesus/sets/72157623221750803/")
-    soup = BeautifulSoup(flickr.content)
-    photos = soup.findAll("div", "setThumbs-indv")
-    random.shuffle(photos)
-    photos_count = len(photos)
-    photos = photos[: photos_count - (photos_count % NUM_PHOTOS_PER_ROW)]
+# def _fetch_and_parse_flickr():
+#     flickr = requests.get("http://www.flickr.com/photos/conesus/sets/72157623221750803/")
+#     soup = BeautifulSoup(flickr.content)
+#     photos = soup.findAll("div", "setThumbs-indv")
+#     random.shuffle(photos)
+#     photos_count = len(photos)
+#     photos = photos[: photos_count - (photos_count % NUM_PHOTOS_PER_ROW)]
 
-    for photo in photos:
-        photo.find("a")["href"] = "http://flickr.com" + photo.find("a")["href"]
-    for photo in photos[-NUM_PHOTOS_PER_ROW:]:
-        photo["class"] += " last"
-    for photo in photos[::NUM_PHOTOS_PER_ROW]:
-        photo["class"] += " first"
-    # photos = [str(BeautifulSoup(photo).findAll('a')[1]) for photo in photos]
+#     for photo in photos:
+#         photo.find("a")["href"] = "http://flickr.com" + photo.find("a")["href"]
+#     for photo in photos[-NUM_PHOTOS_PER_ROW:]:
+#         photo["class"] += " last"
+#     for photo in photos[::NUM_PHOTOS_PER_ROW]:
+#         photo["class"] += " first"
+#     # photos = [str(BeautifulSoup(photo).findAll('a')[1]) for photo in photos]
 
-    return photos
+#     return photos
 
 
 def chunks(l, n):
