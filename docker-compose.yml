@@ -15,15 +15,15 @@ services:
     image: nginx:latest
     container_name: samuelclay-nginx
     volumes:
-      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/nginx.prod:/etc/nginx/conf.d
       - ${PWD}/media:/static
       - ${PWD}/media:/media
       - certs:/etc/letsencrypt
     ports:
-      # - "8883:80" # For local dev
-      # - "8443:443" # For local dev
-      - "80:80"
-      - "443:443"
+      - "8883:80" # For local dev
+      - "8443:443" # For local dev
+      # - "80:80"
+      # - "443:443"
     depends_on:
       - web
       - certbot
@@ -31,7 +31,7 @@ services:
   certbot:
     image: certbot/dns-dnsimple
     container_name: samuelclay-certbot
-    command: certonly --dns-dnsimple --dns-dnsimple-credentials /etc/letsencrypt/dnsimple.ini -d samuelclay.com -d *.samuelclay.com --email samuel@ofbrooklyn.com --agree-tos --no-eff-email --keep-until-expiring
+    command: certonly --dns-dnsimple --dns-dnsimple-credentials /etc/letsencrypt/dnsimple.ini -d samuelclay.com -d *.samuelclay.com --email samuel@ofbrooklyn.com --agree-tos --no-eff-email --keep-until-expiring -v
     volumes:
       - certs:/etc/letsencrypt
       - ./dnsimple.ini:/etc/letsencrypt/dnsimple.ini

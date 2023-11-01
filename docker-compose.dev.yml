@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  nginx:
+    ports:
+      - "8883:80"
+      - "8443:443"
+    volumes:
+      - ./config/nginx.dev:/etc/nginx/conf.d
