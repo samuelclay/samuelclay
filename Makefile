@@ -20,3 +20,10 @@ down:
 
 log:
 	docker-compose $(COMPOSE_FILES) logs -f
+
+migrate:
+	docker-compose $(COMPOSE_FILES) exec web python manage.py migrate
+makemigrations:
+	docker-compose $(COMPOSE_FILES) exec web python manage.py makemigrations
+showmigrations:
+	docker-compose $(COMPOSE_FILES) exec web python manage.py showmigrations
