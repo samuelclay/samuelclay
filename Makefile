@@ -27,3 +27,5 @@ makemigrations:
 	docker-compose $(COMPOSE_FILES) exec web python manage.py makemigrations
 showmigrations:
 	docker-compose $(COMPOSE_FILES) exec web python manage.py showmigrations
+createcachetable:
+	docker-compose $(COMPOSE_FILES) exec web python manage.py createcachetable
