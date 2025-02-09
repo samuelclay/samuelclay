@@ -142,6 +142,7 @@ body {
     text-shadow: 1px 1px 0 #DFDFDF;
     position: relative;
     z-index: 1;
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
 }
 
 .name-header a {
@@ -170,6 +171,7 @@ body {
 .header .title {
     color: #602e2b;
     font-weight: bold;
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
 }
 
 .header .subtitle {
@@ -326,6 +328,10 @@ ul li:last-child img.screenshot {
     position: relative;
 }
 
+.dated-image small {
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
+}
+
 small {
     position: absolute;
     left: 520px;
@@ -343,9 +349,6 @@ small, small a, small a:link, small a:visited {
     font-size: 13px;
 }
 
-.desc {
-    font-family: 'Lora', serif;
-}
 
 
 @media only screen and (max-width:1000px) {

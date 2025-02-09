@@ -29,3 +29,6 @@ showmigrations:
 	docker-compose $(COMPOSE_FILES) exec web python manage.py showmigrations
 createcachetable:
 	docker-compose $(COMPOSE_FILES) exec web python manage.py createcachetable
+
+ssh:
+	sshdo hackersmacker old
