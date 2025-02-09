@@ -25,6 +25,7 @@ urlpatterns = [
         r"^donationparty/?$", TemplateView.as_view(template_name="donationparty.html"), name="donationparty"
     ),
     re_path(r"^kickpoint/?$", TemplateView.as_view(template_name="kickpoint.html"), name="kickpoint"),
+    re_path(r"^comfortmaps/?$", TemplateView.as_view(template_name="comfortmaps.html"), name="comfortmaps"),
     re_path(
         r"^newyorkfieldguide/?$",
         TemplateView.as_view(template_name="newyorkfieldguide.html"),
