@@ -29,12 +29,14 @@ services:
       - certbot
     restart: unless-stopped
   certbot:
-    image: certbot/dns-dnsimple
+    image: certbot/certbot
     container_name: samuelclay-certbot
-    command: certonly --dns-dnsimple --dns-dnsimple-credentials /etc/letsencrypt/dnsimple.ini -d samuelclay.com -d *.samuelclay.com --email samuel@ofbrooklyn.com --agree-tos --no-eff-email --keep-until-expiring -v
+    # Note: This container will exit after running, which is expected behavior
+    # The renewal is handled by the renew-certbot-standalone.sh script
+    command: certonly --standalone --preferred-challenges http --agree-tos --no-eff-email --keep-until-expiring --expand --email samuel@ofbrooklyn.com -d samuelclay.com -v
     volumes:
       - certs:/etc/letsencrypt
-      - ./dnsimple.ini:/etc/letsencrypt/dnsimple.ini
+      - webroot:/var/www/certbot
 
 volumes:
   certs:
