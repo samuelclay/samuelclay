@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: samuelclay-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./com:/app
+      - certs:/etc/letsencrypt
+      - webroot:/var/www/certbot
+    depends_on:
+      - certbot
+    restart: unless-stopped
+    
+  certbot:
+    image: certbot/certbot
+    container_name: samuelclay-certbot
+    # Note: This container will exit after running, which is expected behavior
+    # The renewal is handled by the renew-certbot-standalone.sh script
+    command: certonly --standalone --preferred-challenges http --agree-tos --no-eff-email --keep-until-expiring --expand --non-interactive --email samuel@ofbrooklyn.com -d samuelclay.com -v
+    volumes:
+      - certs:/etc/letsencrypt
+      - webroot:/var/www/certbot
+
+volumes:
+  certs:
+  webroot:
