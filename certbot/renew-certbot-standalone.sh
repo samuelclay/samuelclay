@@ -6,7 +6,7 @@
 set -e
 
 # Change to the correct directory
-cd /home/sclay/samuelclay
+cd /home/sclay/samuelclay/certbot
 
 # Stop nginx to free up port 80 for standalone validation
 echo "Stopping nginx..."

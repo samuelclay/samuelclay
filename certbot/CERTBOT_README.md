@@ -14,7 +14,7 @@ The CertBot renewal was failing because it was prompting for interactive input "
 
 1. **Push to Git Repository:**
    ```bash
-   git add docker-compose.yml renew-certbot-*.sh setup-certbot-cron.sh CERTBOT_README.md
+   git add certbot/
    git commit -m "Fix CertBot non-interactive renewal issue"
    git push
    ```
@@ -30,6 +30,7 @@ The CertBot renewal was failing because it was prompting for interactive input "
 3. **Set Up Automatic Renewal:**
    Run the setup script on the server:
    ```bash
+   cd certbot/
    ./setup-certbot-cron.sh
    ```
 
@@ -45,7 +46,7 @@ The CertBot renewal was failing because it was prompting for interactive input "
 To test the renewal process manually:
 ```bash
 ssh samuelclay.com
-cd /home/sclay/samuelclay
+cd /home/sclay/samuelclay/certbot
 ./renew-certbot-auto.sh
 ```
 

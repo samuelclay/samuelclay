@@ -7,7 +7,7 @@
 set -e
 
 # Change to the correct directory
-cd /home/sclay/samuelclay
+cd /home/sclay/samuelclay/certbot
 
 echo "Starting automated certificate renewal check..."
 
