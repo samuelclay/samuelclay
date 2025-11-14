@@ -34,40 +34,14 @@ body {
     height: 42px;
     z-index: 1;
     position: relative;
-    /*    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.09, #1A1A1A),
-        color-stop(0.92, #4A4A4A)
-    );
-    background-image: -moz-linear-gradient(
-        center bottom,
-        #1A1A1A 9%,
-        #4A4A4A 92%
-    );*/
-    background: url(/static/images/artdots-horizontal.jpg) repeat-x top center;
-    background-size: cover;
+    background: #EEECEA;  /* Page background color */
 }
 
 #bottombar {
     height: 42px;
     z-index: 1;
     position: relative;
-    /*    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.09, #1A1A1A),
-        color-stop(0.92, #4A4A4A)
-    );
-    background-image: -moz-linear-gradient(
-        center bottom,
-        #1A1A1A 9%,
-        #4A4A4A 92%
-    );*/
-    background: url(/static/images/artdots-horizontal.jpg) repeat-x bottom center;
-    background-size: cover;
+    background: #EEECEA;  /* Page background color */
 }
 
 #wrapper {
@@ -198,8 +172,8 @@ body {
     width: 20px;
     top: 0;
     left: -24px;
-    background: url(/static/images/artdots-vertical.jpg) repeat-x top center;
-    background-size: cover;
+    background: #EEECEA;  /* Page background color */
+    overflow: hidden;
 }
 
 .content.block-photos {

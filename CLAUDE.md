@@ -29,6 +29,13 @@ python manage.py runserver    # Run development server
 python manage.py migrate      # Apply migrations
 ```
 
+### Accessing the Running Server
+- **Development**: http://localhost:8882 (Django/gunicorn directly)
+- **Production**: http://localhost (nginx on port 80, proxies to gunicorn on 8882)
+- **HTTPS** (production only): https://localhost (nginx on port 443)
+
+Note: Port 80 may be running a different service in development, always use port 8882 for local development.
+
 ## Architecture
 
 ### Application Structure
