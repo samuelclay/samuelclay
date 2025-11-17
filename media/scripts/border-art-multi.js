@@ -1,25 +1,24 @@
 /**
  * MULTI-STYLE BORDER ART SYSTEM
  *
- * Five distinct algorithmic art styles for borders:
- * 1. Liminal Flow - Particle density through noise fields
- * 2. Digital Weave - Intersecting sine waves creating textile patterns
- * 3. Thermal Drift - Layered gradient bands with organic movement
- * 4. Organic Noise - Pure Perlin noise with thermal color mapping
- * 5. Particle Storm - High-energy particle system with motion blur
+ * Three distinct algorithmic art styles for borders:
+ * 1. Digital Weave - Intersecting sine waves creating textile patterns
+ * 2. Thermal Drift - Layered gradient bands with organic movement
+ * 3. Organic Noise - Pure Perlin noise with thermal color mapping
  */
 
 class BorderArtSystem {
     constructor() {
         this.sketches = [];
-        this.currentStyle = 'thermal-drift'; // default
+        this.sketchStates = new Map(); // Track sketch visibility and state
         this.styles = {
-            'liminal-flow': 'Liminal Flow',
             'digital-weave': 'Digital Weave',
             'thermal-drift': 'Thermal Drift',
-            'organic-noise': 'Organic Noise',
-            'particle-storm': 'Particle Storm'
+            'organic-noise': 'Organic Noise'
         };
+        // Randomly select a style on page load
+        const styleKeys = Object.keys(this.styles);
+        this.currentStyle = styleKeys[Math.floor(Math.random() * styleKeys.length)];
         // 20 saturated, off-center colors (not too white, black, or gray)
         this.colorPalette = [
             [255, 107, 129],  // Coral pink
@@ -46,6 +45,27 @@ class BorderArtSystem {
         // Pick ONE random color for this page load - all borders will use this color
         const randomIndex = Math.floor(Math.random() * this.colorPalette.length);
         this.currentColor = this.colorPalette[randomIndex];
+
+        // Setup Intersection Observer for performance
+        this.setupIntersectionObserver();
+    }
+
+    setupIntersectionObserver() {
+        // Only animate borders that are visible in viewport
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const state = this.sketchStates.get(entry.target.id);
+                if (state && state.p5Instance) {
+                    if (entry.isIntersecting) {
+                        state.p5Instance.loop();
+                    } else {
+                        state.p5Instance.noLoop();
+                    }
+                }
+            });
+        }, {
+            rootMargin: '100px' // Start animating slightly before entering viewport
+        });
     }
 
     init() {
@@ -141,26 +161,51 @@ class BorderArtSystem {
     }
 
     createBorderSketches() {
-        // Handle vertical borders
-        const verticalBorders = document.querySelectorAll('.block-border');
-        verticalBorders.forEach((border, index) => {
+        // Handle full frame borders
+        const frameBorders = document.querySelectorAll('.block-border');
+        frameBorders.forEach((border, index) => {
             border.style.background = 'none';
             // Clear any existing canvases
             border.innerHTML = '';
 
-            const canvasContainer = document.createElement('div');
-            canvasContainer.style.width = '100%';
-            canvasContainer.style.height = '100%';
-            canvasContainer.style.position = 'absolute';
-            canvasContainer.style.top = '0';
-            canvasContainer.style.left = '0';
-            canvasContainer.id = `border-canvas-v-${index}`;
-            border.appendChild(canvasContainer);
+            // Find the header element (previous sibling of .content which contains .block-border)
+            const content = border.parentElement;
+            const header = content ? content.previousElementSibling : null;
 
-            this.createSketch(canvasContainer.id, index, 'vertical');
+            // Create top border in the header (if it exists)
+            if (header && header.classList.contains('header')) {
+                const topContainer = document.createElement('div');
+                topContainer.className = 'header-border-top';
+                topContainer.id = `border-canvas-top-${index}`;
+                header.appendChild(topContainer);
+                this.createSketch(`border-canvas-top-${index}`, index, 'horizontal');
+            }
+
+            // Create right border
+            const rightContainer = document.createElement('div');
+            rightContainer.className = 'border-right';
+            rightContainer.id = `border-canvas-right-${index}`;
+            border.appendChild(rightContainer);
+
+            // Create bottom border
+            const bottomContainer = document.createElement('div');
+            bottomContainer.className = 'border-bottom';
+            bottomContainer.id = `border-canvas-bottom-${index}`;
+            border.appendChild(bottomContainer);
+
+            // Create left border
+            const leftContainer = document.createElement('div');
+            leftContainer.className = 'border-left';
+            leftContainer.id = `border-canvas-left-${index}`;
+            border.appendChild(leftContainer);
+
+            // Create sketches for right, bottom, left sides
+            this.createSketch(`border-canvas-right-${index}`, index, 'vertical');
+            this.createSketch(`border-canvas-bottom-${index}`, index, 'horizontal');
+            this.createSketch(`border-canvas-left-${index}`, index, 'vertical');
         });
 
-        // Handle horizontal borders (top and bottom)
+        // Handle page-level horizontal borders (top and bottom bars)
         const topbar = document.getElementById('topbar');
         const bottombar = document.getElementById('bottombar');
 
@@ -173,9 +218,9 @@ class BorderArtSystem {
             container.style.position = 'absolute';
             container.style.top = '0';
             container.style.left = '0';
-            container.id = 'border-canvas-top';
+            container.id = 'border-canvas-page-top';
             topbar.appendChild(container);
-            this.createSketch('border-canvas-top', 100, 'horizontal');
+            this.createSketch('border-canvas-page-top', 100, 'horizontal');
         }
 
         if (bottombar) {
@@ -187,9 +232,9 @@ class BorderArtSystem {
             container.style.position = 'absolute';
             container.style.top = '0';
             container.style.left = '0';
-            container.id = 'border-canvas-bottom';
+            container.id = 'border-canvas-page-bottom';
             bottombar.appendChild(container);
-            this.createSketch('border-canvas-bottom', 200, 'horizontal');
+            this.createSketch('border-canvas-page-bottom', 200, 'horizontal');
         }
     }
 
@@ -218,208 +263,28 @@ class BorderArtSystem {
 
         const styleFunc = this.getStyleFunction(this.currentStyle);
         const sketch = styleFunc(containerId, seed, orientation);
-        this.sketches.push(new p5(sketch));
+        const p5Instance = new p5(sketch);
+        this.sketches.push(p5Instance);
+
+        // Store reference and observe for visibility
+        this.sketchStates.set(containerId, { p5Instance, container });
+        this.observer.observe(container);
     }
 
     getStyleFunction(styleName) {
         switch (styleName) {
-            case 'liminal-flow':
-                return this.liminalFlowStyle.bind(this);
             case 'digital-weave':
                 return this.digitalWeaveStyle.bind(this);
             case 'thermal-drift':
                 return this.thermalDriftStyle.bind(this);
             case 'organic-noise':
                 return this.organicNoiseStyle.bind(this);
-            case 'particle-storm':
-                return this.particleStormStyle.bind(this);
             default:
-                return this.liminalFlowStyle.bind(this);
+                return this.digitalWeaveStyle.bind(this);
         }
     }
 
-    // STYLE 1: Liminal Flow - Particle density through noise fields
-    liminalFlowStyle(containerId, seed, orientation) {
-        const baseColor = this.currentColor;
-
-        return (p) => {
-            let particles = [];
-            let densityMap = [];
-            let noiseOffset1 = 0, noiseOffset2 = 0;
-            let w, h;
-            let canvasWidth, canvasHeight; // Actual pixel dimensions
-
-            const params = {
-                particleCount: orientation === 'vertical' ? 120 : 300,
-                particleSpeed: orientation === 'vertical' ? 0.8 : 1.2,
-                noiseScale: 0.015,
-                noiseSpeed: 0.003,
-                densityDecay: 0.95,
-                maxDensity: 255,
-                colors: {
-                    hot: baseColor,
-                    warm: baseColor.map(c => c * 0.8),
-                    cool: baseColor.map(c => c * 0.5),
-                    bg: [238, 236, 234]  // Page background color
-                }
-            };
-
-            p.setup = () => {
-                const container = document.getElementById(containerId);
-                w = container.offsetWidth || 20;
-                // For vertical borders, use the grandparent's height (the .content block)
-                if (orientation === 'vertical') {
-                    const parent = container.parentElement; // .block-border
-                    const grandparent = parent ? parent.parentElement : null; // .content
-                    // Use scrollHeight to get full content height including any overflow
-                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
-                } else {
-                    h = container.offsetHeight || 42;
-                }
-
-                // Skip if height is 0 or too small
-                if (h <= 0) {
-                    console.log('Skipping canvas creation for', containerId, '- height is', h);
-                    p.noLoop();
-                    return;
-                }
-
-                const canvas = p.createCanvas(w, h);
-                canvas.parent(containerId);
-
-                // Get actual canvas pixel dimensions (accounts for retina displays)
-                canvasWidth = canvas.elt.width;
-                canvasHeight = canvas.elt.height;
-
-                p.randomSeed(seed * 1234);
-                p.noiseSeed(seed * 5678);
-                // Create density map at logical resolution for performance
-                densityMap = Array(w).fill(0).map(() => Array(h).fill(0));
-                for (let i = 0; i < params.particleCount; i++) {
-                    particles.push(new Particle());
-                }
-                p.background(238, 236, 234);
-                p.frameRate(30);
-            };
-
-            p.draw = () => {
-                // Decay density at logical resolution
-                for (let x = 0; x < w; x++) {
-                    for (let y = 0; y < h; y++) {
-                        densityMap[x][y] *= params.densityDecay;
-                    }
-                }
-                noiseOffset1 += params.noiseSpeed;
-                noiseOffset2 += params.noiseSpeed * 0.5;
-
-                for (let particle of particles) {
-                    particle.update();
-                    particle.addToDensityMap();
-                }
-
-                // Render at physical pixel resolution by scaling up
-                p.loadPixels();
-                const scaleX = canvasWidth / w;
-                const scaleY = canvasHeight / h;
-
-                for (let px = 0; px < canvasWidth; px++) {
-                    for (let py = 0; py < canvasHeight; py++) {
-                        // Map physical pixel to logical coordinate
-                        const x = Math.floor(px / scaleX);
-                        const y = Math.floor(py / scaleY);
-
-                        const density = Math.min(densityMap[x][y], params.maxDensity);
-                        const pos = orientation === 'vertical' ? y / h : x / w;
-                        const c = getColorFromDensity(density, pos);
-                        const index = (px + py * canvasWidth) * 4;
-                        p.pixels[index] = c[0];
-                        p.pixels[index + 1] = c[1];
-                        p.pixels[index + 2] = c[2];
-                        p.pixels[index + 3] = 255;
-                    }
-                }
-                p.updatePixels();
-            };
-
-            function getColorFromDensity(density, pos) {
-                if (density < 5) return params.colors.bg;
-                if (density < 30) return lerpColor(params.colors.bg, params.colors.cool, density / 30);
-                if (density < 80) {
-                    const t = (density - 30) / 50;
-                    const baseColor = lerpColor(params.colors.cool, params.colors.warm, t);
-                    return lerpColor(baseColor, params.colors.hot, (1 - pos) * 0.3);
-                }
-                const t = (density - 80) / (params.maxDensity - 80);
-                return lerpColor(params.colors.warm, params.colors.hot, t);
-            }
-
-            function lerpColor(c1, c2, t) {
-                return [p.lerp(c1[0], c2[0], t), p.lerp(c1[1], c2[1], t), p.lerp(c1[2], c2[2], t)];
-            }
-
-            class Particle {
-                constructor() {
-                    this.x = p.random(w);
-                    this.y = p.random(h);
-                    this.vx = 0;
-                    this.vy = orientation === 'vertical' ? params.particleSpeed : 0;
-                    this.vx = orientation === 'horizontal' ? params.particleSpeed : 0;
-                    this.life = p.random(100, 200);
-                    this.maxLife = this.life;
-                }
-
-                update() {
-                    const noiseVal = p.noise(
-                        this.x * params.noiseScale + noiseOffset2,
-                        this.y * params.noiseScale + noiseOffset1
-                    );
-                    const force = (noiseVal - 0.5) * 0.4;
-
-                    if (orientation === 'vertical') {
-                        this.vx = force;
-                        this.vy = params.particleSpeed;
-                    } else {
-                        this.vx = params.particleSpeed;
-                        this.vy = force;
-                    }
-
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    this.life -= 0.5;
-
-                    if (this.x < 0) this.x = w;
-                    if (this.x >= w) this.x = 0;
-                    if (this.y < 0) this.y = h;
-                    if (this.y >= h) this.y = 0;
-
-                    if ((orientation === 'vertical' && this.y >= h) ||
-                        (orientation === 'horizontal' && this.x >= w) ||
-                        this.life <= 0) {
-                        if (orientation === 'vertical') {
-                            this.y = 0;
-                            this.x = p.random(w);
-                        } else {
-                            this.x = 0;
-                            this.y = p.random(h);
-                        }
-                        this.life = p.random(100, 200);
-                        this.maxLife = this.life;
-                    }
-                }
-
-                addToDensityMap() {
-                    const px = Math.floor(this.x);
-                    const py = Math.floor(this.y);
-                    if (px >= 0 && px < w && py >= 0 && py < h) {
-                        const contribution = (this.life / this.maxLife) * 8;
-                        densityMap[px][py] += contribution;
-                    }
-                }
-            }
-        };
-    }
-
-    // STYLE 2: Digital Weave - Intersecting sine waves
+    // STYLE 1: Digital Weave - Intersecting sine waves creating textile patterns
     digitalWeaveStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
 
@@ -454,8 +319,8 @@ class BorderArtSystem {
                 canvasHeight = canvas.elt.height;
                 p.randomSeed(seed * 9999);
 
-                // Generate harmonic frequencies
-                const numWaves = orientation === 'vertical' ? 6 : 10;
+                // Generate harmonic frequencies - REDUCED for performance
+                const numWaves = orientation === 'vertical' ? 3 : 5;
                 for (let i = 0; i < numWaves; i++) {
                     frequencies.push({
                         freq: p.random(0.02, 0.08),
@@ -463,18 +328,18 @@ class BorderArtSystem {
                         amp: p.random(0.5, 1.3)  // Higher amplitude for more intense variation
                     });
                 }
-                p.frameRate(30);
+                p.frameRate(12); // REDUCED from 30 for better performance
             };
 
             p.draw = () => {
                 // Smooth, moderate animation speed
                 time += orientation === 'vertical' ? 0.06 : 0.05;
 
-                // Use strip-based rendering for smooth performance
-                const stripSize = 3;
+                // Use larger strips for better performance
+                const stripSize = 6;
 
                 for (let y = 0; y < h; y += stripSize) {
-                    for (let x = 0; x < w; x++) {
+                    for (let x = 0; x < w; x += 2) {  // Skip every other pixel horizontally
                         let value = 0;
 
                         frequencies.forEach(freq => {
@@ -493,14 +358,14 @@ class BorderArtSystem {
 
                         p.fill(r, g, b);
                         p.noStroke();
-                        p.rect(x, y, 1, stripSize);
+                        p.rect(x, y, 2, stripSize);  // Wider rectangles to match x skip
                     }
                 }
             };
         };
     }
 
-    // STYLE 3: Thermal Drift - Layered gradient bands (optimized)
+    // STYLE 2: Thermal Drift - Layered gradient bands with organic movement
     thermalDriftStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
 
@@ -533,26 +398,26 @@ class BorderArtSystem {
                 p.randomSeed(seed * 7777);
                 p.noiseSeed(seed * 3333);
 
-                // Create thermal bands
-                const numBands = 10;
+                // Create thermal bands - REDUCED for performance
+                const numBands = 5;
                 for (let i = 0; i < numBands; i++) {
                     bands.push({
                         offset: p.random(1000),
-                        speed: p.random(0.015, 0.04),  // 30% faster for more visible animation
-                        scale: p.random(0.006, 0.02),  // Slightly larger scale for more variation
-                        intensity: p.random(0.5, 1.2)  // Higher intensity range
+                        speed: p.random(0.02, 0.06),  // Even faster for more visible animation
+                        scale: p.random(0.003, 0.012),  // Larger scale for bigger, more visible bands
+                        intensity: p.random(0.8, 2.0)  // Much higher intensity range
                     });
                 }
                 p.noStroke();
-                p.frameRate(60);  // Smoother animation
+                p.frameRate(12);  // REDUCED from 60 for better performance
             };
 
             p.draw = () => {
-                // Use strip-based rendering for performance
-                const stripSize = 3;
+                // Use larger strips for better performance
+                const stripSize = 6;
 
                 for (let y = 0; y < h; y += stripSize) {
-                    for (let x = 0; x < w; x++) {
+                    for (let x = 0; x < w; x += 2) {  // Skip every other pixel
                         let heat = 0;
 
                         bands.forEach(band => {
@@ -566,13 +431,15 @@ class BorderArtSystem {
 
                         heat /= bands.length;
 
-                        // Map heat from background to the palette color
-                        const r = p.lerp(238, baseColor[0], p.pow(heat, 0.8));
-                        const g = p.lerp(236, baseColor[1], p.pow(heat, 1.2));
-                        const b = p.lerp(234, baseColor[2], p.pow(heat, 1.0));
+                        // Map heat with MUCH more dramatic color variation
+                        // Use steeper curves and wider range for visible bands
+                        const heatCurve = p.pow(heat, 0.4);  // Very aggressive curve
+                        const r = p.lerp(250, baseColor[0], heatCurve);
+                        const g = p.lerp(250, baseColor[1], heatCurve);
+                        const b = p.lerp(250, baseColor[2], heatCurve);
 
                         p.fill(r, g, b);
-                        p.rect(x, y, 1, stripSize);
+                        p.rect(x, y, 2, stripSize);  // Wider to match x skip
                     }
                 }
 
@@ -584,7 +451,7 @@ class BorderArtSystem {
         };
     }
 
-    // STYLE 4: Organic Noise - Pure Perlin noise (optimized)
+    // STYLE 3: Organic Noise - Pure Perlin noise with thermal color mapping
     organicNoiseStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
 
@@ -615,129 +482,32 @@ class BorderArtSystem {
                 canvas.parent(containerId);
                 p.noiseSeed(seed * 4444);
                 p.noStroke();
-                p.frameRate(60);  // Higher framerate for smoother animation
+                p.frameRate(12);  // REDUCED from 60 for better performance
             };
 
             p.draw = () => {
-                // Use strip-based rendering - much faster than pixel manipulation
-                const stripHeight = 4;  // Render in 4px tall strips
+                // Use larger strips for better performance
+                const stripHeight = 6;  // Increased from 4px
 
                 for (let y = 0; y < h; y += stripHeight) {
-                    for (let x = 0; x < w; x++) {
-                        // Multi-octave noise
+                    for (let x = 0; x < w; x += 2) {  // Skip every other pixel
+                        // Simplified to 2-octave noise for performance
                         const n1 = p.noise(x * 0.05, y * 0.05, zoff);
                         const n2 = p.noise(x * 0.1, y * 0.1, zoff * 0.5);
-                        const n3 = p.noise(x * 0.02, y * 0.02, zoff * 2);
 
-                        const combined = (n1 * 0.5 + n2 * 0.3 + n3 * 0.2);
+                        const combined = (n1 * 0.6 + n2 * 0.4);  // Removed third octave
 
                         const r = p.lerp(238, baseColor[0], p.pow(combined, 1.2));
                         const g = p.lerp(236, baseColor[1], combined);
                         const b = p.lerp(234, baseColor[2], combined * 0.8);
 
                         p.fill(r, g, b);
-                        p.rect(x, y, 1, stripHeight);
+                        p.rect(x, y, 2, stripHeight);  // Wider to match x skip
                     }
                 }
 
                 zoff += 0.05;  // Smooth, visible animation
             };
-        };
-    }
-
-    // STYLE 5: Particle Storm - High-energy particles
-    particleStormStyle(containerId, seed, orientation) {
-        const baseColor = this.currentColor;
-
-        return (p) => {
-            let particles = [];
-            let w, h;
-
-            p.setup = () => {
-                const container = document.getElementById(containerId);
-                w = container.offsetWidth || 20;
-                // For vertical borders, use the grandparent's height (the .content block)
-                if (orientation === 'vertical') {
-                    const parent = container.parentElement; // .block-border
-                    const grandparent = parent ? parent.parentElement : null; // .content
-                    // Use scrollHeight to get full content height including any overflow
-                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
-                } else {
-                    h = container.offsetHeight || 42;
-                }
-
-                // Skip if height is 0 or too small
-                if (h <= 0) {
-                    console.log('Skipping canvas creation for', containerId, '- height is', h);
-                    p.noLoop();
-                    return;
-                }
-
-                const canvas = p.createCanvas(w, h);
-                canvas.parent(containerId);
-                p.randomSeed(seed * 8888);
-
-                const count = orientation === 'vertical' ? 100 : 250;
-                for (let i = 0; i < count; i++) {
-                    particles.push(new FastParticle());
-                }
-                p.background(238, 236, 234);
-                p.frameRate(60);
-            };
-
-            p.draw = () => {
-                p.fill(238, 236, 234, 40);
-                p.noStroke();
-                p.rect(0, 0, w, h);
-
-                particles.forEach(particle => {
-                    particle.update();
-                    particle.show();
-                });
-            };
-
-            class FastParticle {
-                constructor() {
-                    this.reset();
-                }
-
-                reset() {
-                    if (orientation === 'vertical') {
-                        this.x = p.random(w);
-                        this.y = 0;
-                        this.vy = p.random(2, 6);
-                        this.vx = p.random(-0.5, 0.5);
-                    } else {
-                        this.x = 0;
-                        this.y = p.random(h);
-                        this.vx = p.random(2, 6);
-                        this.vy = p.random(-0.5, 0.5);
-                    }
-                    this.hue = p.random([0, 5, 10, 15]);
-                }
-
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    if ((orientation === 'vertical' && this.y > h) ||
-                        (orientation === 'horizontal' && this.x > w)) {
-                        this.reset();
-                    }
-                }
-
-                show() {
-                    const speed = orientation === 'vertical' ? this.vy : this.vx;
-                    const brightness = p.map(speed, 2, 6, 100, 255);
-                    const hueShift = this.hue / 15; // Normalize hue to 0-1 range
-                    const r = baseColor[0] + (hueShift * 30);
-                    const g = baseColor[1] + (hueShift * 20);
-                    const b = baseColor[2] + (hueShift * 10);
-                    p.stroke(r, g, b, brightness);
-                    p.strokeWeight(p.random(1, 2));
-                    p.point(this.x, this.y);
-                }
-            }
         };
     }
 }
