@@ -101,7 +101,7 @@ class BorderArtSystem {
 
                     // Fade in borders after creation with longer delay
                     setTimeout(() => {
-                        document.querySelectorAll('.block-border, .header-border-top, .header, #topbar, #bottombar').forEach(el => {
+                        document.querySelectorAll('.block-border, .header, #topbar, #bottombar').forEach(el => {
                             el.style.opacity = '1';
                         });
                     }, 100);
@@ -387,8 +387,8 @@ class BorderArtSystem {
             swatch.style.transform = isActive ? 'scale(1.15)' : 'scale(1)';
         });
 
-        // Fade out, redraw, fade in - include header top borders
-        document.querySelectorAll('.block-border, .header-border-top, #topbar, #bottombar').forEach(el => {
+        // Fade out, redraw, fade in
+        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
             el.style.transition = 'opacity 0.2s ease';  // Faster fade for switching
             el.style.opacity = '0';
         });
@@ -396,7 +396,7 @@ class BorderArtSystem {
         setTimeout(() => {
             this.redrawBorders();
             setTimeout(() => {
-                document.querySelectorAll('.block-border, .header-border-top, #topbar, #bottombar').forEach(el => {
+                document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
                     el.style.opacity = '1';
                 });
             }, 50);
@@ -433,8 +433,8 @@ class BorderArtSystem {
             segment.style.boxShadow = isActive ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none';
         });
 
-        // Fade out, redraw, fade in - include header top borders
-        document.querySelectorAll('.block-border, .header-border-top, #topbar, #bottombar').forEach(el => {
+        // Fade out, redraw, fade in
+        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
             el.style.transition = 'opacity 0.2s ease';  // Faster fade for switching
             el.style.opacity = '0';
         });
@@ -442,7 +442,7 @@ class BorderArtSystem {
         setTimeout(() => {
             this.redrawBorders();
             setTimeout(() => {
-                document.querySelectorAll('.block-border, .header-border-top, #topbar, #bottombar').forEach(el => {
+                document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
                     el.style.opacity = '1';
                 });
             }, 50);
@@ -461,40 +461,13 @@ class BorderArtSystem {
             // Clear any existing canvases
             border.innerHTML = '';
 
-            // Find the header element (previous sibling of .content which contains .block-border)
-            const content = border.parentElement;
-            const header = content ? content.previousElementSibling : null;
-
-            // Create top border in the header (if it exists)
-            if (header && header.classList.contains('header')) {
-                const topContainer = document.createElement('div');
-                topContainer.className = 'header-border-top';
-                topContainer.id = `border-canvas-top-${index}`;
-                header.appendChild(topContainer);
-                this.createSketch(`border-canvas-top-${index}`, index, 'horizontal');
-            }
-
-            // Create right border
-            const rightContainer = document.createElement('div');
-            rightContainer.className = 'border-right';
-            rightContainer.id = `border-canvas-right-${index}`;
-            border.appendChild(rightContainer);
-
-            // Create bottom border
-            const bottomContainer = document.createElement('div');
-            bottomContainer.className = 'border-bottom';
-            bottomContainer.id = `border-canvas-bottom-${index}`;
-            border.appendChild(bottomContainer);
-
-            // Create left border
+            // Create ONLY left border
             const leftContainer = document.createElement('div');
             leftContainer.className = 'border-left';
             leftContainer.id = `border-canvas-left-${index}`;
             border.appendChild(leftContainer);
 
-            // Create sketches for right, bottom, left sides
-            this.createSketch(`border-canvas-right-${index}`, index, 'vertical');
-            this.createSketch(`border-canvas-bottom-${index}`, index, 'horizontal');
+            // Create sketch only for left side
             this.createSketch(`border-canvas-left-${index}`, index, 'vertical');
         });
 
@@ -628,11 +601,12 @@ class BorderArtSystem {
                 // Smooth, moderate animation speed
                 time += orientation === 'vertical' ? 0.06 : 0.05;
 
-                // Use larger strips for better performance
-                const stripSize = 6;
+                // Smaller strips for vertical borders for smoother gradients
+                const stripSize = orientation === 'vertical' ? 2 : 6;
+                const xStep = orientation === 'vertical' ? 1 : 2;
 
                 for (let y = 0; y < h; y += stripSize) {
-                    for (let x = 0; x < w; x += 2) {  // Skip every other pixel horizontally
+                    for (let x = 0; x < w; x += xStep) {
                         let value = 0;
 
                         frequencies.forEach(freq => {
@@ -645,13 +619,15 @@ class BorderArtSystem {
 
                         // Normalize and map to color from palette
                         value = (value + frequencies.length) / (frequencies.length * 2);
-                        const r = p.lerp(238, baseColor[0], p.pow(value, 1.2));
-                        const g = p.lerp(236, baseColor[1], value);
-                        const b = p.lerp(234, baseColor[2], value * 0.8);
+                        // Same baseline for both orientations - approaches white
+                        const baseline = 238;
+                        const r = p.lerp(baseline, baseColor[0], p.pow(value, 1.2));
+                        const g = p.lerp(baseline - 2, baseColor[1], value);
+                        const b = p.lerp(baseline - 4, baseColor[2], value * 0.8);
 
                         p.fill(r, g, b);
                         p.noStroke();
-                        p.rect(x, y, 2, stripSize);  // Wider rectangles to match x skip
+                        p.rect(x, y, xStep, stripSize);
                     }
                 }
             };
@@ -706,11 +682,12 @@ class BorderArtSystem {
             };
 
             p.draw = () => {
-                // Use larger strips for better performance
-                const stripSize = 6;
+                // Smaller strips for vertical borders for smoother gradients
+                const stripSize = orientation === 'vertical' ? 2 : 6;
+                const xStep = orientation === 'vertical' ? 1 : 2;
 
                 for (let y = 0; y < h; y += stripSize) {
-                    for (let x = 0; x < w; x += 2) {  // Skip every other pixel
+                    for (let x = 0; x < w; x += xStep) {
                         let heat = 0;
 
                         // Combine bands with multiplication for more extreme variation
@@ -729,13 +706,14 @@ class BorderArtSystem {
                         // Use a very aggressive curve for dramatic banding
                         const heatCurve = p.constrain(p.pow(normalized, 0.15), 0, 1);  // Even steeper
 
-                        // Map to colors with MAXIMUM range - from very dark to full color
-                        const r = p.lerp(80, baseColor[0], heatCurve);  // Very dark baseline for huge contrast
-                        const g = p.lerp(80, baseColor[1], heatCurve);
-                        const b = p.lerp(80, baseColor[2], heatCurve);
+                        // Map to colors - darker baseline for vertical borders for visibility
+                        const baseline = orientation === 'vertical' ? 100 : 80;  // Darker for vertical
+                        const r = p.lerp(baseline, baseColor[0], heatCurve);
+                        const g = p.lerp(baseline, baseColor[1], heatCurve);
+                        const b = p.lerp(baseline, baseColor[2], heatCurve);
 
                         p.fill(r, g, b);
-                        p.rect(x, y, 2, stripSize);  // Wider to match x skip
+                        p.rect(x, y, xStep, stripSize);
                     }
                 }
 
@@ -782,23 +760,26 @@ class BorderArtSystem {
             };
 
             p.draw = () => {
-                // Use larger strips for better performance
-                const stripHeight = 6;  // Increased from 4px
+                // Smaller strips for vertical borders for smoother gradients
+                const stripSize = orientation === 'vertical' ? 2 : 6;
+                const xStep = orientation === 'vertical' ? 1 : 2;
 
-                for (let y = 0; y < h; y += stripHeight) {
-                    for (let x = 0; x < w; x += 2) {  // Skip every other pixel
+                for (let y = 0; y < h; y += stripSize) {
+                    for (let x = 0; x < w; x += xStep) {
                         // Simplified to 2-octave noise for performance
                         const n1 = p.noise(x * 0.05, y * 0.05, zoff);
                         const n2 = p.noise(x * 0.1, y * 0.1, zoff * 0.5);
 
                         const combined = (n1 * 0.6 + n2 * 0.4);  // Removed third octave
 
-                        const r = p.lerp(238, baseColor[0], p.pow(combined, 1.2));
-                        const g = p.lerp(236, baseColor[1], combined);
-                        const b = p.lerp(234, baseColor[2], combined * 0.8);
+                        // Same baseline for both orientations - approaches white
+                        const baseline = 238;
+                        const r = p.lerp(baseline, baseColor[0], p.pow(combined, 1.2));
+                        const g = p.lerp(baseline - 2, baseColor[1], combined);
+                        const b = p.lerp(baseline - 4, baseColor[2], combined * 0.8);
 
                         p.fill(r, g, b);
-                        p.rect(x, y, 2, stripHeight);  // Wider to match x skip
+                        p.rect(x, y, xStep, stripSize);
                     }
                 }
 

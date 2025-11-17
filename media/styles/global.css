@@ -14,7 +14,7 @@
     --color-primary-dark: #c9302c;
     --color-text: #2a2a2a;
     --color-text-light: #6a6a6a;
-    --color-bg: #fafaf8;
+    --color-bg: #EEECEA;
     --color-card-bg: #ffffff;
     --color-border: #e8e8e8;
     --spacing-xs: 8px;
@@ -54,7 +54,7 @@ body {
 }
 
 #topbar {
-    height: 80px;
+    height: 78px;
     z-index: 1000;
     position: sticky;
     top: 0;
@@ -72,8 +72,10 @@ body {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: var(--spacing-xxl) var(--spacing-lg);
+    padding: var(--spacing-xxl) var(--spacing-lg) 0;
     box-sizing: border-box;
+    overflow: visible;
+    /* Allow header to extend left */
 }
 
 #wrapper.subview {
@@ -166,37 +168,56 @@ body {
 /* Section wrapper to contain sticky headers */
 .section-wrapper {
     position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.section-wrapper:first-child {
+    margin-top: 0;
+}
+
+.section-wrapper:last-child {
+    margin-bottom: 0;
 }
 
 .header {
-    margin: var(--spacing-xxl) 0 0;
     text-transform: uppercase;
     font-size: clamp(16px, 1.5vw, 18px);
     color: var(--color-text);
     font-weight: 600;
+    letter-spacing: 2px;
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
+    /* Flexbox positioning - fixed width for consistent alignment */
+    flex-shrink: 0;
+    width: 48px;
+    margin: 0;
+    padding: 0;
+    margin-right: var(--spacing-md);
+    background: var(--color-bg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    overflow: visible;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    /* Reverse order (icon before text) and position to end (left when rotated) */
+    justify-content: flex-end;
+    /* Sticky positioning */
     position: -webkit-sticky;
     position: sticky;
     top: 80px;
+    /* Stick below the topbar */
     z-index: 500;
-    letter-spacing: 2px;
-    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
-    padding: var(--spacing-md) 0 calc(var(--spacing-md) + 24px);
-    background: var(--color-bg);
+    align-self: flex-start;
+    /* Stick to top of section */
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
-.section-wrapper:first-child .header {
-    margin-top: 0;
-}
-
-.header .header-border-top {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 24px;
-    background: transparent;
-    overflow: hidden;
-}
+/* Removed .header-border-top - no longer needed */
 
 .header .title {
     color: var(--color-text);
@@ -214,13 +235,14 @@ body {
 
 .header .header-photo {
     display: inline-block;
-    margin-left: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
     vertical-align: middle;
 }
 
 .header .header-photo img {
     border-radius: 0;
     transition: opacity 0.2s ease;
+    transform: rotate(180deg);
 }
 
 .header .header-photo img:hover {
@@ -239,7 +261,8 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 40px;
+    /* Only as wide as the left border */
     height: 100%;
     background: transparent;
     overflow: visible;
@@ -281,16 +304,17 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 24px;
-    bottom: 0;
+    width: 40px;
+    height: 100%;
     background: transparent;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .content.block-photos {
+    width: 100%;
     max-width: 100%;
-    width: auto;
     margin-right: 0px;
+    padding: 0 var(--spacing-lg) 0 60px;
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
@@ -327,6 +351,18 @@ body {
 img {
     border: none;
     border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+}
+
+.screenshot,
+.content img:not(.favicon) {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.block-press strong img,
+strong .favicon {
+    box-shadow: none !important;
 }
 
 .block-caselife img {
@@ -349,15 +385,18 @@ img {
 .favicon {
     width: 28px;
     height: 28px;
-    vertical-align: middle;
-    margin-top: -4px;
-    margin-right: var(--spacing-sm);
+    flex-shrink: 0;
+    margin: 0 var(--spacing-sm) 0 0;
     border: none;
     border-radius: 4px;
+    box-shadow: none !important;
+    /* No shadow on small icons */
 }
 
 strong {
-    display: block;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
     font-size: 40px;
     font-weight: 600;
     margin: 0 0 var(--spacing-lg);
@@ -365,6 +404,7 @@ strong {
     letter-spacing: -0.02em;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    gap: var(--spacing-xs);
 }
 
 strong a {
@@ -392,15 +432,32 @@ strong a {
 
 
 .content {
+    flex: 1;
     width: 100%;
     max-width: 100%;
-    margin: 0 0 var(--spacing-xl);
-    padding: var(--spacing-xl) var(--spacing-lg);
+    margin: 0;
+    padding: 0 var(--spacing-lg) 0 60px;
+    /* Left padding for border (40px) + spacing (20px) */
     position: relative;
     overflow-wrap: break-word;
     word-wrap: break-word;
     box-sizing: border-box;
     z-index: 1;
+}
+
+/* Ensure all content blocks have consistent styling */
+.content.block-intro,
+.content.block-projects,
+.content.block-1,
+.content.block-2,
+.content.block-3,
+.content.block-4,
+.content.block-5,
+.content.block-code,
+.content.block-blog,
+.content.block-twitter,
+.content.block-press {
+    padding: 0 var(--spacing-lg) 0 60px;
 }
 
 .contact-info {
@@ -439,6 +496,7 @@ strong a {
     position: relative;
     display: flex;
     flex-direction: column;
+    width: 100%;
     max-width: 100%;
 }
 
@@ -450,7 +508,6 @@ ul {
     display: grid;
     grid-template-columns: 1fr;
     gap: 80px;
-    padding: 24px;
 }
 
 ul li {
@@ -466,7 +523,8 @@ ul li {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xs) var(--spacing-xl);
     align-items: start;
-    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 ul li .dated-image {
@@ -496,6 +554,10 @@ ul li strong {
     font-size: 40px;
     margin-bottom: var(--spacing-lg);
     line-height: 1.3;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: var(--spacing-xs);
 }
 
 ul li .desc {
@@ -548,10 +610,6 @@ ul li:last-child {
     margin: 0;
 }
 
-ul li:last-child img.screenshot {
-    margin-bottom: var(--spacing-md);
-}
-
 .dated-image {
     position: relative;
 }
@@ -560,7 +618,6 @@ ul li:last-child img.screenshot {
     display: block;
     position: relative;
     width: 100%;
-    overflow: hidden;
     border-radius: 4px;
 }
 
@@ -599,6 +656,7 @@ small, small a, small a:link, small a:visited {
     margin-top: var(--spacing-sm);
     margin-left: -4px;
     margin-right: -4px;
+    width: calc(100% + 8px);
     max-width: calc(100% + 8px);
     overflow: visible;
 }
@@ -618,15 +676,15 @@ small, small a, small a:link, small a:visited {
     height: 100%;
     object-fit: cover;
     display: block;
-    border: 2px solid #e0e0e0;
+    border: none;
     border-radius: 4px;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.03);
 }
 
 .screenshot-thumb:hover img {
-    border-color: var(--color-primary);
     transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 @media only screen and (max-width: 768px) {
@@ -654,17 +712,29 @@ small, small a, small a:link, small a:visited {
         padding: var(--spacing-xl) var(--spacing-md);
     }
 
+    /* Stack section-wrapper vertically on mobile */
+    .section-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
     .header {
         font-size: 12px;
-        margin: var(--spacing-xl) 0 var(--spacing-md);
+        margin: 0 0 var(--spacing-sm);
         position: relative;
         top: auto;
         box-shadow: none;
+        /* Reset vertical text on mobile */
+        writing-mode: horizontal-tb;
+        transform: none;
+        padding: 0;
+        width: 100%;
     }
 
     .content {
-        margin-top: var(--spacing-md);
+        margin-top: 0;
         padding: 0;
+        width: 100%;
     }
 
     .content.block-photos {
