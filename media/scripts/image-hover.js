@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Store the original image source
         const originalSrc = mainImage.src;
+        let isHovering = false;
 
         // Find all thumbnails in this gallery
         const thumbnails = gallery.querySelectorAll('.screenshot-thumb');
@@ -25,6 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
         thumbnails.forEach(thumb => {
             // On hover, change the main image
             thumb.addEventListener('mouseenter', () => {
+                // Lock height on first hover
+                if (!isHovering) {
+                    const currentHeight = mainImage.offsetHeight;
+                    mainImage.style.height = currentHeight + 'px';
+                    isHovering = true;
+                }
+
                 const fullSrc = thumb.dataset.fullSrc;
                 if (fullSrc) {
                     mainImage.src = fullSrc;
@@ -34,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // On mouse leave from thumbnail, restore original
             thumb.addEventListener('mouseleave', () => {
                 mainImage.src = originalSrc;
+                // Unlock height
+                mainImage.style.height = '';
+                isHovering = false;
             });
         });
     });

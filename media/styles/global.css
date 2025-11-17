@@ -548,6 +548,15 @@ ul li:last-child img.screenshot {
     position: relative;
 }
 
+.dated-image > a {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+
 small {
     display: block;
     position: static;
@@ -712,7 +721,6 @@ small, small a, small a:link, small a:visited {
 
     .content .screenshot {
         width: 100%;
-        height: auto;
     }
 
     strong {
@@ -751,12 +759,8 @@ small, small a, small a:link, small a:visited {
         gap: var(--spacing-xl);
     }
 
-    .content .screenshot {
-        height: 280px;
-    }
-
     .block-photo .dated-image img {
-        height: 280px;
+        width: 100%;
     }
 
     #wrapper {
