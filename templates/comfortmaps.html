@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="topbar"></div>
+
+<div id="wrapper" class="subview">
+
+    <div id="nav">
+      &laquo; <a href="{% url "index" %}" class="subtitle">Back to Everything</a>
+    </div>
+
+    <div class="header">
+      <div class="title">Comfort Maps</div>
+    </div>
+    <div class="content block-intro">
+        <ul>
+            <li class="last">
+                Comfort Maps make safer streets. Turn your two-wheeled commute into a call for action.
+                <small>2020</small>
+            </li>
+        </ul>
+    </div>
+
+    <div class="header">Screenshot</div>
+    <div class="content block-projects">
+      <img src="/static/images/comfortmaps/clay-samuel-mde-1.jpg" width="575" class="screenshot" />
+      <div class="screenshot-gallery">
+        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-1.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-1.jpg" alt="Comfort Maps 1"></a>
+        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-2.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-2.jpg" alt="Comfort Maps 2"></a>
+        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-3.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-3.jpg" alt="Comfort Maps 3"></a>
+        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-4.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-4.jpg" alt="Comfort Maps 4"></a>
+        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-5.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-5.jpg" alt="Comfort Maps 5"></a>
+      </div>
+    </div>
+
+    <div id="bottom_nav">
+      &laquo; <a href="{% url "index" %}" class="subtitle">Back to Everything</a>
+    </div>
+
+    <div class="background-inner"></div>
+    <div class="background-outer"></div>
+
+</div>
+
+<div id="bottombar"></div>
+{% endblock %}
