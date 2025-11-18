@@ -83,7 +83,7 @@ class BorderArtSystem {
 
             Promise.all(imagePromises).then(() => {
                 // Set initial opacity to 0 immediately - before any delay
-                document.querySelectorAll('.block-border, .header, #topbar, #bottombar').forEach(el => {
+                document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
                     el.style.opacity = '0';
                 });
 
@@ -92,7 +92,7 @@ class BorderArtSystem {
                     this.createHUD();
 
                     // Set transition for smooth fade-in
-                    document.querySelectorAll('.block-border, .header, #topbar, #bottombar').forEach(el => {
+                    document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
                         el.style.transition = 'opacity 2.4s ease';  // Very slow, luxurious fade
                     });
 
@@ -101,7 +101,7 @@ class BorderArtSystem {
 
                     // Fade in borders after creation with longer delay
                     setTimeout(() => {
-                        document.querySelectorAll('.block-border, .header, #topbar, #bottombar').forEach(el => {
+                        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
                             el.style.opacity = '1';
                         });
                     }, 100);

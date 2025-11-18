@@ -17,6 +17,7 @@
     --color-bg: #EEECEA;
     --color-card-bg: #ffffff;
     --color-border: #e8e8e8;
+    --spacing-xxs: 4px;
     --spacing-xs: 8px;
     --spacing-sm: 12px;
     --spacing-md: 16px;
@@ -423,11 +424,37 @@ strong a {
 }
 
 .block-press strong {
-    font-size: 24px;
+    font-size: 16px;
     display: inline;
     margin-bottom: 0;
-    order: 1;
-    flex: 1;
+}
+
+.block-press strong img,
+.block-press ul li img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 0;
+    margin-right: var(--spacing-xxs);
+}
+
+.block-press ul li {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    row-gap: 0;
+    column-gap: var(--spacing-md);
+    line-height: 1.3;
+}
+
+.block-press ul li .author {
+    display: inline;
+}
+
+.block-press ul li small {
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .block-code ul li .desc,
@@ -553,6 +580,19 @@ ul li {
     max-width: 100%;
 }
 
+/* Custom grid columns for specific sections */
+.block-photo ul li {
+    grid-template-columns: 7fr 5fr;
+}
+
+.block-work ul li {
+    grid-template-columns: 6fr 6fr;
+}
+
+.block-past-projects ul li {
+    grid-template-columns: 4fr 8fr;
+}
+
 ul li .dated-image {
     position: relative;
     padding-left: 24px;
@@ -617,8 +657,7 @@ ul li .screenshot-gallery {
 }
 
 .block-twitter ul li,
-.block-blog ul li,
-.block-press ul li {
+.block-blog ul li {
     margin-bottom: 0;
 }
 
@@ -631,7 +670,6 @@ ul li .screenshot-gallery {
 
 .block-blog ul li,
 .block-twitter ul li,
-.block-press ul li,
 .block-code ul li {
     margin-bottom: 0;
     display: flex;
@@ -639,6 +677,12 @@ ul li .screenshot-gallery {
     align-items: center;
     row-gap: 0;
     column-gap: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-lg);
+}
+
+/* Press section has different layout - not flexbox */
+.block-press ul li {
+    margin-bottom: 0;
     padding: var(--spacing-xs) var(--spacing-lg);
 }
 
@@ -895,6 +939,35 @@ small, small a, small a:link, small a:visited {
     .block-press strong {
         margin-bottom: var(--spacing-xs);
         font-size: 18px;
+    }
+
+    /* Press section mobile - title and author on same line, date below */
+    .block-press ul li {
+        display: block;
+    }
+
+    .block-press ul li strong {
+        display: inline;
+        margin-bottom: 0;
+    }
+
+    .block-press ul li .author {
+        display: inline;
+    }
+
+    .block-press ul li strong img,
+    .block-press strong img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-left: 2px;
+        margin-right: var(--spacing-xxs);
+    }
+
+    .block-press ul li small {
+        display: block;
+        margin-left: 0;
+        margin-top: var(--spacing-xs);
     }
 
     .content .screenshot {
