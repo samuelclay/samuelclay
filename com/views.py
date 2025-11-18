@@ -63,9 +63,11 @@ def _choose_is_a_quote():
         "is in his element.",
         "is randomizing fields.",
         "is ahead of schedule.",
-        "is driving with the top down.",
-        "is flying past on his bike.",
-        "is skating into the night.",
+        "is fiddling with the controls again.",
+        "is looking directly at the sun.",
+        # "is driving with the top down.",
+        # "is flying past on his bike.",
+        # "is skating into the night.",
     ]
 
     now = datetime.datetime.now()

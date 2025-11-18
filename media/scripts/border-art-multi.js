@@ -13,6 +13,8 @@ class BorderArtSystem {
         this.sketches = [];
         this.sketchStates = new Map(); // Track sketch visibility and state
         this.firstDrawComplete = new Map(); // Track which sketches have completed their first draw
+        this.sketchHeights = new Map(); // Track height of each sketch to prevent unnecessary redraws
+        this.lastRedrawTime = 0; // Track when we last redrew to prevent too-frequent redraws
         this.allSketchesReady = false;
         this.totalSketchesExpected = 0;
         this.styles = {
@@ -482,17 +484,76 @@ class BorderArtSystem {
         }
     }
 
+    checkHeightsChanged() {
+        // Check if any sketch heights have changed
+        let heightsChanged = false;
+
+        for (const [containerId, storedData] of this.sketchHeights.entries()) {
+            const container = document.getElementById(containerId);
+            if (!container) continue;
+
+            let currentHeight;
+            if (storedData.orientation === 'vertical') {
+                const parent = container.parentElement;
+                const grandparent = parent ? parent.parentElement : null;
+                currentHeight = grandparent ? grandparent.scrollHeight : 0;
+            } else {
+                currentHeight = container.offsetHeight || 42;
+            }
+
+            if (currentHeight !== storedData.height) {
+                heightsChanged = true;
+                break;
+            }
+        }
+
+        return heightsChanged;
+    }
+
     setupWindowResize() {
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
-                this.redrawBorders();
+                this.redrawBordersIfNeeded();
             }, 250);
+        });
+
+        // Also check when images load (they can change layout heights)
+        // Use a longer debounce to let layout settle
+        let imageLoadTimeout;
+        document.querySelectorAll('img').forEach(img => {
+            // Only attach if not already loaded
+            if (!img.complete) {
+                img.addEventListener('load', () => {
+                    clearTimeout(imageLoadTimeout);
+                    imageLoadTimeout = setTimeout(() => {
+                        this.redrawBordersIfNeeded();
+                    }, 500); // Longer timeout to let layout fully settle
+                }, { once: true });
+            }
         });
     }
 
+    redrawBordersIfNeeded() {
+        const now = Date.now();
+        const timeSinceLastRedraw = now - this.lastRedrawTime;
+
+        // Don't redraw more than once every 2 seconds to prevent flashing
+        if (timeSinceLastRedraw < 2000) {
+            return;
+        }
+
+        // Only redraw if heights have actually changed
+        if (this.checkHeightsChanged()) {
+            this.redrawBorders();
+        }
+    }
+
     redrawBorders() {
+        // Track when we redrew
+        this.lastRedrawTime = Date.now();
+
         // Remove all existing sketches
         this.sketches.forEach(sketch => sketch.remove());
         this.sketches = [];
@@ -537,6 +598,7 @@ class BorderArtSystem {
         // Reset sketch tracking
         this.totalSketchesExpected = 0;
         this.firstDrawComplete.clear();
+        this.sketchHeights.clear();
 
         // Handle full frame borders
         const frameBorders = document.querySelectorAll('.block-border');
@@ -610,6 +672,9 @@ class BorderArtSystem {
         if (height <= 0) {
             return;
         }
+
+        // Store the height for this sketch
+        this.sketchHeights.set(containerId, { height, orientation });
 
         // Increment expected sketches count
         this.totalSketchesExpected++;
