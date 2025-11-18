@@ -81,50 +81,40 @@ class BorderArtSystem {
     }
 
     init() {
-        // Wait for full page load including images to ensure correct height calculation
+        // Start rendering as soon as DOM is ready, don't wait for images
         const initBorders = () => {
-            // Wait for all images to load before calculating heights
-            const images = Array.from(document.querySelectorAll('img'));
-            const imagePromises = images.map(img => {
-                if (img.complete) return Promise.resolve();
-                return new Promise(resolve => {
-                    img.addEventListener('load', resolve);
-                    img.addEventListener('error', resolve); // Resolve even on error
-                });
+            // Set initial opacity to 0 immediately
+            document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
+                el.style.opacity = '0';
             });
 
-            Promise.all(imagePromises).then(() => {
-                // Set initial opacity to 0 immediately - before any delay
+            // Small delay to ensure DOM layout is stable
+            setTimeout(() => {
+                this.createHUD();
+
+                // Set transition for smooth fade-in
                 document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
-                    el.style.opacity = '0';
+                    el.style.transition = 'opacity 2.4s ease';  // Very slow, luxurious fade
                 });
 
-                // Add delay to ensure layout has been recalculated after images load
+                this.createBorderSketches();
+                this.setupWindowResize();
+
+                // Fade in borders after creation
                 setTimeout(() => {
-                    this.createHUD();
-
-                    // Set transition for smooth fade-in
                     document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
-                        el.style.transition = 'opacity 2.4s ease';  // Very slow, luxurious fade
+                        el.style.opacity = '1';
                     });
-
-                    this.createBorderSketches();
-                    this.setupWindowResize();
-
-                    // Fade in borders after creation with longer delay
-                    setTimeout(() => {
-                        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
-                            el.style.opacity = '1';
-                        });
-                    }, 100);
-                }, 200);
-            });
+                }, 100);
+            }, 100);
         };
 
-        if (document.readyState === 'complete') {
-            initBorders();
+        // Start as soon as DOM is ready, not when all images load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initBorders);
         } else {
-            window.addEventListener('load', initBorders);
+            // DOM already ready
+            initBorders();
         }
     }
 
