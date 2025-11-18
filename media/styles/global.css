@@ -234,18 +234,18 @@ body {
 /* ========== */
 
 .name-header {
-    margin: 0 0 var(--spacing-xxl);
-    padding: 0 0 var(--spacing-lg);
+    margin: 0 0 var(--spacing-xl);
+    padding: 0;
     color: var(--color-text);
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 500;
+    font-size: 40px;
+    font-weight: 600;
     position: relative;
-    z-index: 1;
     font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
     display: block;
-    border-bottom: 1px solid var(--color-border);
+    grid-column: 2;
+    grid-row: 1;
 }
 
 .name-header a {
@@ -256,11 +256,11 @@ body {
 
 .name-header-text {
     display: inline;
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 500;
+    font-size: 40px;
+    font-weight: 600;
     color: var(--color-text);
-    letter-spacing: -0.01em;
-    line-height: 1.2;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
 }
 
 /* Section wrapper to contain sticky headers */
@@ -282,9 +282,9 @@ body {
 
 .header {
     text-transform: uppercase;
-    font-size: clamp(16px, 1.5vw, 18px);
+    font-size: clamp(16px, 2.5vw, 24px);
     color: var(--color-text);
-    font-weight: 600;
+    font-weight: 200;
     letter-spacing: 2px;
     font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
     /* Flexbox positioning - fixed width for consistent alignment */
@@ -319,13 +319,12 @@ body {
 
 .header .title {
     color: var(--color-text);
-    font-weight: 500;
+    font-weight: 200;
     font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
 }
 
 .header .title.past-projects-title {
     color: var(--color-text-light);
-    font-weight: 500;
 }
 
 .header .subtitle {
@@ -345,8 +344,8 @@ body {
 .header .header-photo img {
     border-radius: 0;
     transition: opacity 0.2s ease;
-    transform: rotate(180deg) translateX(4px);
-    height: 36px;
+    transform: rotate(180deg);
+    height: 42px;
     width: auto;
 }
 
@@ -628,7 +627,7 @@ strong a {
 
 .contact-info {
     grid-column: 2;
-    grid-row: 1;
+    grid-row: 2;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
