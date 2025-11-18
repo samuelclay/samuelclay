@@ -80,7 +80,106 @@ body {
 }
 
 #wrapper.subview {
-    padding: 140px var(--spacing-md) 140px;
+    padding: var(--spacing-xxl) var(--spacing-lg);
+    max-width: 900px;
+}
+
+/* Back button styles */
+.back-button {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-button:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateX(-4px);
+}
+
+.back-button-bottom {
+    margin-top: var(--spacing-xxl);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Project detail header */
+.project-detail-header {
+    margin-bottom: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.project-detail-header h1 {
+    font-size: clamp(40px, 5vw, 56px);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin: 0 0 var(--spacing-lg);
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.project-detail-header .project-description {
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin: 0 0 var(--spacing-md);
+}
+
+.project-detail-header small {
+    display: block;
+    margin: var(--spacing-md) 0 0;
+}
+
+/* Project screenshots */
+.project-screenshots {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.project-screenshots img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Hide old layout elements on detail pages */
+#wrapper.subview .background-inner,
+#wrapper.subview .background-outer {
+    display: none;
+}
+
+/* Project team section */
+.project-team {
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--color-border);
+}
+
+.project-team h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 var(--spacing-md);
+    font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
+}
+
+.project-team p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin: 0;
 }
 
 #nav {
@@ -145,10 +244,7 @@ body {
     font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
     line-height: 1.2;
     letter-spacing: -0.01em;
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0 var(--spacing-md);
+    display: block;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -159,6 +255,7 @@ body {
 }
 
 .name-header-text {
+    display: inline;
     font-size: clamp(40px, 5vw, 64px);
     font-weight: 500;
     color: var(--color-text);
@@ -226,6 +323,11 @@ body {
     font-family: 'Gotham Narrow A', 'Gotham Narrow B', sans-serif;
 }
 
+.header .title.past-projects-title {
+    color: var(--color-text-light);
+    font-weight: 500;
+}
+
 .header .subtitle {
     font-size: 18px;
 }
@@ -243,7 +345,9 @@ body {
 .header .header-photo img {
     border-radius: 0;
     transition: opacity 0.2s ease;
-    transform: rotate(180deg);
+    transform: rotate(180deg) translateX(4px);
+    height: 36px;
+    width: auto;
 }
 
 .header .header-photo img:hover {
@@ -438,6 +542,7 @@ strong a {
     font-size: 16px;
     display: inline;
     margin-bottom: 0;
+    margin-right: var(--spacing-md);
 }
 
 .block-press strong img,
@@ -460,6 +565,7 @@ strong a {
 
 .block-press ul li .author {
     display: inline;
+    font-weight: normal;
 }
 
 .block-press ul li small {
@@ -589,7 +695,8 @@ ul li {
     align-items: start;
     width: 100%;
     max-width: 100%;
-    overflow: visible; /* Allow overlay to be visible */
+    overflow: visible;
+    /* Allow overlay to be visible */
 }
 
 /* Custom grid columns for specific sections */
@@ -688,7 +795,7 @@ ul li .screenshot-gallery {
     flex-wrap: wrap;
     align-items: center;
     row-gap: 0;
-    column-gap: var(--spacing-md);
+    column-gap: var(--spacing-xl);
     padding: var(--spacing-xs) var(--spacing-lg);
 }
 
@@ -790,7 +897,7 @@ small, small a, small a:link, small a:visited {
 .screenshot-hover-overlay {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     bottom: 0;
     /* Position to cover the entire second grid column (title + description area) */
     grid-column: 2;
@@ -862,7 +969,8 @@ small, small a, small a:link, small a:visited {
 
     .screenshot-hover-overlay {
         height: auto;
-        max-height: 300px; /* Approximate height of main screenshot on mobile */
+        max-height: 300px;
+        /* Approximate height of main screenshot on mobile */
     }
 }
 
@@ -928,11 +1036,12 @@ small, small a, small a:link, small a:visited {
     .name-header {
         font-size: clamp(28px, 10vw, 48px);
         margin-bottom: var(--spacing-xl);
-        flex-direction: column;
-        gap: var(--spacing-sm) 0;
+        display: block;
     }
 
+    .name-header a,
     .name-header-text {
+        display: inline;
         font-size: clamp(28px, 10vw, 48px);
     }
 
