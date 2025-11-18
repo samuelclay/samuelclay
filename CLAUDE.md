@@ -36,6 +36,11 @@ python manage.py migrate      # Apply migrations
 
 Note: Port 80 may be running a different service in development, always use port 8882 for local development.
 
+### SSH to Production
+```bash
+make ssh RUN="cmd"    # Run command on samuelclay.com (uses /srv/secrets-newsblur/keys/newsblur.key)
+```
+
 ## Architecture
 
 ### Application Structure

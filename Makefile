@@ -31,4 +31,8 @@ createcachetable:
 	docker-compose $(COMPOSE_FILES) exec web python manage.py createcachetable
 
 ssh:
-	sshdo hackersmacker old
+ifdef RUN
+	@ssh -l sclay -i /srv/secrets-newsblur/keys/newsblur.key 157.230.10.91 "$(RUN)"
+else
+	@ssh -l sclay -i /srv/secrets-newsblur/keys/newsblur.key 157.230.10.91
+endif

@@ -33,7 +33,7 @@ services:
     container_name: samuelclay-certbot
     # Note: This container will exit after running, which is expected behavior
     # The renewal is handled by the renew-certbot-standalone.sh script
-    command: certonly --standalone --preferred-challenges http --agree-tos --no-eff-email --keep-until-expiring --expand --email samuel@ofbrooklyn.com -d samuelclay.com -v
+    command: certonly --standalone --preferred-challenges http --agree-tos --no-eff-email --keep-until-expiring --expand --email samuel@ofbrooklyn.com -d samuelclay.com -d www.samuelclay.com -v
     volumes:
       - certs:/etc/letsencrypt
       - webroot:/var/www/certbot

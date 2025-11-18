@@ -5,16 +5,17 @@
 
 set -e
 
-# Change to the correct directory
-cd /home/sclay/samuelclay/certbot
+# Change to the main project directory (not certbot subdir)
+# This ensures we use the main docker-compose.yml and share volumes with nginx
+cd /srv/samuelclay
 
 # Stop nginx to free up port 80 for standalone validation
 echo "Stopping nginx..."
-docker-compose stop nginx
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml stop nginx
 
 # Run certbot renewal in standalone mode with non-interactive flag
 echo "Running certbot renewal..."
-docker-compose run --rm -p 80:80 certbot certonly \
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml run --rm -p 80:80 certbot certonly \
     --standalone \
     --preferred-challenges http \
     --agree-tos \
@@ -33,7 +34,7 @@ docker-compose run --rm -p 80:80 certbot certonly \
 # Check if renewal created a new directory (e.g., samuelclay.com-0001)
 if [ -d "/var/lib/docker/volumes/samuelclay_certs/_data/live/samuelclay.com-0001" ]; then
     echo "New certificate directory detected, updating symlinks..."
-    docker-compose run --rm --entrypoint sh certbot -c '
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml run --rm --entrypoint sh certbot -c '
         rm -f /etc/letsencrypt/live/samuelclay.com/*.pem
         ln -s /etc/letsencrypt/live/samuelclay.com-0001/fullchain.pem /etc/letsencrypt/live/samuelclay.com/fullchain.pem
         ln -s /etc/letsencrypt/live/samuelclay.com-0001/privkey.pem /etc/letsencrypt/live/samuelclay.com/privkey.pem
@@ -44,6 +45,6 @@ fi
 
 # Start nginx back up
 echo "Starting nginx..."
-docker-compose start nginx
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml start nginx
 
 echo "Renewal process completed!"
