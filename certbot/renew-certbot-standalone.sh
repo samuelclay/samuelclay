@@ -24,6 +24,7 @@ docker-compose run --rm -p 80:80 certbot certonly \
     --non-interactive \
     --email samuel@ofbrooklyn.com \
     -d samuelclay.com \
+    -d www.samuelclay.com \
     -v
 
 # Note: Removed wildcard domain as standalone doesn't support it
