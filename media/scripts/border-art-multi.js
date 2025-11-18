@@ -19,41 +19,42 @@ class BorderArtSystem {
         // Randomly select a style on page load
         const styleKeys = Object.keys(this.styles);
         this.currentStyle = styleKeys[Math.floor(Math.random() * styleKeys.length)];
-        // 24 colors: spectrum left-to-right, brightness/saturation top-to-bottom
+        // 24 colors: organized for smooth gradient flow
+        // Format: { color: [r, g, b], name: 'Color Name' }
         this.colorPalette = [
-            // Row 1: Lighter/brighter versions across spectrum
-            [255, 118, 117],  // Light red
-            [252, 92, 125],   // Light pink
-            [255, 177, 66],   // Light orange
-            [255, 220, 116],  // Soft yellow
-            [163, 203, 56],   // Yellow-lime
-            [85, 239, 196],   // Mint
-            [116, 185, 255],  // Sky blue
-            [200, 180, 235],  // Lavender
+            // Row 1: Light/bright across spectrum
+            { color: [255, 118, 117], name: 'Salmon' },
+            { color: [252, 92, 125],  name: 'Fuchsia' },
+            { color: [255, 177, 66],  name: 'Cantaloupe' },
+            { color: [180, 235, 80],  name: 'Chartreuse' },
+            { color: [163, 203, 56],  name: 'Lime' },
+            { color: [85, 239, 196],  name: 'Mint' },
+            { color: [116, 185, 255], name: 'Sky Blue' },
+            { color: [200, 180, 235], name: 'Lavender' },
 
-            // Row 2: Medium saturation/brightness across spectrum
-            [235, 77, 75],    // Medium red
-            [255, 159, 64],   // Coral
-            [245, 124, 0],    // Orange
-            [241, 196, 15],   // Sunflower
-            [39, 174, 96],    // Emerald
-            [9, 132, 227],    // Bright blue
-            [108, 92, 231],   // Periwinkle
-            [162, 155, 254],  // Light purple
+            // Row 2: Medium brightness across spectrum
+            { color: [235, 77, 75],   name: 'Scarlet' },
+            { color: [225, 112, 85],  name: 'Terracotta' },
+            { color: [255, 159, 64],  name: 'Coral' },
+            { color: [39, 174, 96],   name: 'Emerald' },
+            { color: [26, 188, 156],  name: 'Turquoise' },
+            { color: [100, 149, 237], name: 'Cornflower' },
+            { color: [84, 160, 255],  name: 'Azure' },
+            { color: [153, 153, 238], name: 'Periwinkle' },
 
-            // Row 3: Darker/richer versions across spectrum
-            [214, 48, 49],    // Rich red
-            [225, 112, 85],   // Terracotta
-            [255, 195, 18],   // Golden orange
-            [254, 211, 48],   // Bright gold
-            [0, 148, 133],    // Teal
-            [84, 160, 255],   // Azure
-            [65, 105, 225],   // Royal blue
-            [155, 89, 182]    // Deep purple
+            // Row 3: Darker/richer across spectrum
+            { color: [214, 48, 49],   name: 'Crimson' },
+            { color: [245, 124, 0],   name: 'Burnt Orange' },
+            { color: [241, 196, 15],  name: 'Sunflower' },
+            { color: [0, 148, 133],   name: 'Teal' },
+            { color: [15, 82, 186],   name: 'Sapphire' },
+            { color: [9, 132, 227],   name: 'Bright Blue' },
+            { color: [65, 105, 225],  name: 'Royal Blue' },
+            { color: [155, 89, 182],  name: 'Amethyst' }
         ];
         // Pick ONE random color for this page load - all borders will use this color
         const randomIndex = Math.floor(Math.random() * this.colorPalette.length);
-        this.currentColor = this.colorPalette[randomIndex];
+        this.currentColor = this.colorPalette[randomIndex].color;
 
         // Setup Intersection Observer for performance
         this.setupIntersectionObserver();
@@ -262,16 +263,35 @@ class BorderArtSystem {
             segmentedControl.appendChild(segment);
         });
 
+        const colorLabelContainer = document.createElement('div');
+        colorLabelContainer.style.cssText = `
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        `;
+
         const colorLabel = document.createElement('div');
         colorLabel.textContent = 'Color Palette';
         colorLabel.style.cssText = `
             font-weight: bold;
-            margin-bottom: 8px;
             color: #623734;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         `;
+
+        const colorName = document.createElement('div');
+        colorName.id = 'selected-color-name';
+        colorName.style.cssText = `
+            font-weight: bold;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        `;
+
+        colorLabelContainer.appendChild(colorLabel);
+        colorLabelContainer.appendChild(colorName);
 
         const colorGrid = document.createElement('div');
         colorGrid.style.cssText = `
@@ -284,8 +304,9 @@ class BorderArtSystem {
         `;
 
         // Create color swatches
-        this.colorPalette.forEach((color, index) => {
+        this.colorPalette.forEach((colorEntry, index) => {
             const swatch = document.createElement('div');
+            const color = colorEntry.color;
             const isActive = JSON.stringify(this.currentColor) === JSON.stringify(color);
             swatch.className = 'color-swatch';
             swatch.dataset.colorIndex = index;
@@ -321,13 +342,16 @@ class BorderArtSystem {
 
         content.appendChild(patternLabel);
         content.appendChild(segmentedControl);
-        content.appendChild(colorLabel);
+        content.appendChild(colorLabelContainer);
         content.appendChild(colorGrid);
 
         hud.appendChild(buttonText);
         hud.appendChild(closeBtn);
         hud.appendChild(content);
         document.body.appendChild(hud);
+
+        // Set initial color name after HUD is in DOM
+        this.updateColorName();
 
         this.hudElement = hud;
         this.isExpanded = false;
@@ -386,14 +410,30 @@ class BorderArtSystem {
         }
     }
 
+    updateColorName() {
+        const colorNameElement = document.getElementById('selected-color-name');
+        if (!colorNameElement) return;
+
+        // Find the current color entry
+        const colorEntry = this.colorPalette.find(
+            entry => JSON.stringify(entry.color) === JSON.stringify(this.currentColor)
+        );
+
+        if (colorEntry) {
+            colorNameElement.textContent = colorEntry.name;
+            colorNameElement.style.color = `rgb(${this.currentColor[0]}, ${this.currentColor[1]}, ${this.currentColor[2]})`;
+        }
+    }
+
     changeColor(newColor) {
         this.currentColor = newColor;
+        this.updateColorName();
 
         // Update swatch highlights - use the color-swatch class
         const swatches = this.hudElement.querySelectorAll('.color-swatch');
         swatches.forEach((swatch) => {
             const colorIndex = parseInt(swatch.dataset.colorIndex);
-            const color = this.colorPalette[colorIndex];
+            const color = this.colorPalette[colorIndex].color;
             const isActive = JSON.stringify(this.currentColor) === JSON.stringify(color);
             swatch.style.boxShadow = isActive ? '0 0 0 3px rgba(0,0,0,0.3)' : '0 2px 4px rgba(0,0,0,0.1)';
             swatch.style.transform = isActive ? 'scale(1.15)' : 'scale(1)';

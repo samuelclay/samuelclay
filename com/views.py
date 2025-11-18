@@ -54,7 +54,7 @@ def index(request):
 
 def _choose_is_a_quote():
     quotes = [
-        "is up on a hill in San Francisco.",
+        # "is up on a hill in San Francisco.",
         # "is going about it all wrong.",
         "is writing code. Right. Now.",
         # "is making out with his dog again.", # Poor Shiloh
