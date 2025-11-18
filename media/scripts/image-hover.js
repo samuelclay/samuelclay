@@ -1,6 +1,6 @@
 /**
  * Image Hover Gallery
- * Hover over thumbnails to change the main screenshot image
+ * Hover over thumbnails to display large overlay on right side
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,39 +12,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const listItem = gallery.closest('li');
         if (!listItem) return;
 
-        // Find the main screenshot image in this list item
-        const mainImage = listItem.querySelector('.screenshot');
-        if (!mainImage) return;
-
-        // Store the original image source
-        const originalSrc = mainImage.src;
-        let isHovering = false;
+        // Create overlay element once for this list item
+        const overlay = document.createElement('div');
+        overlay.className = 'screenshot-hover-overlay';
+        const overlayImg = document.createElement('img');
+        overlay.appendChild(overlayImg);
+        listItem.appendChild(overlay);
 
         // Find all thumbnails in this gallery
         const thumbnails = gallery.querySelectorAll('.screenshot-thumb');
 
+        // Preload all images for instant display
         thumbnails.forEach(thumb => {
-            // On hover, change the main image
-            thumb.addEventListener('mouseenter', () => {
-                // Lock height on first hover
-                if (!isHovering) {
-                    const currentHeight = mainImage.offsetHeight;
-                    mainImage.style.height = currentHeight + 'px';
-                    isHovering = true;
-                }
+            const fullSrc = thumb.dataset.fullSrc;
+            if (fullSrc) {
+                const preloadImg = new Image();
+                preloadImg.src = fullSrc;
+            }
+        });
 
+        thumbnails.forEach(thumb => {
+            // On hover, show the overlay with the full-size image
+            thumb.addEventListener('mouseenter', () => {
                 const fullSrc = thumb.dataset.fullSrc;
                 if (fullSrc) {
-                    mainImage.src = fullSrc;
+                    overlayImg.src = fullSrc;
+                    overlay.classList.add('visible');
                 }
             });
 
-            // On mouse leave from thumbnail, restore original
+            // On mouse leave from thumbnail, hide overlay
             thumb.addEventListener('mouseleave', () => {
-                mainImage.src = originalSrc;
-                // Unlock height
-                mainImage.style.height = '';
-                isHovering = false;
+                overlay.classList.remove('visible');
             });
         });
     });

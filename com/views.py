@@ -30,21 +30,12 @@ def index(request):
         logging.debug(" ---> Cached blog.")
 
     # tweets = cache.get('tweets')
-    # if not tweets and tweets != []:
+    # if tweets is None:
     #     logging.debug(" ---> Fetching twitter...")
     #     tweets = _fetch_and_parse_twitter()
     #     cache.set('tweets', tweets, 60 * 60 * 24)
     # else:
     #     logging.debug(" ---> Cached twitter.")
-
-    # photos = cache.get("photos")
-    # if not photos:
-    #     logging.debug(" ---> Fetching flickr...")
-    #     # photos = _fetch_and_parse_flickr()
-    #     photos = Photo.objects.all().order_by("?")
-    #     cache.set("photos", photos, 60 * 60 * 24)
-    # else:
-    #     logging.debug(" ---> Cached flickr.")
 
     isa_quote = _choose_is_a_quote()
     year = datetime.datetime.now().year
@@ -54,8 +45,7 @@ def index(request):
         "index.html",
         {
             "blog_entries": blog_entries,
-            # 'tweets': tweets,
-            # "photos": photos,
+            # "tweets": tweets,
             "isa_quote": isa_quote,
             "year": year,
         },
@@ -105,29 +95,63 @@ def _fetch_and_parse_blog():
 
 
 # def _fetch_and_parse_twitter():
+#     """Fetch tweets from Nitter RSS feed"""
 #     try:
-#         auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
-#         auth.set_access_token(settings.TWITTER_ACCESS_TOKEN, settings.TWITTER_ACCESS_TOKEN_SECRET)
-#         twitter_api = tweepy.API(auth)
-#         tweets = twitter_api.user_timeline('samuelclay', exclude_replies=True,
-#                                            count=100, trim_user=True, include_rts=False)
-#     except tweepy.TweepError:
+#         # Try multiple Nitter instances in case one is down
+#         nitter_instances = [
+#             "https://nitter.privacydev.net/samuelclay/rss",
+#             "https://nitter.1d4.us/samuelclay/rss",
+#             "https://nitter.kavin.rocks/samuelclay/rss",
+#         ]
+
+#         twitter_feed = None
+#         headers = {
+#             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+#         }
+
+#         for instance_url in nitter_instances:
+#             try:
+#                 logging.debug(f" ---> Trying Nitter instance: {instance_url}")
+#                 response = requests.get(instance_url, headers=headers, timeout=10)
+#                 if response.status_code == 200:
+#                     twitter_feed = feedparser.parse(response.content)
+#                     if twitter_feed and twitter_feed.get('entries'):
+#                         logging.debug(f" ---> Successfully fetched {len(twitter_feed.entries)} tweets from {instance_url}")
+#                         break
+#                 else:
+#                     logging.debug(f" ---> HTTP {response.status_code} from {instance_url}")
+#             except Exception as e:
+#                 logging.debug(f" ---> Failed to fetch from {instance_url}: {e}")
+#                 continue
+
+#         if not twitter_feed or not twitter_feed.get('entries'):
+#             logging.debug(" ---> No tweets found from any Nitter instance")
+#             return []
+
+#         tweets = []
+#         for entry in twitter_feed['entries'][:12]:
+#             # Parse the description to get clean text
+#             soup = BeautifulSoup(entry.get('description', entry.get('summary', '')), 'html.parser')
+#             text = soup.get_text().strip()
+
+#             # Extract tweet ID from link
+#             tweet_id = entry.link.split('/')[-1].split('#')[0] if entry.link else ''
+
+#             # Convert published_parsed time tuple to datetime
+#             published_dt = None
+#             if hasattr(entry, 'published_parsed') and entry.published_parsed:
+#                 published_dt = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
+
+#             tweets.append({
+#                 'relative_created_at': "%s ago" % relative_timesince(published_dt) if published_dt else '',
+#                 'text': text,
+#                 'id': tweet_id,
+#             })
+
+#         return tweets
+#     except Exception as e:
+#         logging.error(f" ---> Error fetching tweets from Nitter: {e}")
 #         return []
-
-#     # shown_tweets = [t for t in tweets if not t.text.startswith('@')]
-#     fixed_tweets = []
-#     for tweet in tweets[:12]:
-#         text = tweet.text
-#         for url in tweet.entities.get('urls', []):
-#             if url['url'] in text:
-#                 text = text.replace(url['url'], url['expanded_url'])
-#         fixed_tweets.append({
-#             'relative_created_at': "%s ago" % relative_timesince(tweet.created_at),
-#             'text': text,
-#             'id': tweet.id,
-#         })
-
-#     return fixed_tweets
 
 
 # def _fetch_and_parse_flickr():

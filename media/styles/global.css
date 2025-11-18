@@ -317,21 +317,32 @@ body {
     width: 100%;
     max-width: 100%;
     margin-right: 0px;
-    padding: 0 var(--spacing-lg) 0 60px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-xl) 0 calc(60px + var(--spacing-lg));
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-md);
+    grid-auto-rows: 240px;
+}
+
+.block-photos a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 .block-photos.img-75 img {
-    width: 75px;
-    height: 75px;
-    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
     transition: opacity 0.2s ease;
+    display: block;
 }
 
 .block-photos.img-75 img:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 .block-photos table {
@@ -578,6 +589,7 @@ ul li {
     align-items: start;
     width: 100%;
     max-width: 100%;
+    overflow: visible; /* Allow overlay to be visible */
 }
 
 /* Custom grid columns for specific sections */
@@ -774,6 +786,37 @@ small, small a, small a:link, small a:visited {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Screenshot hover overlay - covers right side on thumbnail hover */
+.screenshot-hover-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* Position to cover the entire second grid column (title + description area) */
+    grid-column: 2;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.screenshot-hover-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.screenshot-hover-overlay img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
 @media only screen and (max-width: 768px) {
     .screenshot-gallery {
         margin-left: -3px;
@@ -785,6 +828,41 @@ small, small a, small a:link, small a:visited {
         min-width: 70px;
         height: 70px;
         padding: 3px;
+    }
+
+    /* On mobile, overlay covers the main screenshot image */
+    .screenshot-hover-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        grid-column: auto;
+        z-index: 100;
+    }
+
+    /* Position overlay to cover the dated-image area */
+    ul li .screenshot-hover-overlay {
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    /* Constrain overlay image to match main screenshot size */
+    .screenshot-hover-overlay img {
+        max-height: 100%;
+        object-fit: contain;
+        object-position: top;
+    }
+
+    /* Make overlay height match the main screenshot container */
+    ul li .dated-image {
+        position: relative;
+    }
+
+    .screenshot-hover-overlay {
+        height: auto;
+        max-height: 300px; /* Approximate height of main screenshot on mobile */
     }
 }
 
@@ -838,6 +916,8 @@ small, small a, small a:link, small a:visited {
 
     .content.block-photos {
         width: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
     }
 
     .header .header-photo {
@@ -978,5 +1058,10 @@ small, small a, small a:link, small a:visited {
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
     #wrapper {
         padding: var(--spacing-xxl) var(--spacing-md);
+    }
+
+    .content.block-photos {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 220px;
     }
 }

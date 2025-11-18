@@ -521,10 +521,31 @@
         </div>
         <div class="content block-photos img-75">
         <div class="block-border"></div>
-        {% for photo in photos|slice:":48" %}
-        <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}"
-                alt="{{ photo.title }}" /></a>
-        {% endfor %}
+        <a href="https://flickr.com/photos/conesus/4373196971/"><img src="/static/images/photos/4373196971.jpg" title="Arnaud" alt="Arnaud" /></a>
+        <a href="https://flickr.com/photos/conesus/4373195769/"><img src="/static/images/photos/4373195769.jpg" title="Ito" alt="Ito" /></a>
+        <a href="https://flickr.com/photos/conesus/36897126301/"><img src="/static/images/photos/36897126301.jpg" title="Sunset at the Grand Canyon" alt="Sunset at the Grand Canyon" /></a>
+        <a href="https://flickr.com/photos/conesus/13731885193/"><img src="/static/images/photos/13731885193.jpg" title="P1040395.jpg" alt="P1040395.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/13173796944/"><img src="/static/images/photos/13173796944.jpg" title="Golden Gate Heights Stairway" alt="Golden Gate Heights Stairway" /></a>
+        <a href="https://flickr.com/photos/conesus/11552697314/"><img src="/static/images/photos/11552697314.jpg" title="This 15 foot tree took us to the beach for a Christmas bonfire." alt="This 15 foot tree took us to the beach for a Christmas bonfire." /></a>
+        <a href="https://flickr.com/photos/conesus/11055042773/"><img src="/static/images/photos/11055042773.jpg" title="At Stack Exchange HQ so I can finally repay everything I owe them for Stack Overflow." alt="At Stack Exchange HQ so I can finally repay everything I owe them for Stack Overflow." /></a>
+        <a href="https://flickr.com/photos/conesus/9523855485/"><img src="/static/images/photos/9523855485.jpg" title="I am now the proud owner of six cronots. Seven if you count the one I just ate." alt="I am now the proud owner of six cronots. Seven if you count the one I just ate." /></a>
+        <a href="https://flickr.com/photos/conesus/9362501522/"><img src="/static/images/photos/9362501522.jpg" title="Answer key to the new NewsBlur t-shirt." alt="Answer key to the new NewsBlur t-shirt." /></a>
+        <a href="https://flickr.com/photos/conesus/8377733789/"><img src="/static/images/photos/8377733789.jpg" title="Holding up the MUNI. My photo just won the MUNI category of the #sfphotohunt" alt="Holding up the MUNI. My photo just won the MUNI category of the #sfphotohunt" /></a>
+        <a href="https://flickr.com/photos/conesus/7960448660/"><img src="/static/images/photos/7960448660.jpg" title="Berkeley does this to you." alt="Berkeley does this to you." /></a>
+        <a href="https://flickr.com/photos/conesus/4587535136/"><img src="/static/images/photos/4587535136.jpg" title="Park Slope Historic District" alt="Park Slope Historic District" /></a>
+        <a href="https://flickr.com/photos/conesus/4586898583/"><img src="/static/images/photos/4586898583.jpg" title="Park Slope Historic District" alt="Park Slope Historic District" /></a>
+        <a href="https://flickr.com/photos/conesus/36849766176/"><img src="/static/images/photos/36849766176.jpg" title="Sunrise in the Grand Canyon" alt="Sunrise in the Grand Canyon" /></a>
+        <a href="https://flickr.com/photos/conesus/32445578844/"><img src="/static/images/photos/32445578844.jpg" title="DSC_0102.jpg" alt="DSC_0102.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/26444693012/"><img src="/static/images/photos/26444693012.jpg" title="IMG_8929.jpg" alt="IMG_8929.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/17188333930/"><img src="/static/images/photos/17188333930.jpg" title="IMG_2023.jpg" alt="IMG_2023.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/17168446997/"><img src="/static/images/photos/17168446997.jpg" title="IMG_2077.jpg" alt="IMG_2077.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/15381334219/"><img src="/static/images/photos/15381334219.jpg" title="Lands End" alt="Lands End" /></a>
+        <a href="https://flickr.com/photos/conesus/15380823688/"><img src="/static/images/photos/15380823688.jpg" title="Saturday at the beach." alt="Saturday at the beach." /></a>
+        <a href="https://flickr.com/photos/conesus/15142084965/"><img src="/static/images/photos/15142084965.jpg" title="USA-NEVADA/BURNINGMAN" alt="USA-NEVADA/BURNINGMAN" /></a>
+        <a href="https://flickr.com/photos/conesus/15121274332/"><img src="/static/images/photos/15121274332.jpg" title="Lotuses at dusk" alt="Lotuses at dusk" /></a>
+        <a href="https://flickr.com/photos/conesus/14993306391/"><img src="/static/images/photos/14993306391.jpg" title="P1040577.jpg" alt="P1040577.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/15119089386/"><img src="/static/images/photos/15119089386.jpg" title="Building Pulse & Bloom at Burning Man" alt="Building Pulse & Bloom at Burning Man" /></a>
+        <a href="https://flickr.com/photos/conesus/14809701529/"><img src="/static/images/photos/14809701529.jpg" title="P1040490.jpg" alt="P1040490.jpg" /></a>
     </div>
     </div>
 
@@ -552,30 +573,31 @@
     </div>
     </div>
 
+    {% comment %}
     <div class="section-wrapper">
         <div class="header">
-            <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a><br />on Twitter</div>
+            <div class="header-text"><a href="https://x.com/samuelclay">@samuelclay</a><br />on Twitter</div>
             <div class="header-photo">
-                <a href="http://twitter.com/samuelclay">
+                <a href="https://x.com/samuelclay">
                     <img src="/static/images/Campeche Steps.jpg" width="77" height="63" />
                 </a>
             </div>
         </div>
-        {% comment %} <div class="content block-twitter">
+        <div class="content block-twitter">
         <div class="block-border"></div>
         <ul class="tweets">
             {% for tweet in tweets %}
             <li {% if forloop.last %}class="last" {% endif %}>
                 {{ tweet.text|safe|urlize|linebreaksbr }}
                 <small>
-                    <a href="https://twitter.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
+                    <a href="https://x.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
                 </small>
             </li>
             {% endfor %}
         </ul>
     </div>
-    {% endcomment %}
     </div>
+    {% endcomment %}
 
     <div class="section-wrapper">
         <div class="header">
