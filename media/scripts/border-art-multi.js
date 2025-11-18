@@ -1,10 +1,11 @@
 /**
  * MULTI-STYLE BORDER ART SYSTEM
  *
- * Three distinct algorithmic art styles for borders:
+ * Four distinct algorithmic art styles for borders:
  * 1. Digital Weave - Intersecting sine waves creating textile patterns
  * 2. Thermal Drift - Layered gradient bands with organic movement
  * 3. Organic Noise - Pure Perlin noise with thermal color mapping
+ * 4. Kaleidoscope - Symmetric mirrored patterns with rotating color wheels
  */
 
 class BorderArtSystem {
@@ -14,7 +15,8 @@ class BorderArtSystem {
         this.styles = {
             'digital-weave': 'Weave',
             'thermal-drift': 'Drift',
-            'organic-noise': 'Noise'
+            'organic-noise': 'Noise',
+            'kaleidoscope': 'Kaleidoscope'
         };
         // Randomly select a style on page load
         const styleKeys = Object.keys(this.styles);
@@ -597,6 +599,8 @@ class BorderArtSystem {
                 return this.thermalDriftStyle.bind(this);
             case 'organic-noise':
                 return this.organicNoiseStyle.bind(this);
+            case 'kaleidoscope':
+                return this.kaleidoscopeStyle.bind(this);
             default:
                 return this.digitalWeaveStyle.bind(this);
         }
@@ -758,8 +762,8 @@ class BorderArtSystem {
                         // Use a very aggressive curve for dramatic banding
                         const heatCurve = p.constrain(p.pow(normalized, 0.15), 0, 1);  // Even steeper
 
-                        // Map to colors - darker baseline for vertical borders for visibility
-                        const baseline = orientation === 'vertical' ? 100 : 80;  // Darker for vertical
+                        // Map to colors - same dark baseline for both orientations
+                        const baseline = 80;  // Same dark baseline for maximum contrast
                         const r = p.lerp(baseline, baseColor[0], heatCurve);
                         const g = p.lerp(baseline, baseColor[1], heatCurve);
                         const b = p.lerp(baseline, baseColor[2], heatCurve);
@@ -836,6 +840,131 @@ class BorderArtSystem {
                 }
 
                 zoff += 0.05;  // Smooth, visible animation
+            };
+        };
+    }
+
+    // STYLE 4: Kaleidoscope - Symmetric mirrored patterns with rotating color wheels
+    kaleidoscopeStyle(containerId, seed, orientation) {
+        const baseColor = this.currentColor;
+
+        // Calculate perceived brightness to determine if color is light or dark
+        const brightness = (baseColor[0] * 0.299 + baseColor[1] * 0.587 + baseColor[2] * 0.114);
+        const isLightColor = brightness > 180;
+
+        return (p) => {
+            let w, h, time = 0;
+            let symmetryLayers = [];
+
+            p.setup = () => {
+                const container = document.getElementById(containerId);
+                w = container.offsetWidth || 20;
+                // For vertical borders, use the grandparent's height (the .content block)
+                if (orientation === 'vertical') {
+                    const parent = container.parentElement; // .block-border
+                    const grandparent = parent ? parent.parentElement : null; // .content
+                    // Use scrollHeight to get full content height including any overflow
+                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                } else {
+                    h = container.offsetHeight || 42;
+                }
+
+                // Skip if height is 0 or too small
+                if (h <= 0) {
+                    console.log('Skipping canvas creation for', containerId, '- height is', h);
+                    p.noLoop();
+                    return;
+                }
+
+                const canvas = p.createCanvas(w, h);
+                canvas.parent(containerId);
+                p.randomSeed(seed * 8888);
+
+                // Create multiple symmetry layers with different patterns
+                const numLayers = 6;
+                for (let i = 0; i < numLayers; i++) {
+                    symmetryLayers.push({
+                        freq: p.random(0.015, 0.04),     // Frequency of pattern
+                        speed: p.random(-0.2, 0.2),      // Rotation speed
+                        phase: p.random(p.TWO_PI),       // Phase offset
+                        symmetry: p.floor(p.random(2, 5)), // Number of symmetry axes (2-4)
+                        amplitude: p.random(0.5, 1.0),   // Pattern strength
+                        colorShift: p.random(p.TWO_PI)   // Color wheel offset
+                    });
+                }
+                p.noStroke();
+                p.frameRate(12);
+            };
+
+            p.draw = () => {
+                const stripSize = orientation === 'vertical' ? 2 : 6;
+                const xStep = orientation === 'vertical' ? 1 : 2;
+                const dimension = orientation === 'vertical' ? h : w;
+                const crossDim = orientation === 'vertical' ? w : h;
+
+                for (let y = 0; y < h; y += stripSize) {
+                    for (let x = 0; x < w; x += xStep) {
+                        const pos = orientation === 'vertical' ? y : x;
+                        const cross = orientation === 'vertical' ? x : y;
+
+                        let totalIntensity = 0;
+                        let colorRotation = 0;
+
+                        // Calculate symmetric pattern values
+                        symmetryLayers.forEach(layer => {
+                            // Create mirrored position (kaleidoscope effect)
+                            const mirrorPos = Math.abs((pos % (dimension / layer.symmetry)) - (dimension / layer.symmetry / 2));
+
+                            // Create radial-like pattern using both dimensions
+                            const dist = p.sqrt(mirrorPos * mirrorPos + cross * cross * 0.5);
+
+                            // Rotating wave pattern
+                            const angle = p.atan2(cross - crossDim/2, mirrorPos - dimension/4);
+                            const wave = p.sin(dist * layer.freq + angle * layer.symmetry + time * layer.speed + layer.phase);
+
+                            // Secondary symmetry wave
+                            const wave2 = p.cos(mirrorPos * layer.freq * 1.5 + time * layer.speed * 0.7);
+
+                            // Combine waves with symmetry
+                            const pattern = (wave + wave2) * 0.5 * layer.amplitude;
+                            totalIntensity += Math.abs(pattern);
+
+                            // Rotating color wheel
+                            colorRotation += p.sin(time * 0.1 + layer.colorShift) * 0.3;
+                        });
+
+                        // Normalize and enhance
+                        totalIntensity = totalIntensity / symmetryLayers.length;
+                        totalIntensity = p.pow(p.constrain(totalIntensity, 0, 1), 0.6);
+
+                        // Apply rotating color wheel effect
+                        const hueShift = (time * 0.05 + colorRotation) % 1.0;
+
+                        // Mix base color with color wheel rotation
+                        // For light colors, use dark baseline and invert intensity
+                        // For dark colors, use light baseline
+                        let r, g, b;
+                        if (isLightColor) {
+                            // Light color: go from dark to light (inverted)
+                            const baseline = 90;
+                            const invertedIntensity = 1 - totalIntensity;
+                            r = p.lerp(baseColor[0], baseline, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI) * 0.3));
+                            g = p.lerp(baseColor[1], baseline - 8, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI/3) * 0.3));
+                            b = p.lerp(baseColor[2], baseline - 12, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2*p.TWO_PI/3) * 0.3));
+                        } else {
+                            // Dark color: go from light to dark (normal)
+                            const baseline = 220;
+                            r = p.lerp(baseline, baseColor[0], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI) * 0.3));
+                            g = p.lerp(baseline - 8, baseColor[1], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI/3) * 0.3));
+                            b = p.lerp(baseline - 12, baseColor[2], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2*p.TWO_PI/3) * 0.3));
+                        }
+
+                        p.fill(r, g, b);
+                        p.rect(x, y, xStep, stripSize);
+                    }
+                }
+
+                time += 0.18;  // Kaleidoscope rotation speed
             };
         };
     }
