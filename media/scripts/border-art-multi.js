@@ -19,49 +19,37 @@ class BorderArtSystem {
         // Randomly select a style on page load
         const styleKeys = Object.keys(this.styles);
         this.currentStyle = styleKeys[Math.floor(Math.random() * styleKeys.length)];
-        // 20 saturated colors organized by hue families
+        // 24 colors: spectrum left-to-right, brightness/saturation top-to-bottom
         this.colorPalette = [
-            // Reds & Pinks
-            [255, 45, 85],    // Vibrant red
-            [255, 99, 71],    // Tomato red
-            [255, 20, 147],   // Deep pink
-            [255, 105, 180],  // Hot pink
+            // Row 1: Lighter/brighter versions across spectrum
+            [255, 118, 117],  // Light red
+            [252, 92, 125],   // Light pink
+            [255, 177, 66],   // Light orange
+            [255, 220, 116],  // Soft yellow
+            [163, 203, 56],   // Yellow-lime
+            [85, 239, 196],   // Mint
+            [116, 185, 255],  // Sky blue
+            [200, 180, 235],  // Lavender
 
-            // Oranges & Corals
-            [255, 140, 0],    // Dark orange
-            [255, 159, 28],   // Vibrant orange
-            [255, 127, 80],   // Coral
-            [255, 69, 0],     // Red-orange
+            // Row 2: Medium saturation/brightness across spectrum
+            [235, 77, 75],    // Medium red
+            [255, 159, 64],   // Coral
+            [245, 124, 0],    // Orange
+            [241, 196, 15],   // Sunflower
+            [39, 174, 96],    // Emerald
+            [9, 132, 227],    // Bright blue
+            [108, 92, 231],   // Periwinkle
+            [162, 155, 254],  // Light purple
 
-            // Yellows & Golds
-            [255, 215, 0],    // Gold
-            [255, 235, 59],   // Bright yellow
-            [255, 193, 7],    // Amber
-            [255, 179, 0],    // Deep gold
-
-            // Greens
-            [50, 205, 50],    // Lime green
-            [0, 230, 118],    // Spring green
-            [34, 139, 34],    // Forest green
-            [102, 255, 102],  // Light green
-
-            // Cyans & Turquoises
-            [0, 255, 255],    // Cyan
-            [64, 224, 208],   // Turquoise
-            [72, 209, 204],   // Medium turquoise
-            [0, 191, 255],    // Deep sky blue
-
-            // Blues
-            [30, 144, 255],   // Dodger blue
-            [100, 149, 237],  // Cornflower blue
+            // Row 3: Darker/richer versions across spectrum
+            [214, 48, 49],    // Rich red
+            [225, 112, 85],   // Terracotta
+            [255, 195, 18],   // Golden orange
+            [254, 211, 48],   // Bright gold
+            [0, 148, 133],    // Teal
+            [84, 160, 255],   // Azure
             [65, 105, 225],   // Royal blue
-            [0, 119, 255],    // Azure
-
-            // Purples & Magentas
-            [147, 51, 234],   // Purple
-            [138, 43, 226],   // Blue violet
-            [220, 20, 180],   // Magenta
-            [199, 21, 133]    // Medium violet red
+            [155, 89, 182]    // Deep purple
         ];
         // Pick ONE random color for this page load - all borders will use this color
         const randomIndex = Math.floor(Math.random() * this.colorPalette.length);
@@ -278,7 +266,7 @@ class BorderArtSystem {
         colorLabel.textContent = 'Color Palette';
         colorLabel.style.cssText = `
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: #623734;
             font-size: 11px;
             text-transform: uppercase;
@@ -288,8 +276,11 @@ class BorderArtSystem {
         const colorGrid = document.createElement('div');
         colorGrid.style.cssText = `
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 7px;
+            justify-items: stretch;
+            align-items: stretch;
+            margin: -4px;
         `;
 
         // Create color swatches
@@ -299,14 +290,14 @@ class BorderArtSystem {
             swatch.className = 'color-swatch';
             swatch.dataset.colorIndex = index;
             swatch.style.cssText = `
-                width: 28px;
-                height: 28px;
-                border-radius: 6px;
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: 4px;
                 background: rgb(${color[0]}, ${color[1]}, ${color[2]});
                 cursor: pointer;
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
-                box-shadow: ${isActive ? '0 0 0 3px rgba(0,0,0,0.3)' : '0 2px 4px rgba(0,0,0,0.1)'};
-                transform: ${isActive ? 'scale(1.15)' : 'scale(1)'};
+                box-shadow: ${isActive ? '0 0 0 2.5px rgba(0,0,0,0.35)' : '0 1px 3px rgba(0,0,0,0.12)'};
+                transform: ${isActive ? 'scale(1.1)' : 'scale(1)'};
             `;
 
             swatch.addEventListener('mouseenter', () => {
@@ -383,9 +374,9 @@ class BorderArtSystem {
             this.isExpanded = false;
         } else {
             // Expand to full panel
-            hud.style.width = '220px';
+            hud.style.width = '340px';
             hud.style.height = 'auto';
-            hud.style.padding = '16px';
+            hud.style.padding = '20px';
             hud.style.borderRadius = '12px';
             hud.style.cursor = 'default';
             buttonText.style.display = 'none';
