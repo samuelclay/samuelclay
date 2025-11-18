@@ -117,19 +117,25 @@ class BorderArtSystem {
                 this.createBorderSketches();
                 this.setupWindowResize();
 
-                // DON'T fade in immediately - wait for sketches to actually draw
-                // The fadeInBorders() method will be called by checkAllSketchesReady()
-                // when all sketches have completed their first draw
+                // Borders will fade in individually as each sketch completes its first draw
+                // via the fadeInBorder() method called from each sketch's draw() function
 
-                // Fallback: if sketches don't complete in 15 seconds, fade in anyway
+                // Fallback: if any sketches don't complete in 15 seconds, fade them in anyway
                 setTimeout(() => {
-                    if (!this.allSketchesReady) {
-                        console.log('[BorderArt] FALLBACK: Fading in borders after timeout (some sketches may not have drawn)', {
+                    const remaining = this.totalSketchesExpected - this.firstDrawComplete.size;
+                    if (remaining > 0) {
+                        console.log('[BorderArt] FALLBACK: Fading in remaining borders after timeout', {
                             timestamp: Date.now(),
                             completedSketches: this.firstDrawComplete.size,
-                            expectedSketches: this.totalSketchesExpected
+                            expectedSketches: this.totalSketchesExpected,
+                            remaining: remaining
                         });
-                        this.fadeInBorders();
+                        // Fade in any remaining borders
+                        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
+                            if (el.style.opacity !== '1') {
+                                el.style.opacity = '1';
+                            }
+                        });
                     }
                 }, 15000);
             }, 100);
@@ -475,34 +481,29 @@ class BorderArtSystem {
         }, 200);  // Match the faster transition time
     }
 
-    fadeInBorders() {
-        if (this.allSketchesReady) {
-            console.log('[BorderArt] fadeInBorders() called but already faded in, ignoring');
-            return; // Already faded in
+    fadeInBorder(containerId) {
+        // Find the border element associated with this sketch
+        let borderElement;
+
+        if (containerId.includes('page-top')) {
+            borderElement = document.getElementById('topbar');
+        } else if (containerId.includes('page-bottom')) {
+            borderElement = document.getElementById('bottombar');
+        } else {
+            // For left borders, find the parent .block-border
+            const container = document.getElementById(containerId);
+            if (container) {
+                borderElement = container.closest('.block-border');
+            }
         }
 
-        this.allSketchesReady = true;
-        console.log('[BorderArt] Fading in borders NOW (all sketches ready)', {
-            timestamp: Date.now(),
-            completedSketches: this.firstDrawComplete.size,
-            expectedSketches: this.totalSketchesExpected
-        });
-
-        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
-            el.style.opacity = '1';
-        });
-    }
-
-    checkAllSketchesReady(containerId) {
-        this.firstDrawComplete.set(containerId, true);
-        console.log(`[BorderArt] Sketch ${containerId} completed first draw`, {
-            completedCount: this.firstDrawComplete.size,
-            expectedCount: this.totalSketchesExpected
-        });
-
-        if (this.firstDrawComplete.size >= this.totalSketchesExpected && !this.allSketchesReady) {
-            // All sketches have completed their first draw!
-            this.fadeInBorders();
+        if (borderElement && !this.firstDrawComplete.has(containerId)) {
+            this.firstDrawComplete.set(containerId, true);
+            console.log(`[BorderArt] Fading in ${containerId}`, {
+                completedCount: this.firstDrawComplete.size,
+                expectedCount: this.totalSketchesExpected
+            });
+            borderElement.style.opacity = '1';
         }
     }
 
@@ -521,8 +522,7 @@ class BorderArtSystem {
         this.sketches.forEach(sketch => sketch.remove());
         this.sketches = [];
         this.sketchStates.clear();
-        // Reset ready state so we can fade in again
-        this.allSketchesReady = false;
+        // Note: firstDrawComplete will be cleared in createBorderSketches()
         // Recreate with current style and color
         this.createBorderSketches();
     }
@@ -837,7 +837,7 @@ class BorderArtSystem {
                 if (!firstDrawDone) {
                     firstDrawDone = true;
                     console.log(`[BorderArt] First draw completed for ${containerId} (digital-weave)`);
-                    borderSystem.checkAllSketchesReady(containerId);
+                    borderSystem.fadeInBorder(containerId);
                 }
             };
         };
@@ -937,7 +937,7 @@ class BorderArtSystem {
                 if (!firstDrawDone) {
                     firstDrawDone = true;
                     console.log(`[BorderArt] First draw completed for ${containerId} (thermal-drift)`);
-                    borderSystem.checkAllSketchesReady(containerId);
+                    borderSystem.fadeInBorder(containerId);
                 }
             };
         };
@@ -1009,7 +1009,7 @@ class BorderArtSystem {
                 if (!firstDrawDone) {
                     firstDrawDone = true;
                     console.log(`[BorderArt] First draw completed for ${containerId} (organic-noise)`);
-                    borderSystem.checkAllSketchesReady(containerId);
+                    borderSystem.fadeInBorder(containerId);
                 }
             };
         };
@@ -1143,7 +1143,7 @@ class BorderArtSystem {
                 if (!firstDrawDone) {
                     firstDrawDone = true;
                     console.log(`[BorderArt] First draw completed for ${containerId} (kaleidoscope)`);
-                    borderSystem.checkAllSketchesReady(containerId);
+                    borderSystem.fadeInBorder(containerId);
                 }
             };
         };
