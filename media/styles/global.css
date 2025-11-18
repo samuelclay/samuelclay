@@ -979,6 +979,12 @@ small, small a, small a:link, small a:visited {
         font-size: 15px;
     }
 
+    /* Disable sticky topbar on mobile for better performance */
+    #topbar {
+        position: relative;
+        top: auto;
+    }
+
     #wrapper {
         width: auto;
         padding: var(--spacing-xl) var(--spacing-md);

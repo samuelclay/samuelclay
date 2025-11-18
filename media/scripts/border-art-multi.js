@@ -84,17 +84,8 @@ class BorderArtSystem {
     }
 
     init() {
-        console.log('[BorderArt] Initialization started', {
-            readyState: document.readyState,
-            timestamp: Date.now()
-        });
-
         // Start rendering as soon as DOM is ready, don't wait for images
         const initBorders = () => {
-            console.log('[BorderArt] initBorders called', {
-                readyState: document.readyState,
-                timestamp: Date.now()
-            });
 
             // Set initial opacity to 0 immediately
             document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
@@ -103,10 +94,6 @@ class BorderArtSystem {
 
             // Small delay to ensure DOM layout is stable
             setTimeout(() => {
-                console.log('[BorderArt] Creating HUD and borders', {
-                    timestamp: Date.now()
-                });
-
                 this.createHUD();
 
                 // Set transition for smooth fade-in
@@ -124,12 +111,6 @@ class BorderArtSystem {
                 setTimeout(() => {
                     const remaining = this.totalSketchesExpected - this.firstDrawComplete.size;
                     if (remaining > 0) {
-                        console.log('[BorderArt] FALLBACK: Fading in remaining borders after timeout', {
-                            timestamp: Date.now(),
-                            completedSketches: this.firstDrawComplete.size,
-                            expectedSketches: this.totalSketchesExpected,
-                            remaining: remaining
-                        });
                         // Fade in any remaining borders
                         document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
                             if (el.style.opacity !== '1') {
@@ -143,11 +124,9 @@ class BorderArtSystem {
 
         // Start as soon as DOM is ready, not when all images load
         if (document.readyState === 'loading') {
-            console.log('[BorderArt] Waiting for DOMContentLoaded');
             document.addEventListener('DOMContentLoaded', initBorders);
         } else {
             // DOM already ready
-            console.log('[BorderArt] DOM already ready, initializing immediately');
             initBorders();
         }
     }
@@ -499,10 +478,6 @@ class BorderArtSystem {
 
         if (borderElement && !this.firstDrawComplete.has(containerId)) {
             this.firstDrawComplete.set(containerId, true);
-            console.log(`[BorderArt] Fading in ${containerId}`, {
-                completedCount: this.firstDrawComplete.size,
-                expectedCount: this.totalSketchesExpected
-            });
             borderElement.style.opacity = '1';
         }
     }
@@ -559,30 +534,14 @@ class BorderArtSystem {
     }
 
     createBorderSketches() {
-        console.log('[BorderArt] createBorderSketches called');
-
         // Reset sketch tracking
         this.totalSketchesExpected = 0;
         this.firstDrawComplete.clear();
 
         // Handle full frame borders
         const frameBorders = document.querySelectorAll('.block-border');
-        console.log('[BorderArt] Found', frameBorders.length, 'block-border elements');
 
         frameBorders.forEach((border, index) => {
-            const parent = border.parentElement;
-            const grandparent = parent ? parent.parentElement : null;
-            console.log(`[BorderArt] Creating border ${index}`, {
-                borderElement: border.className,
-                parentElement: parent ? parent.className : 'none',
-                grandparentElement: grandparent ? grandparent.className : 'none',
-                borderOffsetHeight: border.offsetHeight,
-                borderScrollHeight: border.scrollHeight,
-                parentOffsetHeight: parent ? parent.offsetHeight : 0,
-                parentScrollHeight: parent ? parent.scrollHeight : 0,
-                grandparentOffsetHeight: grandparent ? grandparent.offsetHeight : 0,
-                grandparentScrollHeight: grandparent ? grandparent.scrollHeight : 0
-            });
 
             border.style.background = 'none';
             // Clear any existing canvases
@@ -603,10 +562,6 @@ class BorderArtSystem {
         const bottombar = document.getElementById('bottombar');
 
         if (topbar) {
-            console.log('[BorderArt] Creating topbar border', {
-                offsetHeight: topbar.offsetHeight,
-                offsetWidth: topbar.offsetWidth
-            });
             topbar.style.background = 'none';
             topbar.innerHTML = '';
             const container = document.createElement('div');
@@ -621,10 +576,6 @@ class BorderArtSystem {
         }
 
         if (bottombar) {
-            console.log('[BorderArt] Creating bottombar border', {
-                offsetHeight: bottombar.offsetHeight,
-                offsetWidth: bottombar.offsetWidth
-            });
             bottombar.style.background = 'none';
             bottombar.innerHTML = '';
             const container = document.createElement('div');
@@ -637,20 +588,12 @@ class BorderArtSystem {
             bottombar.appendChild(container);
             this.createSketch('border-canvas-page-bottom', 200, 'horizontal');
         }
-
-        console.log('[BorderArt] createBorderSketches completed');
     }
 
     createSketch(containerId, seed, orientation) {
-        console.log(`[BorderArt] createSketch called for ${containerId}`, {
-            orientation,
-            seed
-        });
-
         // Check if container exists and has valid dimensions before creating p5 instance
         const container = document.getElementById(containerId);
         if (!container) {
-            console.log('[BorderArt] Skipping sketch for', containerId, '- container not found');
             return;
         }
 
@@ -660,32 +603,13 @@ class BorderArtSystem {
             const parent = container.parentElement;
             const grandparent = parent ? parent.parentElement : null;
             height = grandparent ? grandparent.scrollHeight : 0;
-            console.log(`[BorderArt] Vertical border height calculation for ${containerId}`, {
-                containerOffsetHeight: container.offsetHeight,
-                containerScrollHeight: container.scrollHeight,
-                parentOffsetHeight: parent ? parent.offsetHeight : 0,
-                parentScrollHeight: parent ? parent.scrollHeight : 0,
-                grandparentOffsetHeight: grandparent ? grandparent.offsetHeight : 0,
-                grandparentScrollHeight: grandparent ? grandparent.scrollHeight : 0,
-                calculatedHeight: height
-            });
         } else {
             height = container.offsetHeight || 42;
-            console.log(`[BorderArt] Horizontal border height for ${containerId}`, {
-                containerOffsetHeight: container.offsetHeight,
-                calculatedHeight: height
-            });
         }
 
         if (height <= 0) {
-            console.log('[BorderArt] Skipping sketch for', containerId, '- height is', height);
             return;
         }
-
-        console.log(`[BorderArt] Creating p5 instance for ${containerId}`, {
-            style: this.currentStyle,
-            height
-        });
 
         // Increment expected sketches count
         this.totalSketchesExpected++;
@@ -698,10 +622,6 @@ class BorderArtSystem {
         // Store reference and observe for visibility
         this.sketchStates.set(containerId, { p5Instance, container });
         this.observer.observe(container);
-
-        console.log(`[BorderArt] p5 instance created for ${containerId}`, {
-            totalExpected: this.totalSketchesExpected
-        });
     }
 
     getStyleFunction(styleName) {
@@ -731,7 +651,6 @@ class BorderArtSystem {
             let firstDrawDone = false;
 
             p.setup = () => {
-                console.log(`[BorderArt] p5.setup() called for ${containerId} (digital-weave)`);
                 const container = document.getElementById(containerId);
                 w = container.offsetWidth || 20;
                 // For vertical borders, use the grandparent's height (the .content block)
@@ -740,42 +659,20 @@ class BorderArtSystem {
                     const grandparent = parent ? parent.parentElement : null; // .content
                     // Use scrollHeight to get full content height including any overflow
                     h = grandparent ? grandparent.scrollHeight : window.innerHeight;
-                    console.log(`[BorderArt] p5.setup() vertical height for ${containerId}`, {
-                        containerOffsetWidth: container.offsetWidth,
-                        parentElement: parent ? parent.className : 'none',
-                        grandparentElement: grandparent ? grandparent.className : 'none',
-                        grandparentScrollHeight: grandparent ? grandparent.scrollHeight : 0,
-                        calculatedWidth: w,
-                        calculatedHeight: h
-                    });
                 } else {
                     h = container.offsetHeight || 42;
-                    console.log(`[BorderArt] p5.setup() horizontal dimensions for ${containerId}`, {
-                        containerOffsetWidth: container.offsetWidth,
-                        containerOffsetHeight: container.offsetHeight,
-                        calculatedWidth: w,
-                        calculatedHeight: h
-                    });
                 }
 
                 // Skip if height is 0 or too small
                 if (h <= 0) {
-                    console.log('[BorderArt] Skipping canvas creation for', containerId, '- height is', h);
                     p.noLoop();
                     return;
                 }
 
-                console.log(`[BorderArt] Creating canvas for ${containerId}`, { w, h });
                 const canvas = p.createCanvas(w, h);
                 canvas.parent(containerId);
                 canvasWidth = canvas.elt.width;
                 canvasHeight = canvas.elt.height;
-                console.log(`[BorderArt] Canvas created for ${containerId}`, {
-                    canvasWidth,
-                    canvasHeight,
-                    canvasElementWidth: canvas.elt.width,
-                    canvasElementHeight: canvas.elt.height
-                });
                 p.randomSeed(seed * 9999);
 
                 // Generate harmonic frequencies - REDUCED for performance
@@ -788,18 +685,9 @@ class BorderArtSystem {
                     });
                 }
                 p.frameRate(12); // REDUCED from 30 for better performance
-                console.log(`[BorderArt] p5.setup() completed for ${containerId}`);
             };
 
             p.draw = () => {
-                // Log first draw call
-                if (time === 0) {
-                    console.log(`[BorderArt] First p5.draw() call for ${containerId}`, {
-                        canvasWidth,
-                        canvasHeight
-                    });
-                }
-
                 // Smooth, moderate animation speed
                 time += orientation === 'vertical' ? 0.06 : 0.05;
 
@@ -836,7 +724,6 @@ class BorderArtSystem {
                 // Notify system that first draw is complete
                 if (!firstDrawDone) {
                     firstDrawDone = true;
-                    console.log(`[BorderArt] First draw completed for ${containerId} (digital-weave)`);
                     borderSystem.fadeInBorder(containerId);
                 }
             };
@@ -868,7 +755,6 @@ class BorderArtSystem {
 
                 // Skip if height is 0 or too small
                 if (h <= 0) {
-                    console.log('Skipping canvas creation for', containerId, '- height is', h);
                     p.noLoop();
                     return;
                 }
@@ -936,7 +822,6 @@ class BorderArtSystem {
                 // Notify system that first draw is complete
                 if (!firstDrawDone) {
                     firstDrawDone = true;
-                    console.log(`[BorderArt] First draw completed for ${containerId} (thermal-drift)`);
                     borderSystem.fadeInBorder(containerId);
                 }
             };
@@ -967,7 +852,6 @@ class BorderArtSystem {
 
                 // Skip if height is 0 or too small
                 if (h <= 0) {
-                    console.log('Skipping canvas creation for', containerId, '- height is', h);
                     p.noLoop();
                     return;
                 }
@@ -1008,7 +892,6 @@ class BorderArtSystem {
                 // Notify system that first draw is complete
                 if (!firstDrawDone) {
                     firstDrawDone = true;
-                    console.log(`[BorderArt] First draw completed for ${containerId} (organic-noise)`);
                     borderSystem.fadeInBorder(containerId);
                 }
             };
@@ -1044,7 +927,6 @@ class BorderArtSystem {
 
                 // Skip if height is 0 or too small
                 if (h <= 0) {
-                    console.log('Skipping canvas creation for', containerId, '- height is', h);
                     p.noLoop();
                     return;
                 }
@@ -1142,7 +1024,6 @@ class BorderArtSystem {
                 // Notify system that first draw is complete
                 if (!firstDrawDone) {
                     firstDrawDone = true;
-                    console.log(`[BorderArt] First draw completed for ${containerId} (kaleidoscope)`);
                     borderSystem.fadeInBorder(containerId);
                 }
             };
@@ -1151,28 +1032,14 @@ class BorderArtSystem {
 }
 
 // Initialize
-console.log('[BorderArt] Script loaded', {
-    p5Available: typeof p5 !== 'undefined',
-    documentReadyState: document.readyState,
-    timestamp: Date.now()
-});
-
-// Check if p5.js is loaded before initializing
 if (typeof p5 === 'undefined') {
-    console.error('[BorderArt] ERROR: p5.js is not loaded yet! Waiting for window load event...');
     window.addEventListener('load', () => {
-        console.log('[BorderArt] Window load event fired', {
-            p5Available: typeof p5 !== 'undefined'
-        });
         if (typeof p5 !== 'undefined') {
             const borderArtSystem = new BorderArtSystem();
             borderArtSystem.init();
-        } else {
-            console.error('[BorderArt] CRITICAL: p5.js still not available after window load!');
         }
     });
 } else {
-    console.log('[BorderArt] p5.js is available, initializing immediately');
     const borderArtSystem = new BorderArtSystem();
     borderArtSystem.init();
 }
