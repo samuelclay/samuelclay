@@ -4,32 +4,43 @@
 <div id="topbar"></div>
 
 <div id="wrapper">
-    <div class="name-header">
-        <a href="mailto:samuel@ofbrooklyn.com">Samuel Clay</a>
-        <div class="name-header-text">
-            {{ isa_quote|safe }}
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="title">A visual</div>
+        </div>
+        <div class="content block-photo">
+            <div class="block-border"></div>
+            <ul>
+                <li>
+                    <div class="dated-image">
+                        <small>2024</small>
+                        <img src="/static/images/2024 - New Mexico.jpg" class="screenshot">
+                    </div>
+                    <div class="name-header">
+                        <a href="mailto:samuel@conesus.com">Samuel Clay</a>
+                        <div class="name-header-text">{{ isa_quote|safe }}</div>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <strong><a href="https://x.com/samuelclay/">@samuelclay</a></strong>
+                        </div>
+                        <div class="contact-item">
+                            <strong><a href="mailto:samuel@conesus.com">samuel@conesus.com</a></strong>
+                        </div>
+                        <div class="contact-item">
+                            <strong>San Francisco, California</strong><br /><strong>Shutesbury, Massachusetts</strong>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 
-    <div class="header">
-        <div class="title">A visual</div>
-    </div>
-    <div class="content block-photo">
-        <div class="block-border"></div>
-        <ul>
-            <li>
-                <div class="dated-image">
-                    <small>2024</small>
-                    <img src="/static/images/2024 - New Mexico.jpg" width="450" height="450">
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="header">
-        <div class="title">For a Living</div>
-    </div>
-    <div class="content block-work">
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="title">For a Living</div>
+        </div>
+        <div class="content block-work">
         <div class="block-border"></div>
         <ul>
             <li>
@@ -39,7 +50,7 @@
                             class="screenshot"></a>
                 </div>
                 <strong><a href="https://www.solreader.com"><img src="/static/images/solreader_favicon.svg"
-                            class="favicon"> Sol Reader</a></strong>
+                            class="favicon">Sol Reader</a></strong>
                 <div class="desc">Experience the next evolution in reading. Illuminate your mind.</div>
             </li>
             <li>
@@ -49,7 +60,7 @@
                             class="screenshot"></a>
                 </div>
                 <strong><a href="http://www.turntouch.com"><img src="/static/images/favicon_turntouch.png"
-                            class="favicon"> Turn Touch</a></strong>
+                            class="favicon">Turn Touch</a></strong>
                 <div class="desc">Beautiful control for your smart home. Small flowers crack concrete.</div>
             </li>
             <li>
@@ -59,22 +70,24 @@
                             class="screenshot"></a>
                 </div>
                 <strong><a href="http://www.newsblur.com"><img src="/static/images/favicon_newsblur.png"
-                            class="favicon"> NewsBlur</a></strong>
+                            class="favicon">NewsBlur</a></strong>
                 <div class="desc">A personal news reader that brings people together to talk about the world. A new
                     sound of an old instrument.</div>
             </li>
         </ul>
     </div>
-
-    <div class="header">
-        <div class="title">Current Projects</div>
-        <div class="header-photo">
-            <a href="http://en.wikipedia.org/wiki/Hacker_(programmer_subculture)">
-                <img src="/static/images/glider.png" width="62" height="62" />
-            </a>
-        </div>
     </div>
-    <div class="content block-projects">
+
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="title">Current Projects</div>
+            <div class="header-photo">
+                <a href="http://en.wikipedia.org/wiki/Hacker_(programmer_subculture)">
+                    <img src="/static/images/glider.png" width="62" height="62" />
+                </a>
+            </div>
+        </div>
+        <div class="content block-projects">
         <div class="block-border"></div>
         <ul>
             <li>
@@ -102,20 +115,30 @@
                             class="screenshot"></a>
                 </div>
                 <strong><a href="http://samuel.newsblur.com">Blurblog</a></strong>
-                <div class="desc"> My shared stories on NewsBlur.</div>
+                <div class="desc">My shared stories on NewsBlur.</div>
             </li>
         </ul>
     </div>
+    </div>
 
-    <div class="header">Past Projects</div>
-    <div class="content block-past-projects">
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="title past-projects-title">Past Projects</div>
+        </div>
+        <div class="content block-past-projects">
         <div class="block-border"></div>
         <ul>
             <li>
                 <div class="dated-image">
                     <small>2020</small>
-                    <a href="https://comfortmaps.com"><img src="/static/images/comfortmaps.jpg"
-                            class="screenshot"></a>
+                    <a href="https://comfortmaps.com"><img src="/static/images/comfortmaps/clay-samuel-mde-1.jpg" class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-1.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-1.jpg" alt="Comfort Maps 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-2.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-2.jpg" alt="Comfort Maps 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-3.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-3.jpg" alt="Comfort Maps 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-4.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-4.jpg" alt="Comfort Maps 4"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/comfortmaps/clay-samuel-mde-5.jpg"><img src="/static/images/comfortmaps/clay-samuel-mde-5.jpg" alt="Comfort Maps 5"></a>
+                    </div>
                 </div>
                 <strong><a href="https://comfortmaps.com">Comfort Maps</a></strong>
                 <div class="desc">Comfort Maps make safer streets. Turn your two-wheeled commute into a call for action.
@@ -127,7 +150,7 @@
                     <a href="https://cda.wtf"><img src="/static/images/wtfiscda.jpg" class="screenshot"></a>
                 </div>
                 <strong><a href="https://cda.wtf">WTF is CDA</a></strong>
-                <div class="desc">An interactive explainer about the Communications Decency Act (“CDA 230”) and one of
+                <div class="desc">An interactive explainer about the Communications Decency Act ("CDA 230") and one of
                     the most powerful laws shaping the Internet as we know it today.</div>
             </li>
             <li>
@@ -144,6 +167,16 @@
                 <div class="dated-image">
                     <small>2018</small>
                     <a href="/podlife"><img src="/static/images/podlife-12.png" class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-12.png"><img src="/static/images/podlife-12.png" alt="Podlife screenshot 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-1.jpg"><img src="/static/images/podlife-1.jpg" alt="Podlife screenshot 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-2.jpg"><img src="/static/images/podlife-2.jpg" alt="Podlife screenshot 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-3.jpg"><img src="/static/images/podlife-3.jpg" alt="Podlife screenshot 4"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-4.jpg"><img src="/static/images/podlife-4.jpg" alt="Podlife screenshot 5"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-5.jpg"><img src="/static/images/podlife-5.jpg" alt="Podlife screenshot 6"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-6.jpg"><img src="/static/images/podlife-6.jpg" alt="Podlife screenshot 7"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/podlife-7.jpg"><img src="/static/images/podlife-7.jpg" alt="Podlife screenshot 8"></a>
+                    </div>
                 </div>
                 <strong><a href="/podlife">Podlife</a></strong>
                 <div class="desc">An augmented reality app that demoed a series of self-driving pods, part of a
@@ -153,6 +186,16 @@
                 <div class="dated-image">
                     <small>2018</small>
                     <a href="/kickpoint"><img src="/static/images/kickpoint-5.png" class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-5.png"><img src="/static/images/kickpoint-5.png" alt="Kickpoint 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-6.png"><img src="/static/images/kickpoint-6.png" alt="Kickpoint 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-7.png"><img src="/static/images/kickpoint-7.png" alt="Kickpoint 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-8.png"><img src="/static/images/kickpoint-8.png" alt="Kickpoint 4"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-1.jpg"><img src="/static/images/kickpoint-1.jpg" alt="Kickpoint 5"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-2.jpg"><img src="/static/images/kickpoint-2.jpg" alt="Kickpoint 6"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-3.jpg"><img src="/static/images/kickpoint-3.jpg" alt="Kickpoint 7"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/kickpoint-4.jpg"><img src="/static/images/kickpoint-4.jpg" alt="Kickpoint 8"></a>
+                    </div>
                 </div>
                 <strong><a href="/kickpoint">Kickpoint</a></strong>
                 <div class="desc">A device that allows for governments to provide a temporary infrastructure for
@@ -214,8 +257,13 @@
             <li>
                 <div class="dated-image">
                     <small>2012</small>
-                    <a href="/donationparty"><img src="/static/images/screenshot_donationparty.png"
-                            class="screenshot"></a>
+                    <a href="/donationparty"><img src="/static/images/donationparty_1.png" class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/donationparty_1.png"><img src="/static/images/donationparty_1.png" alt="DonationParty 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/donationparty_2.png"><img src="/static/images/donationparty_2.png" alt="DonationParty 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/donationparty_3.png"><img src="/static/images/donationparty_3.png" alt="DonationParty 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/donationparty_4.png"><img src="/static/images/donationparty_4.png" alt="DonationParty 4"></a>
+                    </div>
                 </div>
                 <strong><a href="/donationparty">DonationParty</a></strong>
                 <div class="desc">Invite friends to donate a randomly selected amount (up to $10) to charity and one
@@ -228,10 +276,10 @@
                             src="/static/images/screenshot_newyorkfieldguide.png" class="screenshot"></a>
                 </div>
                 <strong><a href="/newyorkfieldguide">New York Field Guide</a></strong>
-                <div class="desc"> A photoblog of New York City's 90 historic districts. Each photo taken using
+                <div class="desc">A photoblog of New York City's 90 historic districts. Each photo taken using
                     a Panasonic Lumix GF1 with a 20mm f/1.7 lens.</div>
             </li>
-            <li class="">
+            <li>
                 <div class="dated-image">
                     <small>2010 - 2011</small>
                     <a href="http://www.documentcloud.org"><img src="/static/images/screenshot_documentcloud.png"
@@ -253,7 +301,7 @@
                 <strong><a
                         href="http://www.svgopen.org/2009/registration.php?section=workshops#Using_Raphael_Javascript_Library_to_write_cross-browser_interactive_SVG_and_VML">Raphaël
                         Vector Library</a></strong>
-                <div class="desc"> A cross-browser <code>JavaScript</code> vector graphics library. I presented my minor
+                <div class="desc">A cross-browser <code>JavaScript</code> vector graphics library. I presented my minor
                     contributions and the library with this paper and workshop at SVG Open 2009 at Google in California.
                     <a href="/raphael/presentation/index.html">Presentation</a> and <a
                         href="/raphael/svg_open_paper.pdf">Paper (PDF)</a>.</div>
@@ -261,18 +309,32 @@
             <li>
                 <div class="dated-image">
                     <small>2007 - 2008</small>
-                    <a href="{% url "sunraylab" %}"><img src="/static/images/screenshot_sunraylab.png"
-                            class="screenshot"></a>
+                    <a href="{% url "sunraylab" %}"><img src="/static/images/sunraylab_create.png" class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/sunraylab_create.png"><img src="/static/images/sunraylab_create.png" alt="SunRayLab 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/sunraylab_collaborate.png"><img src="/static/images/sunraylab_collaborate.png" alt="SunRayLab 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/sunraylab_profile.png"><img src="/static/images/sunraylab_profile.png" alt="SunRayLab 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/sunraylab_blog.png"><img src="/static/images/sunraylab_blog.png" alt="SunRayLab 4"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/sunraylab_home.png"><img src="/static/images/sunraylab_home.png" alt="SunRayLab 5"></a>
+                    </div>
                 </div>
                 <strong><a href="{% url "sunraylab" %}">SunRayLab</a></strong>
                 <div class="desc">A CMS for projects. Originally built to connect creative people together to work on
-                    projects. <code>PHP</code>, sadly.</div>
+                    projects.</div>
             </li>
             <li>
                 <div class="dated-image">
                     <small>2006 - 2007</small>
                     <a href="{% url "caselife" %}"><img src="/static/images/screenshot_caselife.png"
                             class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/caselife_main.png"><img src="/static/images/caselife_main.png" alt="CaseLife main"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/caselife_calendar.png"><img src="/static/images/caselife_calendar.png" alt="CaseLife calendar"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/caselife_stats_1.png"><img src="/static/images/caselife_stats_1.png" alt="CaseLife stats 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/caselife_stats_2.png"><img src="/static/images/caselife_stats_2.png" alt="CaseLife stats 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/caselife_stats_3.png"><img src="/static/images/caselife_stats_3.png" alt="CaseLife stats 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/caselife_flyer_1.jpg"><img src="/static/images/caselife_flyer_1.jpg" alt="CaseLife flyer"></a>
+                    </div>
                 </div>
                 <strong><a href="{% url "caselife" %}">CaseLife</a></strong>
                 <div class="desc">Student group communications systems built for campus groups in <code>PHP</code>.
@@ -283,16 +345,28 @@
                     <small>2003 - 2007</small>
                     <a href="{% url "schedulerjones" %}"><img src="/static/images/screenshot_schedulerjones.png"
                             class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/schedulerjones_medium.png"><img src="/static/images/schedulerjones_medium.png" alt="Scheduler Jones main"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/schedulerjones_main_medium.png"><img src="/static/images/schedulerjones_main_medium.png" alt="Scheduler Jones code view"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/schedulerjones_about_medium.png"><img src="/static/images/schedulerjones_about_medium.png" alt="Scheduler Jones about"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/schedulerjones_flyer.jpg"><img src="/static/images/schedulerjones_flyer.jpg" alt="Scheduler Jones flyer"></a>
+                    </div>
                 </div>
                 <strong><a href="{% url "schedulerjones" %}">Scheduler Jones</a></strong>
-                <div class="desc"> A graphical scheduling application for students to plan and share their next semester
+                <div class="desc">A graphical scheduling application for students to plan and share their next semester
                     schedule, written with <code>Microsoft Visual C++</code>.</div>
             </li>
-            <li class="last">
+            <li>
                 <div class="dated-image">
                     <small>1999 - 2001</small>
-                    <a href="{% url "brainexplorer" %}"><img src="/static/images/brainexplorer.png"
-                            class="screenshot"></a>
+                    <a href="{% url "brainexplorer" %}"><img src="/static/images/brainexplorer.png" class="screenshot"></a>
+                    <div class="screenshot-gallery">
+                        <a class="screenshot-thumb" data-full-src="/static/images/brainexplorer.png"><img src="/static/images/brainexplorer.png" alt="Brain Explorer 1"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/brainexplorer_home.png"><img src="/static/images/brainexplorer_home.png" alt="Brain Explorer 2"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/brainexplorer_brain.png"><img src="/static/images/brainexplorer_brain.png" alt="Brain Explorer 3"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/brainexplorer_mind.png"><img src="/static/images/brainexplorer_mind.png" alt="Brain Explorer 4"></a>
+                        <a class="screenshot-thumb" data-full-src="/static/images/brainexplorer_about.png"><img src="/static/images/brainexplorer_about.png" alt="Brain Explorer 5"></a>
+                    </div>
                 </div>
                 <strong><a href="{% url "brainexplorer" %}">The Brain Explorer</a></strong>
                 <div class="desc">In high school, I led an international team to build this educational site. Won as a
@@ -300,155 +374,199 @@
             </li>
         </ul>
     </div>
-
-    <div class="header">
-
-        <div class="header-text"><a href="http://github.com/samuelclay">Code</a></div>
-        <div class="header-photo header-photo-borderless">
-            <a href="http://github.com/samuelclay">
-                <img src="/static/images/github-logo.png" width="73" height="73" />
-            </a>
-        </div>
-
     </div>
-    <div class="content block-code">
+
+    <div class="section-wrapper">
+        <div class="header">
+
+            <div class="header-text"><a href="http://github.com/samuelclay">Code</a></div>
+            <div class="header-photo header-photo-borderless">
+                <a href="http://github.com/samuelclay">
+                    <img src="/static/images/github-logo.png" width="73" height="73" />
+                </a>
+            </div>
+
+        </div>
+        <div class="content block-code">
         <div class="block-border"></div>
         <ul>
             <li>
-                <div class="dated-image">
-                    <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on
-                                GitHub</span></a></strong> The Django/Python code that powers the intelligent visual
-                    feed reader.
-                    <small>2009 - {{ year }}</small>
-                </div>
+                <strong><a href="http://github.com/samuelclay/newsblur">NewsBlur <span class="github">on
+                            GitHub</span></a></strong>
+                <small>2009 - {{ year }}</small>
+                <div class="desc">The Django/Python code that powers the intelligent visual feed reader.</div>
+            </li>
+            <li>
+                <strong><a href="https://github.com/samuelclay/tiki/blob/main/tikiv3/tikiv3.ino">Tiki v3 <span
+                            class="github">on GitHub</span></a></strong>
+                <small>2025</small>
+                <div class="desc">Firmware for the Tiki v3 lights. Smiles, winks, fades, and syncs between devices.</div>
+            </li>
+            <li>
+                <strong><a href="https://github.com/samuelclay/swarm">Bike Swarm <span
+                            class="github">on GitHub</span></a></strong>
+                <small>2020 - 2023</small>
+                <div class="desc">Firmware for the syncing bike lights.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/turntouch-remote">Turn Touch remote <span
-                            class="github">on GitHub</span></a></strong> Firmware and the custom circuit board for the
-                four button Turn Touch remote.
-                <small>2015 - {{ year }}</small>
+                            class="github">on GitHub</span></a></strong>
+                <small>2015 - 2018</small>
+                <div class="desc">Firmware and the custom circuit board for the four button Turn Touch remote.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/turntouch-enclosure">Turn Touch CAD and CAM <span
-                            class="github">on GitHub</span></a></strong> Models and CNC machining design files for the
-                solid wood Turn Touch remote.
-                <small>2015 - {{ year }}</small>
+                            class="github">on GitHub</span></a></strong>
+                <small>2015 - 2018</small>
+                <div class="desc">Models and CNC machining design files for the solid wood Turn Touch remote.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/grove">Grove <span class="github">on
-                            GitHub</span></a></strong> Firmware and three custom circuit boards for an interactive
-                biofeedback installation at Burning Man. Measures breathing.
+                            GitHub</span></a></strong>
                 <small>2016</small>
+                <div class="desc">Firmware and three custom circuit boards for an interactive biofeedback installation at Burning Man. Measures breathing.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/documentcloud/visualsearch">VisualSearch.js <span class="github">on
-                            GitHub</span></a></strong> Creator of a JavaScript library that creates an auto-completing
-                faceted search box.
+                            GitHub</span></a></strong>
                 <small>2011 - 2014</small>
+                <div class="desc">Creator of a JavaScript library that creates an auto-completing faceted search box.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/hackersmacker">Hacker Smacker <span class="github">on
-                            GitHub</span></a></strong> Built this browser extension with Node.js and Redis for finding
-                graph connections between comment authors (friend of a friend).
+                            GitHub</span></a></strong>
                 <small>2012 - 2014</small>
+                <div class="desc">Built this browser extension with Node.js and Redis for finding graph connections between comment authors (friend of a friend).</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/pulse-bloom">Pulse &amp; Bloom <span class="github">on
-                            GitHub</span></a></strong> Firmware for an interactive biofeedback installation at Burning
-                Man. Measures two heartbeats.
+                            GitHub</span></a></strong>
                 <small>2014</small>
+                <div class="desc">Firmware for an interactive biofeedback installation at Burning Man. Measures two heartbeats.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/donationparty">DonationParty <span class="github">on
-                            GitHub</span></a></strong> A four-man team working over two hackathons to create this fun
-                Django-based charity donation site.
+                            GitHub</span></a></strong>
                 <small>2012 - 2013</small>
+                <div class="desc">A four-man team working over two hackathons to create this fun Django-based charity donation site.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/thedoclub/thedoclub">The Do Club <span class="github">on
-                            GitHub</span></a></strong> A two-man team built this presentation and event system for
-                hackers to showcase their work.
+                            GitHub</span></a></strong>
                 <small>2013</small>
+                <div class="desc">A two-man team built this presentation and event system for hackers to showcase their work.</div>
             </li>
             <li>
                 <strong><a href="https://github.com/jashkenas/backbone/commits/master?author=samuelclay">Backbone.js
-                        <span class="github">on GitHub</span></a></strong> Contributor to this popular JavaScript
-                library for creating model, view, collections, and tying them together with events.
+                        <span class="github">on GitHub</span></a></strong>
                 <small>2010 - 2011</small>
+                <div class="desc">Contributor to this popular JavaScript library for creating model, view, collections, and tying them together with events.</div>
             </li>
             <li>
                 <strong><a href="https://github.com/jashkenas/underscore/commits/master?author=samuelclay">Underscore.js
-                        <span class="github">on GitHub</span></a></strong> Contributor to this popular JavaScript
-                library used as a general toolkit. Based off of functional programming patterns.
+                        <span class="github">on GitHub</span></a></strong>
                 <small>2010 - 2011</small>
+                <div class="desc">Contributor to this popular JavaScript library used as a general toolkit. Based off of functional programming patterns.</div>
             </li>
             <li>
                 <strong><a
                         href="https://github.com/mongoengine/mongoengine/commits/master?author=samuelclay">Mongoengine
-                        <span class="github">on GitHub</span></a></strong> Contributor to this popular Python
-                framework/ORM for MongoDB.
+                        <span class="github">on GitHub</span></a></strong>
                 <small>2010 - 2011</small>
+                <div class="desc">Contributor to this popular Python framework/ORM for MongoDB.</div>
             </li>
             <li>
                 <strong><a
                         href="https://github.com/documentcloud/document-viewer/commits/master?author=samuelclay">DocumentViewer.js
-                        <span class="github">on GitHub</span></a></strong> Major contributor to this JavaScript library
-                used to embed PDFs as images on a website.
+                        <span class="github">on GitHub</span></a></strong>
                 <small>2010 - 2011</small>
+                <div class="desc">Major contributor to this JavaScript library used to embed PDFs as images on a website.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/newyorkfieldguide">New York Field Guide <span
-                            class="github">on GitHub</span></a></strong> A stylish photoblog with annotations and
-                per-photo commenting.
+                            class="github">on GitHub</span></a></strong>
                 <small>2010</small>
+                <div class="desc">A stylish photoblog with annotations and per-photo commenting.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/samuelclay">samuelclay.com <span class="github">on
-                            GitHub</span></a></strong> The code that runs this site here.
+                            GitHub</span></a></strong>
                 <small>2009 - 2010</small>
+                <div class="desc">The code that runs this site here.</div>
             </li>
             <li>
                 <strong><a href="http://github.com/samuelclay/raphael">Raphaël JavaScript Library <span
-                            class="github">on GitHub</span></a></strong> My minor contributions to the Raphaël library
-                are found on GitHub.
+                            class="github">on GitHub</span></a></strong>
                 <small>2009</small>
+                <div class="desc">My minor contributions to the Raphaël library are found on GitHub.</div>
             </li>
             <li class="last">
                 <strong><a href="http://github.com/samuelclay/raphael-easing">Raphaël animation easing formulas <span
-                            class="github">on GitHub</span></a></strong> Additional formulas used in animation easing in
-                Raphaël. Includes easeInOutQuad to easeInOutQuint, bounces, elastic, and even easeInOutCirc.
+                            class="github">on GitHub</span></a></strong>
                 <small>2009</small>
+                <div class="desc">Additional formulas used in animation easing in Raphaël. Includes easeInOutQuad to easeInOutQuint, bounces, elastic, and even easeInOutCirc.</div>
             </li>
         </ul>
     </div>
-
-    <div class="header">
-        <div class="header-text"><a href="http://flickr.com/photos/conesus/">Photos</a></div>
-
-        <div class="header-photo header-photo-borderless">
-            <a href="http://flickr.com/photos/conesus/">
-                <img src="/static/images/flickr-logo.png" width="50" height="50" />
-            </a>
-        </div>
     </div>
-    <div class="content block-photos img-75">
+
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="header-text"><a href="http://flickr.com/photos/conesus/">Photos</a></div>
+
+            <div class="header-photo header-photo-borderless">
+                <a href="http://flickr.com/photos/conesus/">
+                    <img src="/static/images/flickr-logo.png" width="50" height="50" />
+                </a>
+            </div>
+        </div>
+        <div class="content block-photos img-75">
         <div class="block-border"></div>
-        {% for photo in photos|slice:":48" %}
-        <a href="{{ photo.photopage_url }}"><img src="{{ photo.get_square_url }}" title="{{ photo.title }}"
-                alt="{{ photo.title }}" /></a>
-        {% endfor %}
+        <a href="https://flickr.com/photos/conesus/4373196971/"><img src="/static/images/photos/4373196971.jpg" title="Arnaud" alt="Arnaud" /></a>
+        <a href="https://flickr.com/photos/conesus/4373195769/"><img src="/static/images/photos/4373195769.jpg" title="Ito" alt="Ito" /></a>
+        <a href="https://flickr.com/photos/conesus/36897126301/"><img src="/static/images/photos/36897126301.jpg" title="Sunset at the Grand Canyon" alt="Sunset at the Grand Canyon" /></a>
+        <a href="https://flickr.com/photos/conesus/13731885193/"><img src="/static/images/photos/13731885193.jpg" title="P1040395.jpg" alt="P1040395.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/13173796944/"><img src="/static/images/photos/13173796944.jpg" title="Golden Gate Heights Stairway" alt="Golden Gate Heights Stairway" /></a>
+        <a href="https://flickr.com/photos/conesus/11552697314/"><img src="/static/images/photos/11552697314.jpg" title="This 15 foot tree took us to the beach for a Christmas bonfire." alt="This 15 foot tree took us to the beach for a Christmas bonfire." /></a>
+        <a href="https://flickr.com/photos/conesus/11055042773/"><img src="/static/images/photos/11055042773.jpg" title="At Stack Exchange HQ so I can finally repay everything I owe them for Stack Overflow." alt="At Stack Exchange HQ so I can finally repay everything I owe them for Stack Overflow." /></a>
+        <a href="https://flickr.com/photos/conesus/9523855485/"><img src="/static/images/photos/9523855485.jpg" title="I am now the proud owner of six cronots. Seven if you count the one I just ate." alt="I am now the proud owner of six cronots. Seven if you count the one I just ate." /></a>
+        <a href="https://flickr.com/photos/conesus/9362501522/"><img src="/static/images/photos/9362501522.jpg" title="Answer key to the new NewsBlur t-shirt." alt="Answer key to the new NewsBlur t-shirt." /></a>
+        <a href="https://flickr.com/photos/conesus/8377733789/"><img src="/static/images/photos/8377733789.jpg" title="Holding up the MUNI. My photo just won the MUNI category of the #sfphotohunt" alt="Holding up the MUNI. My photo just won the MUNI category of the #sfphotohunt" /></a>
+        <a href="https://flickr.com/photos/conesus/7960448660/"><img src="/static/images/photos/7960448660.jpg" title="Berkeley does this to you." alt="Berkeley does this to you." /></a>
+        <a href="https://flickr.com/photos/conesus/4587535136/"><img src="/static/images/photos/4587535136.jpg" title="Park Slope Historic District" alt="Park Slope Historic District" /></a>
+        <a href="https://flickr.com/photos/conesus/4586898583/"><img src="/static/images/photos/4586898583.jpg" title="Park Slope Historic District" alt="Park Slope Historic District" /></a>
+        <a href="https://flickr.com/photos/conesus/36849766176/"><img src="/static/images/photos/36849766176.jpg" title="Sunrise in the Grand Canyon" alt="Sunrise in the Grand Canyon" /></a>
+        <a href="https://flickr.com/photos/conesus/36849731896/"><img src="/static/images/photos/36849731896.jpg" title="Monument Valley" alt="Monument Valley" /></a>
+        <a href="https://flickr.com/photos/conesus/32445578844/"><img src="/static/images/photos/32445578844.jpg" title="DSC_0102.jpg" alt="DSC_0102.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/26444693012/"><img src="/static/images/photos/26444693012.jpg" title="IMG_8929.jpg" alt="IMG_8929.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/17188333930/"><img src="/static/images/photos/17188333930.jpg" title="IMG_2023.jpg" alt="IMG_2023.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/17168446997/"><img src="/static/images/photos/17168446997.jpg" title="IMG_2077.jpg" alt="IMG_2077.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/15381334219/"><img src="/static/images/photos/15381334219.jpg" title="Lands End" alt="Lands End" /></a>
+        <a href="https://flickr.com/photos/conesus/15380823688/"><img src="/static/images/photos/15380823688.jpg" title="Saturday at the beach." alt="Saturday at the beach." /></a>
+        <a href="https://flickr.com/photos/conesus/15142084965/"><img src="/static/images/photos/15142084965.jpg" title="USA-NEVADA/BURNINGMAN" alt="USA-NEVADA/BURNINGMAN" /></a>
+        <a href="https://flickr.com/photos/conesus/15121274332/"><img src="/static/images/photos/15121274332.jpg" title="Lotuses at dusk" alt="Lotuses at dusk" /></a>
+        <a href="https://flickr.com/photos/conesus/14993306391/"><img src="/static/images/photos/14993306391.jpg" title="P1040577.jpg" alt="P1040577.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/15119089386/"><img src="/static/images/photos/15119089386.jpg" title="Building Pulse & Bloom at Burning Man" alt="Building Pulse & Bloom at Burning Man" /></a>
+        <a href="https://flickr.com/photos/conesus/14809701529/"><img src="/static/images/photos/14809701529.jpg" title="P1040490.jpg" alt="P1040490.jpg" /></a>
+        <a href="https://flickr.com/photos/conesus/5798145956/"><img src="/static/images/photos/5798145956.jpg" title="Flickr photo" alt="Flickr photo" /></a>
+        <a href="https://flickr.com/photos/conesus/11052509573/"><img src="/static/images/photos/11052509573.jpg" title="Flickr photo" alt="Flickr photo" /></a>
+        <a href="https://flickr.com/photos/conesus/13016531835/"><img src="/static/images/photos/13016531835.jpg" title="Flickr photo" alt="Flickr photo" /></a>
+        <a href="https://flickr.com/photos/conesus/13731774653/"><img src="/static/images/photos/13731774653.jpg" title="Flickr photo" alt="Flickr photo" /></a>
     </div>
-    <div class="header">
-        <div class="header-text"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com</a><br />Blog</div>
+    </div>
 
-        <div class="header-photo">
-            <a href="http://www.ofbrooklyn.com">
-                <img src="http://farm5.static.flickr.com/4005/4482046088_682023dde7_s.jpg" width="75" height="75" />
-            </a>
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="header-text"><a href="http://www.ofbrooklyn.com">ofBrooklyn.com blog</a></div>
+
+            <div class="header-photo">
+                <a href="http://www.ofbrooklyn.com">
+                    <img src="https://www.newsblur.com/media/img/static/Lyric.jpg" width="75" />
+                </a>
+            </div>
+
         </div>
-
-    </div>
-    <div class="content block-blog">
+        <div class="content block-blog">
         <div class="block-border"></div>
         <ul class="blog">
             {% for entry in blog_entries %}
@@ -459,34 +577,39 @@
             {% endfor %}
         </ul>
     </div>
-
-    <div class="header">
-        <div class="header-text"><a href="http://twitter.com/samuelclay">@samuelclay</a><br />on Twitter</div>
-        <div class="header-photo">
-            <a href="http://twitter.com/samuelclay">
-                <img src="/static/images/Campeche Steps.jpg" width="77" height="63" />
-            </a>
-        </div>
     </div>
-    {% comment %} <div class="content block-twitter">
+
+    {% comment %}
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="header-text"><a href="https://x.com/samuelclay">@samuelclay</a><br />on Twitter</div>
+            <div class="header-photo">
+                <a href="https://x.com/samuelclay">
+                    <img src="/static/images/Campeche Steps.jpg" width="77" height="63" />
+                </a>
+            </div>
+        </div>
+        <div class="content block-twitter">
         <div class="block-border"></div>
         <ul class="tweets">
             {% for tweet in tweets %}
             <li {% if forloop.last %}class="last" {% endif %}>
                 {{ tweet.text|safe|urlize|linebreaksbr }}
                 <small>
-                    <a href="https://twitter.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
+                    <a href="https://x.com/samuelclay/status/{{ tweet.id }}">{{ tweet.relative_created_at }}</a>
                 </small>
             </li>
             {% endfor %}
         </ul>
     </div>
+    </div>
     {% endcomment %}
 
-    <div class="header">
-        <div class="title">Press</div>
-    </div>
-    <div class="content block-press">
+    <div class="section-wrapper">
+        <div class="header">
+            <div class="title">Press</div>
+        </div>
+        <div class="content block-press">
         <div class="block-border"></div>
         <ul class="press">
             <li>
@@ -498,8 +621,8 @@
                         Building Grove — interactive trees that come alive to your breath at Burning Man 2016
                         #ArtTuesday
                     </a>
+                    <span class="author">by Jessica Califano</span>
                 </strong>
-                by Jessica Califano
                 <small>April 4th, 2017</small>
             </li>
             <li>
@@ -509,8 +632,8 @@
                     <a href="http://hackaday.com/2014/09/10/biofeedback-flowers-at-burning-man/">
                         Biofeedback Flowers at Burning Man
                     </a>
+                    <span class="author">by Bryan Cockfield</span>
                 </strong>
-                by Bryan Cockfield
                 <small>September 10th, 2014</small>
             </li>
             <li>
@@ -550,10 +673,10 @@
                     <img src="http://0.gravatar.com/blavatar/4f3e6b6daa090af416a1ba595885efd1?s=16">
                     Hack a Day:
                     <a href="http://hackaday.com/2014/01/15/a-light-up-dress-for-a-new-years-dance-party/">
-                        A Light-Up Dress for a New Year’s Dance Party
+                        A Light-Up Dress for a New Year's Dance Party
                     </a>
+                    <span class="author">by Josh Marsh</span>
                 </strong>
-                by Josh Marsh
                 <small>January 15th, 2014</small>
             </li>
             <li>
@@ -563,8 +686,8 @@
                     <a href="http://lifehacker.com/build-a-smarter-digital-photo-frame-with-a-raspberry-pi-1495565726">
                         Build a Smarter Digital Photo Frame with a Raspberry Pi
                     </a>
+                    <span class="author">by Thorin Klosowski</span>
                 </strong>
-                by Thorin Klosowski
                 <small>January 6th, 2014</small>
             </li>
             <li>
@@ -574,8 +697,8 @@
                     <a href="http://hackaday.com/2014/01/04/building-a-raspberry-pi-digital-photo-frame/">
                         Building a Raspberry PI Digital Photo Frame
                     </a>
+                    <span class="author">by Kevin Darrah</span>
                 </strong>
-                by Kevin Darrah
                 <small>January 4th, 2014</small>
             </li>
             <li>
@@ -586,8 +709,8 @@
                         href="http://www.adafruit.com/blog/2014/01/03/building-a-living-photo-frame-with-a-raspberry-pi-and-a-motion-detector-raspberry_pi-piday-raspberrypi/">
                         Building a living photo frame with a Raspberry Pi and a motion detector
                     </a>
+                    <span class="author">by Jessica Califano</span>
                 </strong>
-                by Jessica Califano
                 <small>January 3rd, 2014</small>
             </li>
             <li>
@@ -597,8 +720,8 @@
                     <a href="http://techcrunch.com/2013/12/31/the-best-ios-and-android-apps-of-2013/">
                         The Best iOS And Android Apps Of 2013 - NewsBlur
                     </a>
+                    <span class="author">by Greg Kumparak</span>
                 </strong>
-                by Greg Kumparak
                 <small>December 31st, 2013</small>
             </li>
             <li>
@@ -609,8 +732,8 @@
                         href="http://www.pcworld.com/article/2041011/review-newsblur-is-a-worthy-powerful-google-reader-replacement.html">
                         NewsBlur is a worthy, powerful Google Reader replacement
                     </a>
+                    <span class="author">by Erez Zukerman</span>
                 </strong>
-                by Erez Zukerman
                 <small>June 24th, 2013</small>
             </li>
             <li>
@@ -621,8 +744,8 @@
                         href="http://www.theverge.com/2013/5/21/4350208/how-sam-clay-and-newsblur-survived-the-google-reader-shutdown-redesign">
                         NewsBlur, flush with Google Reader refugees, rolls out redesign
                     </a>
+                    <span class="author">by Adrianne Jeffries</span>
                 </strong>
-                by Adrianne Jeffries
                 <small>May 21st, 2013</small>
             </li>
             <li>
@@ -632,8 +755,8 @@
                     <a href="http://www.webmonkey.com/2013/03/scaling-on-a-shoestring-lessons-from-newsblur/">
                         Scaling on a Shoestring, Lessons from NewsBlur
                     </a>
+                    <span class="author">by Scott Gilbertson</span>
                 </strong>
-                by Scott Gilbertson
                 <small>March 20th, 2013</small>
             </li>
             <li>
@@ -643,11 +766,12 @@
                     <a href="http://venturebeat.com/2012/09/05/newsblur-ipad/">
                         NewsBlur launches iPad app, aims to compete with Google Reader (exclusive)
                     </a>
+                    <span class="author">by Christina Farr</span>
                 </strong>
-                by Christina Farr
                 <small>September 5th, 2012</small>
             </li>
         </ul>
+    </div>
     </div>
 </div>
 

@@ -4,63 +4,28 @@
 <div id="topbar"></div>
 
 <div id="wrapper" class="subview">
-    
-    <div id="nav">
-      &laquo; <a href="{% url "index" %}" class="subtitle">Back to Everything</a>
-    </div>
-      
-    <div class="header">
-      <div class="title">The Brain Explorer</div>
-    </div>
-    <div class="content block-intro">
-        <ul>
-            <li class="last">
-                In high school, I led an international team to build this educational site. Won as a semi-finalist in the ThinkQuest 2001 competition.
-                <small>1999 - 2001</small>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="header">Landing</div>
-    <div class="content block-projects">
-      <img src="/static/images/brainexplorer.png" width="575" />
-    </div>
-    
-    <div class="header">Home</div>
-    <div class="content block-projects">
-      <img src="/static/images/brainexplorer_home.png" width="575" />
-    </div>
-    
-    
-    <div class="header">The Whole Brain</div>
-    <div class="content block-code">
-      <img src="/static/images/brainexplorer_brain.png" width="575" />
-    </div>
-    
-    
-    <div class="header">The Whole Mind</div>
-    <div class="content block-blog">
-      <img src="/static/images/brainexplorer_mind.png" width="575" />
-    </div>
-    
-    <div class="header">About</div>
-    <div class="content block-twitter">
-      <img src="/static/images/brainexplorer_about.png" width="575" />
-    </div>
-    
-    
-    <div class="header">Team</div>
-    <div class="content block-press">
-      Samuel Clay (Robert Klayman), Tina Do, Ivy Chung
-    </div>
-    
-    <div id="bottom_nav">
-      &laquo; <a href="{% url "index" %}" class="subtitle">Back to Everything</a>
+    <a href="/" class="back-button">← Back to Everything</a>
+
+    <div class="project-detail-header">
+        <h1>The Brain Explorer</h1>
+        <p class="project-description">In high school, I led an international team to build this educational site. Won as a semi-finalist in the ThinkQuest 2001 competition.</p>
+        <small>1999 - 2001</small>
     </div>
 
-    <div class="background-inner"></div>
-    <div class="background-outer"></div>
-    
+    <div class="project-screenshots">
+        <img src="/static/images/brainexplorer.png" />
+        <img src="/static/images/brainexplorer_home.png" />
+        <img src="/static/images/brainexplorer_brain.png" />
+        <img src="/static/images/brainexplorer_mind.png" />
+        <img src="/static/images/brainexplorer_about.png" />
+    </div>
+
+    <div class="project-team">
+        <h3>Team</h3>
+        <p>Samuel Clay (Robert Klayman), Tina Do, Ivy Chung</p>
+    </div>
+
+    <a href="/" class="back-button back-button-bottom">← Back to Everything</a>
 </div>
 
 <div id="bottombar"></div>
