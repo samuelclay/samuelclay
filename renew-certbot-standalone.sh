@@ -17,7 +17,7 @@ docker-compose run --rm -p 80:80 certbot certonly \
     --agree-tos \
     --no-eff-email \
     --keep-until-expiring \
-    --expand \
+    --expand --non-interactive \
     --email samuel@ofbrooklyn.com \
     -d samuelclay.com \
     -d '*.samuelclay.com' \
