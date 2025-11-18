@@ -12,6 +12,9 @@ class BorderArtSystem {
     constructor() {
         this.sketches = [];
         this.sketchStates = new Map(); // Track sketch visibility and state
+        this.firstDrawComplete = new Map(); // Track which sketches have completed their first draw
+        this.allSketchesReady = false;
+        this.totalSketchesExpected = 0;
         this.styles = {
             'digital-weave': 'Weave',
             'thermal-drift': 'Drift',
@@ -114,15 +117,21 @@ class BorderArtSystem {
                 this.createBorderSketches();
                 this.setupWindowResize();
 
-                // Fade in borders after creation
+                // DON'T fade in immediately - wait for sketches to actually draw
+                // The fadeInBorders() method will be called by checkAllSketchesReady()
+                // when all sketches have completed their first draw
+
+                // Fallback: if sketches don't complete in 15 seconds, fade in anyway
                 setTimeout(() => {
-                    console.log('[BorderArt] Fading in borders', {
-                        timestamp: Date.now()
-                    });
-                    document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
-                        el.style.opacity = '1';
-                    });
-                }, 100);
+                    if (!this.allSketchesReady) {
+                        console.log('[BorderArt] FALLBACK: Fading in borders after timeout (some sketches may not have drawn)', {
+                            timestamp: Date.now(),
+                            completedSketches: this.firstDrawComplete.size,
+                            expectedSketches: this.totalSketchesExpected
+                        });
+                        this.fadeInBorders();
+                    }
+                }, 15000);
             }, 100);
         };
 
@@ -466,6 +475,37 @@ class BorderArtSystem {
         }, 200);  // Match the faster transition time
     }
 
+    fadeInBorders() {
+        if (this.allSketchesReady) {
+            console.log('[BorderArt] fadeInBorders() called but already faded in, ignoring');
+            return; // Already faded in
+        }
+
+        this.allSketchesReady = true;
+        console.log('[BorderArt] Fading in borders NOW (all sketches ready)', {
+            timestamp: Date.now(),
+            completedSketches: this.firstDrawComplete.size,
+            expectedSketches: this.totalSketchesExpected
+        });
+
+        document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
+            el.style.opacity = '1';
+        });
+    }
+
+    checkAllSketchesReady(containerId) {
+        this.firstDrawComplete.set(containerId, true);
+        console.log(`[BorderArt] Sketch ${containerId} completed first draw`, {
+            completedCount: this.firstDrawComplete.size,
+            expectedCount: this.totalSketchesExpected
+        });
+
+        if (this.firstDrawComplete.size >= this.totalSketchesExpected && !this.allSketchesReady) {
+            // All sketches have completed their first draw!
+            this.fadeInBorders();
+        }
+    }
+
     setupWindowResize() {
         let resizeTimeout;
         window.addEventListener('resize', () => {
@@ -481,6 +521,8 @@ class BorderArtSystem {
         this.sketches.forEach(sketch => sketch.remove());
         this.sketches = [];
         this.sketchStates.clear();
+        // Reset ready state so we can fade in again
+        this.allSketchesReady = false;
         // Recreate with current style and color
         this.createBorderSketches();
     }
@@ -518,6 +560,10 @@ class BorderArtSystem {
 
     createBorderSketches() {
         console.log('[BorderArt] createBorderSketches called');
+
+        // Reset sketch tracking
+        this.totalSketchesExpected = 0;
+        this.firstDrawComplete.clear();
 
         // Handle full frame borders
         const frameBorders = document.querySelectorAll('.block-border');
@@ -641,6 +687,9 @@ class BorderArtSystem {
             height
         });
 
+        // Increment expected sketches count
+        this.totalSketchesExpected++;
+
         const styleFunc = this.getStyleFunction(this.currentStyle);
         const sketch = styleFunc(containerId, seed, orientation);
         const p5Instance = new p5(sketch);
@@ -650,7 +699,9 @@ class BorderArtSystem {
         this.sketchStates.set(containerId, { p5Instance, container });
         this.observer.observe(container);
 
-        console.log(`[BorderArt] p5 instance created for ${containerId}`);
+        console.log(`[BorderArt] p5 instance created for ${containerId}`, {
+            totalExpected: this.totalSketchesExpected
+        });
     }
 
     getStyleFunction(styleName) {
@@ -671,11 +722,13 @@ class BorderArtSystem {
     // STYLE 1: Digital Weave - Intersecting sine waves creating textile patterns
     digitalWeaveStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
+        const borderSystem = this; // Capture reference to BorderArtSystem
 
         return (p) => {
             let w, h, time = 0;
             let canvasWidth, canvasHeight;
             let frequencies = [];
+            let firstDrawDone = false;
 
             p.setup = () => {
                 console.log(`[BorderArt] p5.setup() called for ${containerId} (digital-weave)`);
@@ -779,6 +832,13 @@ class BorderArtSystem {
                         p.rect(x, y, xStep, stripSize);
                     }
                 }
+
+                // Notify system that first draw is complete
+                if (!firstDrawDone) {
+                    firstDrawDone = true;
+                    console.log(`[BorderArt] First draw completed for ${containerId} (digital-weave)`);
+                    borderSystem.checkAllSketchesReady(containerId);
+                }
             };
         };
     }
@@ -786,10 +846,12 @@ class BorderArtSystem {
     // STYLE 2: Thermal Drift - Layered gradient bands with organic movement
     thermalDriftStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
+        const borderSystem = this; // Capture reference to BorderArtSystem
 
         return (p) => {
             let w, h, offset = 0;
             let bands = [];
+            let firstDrawDone = false;
 
             p.setup = () => {
                 const container = document.getElementById(containerId);
@@ -870,6 +932,13 @@ class BorderArtSystem {
                 bands.forEach(band => {
                     band.offset += band.speed;
                 });
+
+                // Notify system that first draw is complete
+                if (!firstDrawDone) {
+                    firstDrawDone = true;
+                    console.log(`[BorderArt] First draw completed for ${containerId} (thermal-drift)`);
+                    borderSystem.checkAllSketchesReady(containerId);
+                }
             };
         };
     }
@@ -877,9 +946,11 @@ class BorderArtSystem {
     // STYLE 3: Organic Noise - Pure Perlin noise with thermal color mapping
     organicNoiseStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
+        const borderSystem = this; // Capture reference to BorderArtSystem
 
         return (p) => {
             let w, h, zoff = 0;
+            let firstDrawDone = false;
 
             p.setup = () => {
                 const container = document.getElementById(containerId);
@@ -933,6 +1004,13 @@ class BorderArtSystem {
                 }
 
                 zoff += 0.05;  // Smooth, visible animation
+
+                // Notify system that first draw is complete
+                if (!firstDrawDone) {
+                    firstDrawDone = true;
+                    console.log(`[BorderArt] First draw completed for ${containerId} (organic-noise)`);
+                    borderSystem.checkAllSketchesReady(containerId);
+                }
             };
         };
     }
@@ -940,6 +1018,7 @@ class BorderArtSystem {
     // STYLE 4: Kaleidoscope - Symmetric mirrored patterns with rotating color wheels
     kaleidoscopeStyle(containerId, seed, orientation) {
         const baseColor = this.currentColor;
+        const borderSystem = this; // Capture reference to BorderArtSystem
 
         // Calculate perceived brightness to determine if color is light or dark
         const brightness = (baseColor[0] * 0.299 + baseColor[1] * 0.587 + baseColor[2] * 0.114);
@@ -948,6 +1027,7 @@ class BorderArtSystem {
         return (p) => {
             let w, h, time = 0;
             let symmetryLayers = [];
+            let firstDrawDone = false;
 
             p.setup = () => {
                 const container = document.getElementById(containerId);
@@ -1058,6 +1138,13 @@ class BorderArtSystem {
                 }
 
                 time += 0.18;  // Kaleidoscope rotation speed
+
+                // Notify system that first draw is complete
+                if (!firstDrawDone) {
+                    firstDrawDone = true;
+                    console.log(`[BorderArt] First draw completed for ${containerId} (kaleidoscope)`);
+                    borderSystem.checkAllSketchesReady(containerId);
+                }
             };
         };
     }
