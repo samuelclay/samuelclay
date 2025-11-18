@@ -19,28 +19,49 @@ class BorderArtSystem {
         // Randomly select a style on page load
         const styleKeys = Object.keys(this.styles);
         this.currentStyle = styleKeys[Math.floor(Math.random() * styleKeys.length)];
-        // 20 saturated, off-center colors (not too white, black, or gray)
+        // 20 saturated colors organized by hue families
         this.colorPalette = [
-            [255, 107, 129],  // Coral pink
-            [64, 224, 208],   // Turquoise
-            [220, 20, 180],   // Deep magenta
-            [255, 159, 28],   // Vibrant orange
-            [147, 51, 234],   // Purple
-            [50, 205, 50],    // Lime green
-            [255, 69, 185],   // Hot pink
-            [30, 144, 255],   // Dodger blue
-            [255, 195, 0],    // Gold
-            [199, 21, 133],   // Medium violet red
-            [0, 191, 255],    // Deep sky blue
-            [255, 99, 71],    // Tomato
-            [138, 43, 226],   // Blue violet
-            [255, 140, 0],    // Dark orange
-            [72, 209, 204],   // Medium turquoise
-            [220, 120, 255],  // Light purple
-            [34, 139, 34],    // Forest green
+            // Reds & Pinks
+            [255, 45, 85],    // Vibrant red
+            [255, 99, 71],    // Tomato red
             [255, 20, 147],   // Deep pink
+            [255, 105, 180],  // Hot pink
+
+            // Oranges & Corals
+            [255, 140, 0],    // Dark orange
+            [255, 159, 28],   // Vibrant orange
+            [255, 127, 80],   // Coral
+            [255, 69, 0],     // Red-orange
+
+            // Yellows & Golds
+            [255, 215, 0],    // Gold
+            [255, 235, 59],   // Bright yellow
+            [255, 193, 7],    // Amber
+            [255, 179, 0],    // Deep gold
+
+            // Greens
+            [50, 205, 50],    // Lime green
+            [0, 230, 118],    // Spring green
+            [34, 139, 34],    // Forest green
+            [102, 255, 102],  // Light green
+
+            // Cyans & Turquoises
+            [0, 255, 255],    // Cyan
+            [64, 224, 208],   // Turquoise
+            [72, 209, 204],   // Medium turquoise
+            [0, 191, 255],    // Deep sky blue
+
+            // Blues
+            [30, 144, 255],   // Dodger blue
             [100, 149, 237],  // Cornflower blue
-            [255, 215, 0]     // Bright gold
+            [65, 105, 225],   // Royal blue
+            [0, 119, 255],    // Azure
+
+            // Purples & Magentas
+            [147, 51, 234],   // Purple
+            [138, 43, 226],   // Blue violet
+            [220, 20, 180],   // Magenta
+            [199, 21, 133]    // Medium violet red
         ];
         // Pick ONE random color for this page load - all borders will use this color
         const randomIndex = Math.floor(Math.random() * this.colorPalette.length);
@@ -267,7 +288,7 @@ class BorderArtSystem {
         const colorGrid = document.createElement('div');
         colorGrid.style.cssText = `
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
         `;
 

@@ -54,8 +54,8 @@ def index(request):
 
 def _choose_is_a_quote():
     quotes = [
-        # "is up on a hill in San Francisco.",
-        "is going about it all wrong.",
+        "is up on a hill in San Francisco.",
+        # "is going about it all wrong.",
         "is writing code. Right. Now.",
         # "is making out with his dog again.", # Poor Shiloh
         "is rewriting and rewriting.",
@@ -63,8 +63,9 @@ def _choose_is_a_quote():
         "is in his element.",
         "is randomizing fields.",
         "is ahead of schedule.",
-        # "is .",
-        # "is driving with the top down.",
+        "is driving with the top down.",
+        "is flying past on his bike.",
+        "is skating into the night.",
     ]
 
     now = datetime.datetime.now()

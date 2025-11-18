@@ -1129,6 +1129,22 @@ small, small a, small a:link, small a:visited {
         font-size: 18px;
     }
 
+    /* Blog section mobile - stack everything vertically */
+    .block-blog ul li {
+        display: block;
+    }
+
+    .block-blog ul li strong,
+    .block-blog ul li small {
+        display: block;
+        width: 100%;
+    }
+
+    .block-blog ul li small {
+        margin-left: 0;
+        margin-top: var(--spacing-xs);
+    }
+
     /* Press section mobile - title and author on same line, date below */
     .block-press ul li {
         display: block;
