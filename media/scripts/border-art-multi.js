@@ -490,7 +490,9 @@ class BorderArtSystem {
     }
 
     checkHeightsChanged() {
-        // Check if any sketch heights have changed
+        // Check if any sketch heights have changed significantly
+        // Use a threshold to ignore minor changes from Safari bounce scroll
+        const THRESHOLD = 20; // Ignore changes smaller than 20px
         let heightsChanged = false;
 
         for (const [containerId, storedData] of this.sketchHeights.entries()) {
@@ -509,7 +511,9 @@ class BorderArtSystem {
                 currentHeight = container.offsetHeight || 42;
             }
 
-            if (currentHeight !== storedData.height) {
+            // Only count as changed if difference exceeds threshold
+            const heightDiff = Math.abs(currentHeight - storedData.height);
+            if (heightDiff > THRESHOLD) {
                 heightsChanged = true;
                 break;
             }
@@ -519,13 +523,32 @@ class BorderArtSystem {
     }
 
     setupWindowResize() {
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                this.redrawBordersIfNeeded();
-            }, 250);
-        });
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            // On mobile, only redraw on orientation change (portrait/landscape)
+            let currentOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+
+            window.addEventListener('resize', () => {
+                const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+                if (newOrientation !== currentOrientation) {
+                    currentOrientation = newOrientation;
+                    // Small delay to let layout settle after rotation
+                    setTimeout(() => {
+                        this.redrawBordersIfNeeded();
+                    }, 300);
+                }
+            });
+        } else {
+            // On desktop, redraw on resize with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    this.redrawBordersIfNeeded();
+                }, 250);
+            });
+        }
 
         // Also check when images load (they can change layout heights)
         // Use a longer debounce to let layout settle
