@@ -496,7 +496,10 @@ class BorderArtSystem {
             if (storedData.orientation === 'vertical') {
                 const parent = container.parentElement;
                 const grandparent = parent ? parent.parentElement : null;
-                currentHeight = grandparent ? grandparent.scrollHeight : 0;
+                const sectionHeight = grandparent ? grandparent.scrollHeight : 0;
+
+                // Cap at viewport height (same logic as createSketch)
+                currentHeight = Math.min(sectionHeight, window.innerHeight);
             } else {
                 currentHeight = container.offsetHeight || 42;
             }
@@ -664,7 +667,10 @@ class BorderArtSystem {
         if (orientation === 'vertical') {
             const parent = container.parentElement;
             const grandparent = parent ? parent.parentElement : null;
-            height = grandparent ? grandparent.scrollHeight : 0;
+            const sectionHeight = grandparent ? grandparent.scrollHeight : 0;
+
+            // Cap at viewport height for performance - creates sticky viewport-height borders
+            height = Math.min(sectionHeight, window.innerHeight);
         } else {
             height = container.offsetHeight || 42;
         }
@@ -687,6 +693,11 @@ class BorderArtSystem {
         // Store reference and observe for visibility
         this.sketchStates.set(containerId, { p5Instance, container });
         this.observer.observe(container);
+
+        // Set explicit height on the border-left element for sticky positioning
+        if (orientation === 'vertical') {
+            container.style.height = `${height}px`;
+        }
     }
 
     getStyleFunction(styleName) {
@@ -723,7 +734,9 @@ class BorderArtSystem {
                     const parent = container.parentElement; // .block-border
                     const grandparent = parent ? parent.parentElement : null; // .content
                     // Use scrollHeight to get full content height including any overflow
-                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    const sectionHeight = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    // Cap at viewport height for performance - sticky borders
+                    h = Math.min(sectionHeight, window.innerHeight);
                 } else {
                     h = container.offsetHeight || 42;
                 }
@@ -813,7 +826,9 @@ class BorderArtSystem {
                     const parent = container.parentElement; // .block-border
                     const grandparent = parent ? parent.parentElement : null; // .content
                     // Use scrollHeight to get full content height including any overflow
-                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    const sectionHeight = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    // Cap at viewport height for performance - sticky borders
+                    h = Math.min(sectionHeight, window.innerHeight);
                 } else {
                     h = container.offsetHeight || 42;
                 }
@@ -910,7 +925,9 @@ class BorderArtSystem {
                     const parent = container.parentElement; // .block-border
                     const grandparent = parent ? parent.parentElement : null; // .content
                     // Use scrollHeight to get full content height including any overflow
-                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    const sectionHeight = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    // Cap at viewport height for performance - sticky borders
+                    h = Math.min(sectionHeight, window.innerHeight);
                 } else {
                     h = container.offsetHeight || 42;
                 }
@@ -985,7 +1002,9 @@ class BorderArtSystem {
                     const parent = container.parentElement; // .block-border
                     const grandparent = parent ? parent.parentElement : null; // .content
                     // Use scrollHeight to get full content height including any overflow
-                    h = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    const sectionHeight = grandparent ? grandparent.scrollHeight : window.innerHeight;
+                    // Cap at viewport height for performance - sticky borders
+                    h = Math.min(sectionHeight, window.innerHeight);
                 } else {
                     h = container.offsetHeight || 42;
                 }

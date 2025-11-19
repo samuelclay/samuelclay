@@ -362,16 +362,15 @@ body {
 /* ========== */
 
 .block-border {
+    /* Absolute container for sticky border - doesn't affect section layout */
     position: absolute;
     top: 0;
     left: 0;
     width: 40px;
-    /* Only as wide as the left border */
-    height: 100%;
+    height: 100%; /* Full section height */
     background: transparent;
     pointer-events: none;
-
-    overflow: hidden;
+    overflow: visible; /* Allow sticky child to overflow */
     border-radius: 4px 4px 4px 4px;
 }
 
@@ -407,13 +406,16 @@ body {
 }
 
 .border-left {
-    position: absolute;
-    top: 0;
+    /* Sticky canvas container - follows viewport scroll, capped at viewport height */
+    position: sticky;
+    top: 80px; /* Desktop: below topbar */
     left: 0;
     width: 40px;
-    height: 100%;
+    /* Height set by JavaScript to min(section height, viewport height) for performance */
+    max-height: 100vh;
     background: transparent;
-    overflow: visible;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 .content.block-photos {
@@ -997,7 +999,7 @@ small, small a, small a:link, small a:visited {
     }
 
     .header {
-        font-size: 18px;
+        font-size: 22px;
         margin: 0 0 var(--spacing-md);
         position: relative;
         top: auto;
@@ -1025,6 +1027,7 @@ small, small a, small a:link, small a:visited {
         max-width: 100%;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
     }
 
     .content.block-photos {
@@ -1057,7 +1060,7 @@ small, small a, small a:link, small a:visited {
     }
 
     ul li {
-        font-size: 18px;
+        font-size: 20px;
         display: block;
         padding: var(--spacing-lg);
         grid-template-columns: 1fr;
@@ -1074,7 +1077,18 @@ small, small a, small a:link, small a:visited {
     }
 
     .block-border {
-        /* Keep border visible on mobile */
+        /* Maintain absolute positioning on mobile */
+        position: absolute !important;
+        height: 100% !important;
+    }
+
+    .border-left {
+        /* Sticky canvas container on mobile - no topbar offset */
+        position: sticky !important;
+        top: 0 !important;
+        max-height: 100vh !important;
+        overflow: hidden !important;
+        border-radius: 4px !important;
     }
 
     ul li small {
@@ -1098,7 +1112,7 @@ small, small a, small a:link, small a:visited {
     ul li strong {
         grid-column: auto;
         grid-row: auto;
-        font-size: 24px;
+        font-size: 28px;
         display: flex;
         align-items: center;
         margin-bottom: var(--spacing-xs);
@@ -1107,7 +1121,7 @@ small, small a, small a:link, small a:visited {
     ul li .desc {
         grid-column: auto;
         grid-row: auto;
-        font-size: 18px;
+        font-size: 20px;
     }
 
     ul li .screenshot-gallery {
@@ -1120,7 +1134,7 @@ small, small a, small a:link, small a:visited {
     }
 
     strong {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     small {
@@ -1132,7 +1146,7 @@ small, small a, small a:link, small a:visited {
     .block-twitter strong,
     .block-press strong {
         margin-bottom: var(--spacing-xs);
-        font-size: 18px;
+        font-size: 20px;
     }
 
     /* Blog section mobile - stack everything vertically */
@@ -1182,6 +1196,19 @@ small, small a, small a:link, small a:visited {
 
     .content .screenshot {
         margin-bottom: 0;
+    }
+
+    /* Contact info and general desc on mobile */
+    .contact-item {
+        font-size: 24px;
+    }
+
+    .contact-item strong {
+        font-size: 24px;
+    }
+
+    .desc {
+        font-size: 24px;
     }
 }
 
