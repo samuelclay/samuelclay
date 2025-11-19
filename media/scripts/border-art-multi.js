@@ -505,8 +505,8 @@ class BorderArtSystem {
                 const grandparent = parent ? parent.parentElement : null;
                 const sectionHeight = grandparent ? grandparent.scrollHeight : 0;
 
-                // Use full section height (same logic as createSketch)
-                currentHeight = sectionHeight;
+                // Cap at viewport height (same logic as createSketch)
+                currentHeight = Math.min(sectionHeight, window.innerHeight);
             } else {
                 currentHeight = container.offsetHeight || 42;
             }
@@ -697,8 +697,8 @@ class BorderArtSystem {
             const grandparent = parent ? parent.parentElement : null;
             const sectionHeight = grandparent ? grandparent.scrollHeight : 0;
 
-            // Use full section height - sticky positioning handles viewport visibility
-            height = sectionHeight;
+            // Cap at viewport height for performance - creates sticky viewport-height borders
+            height = Math.min(sectionHeight, window.innerHeight);
         } else {
             height = container.offsetHeight || 42;
         }

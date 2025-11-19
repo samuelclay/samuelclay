@@ -416,12 +416,15 @@ body {
 }
 
 .border-left {
-    /* Sticky canvas container - follows viewport scroll as you scroll through sections */
+    /* Sticky canvas container - follows viewport scroll, capped at viewport height */
     position: sticky;
     top: 80px; /* Desktop: below topbar */
     left: 0;
     width: 40px;
-    /* Height set by JavaScript to full section height */
+    /* Height set by JavaScript to min(section height, viewport height) for performance */
+    max-height: 100vh; /* Fallback */
+    max-height: -webkit-fill-available; /* Safari fallback */
+    max-height: 100svh; /* Modern browsers - accounts for mobile browser chrome */
     background: transparent;
     overflow: hidden;
     border-radius: 4px;
@@ -1095,6 +1098,9 @@ small, small a, small a:link, small a:visited {
         /* Sticky canvas container on mobile - no topbar offset */
         position: sticky !important;
         top: 0 !important;
+        max-height: 100vh !important; /* Fallback */
+        max-height: -webkit-fill-available !important; /* Safari fallback */
+        max-height: 100svh !important; /* Modern browsers - accounts for mobile browser chrome */
         overflow: hidden !important;
         border-radius: 4px !important;
     }
