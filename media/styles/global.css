@@ -43,7 +43,9 @@ a:hover,
 
 html {
     /* Ensure html extends to at least full viewport on mobile */
-    min-height: 100svh;
+    min-height: 100vh; /* Fallback */
+    min-height: -webkit-fill-available; /* Safari fallback */
+    min-height: 100svh; /* Modern browsers - accounts for mobile browser chrome */
 }
 
 body {
@@ -57,7 +59,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     overflow-x: hidden;
-    min-height: 100svh; /* Ensure body extends to at least full viewport on mobile */
+    min-height: 100vh; /* Fallback */
+    min-height: -webkit-fill-available; /* Safari fallback */
+    min-height: 100svh; /* Modern browsers - accounts for mobile browser chrome */
 }
 
 #topbar {
@@ -418,7 +422,9 @@ body {
     left: 0;
     width: 40px;
     /* Height set by JavaScript to min(section height, viewport height) for performance */
-    max-height: 100svh; /* Use small viewport height to account for mobile browser chrome */
+    max-height: 100vh; /* Fallback */
+    max-height: -webkit-fill-available; /* Safari fallback */
+    max-height: 100svh; /* Modern browsers - accounts for mobile browser chrome */
     background: transparent;
     overflow: hidden;
     border-radius: 4px;
@@ -1092,7 +1098,9 @@ small, small a, small a:link, small a:visited {
         /* Sticky canvas container on mobile - no topbar offset */
         position: sticky !important;
         top: 0 !important;
-        max-height: 100svh !important; /* Use small viewport height for mobile browser chrome */
+        max-height: 100vh !important; /* Fallback */
+        max-height: -webkit-fill-available !important; /* Safari fallback */
+        max-height: 100svh !important; /* Modern browsers - accounts for mobile browser chrome */
         overflow: hidden !important;
         border-radius: 4px !important;
     }

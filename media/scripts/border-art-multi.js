@@ -134,6 +134,11 @@ class BorderArtSystem {
     }
 
     createHUD() {
+        // Check if HUD already exists - prevent duplicates
+        if (document.getElementById('border-art-customize')) {
+            return;
+        }
+
         // Create customize panel container
         const hud = document.createElement('div');
         hud.id = 'border-art-customize';
@@ -1115,15 +1120,21 @@ class BorderArtSystem {
     }
 }
 
-// Initialize
-if (typeof p5 === 'undefined') {
-    window.addEventListener('load', () => {
-        if (typeof p5 !== 'undefined') {
-            const borderArtSystem = new BorderArtSystem();
-            borderArtSystem.init();
+// Initialize - only once
+if (!window.borderArtSystemInitialized) {
+    window.borderArtSystemInitialized = true;
+
+    if (typeof p5 === 'undefined') {
+        window.addEventListener('load', () => {
+            if (typeof p5 !== 'undefined' && !window.borderArtSystemInstance) {
+                window.borderArtSystemInstance = new BorderArtSystem();
+                window.borderArtSystemInstance.init();
+            }
+        });
+    } else {
+        if (!window.borderArtSystemInstance) {
+            window.borderArtSystemInstance = new BorderArtSystem();
+            window.borderArtSystemInstance.init();
         }
-    });
-} else {
-    const borderArtSystem = new BorderArtSystem();
-    borderArtSystem.init();
+    }
 }
