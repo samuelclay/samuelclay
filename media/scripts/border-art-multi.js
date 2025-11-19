@@ -30,13 +30,13 @@ class BorderArtSystem {
         // Format: { color: [r, g, b], name: 'Color Name' }
         this.colorPalette = [
             // Row 1: Light/bright across spectrum
-            { color: [255, 118, 117], name: 'Salmon' },
+            { color: [240, 95, 64],   name: 'Persimmon' },
             { color: [252, 92, 125],  name: 'Fuchsia' },
             { color: [255, 177, 66],  name: 'Cantaloupe' },
             { color: [180, 235, 80],  name: 'Chartreuse' },
             { color: [163, 203, 56],  name: 'Lime' },
             { color: [85, 239, 196],  name: 'Mint' },
-            { color: [116, 185, 255], name: 'Sky Blue' },
+            { color: [120, 175, 230], name: 'Bluebell' },
             { color: [200, 180, 235], name: 'Lavender' },
 
             // Row 2: Medium brightness across spectrum
@@ -55,8 +55,8 @@ class BorderArtSystem {
             { color: [241, 196, 15],  name: 'Sunflower' },
             { color: [0, 148, 133],   name: 'Teal' },
             { color: [15, 82, 186],   name: 'Sapphire' },
-            { color: [9, 132, 227],   name: 'Bright Blue' },
-            { color: [65, 105, 225],  name: 'Royal Blue' },
+            { color: [28, 107, 196],  name: 'Cobalt' },
+            { color: [38, 97, 156],   name: 'Lapis Lazuli' },
             { color: [155, 89, 182],  name: 'Amethyst' }
         ];
         // Pick ONE random color for this page load - all borders will use this color
@@ -505,8 +505,8 @@ class BorderArtSystem {
                 const grandparent = parent ? parent.parentElement : null;
                 const sectionHeight = grandparent ? grandparent.scrollHeight : 0;
 
-                // Cap at viewport height (same logic as createSketch)
-                currentHeight = Math.min(sectionHeight, window.innerHeight);
+                // Use full section height (same logic as createSketch)
+                currentHeight = sectionHeight;
             } else {
                 currentHeight = container.offsetHeight || 42;
             }
@@ -697,8 +697,8 @@ class BorderArtSystem {
             const grandparent = parent ? parent.parentElement : null;
             const sectionHeight = grandparent ? grandparent.scrollHeight : 0;
 
-            // Cap at viewport height for performance - creates sticky viewport-height borders
-            height = Math.min(sectionHeight, window.innerHeight);
+            // Use full section height - sticky positioning handles viewport visibility
+            height = sectionHeight;
         } else {
             height = container.offsetHeight || 42;
         }
