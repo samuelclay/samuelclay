@@ -30,34 +30,34 @@ class BorderArtSystem {
         // Format: { color: [r, g, b], name: 'Color Name' }
         this.colorPalette = [
             // Row 1: Light/bright across spectrum
-            { color: [240, 95, 64],   name: 'Persimmon' },
-            { color: [252, 92, 125],  name: 'Fuchsia' },
-            { color: [255, 177, 66],  name: 'Cantaloupe' },
-            { color: [180, 235, 80],  name: 'Chartreuse' },
-            { color: [163, 203, 56],  name: 'Lime' },
-            { color: [85, 239, 196],  name: 'Mint' },
+            { color: [240, 95, 64], name: 'Persimmon' },
+            { color: [252, 92, 125], name: 'Fuchsia' },
+            { color: [255, 177, 66], name: 'Cantaloupe' },
+            { color: [180, 235, 80], name: 'Chartreuse' },
+            { color: [163, 203, 56], name: 'Lime' },
+            { color: [85, 239, 196], name: 'Mint' },
             { color: [120, 175, 230], name: 'Bluebell' },
             { color: [200, 180, 235], name: 'Lavender' },
 
             // Row 2: Medium brightness across spectrum
-            { color: [235, 77, 75],   name: 'Scarlet' },
-            { color: [225, 112, 85],  name: 'Terracotta' },
-            { color: [255, 159, 64],  name: 'Coral' },
-            { color: [39, 174, 96],   name: 'Emerald' },
-            { color: [26, 188, 156],  name: 'Turquoise' },
+            { color: [235, 77, 75], name: 'Scarlet' },
+            { color: [225, 112, 85], name: 'Terracotta' },
+            { color: [255, 159, 64], name: 'Coral' },
+            { color: [39, 174, 96], name: 'Emerald' },
+            { color: [26, 188, 156], name: 'Turquoise' },
             { color: [100, 149, 237], name: 'Cornflower' },
-            { color: [84, 160, 255],  name: 'Azure' },
+            { color: [84, 160, 255], name: 'Azure' },
             { color: [153, 153, 238], name: 'Periwinkle' },
 
             // Row 3: Darker/richer across spectrum
-            { color: [214, 48, 49],   name: 'Crimson' },
-            { color: [245, 124, 0],   name: 'Burnt Orange' },
-            { color: [241, 196, 15],  name: 'Sunflower' },
-            { color: [0, 148, 133],   name: 'Teal' },
-            { color: [15, 82, 186],   name: 'Sapphire' },
-            { color: [28, 107, 196],  name: 'Cobalt' },
-            { color: [38, 97, 156],   name: 'Lapis Lazuli' },
-            { color: [155, 89, 182],  name: 'Amethyst' }
+            { color: [214, 48, 49], name: 'Crimson' },
+            { color: [245, 124, 0], name: 'Burnt Orange' },
+            { color: [241, 196, 15], name: 'Sunflower' },
+            { color: [0, 148, 133], name: 'Teal' },
+            { color: [15, 82, 186], name: 'Sapphire' },
+            { color: [28, 107, 196], name: 'Cobalt' },
+            { color: [38, 97, 156], name: 'Lapis Lazuli' },
+            { color: [155, 89, 182], name: 'Amethyst' }
         ];
         // Pick ONE random color for this page load - all borders will use this color
         const randomIndex = Math.floor(Math.random() * this.colorPalette.length);
@@ -88,6 +88,9 @@ class BorderArtSystem {
     init() {
         // Start rendering as soon as DOM is ready, don't wait for images
         const initBorders = () => {
+            // Initialize theme
+            const savedTheme = this.getCurrentTheme();
+            document.documentElement.setAttribute('data-theme', savedTheme);
 
             // Set initial opacity to 0 immediately
             document.querySelectorAll('.block-border, #topbar, #bottombar').forEach(el => {
@@ -142,13 +145,12 @@ class BorderArtSystem {
         // Create customize panel container
         const hud = document.createElement('div');
         hud.id = 'border-art-customize';
+        hud.className = 'customize-hud';
         hud.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.95);
             padding: 6px 14px;
-            border: 1px solid rgba(0, 0, 0, 0.15);
             border-radius: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             z-index: 1001;
@@ -166,8 +168,8 @@ class BorderArtSystem {
             font-size: 9px;
             font-weight: 600;
             letter-spacing: 0.8px;
-            color: #623734;
             white-space: nowrap;
+            transition: color 1.8s ease;
         `;
 
         // Content container (shown when expanded)
@@ -215,10 +217,10 @@ class BorderArtSystem {
         // Pattern selector
         const patternLabel = document.createElement('div');
         patternLabel.textContent = 'Border Pattern';
+        patternLabel.className = 'hud-label';
         patternLabel.style.cssText = `
             font-weight: bold;
             margin-bottom: 8px;
-            color: #623734;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -226,9 +228,9 @@ class BorderArtSystem {
 
         // Segmented control container
         const segmentedControl = document.createElement('div');
+        segmentedControl.className = 'hud-segmented-control';
         segmentedControl.style.cssText = `
             display: flex;
-            background: rgba(0, 0, 0, 0.05);
             border-radius: 6px;
             padding: 2px;
             margin-bottom: 16px;
@@ -249,24 +251,11 @@ class BorderArtSystem {
                 font-size: 11px;
                 font-weight: 600;
                 cursor: pointer;
-                transition: all 0.2s ease;
+                transition: all 0.3s ease;
                 border-radius: 4px;
-                color: ${isActive ? '#623734' : 'rgba(98, 55, 52, 0.5)'};
                 background: ${isActive ? 'white' : 'transparent'};
                 box-shadow: ${isActive ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none'};
             `;
-
-            segment.addEventListener('mouseenter', () => {
-                if (!isActive) {
-                    segment.style.color = 'rgba(98, 55, 52, 0.7)';
-                }
-            });
-
-            segment.addEventListener('mouseleave', () => {
-                if (!isActive) {
-                    segment.style.color = 'rgba(98, 55, 52, 0.5)';
-                }
-            });
 
             segment.addEventListener('click', () => {
                 this.switchStyleFromSegment(key);
@@ -285,9 +274,9 @@ class BorderArtSystem {
 
         const colorLabel = document.createElement('div');
         colorLabel.textContent = 'Color Palette';
+        colorLabel.className = 'hud-label';
         colorLabel.style.cssText = `
             font-weight: bold;
-            color: #623734;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -295,6 +284,7 @@ class BorderArtSystem {
 
         const colorName = document.createElement('div');
         colorName.id = 'selected-color-name';
+        colorName.className = 'hud-label';
         colorName.style.cssText = `
             font-weight: bold;
             font-size: 11px;
@@ -352,10 +342,65 @@ class BorderArtSystem {
             colorGrid.appendChild(swatch);
         });
 
+        // Theme selector
+        const themeLabel = document.createElement('div');
+        themeLabel.textContent = 'Theme';
+        themeLabel.className = 'hud-label';
+        themeLabel.style.cssText = `
+            font-weight: bold;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        `;
+
+        // Theme segmented control
+        const themeControl = document.createElement('div');
+        themeControl.className = 'hud-segmented-control';
+        themeControl.style.cssText = `
+            display: flex;
+            border-radius: 6px;
+            padding: 2px;
+        `;
+
+        const themes = ['Auto', 'Light', 'Dark'];
+        const currentTheme = this.getCurrentTheme();
+
+        themes.forEach((themeName) => {
+            const segment = document.createElement('div');
+            const themeKey = themeName.toLowerCase();
+            const isActive = themeKey === currentTheme;
+
+            segment.className = 'theme-segment';
+            segment.dataset.theme = themeKey;
+            segment.textContent = themeName;
+            segment.style.cssText = `
+                flex: 1;
+                padding: 6px 8px;
+                text-align: center;
+                font-size: 11px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 1.8s ease;
+                border-radius: 4px;
+                background: ${isActive ? 'white' : 'transparent'};
+                box-shadow: ${isActive ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none'};
+            `;
+
+            segment.addEventListener('click', () => {
+                this.switchTheme(themeKey);
+            });
+
+            themeControl.appendChild(segment);
+        });
+
         content.appendChild(patternLabel);
         content.appendChild(segmentedControl);
         content.appendChild(colorLabelContainer);
         content.appendChild(colorGrid);
+        content.appendChild(themeLabel);
+        content.appendChild(themeControl);
 
         hud.appendChild(buttonText);
         hud.appendChild(closeBtn);
@@ -368,6 +413,16 @@ class BorderArtSystem {
         this.hudElement = hud;
         this.isExpanded = false;
 
+        // Set initial colors and segment states after everything is in DOM
+        this.updateHUDColors(hud, buttonText);
+
+        // Listen for system theme changes when in auto mode
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (this.getCurrentTheme() === 'auto') {
+                this.updateHUDColors(hud, buttonText);
+            }
+        });
+
         // Click handler for expanding
         hud.addEventListener('click', () => {
             if (!this.isExpanded) {
@@ -378,14 +433,18 @@ class BorderArtSystem {
         // Hover effect when collapsed
         hud.addEventListener('mouseenter', () => {
             if (!this.isExpanded) {
-                hud.style.background = 'rgba(255, 255, 255, 1)';
+                const effectiveTheme = this.getEffectiveTheme();
+                const isDark = effectiveTheme === 'dark';
+                hud.style.background = isDark ? 'rgba(42, 42, 42, 1)' : 'rgba(255, 255, 255, 1)';
                 hud.style.boxShadow = '0 3px 12px rgba(0,0,0,0.15)';
             }
         });
 
         hud.addEventListener('mouseleave', () => {
             if (!this.isExpanded) {
-                hud.style.background = 'rgba(255, 255, 255, 0.95)';
+                const effectiveTheme = this.getEffectiveTheme();
+                const isDark = effectiveTheme === 'dark';
+                hud.style.background = isDark ? 'rgba(42, 42, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
                 hud.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
             }
         });
@@ -465,6 +524,107 @@ class BorderArtSystem {
                 });
             }, 50);
         }, 200);  // Match the faster transition time
+    }
+
+    getCurrentTheme() {
+        // Check localStorage first, default to 'auto'
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            return savedTheme;
+        }
+        return 'auto';
+    }
+
+    getEffectiveTheme() {
+        // Get the actual theme being used (resolve 'auto')
+        const theme = this.getCurrentTheme();
+        if (theme === 'auto') {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        return theme;
+    }
+
+    updateHUDColors(hud, buttonText) {
+        const effectiveTheme = this.getEffectiveTheme();
+        const isDark = effectiveTheme === 'dark';
+
+        // Update HUD container
+        if (hud) {
+            hud.style.background = isDark ? 'rgba(42, 42, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+            hud.style.border = isDark ? '1px solid rgba(255, 255, 255, 0.15)' : '1px solid rgba(0, 0, 0, 0.15)';
+        }
+
+        // Update button text
+        if (buttonText) {
+            buttonText.style.color = isDark ? '#e8e8e8' : '#623734';
+        }
+
+        // Update all labels (Border Pattern, Color Palette, Theme, color name)
+        const labels = this.hudElement?.querySelectorAll('.hud-label');
+        if (labels) {
+            labels.forEach(label => {
+                label.style.color = isDark ? '#e8e8e8' : '#623734';
+            });
+        }
+
+        // Update segmented control backgrounds
+        const controls = this.hudElement?.querySelectorAll('.hud-segmented-control');
+        if (controls) {
+            controls.forEach(control => {
+                control.style.background = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+            });
+        }
+
+        // Update pattern segments
+        const patternSegments = this.hudElement?.querySelectorAll('.pattern-segment');
+        if (patternSegments) {
+            patternSegments.forEach(segment => {
+                const isActive = segment.dataset.styleKey === this.currentStyle;
+                // Active segments always have white background, so always use dark text
+                // Inactive segments use theme-appropriate colors
+                segment.style.color = isActive
+                    ? '#623734'
+                    : (isDark ? '#e8e8e8' : 'rgba(98, 55, 52, 0.6)');
+                segment.style.background = isActive ? 'white' : 'transparent';
+                segment.style.boxShadow = isActive ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none';
+            });
+        }
+
+        // Update theme segments
+        const themeSegments = this.hudElement?.querySelectorAll('.theme-segment');
+        if (themeSegments) {
+            const currentTheme = this.getCurrentTheme();
+            themeSegments.forEach(segment => {
+                const isActive = segment.dataset.theme === currentTheme;
+                // Active segments always have white background, so always use dark text
+                // Inactive segments use theme-appropriate colors
+                segment.style.color = isActive
+                    ? '#623734'
+                    : (isDark ? '#e8e8e8' : 'rgba(98, 55, 52, 0.6)');
+                segment.style.background = isActive ? 'white' : 'transparent';
+                segment.style.boxShadow = isActive ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none';
+            });
+        }
+
+        // Update close button
+        const closeBtn = this.hudElement?.querySelector('#customize-close');
+        if (closeBtn) {
+            closeBtn.style.color = isDark ? '#e8e8e8' : '#623734';
+            closeBtn.style.background = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+        }
+    }
+
+    switchTheme(theme) {
+        // Save to localStorage
+        localStorage.setItem('theme', theme);
+
+        // Apply theme to document root
+        document.documentElement.setAttribute('data-theme', theme);
+
+        // Update HUD colors (this handles all the segments, labels, and colors)
+        const hud = document.getElementById('border-art-customize');
+        const buttonText = document.getElementById('customize-button-text');
+        this.updateHUDColors(hud, buttonText);
     }
 
     fadeInBorder(containerId) {
@@ -597,10 +757,14 @@ class BorderArtSystem {
     switchStyleFromSegment(newStyle) {
         this.currentStyle = newStyle;
 
-        // Update segment visual state
+        // Update segment visual state using the theme-aware color system
+        const hud = document.getElementById('border-art-customize');
+        const buttonText = document.getElementById('customize-button-text');
+        this.updateHUDColors(hud, buttonText);
+
+        // Update backgrounds and shadows for pattern segments
         document.querySelectorAll('.pattern-segment').forEach(segment => {
             const isActive = segment.dataset.styleKey === newStyle;
-            segment.style.color = isActive ? '#623734' : 'rgba(98, 55, 52, 0.5)';
             segment.style.background = isActive ? 'white' : 'transparent';
             segment.style.boxShadow = isActive ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none';
         });
@@ -848,10 +1012,15 @@ class BorderArtSystem {
         const baseColor = this.currentColor;
         const borderSystem = this; // Capture reference to BorderArtSystem
 
+        // Calculate perceived brightness to determine if color is light or dark
+        const brightness = (baseColor[0] * 0.299 + baseColor[1] * 0.587 + baseColor[2] * 0.114);
+        const isLightColor = brightness > 130;
+
         return (p) => {
             let w, h, offset = 0;
             let bands = [];
             let firstDrawDone = false;
+            let numBands; // Declare in outer scope so draw() can access it
 
             p.setup = () => {
                 const container = document.getElementById(containerId);
@@ -879,14 +1048,20 @@ class BorderArtSystem {
                 p.randomSeed(seed * 7777);
                 p.noiseSeed(seed * 3333);
 
-                // Create thermal bands - REDUCED for performance
-                const numBands = 2;  // Just 2 bands for maximum contrast
+                // Create thermal bands - fewer, bolder bands for vertical to avoid muddy mid-tones
+                numBands = orientation === 'vertical' ? 2 : 2;
+                const scaleRange = orientation === 'vertical'
+                    ? { min: 0.02, max: 0.04 }  // Moderate scale = clear, visible bands without muddiness
+                    : { min: 0.015, max: 0.05 };
+                const intensityRange = orientation === 'vertical'
+                    ? { min: 3.0, max: 6.0 }  // Higher intensity for bolder bands
+                    : { min: 8.0, max: 25.0 };
                 for (let i = 0; i < numBands; i++) {
                     bands.push({
                         offset: p.random(1000),
                         speed: p.random(0.025, 0.06),  // Slowed down by 50%
-                        scale: p.random(0.015, 0.05),  // Larger scale for bigger bands
-                        intensity: p.random(8.0, 25.0)  // Much higher intensity
+                        scale: p.random(scaleRange.min, scaleRange.max),
+                        intensity: p.random(intensityRange.min, intensityRange.max)
                     });
                 }
                 p.noStroke();
@@ -902,27 +1077,56 @@ class BorderArtSystem {
                     for (let x = 0; x < w; x += xStep) {
                         let heat = 0;
 
-                        // Combine bands with multiplication for more extreme variation
-                        let combinedHeat = 1;
-                        bands.forEach(band => {
-                            const pos = orientation === 'vertical' ? y : x;
-                            const noiseVal = p.noise(
-                                pos * band.scale,
-                                offset + band.offset
-                            );
-                            combinedHeat *= (noiseVal * band.intensity);
-                        });
+                        // For vertical borders, use addition; for horizontal, use multiplication
+                        let combinedHeat;
+                        if (orientation === 'vertical') {
+                            // Addition creates more consistent, visible bands
+                            combinedHeat = 0;
+                            bands.forEach(band => {
+                                const noiseVal = p.noise(
+                                    y * band.scale,
+                                    offset + band.offset
+                                );
+                                combinedHeat += noiseVal * band.intensity;
+                            });
+                            // Normalize and add bias to keep overall brightness high (closer to base color)
+                            combinedHeat = p.constrain(combinedHeat, 0, numBands * 4) / (numBands * 4);
+                            combinedHeat = combinedHeat * 0.6 + 0.4;  // Scale to 0.4-1.0 range for lighter appearance
+                        } else {
+                            // Multiplication for horizontal borders (original behavior)
+                            combinedHeat = 1;
+                            bands.forEach(band => {
+                                const pos = x;
+                                const noiseVal = p.noise(
+                                    pos * band.scale,
+                                    offset + band.offset
+                                );
+                                combinedHeat *= (noiseVal * band.intensity);
+                            });
+                            combinedHeat = p.constrain(combinedHeat, 0, 50) / 50;
+                        }
 
-                        // Normalize and apply extreme contrast curve
-                        const normalized = p.constrain(combinedHeat, 0, 50) / 50;  // Much wider range
-                        // Use a very aggressive curve for dramatic banding
-                        const heatCurve = p.constrain(p.pow(normalized, 0.15), 0, 1);  // Even steeper
+                        // Use a gentler curve for vertical, aggressive for horizontal
+                        const heatCurve = orientation === 'vertical'
+                            ? p.constrain(combinedHeat, 0, 1)  // Linear - no curve, maximum contrast
+                            : p.constrain(p.pow(combinedHeat, 0.15), 0, 1);  // Steep curve
 
-                        // Map to colors - same dark baseline for both orientations
-                        const baseline = 80;  // Same dark baseline for maximum contrast
-                        const r = p.lerp(baseline, baseColor[0], heatCurve);
-                        const g = p.lerp(baseline, baseColor[1], heatCurve);
-                        const b = p.lerp(baseline, baseColor[2], heatCurve);
+                        // Map to colors with adaptive baseline for better contrast
+                        let r, g, b;
+                        if (isLightColor) {
+                            // Light color: use very dark baseline and invert intensity for maximum contrast
+                            const baseline = 40;
+                            const invertedIntensity = 1 - heatCurve;
+                            r = p.lerp(baseColor[0], baseline, invertedIntensity);
+                            g = p.lerp(baseColor[1], baseline, invertedIntensity);
+                            b = p.lerp(baseColor[2], baseline, invertedIntensity);
+                        } else {
+                            // Dark color: use light baseline for maximum contrast
+                            const baseline = 220;
+                            r = p.lerp(baseline, baseColor[0], heatCurve);
+                            g = p.lerp(baseline, baseColor[1], heatCurve);
+                            b = p.lerp(baseline, baseColor[2], heatCurve);
+                        }
 
                         p.fill(r, g, b);
                         p.rect(x, y, xStep, stripSize);
@@ -1093,7 +1297,7 @@ class BorderArtSystem {
                             const dist = p.sqrt(mirrorPos * mirrorPos + cross * cross * 0.5);
 
                             // Rotating wave pattern
-                            const angle = p.atan2(cross - crossDim/2, mirrorPos - dimension/4);
+                            const angle = p.atan2(cross - crossDim / 2, mirrorPos - dimension / 4);
                             const wave = p.sin(dist * layer.freq + angle * layer.symmetry + time * layer.speed + layer.phase);
 
                             // Secondary symmetry wave
@@ -1123,14 +1327,14 @@ class BorderArtSystem {
                             const baseline = 90;
                             const invertedIntensity = 1 - totalIntensity;
                             r = p.lerp(baseColor[0], baseline, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI) * 0.3));
-                            g = p.lerp(baseColor[1], baseline - 8, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI/3) * 0.3));
-                            b = p.lerp(baseColor[2], baseline - 12, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2*p.TWO_PI/3) * 0.3));
+                            g = p.lerp(baseColor[1], baseline - 8, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI / 3) * 0.3));
+                            b = p.lerp(baseColor[2], baseline - 12, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2 * p.TWO_PI / 3) * 0.3));
                         } else {
                             // Dark color: go from light to dark (normal)
                             const baseline = 220;
                             r = p.lerp(baseline, baseColor[0], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI) * 0.3));
-                            g = p.lerp(baseline - 8, baseColor[1], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI/3) * 0.3));
-                            b = p.lerp(baseline - 12, baseColor[2], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2*p.TWO_PI/3) * 0.3));
+                            g = p.lerp(baseline - 8, baseColor[1], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI / 3) * 0.3));
+                            b = p.lerp(baseline - 12, baseColor[2], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2 * p.TWO_PI / 3) * 0.3));
                         }
 
                         p.fill(r, g, b);

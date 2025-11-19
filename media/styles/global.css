@@ -26,6 +26,30 @@
     --spacing-xxl: 64px;
 }
 
+/* Dark mode color scheme */
+:root[data-theme="dark"] {
+    --color-primary: #ff6b6b;
+    --color-primary-dark: #ff5252;
+    --color-text: #e8e8e8;
+    --color-text-light: #a8a8a8;
+    --color-bg: #1a1a1a;
+    --color-card-bg: #2a2a2a;
+    --color-border: #3a3a3a;
+}
+
+/* Auto mode - uses system preference */
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] {
+        --color-primary: #ff6b6b;
+        --color-primary-dark: #ff5252;
+        --color-text: #e8e8e8;
+        --color-text-light: #a8a8a8;
+        --color-bg: #1a1a1a;
+        --color-card-bg: #2a2a2a;
+        --color-border: #3a3a3a;
+    }
+}
+
 a, a:visited, a:link {
     color: var(--color-primary);
     transition: color 0.2s ease;
@@ -46,6 +70,23 @@ html {
     min-height: 100vh; /* Fallback */
     min-height: -webkit-fill-available; /* Safari fallback */
     min-height: 100svh; /* Modern browsers - accounts for mobile browser chrome */
+}
+
+/* Smooth theme transitions */
+:root {
+    transition:
+        --color-primary 1.8s ease,
+        --color-primary-dark 1.8s ease,
+        --color-text 1.8s ease,
+        --color-text-light 1.8s ease,
+        --color-bg 1.8s ease,
+        --color-card-bg 1.8s ease,
+        --color-border 1.8s ease;
+}
+
+/* Apply transitions to all elements that use theme colors */
+* {
+    transition: background-color 1.8s ease, color 1.8s ease, border-color 1.8s ease, box-shadow 1.8s ease;
 }
 
 body {
@@ -365,6 +406,17 @@ body {
 
 .header .header-photo.header-photo-borderless img {
     border: none;
+}
+
+/* Invert glider icon in dark mode */
+:root[data-theme="dark"] .header .header-photo img[src*="glider.png"] {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] .header .header-photo img[src*="glider.png"] {
+        filter: invert(1);
+    }
 }
 
 /* ========== */
