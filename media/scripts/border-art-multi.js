@@ -690,6 +690,13 @@ class BorderArtSystem {
             return;
         }
 
+        // Check if canvas already exists - prevent duplicate canvases
+        const existingCanvas = container.querySelector('canvas');
+        if (existingCanvas) {
+            console.log(`Canvas already exists in ${containerId}, skipping creation`);
+            return;
+        }
+
         // Check height - for vertical borders, check grandparent height
         let height;
         if (orientation === 'vertical') {
