@@ -41,6 +41,11 @@ a:hover,
 
 /* http://orderedlist.com/articles/thining-text-in-safari-under-snow-leopard */
 
+html {
+    /* Ensure html extends to at least full viewport on mobile */
+    min-height: 100svh;
+}
+
 body {
     -webkit-text-stroke: 1px transparent;
     font-family: "Whitney A", "Whitney B", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -52,6 +57,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     overflow-x: hidden;
+    min-height: 100svh; /* Ensure body extends to at least full viewport on mobile */
 }
 
 #topbar {
@@ -412,7 +418,7 @@ body {
     left: 0;
     width: 40px;
     /* Height set by JavaScript to min(section height, viewport height) for performance */
-    max-height: 100vh;
+    max-height: 100svh; /* Use small viewport height to account for mobile browser chrome */
     background: transparent;
     overflow: hidden;
     border-radius: 4px;
@@ -1086,7 +1092,7 @@ small, small a, small a:link, small a:visited {
         /* Sticky canvas container on mobile - no topbar offset */
         position: sticky !important;
         top: 0 !important;
-        max-height: 100vh !important;
+        max-height: 100svh !important; /* Use small viewport height for mobile browser chrome */
         overflow: hidden !important;
         border-radius: 4px !important;
     }
