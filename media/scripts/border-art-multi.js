@@ -13,7 +13,7 @@ class BorderArtSystem {
         this.sketches = [];
         this.sketchStates = new Map(); // Track sketch visibility and state
         this.firstDrawComplete = new Map(); // Track which sketches have completed their first draw
-        this.sketchHeights = new Map(); // Track height of each sketch to prevent unnecessary redraws
+        this.sketchDimensions = new Map(); // Track width and height of each sketch to prevent unnecessary redraws
         this.lastRedrawTime = 0; // Track when we last redrew to prevent too-frequent redraws
         this.allSketchesReady = false;
         this.totalSketchesExpected = 0;
@@ -290,6 +290,7 @@ class BorderArtSystem {
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            transition: none !important;
         `;
 
         colorLabelContainer.appendChild(colorLabel);
@@ -559,11 +560,14 @@ class BorderArtSystem {
             buttonText.style.color = isDark ? '#e8e8e8' : '#623734';
         }
 
-        // Update all labels (Border Pattern, Color Palette, Theme, color name)
+        // Update all labels (Border Pattern, Color Palette, Theme)
+        // Exclude the color name which has its own special color
         const labels = this.hudElement?.querySelectorAll('.hud-label');
         if (labels) {
             labels.forEach(label => {
-                label.style.color = isDark ? '#e8e8e8' : '#623734';
+                if (label.id !== 'selected-color-name') {
+                    label.style.color = isDark ? '#e8e8e8' : '#623734';
+                }
             });
         }
 
@@ -649,17 +653,17 @@ class BorderArtSystem {
         }
     }
 
-    checkHeightsChanged() {
-        // Check if any sketch heights have changed significantly
+    checkDimensionsChanged() {
+        // Check if any sketch dimensions (width or height) have changed significantly
         // Use a threshold to ignore minor changes from Safari bounce scroll
         const THRESHOLD = 20; // Ignore changes smaller than 20px
-        let heightsChanged = false;
+        let dimensionsChanged = false;
 
-        for (const [containerId, storedData] of this.sketchHeights.entries()) {
+        for (const [containerId, storedData] of this.sketchDimensions.entries()) {
             const container = document.getElementById(containerId);
             if (!container) continue;
 
-            let currentHeight;
+            let currentHeight, currentWidth;
             if (storedData.orientation === 'vertical') {
                 const parent = container.parentElement;
                 const grandparent = parent ? parent.parentElement : null;
@@ -667,19 +671,22 @@ class BorderArtSystem {
 
                 // Cap at viewport height (same logic as createSketch)
                 currentHeight = Math.min(sectionHeight, window.innerHeight);
+                currentWidth = container.offsetWidth || 40;
             } else {
                 currentHeight = container.offsetHeight || 42;
+                currentWidth = container.offsetWidth || 100;
             }
 
-            // Only count as changed if difference exceeds threshold
+            // Only count as changed if difference exceeds threshold for either dimension
             const heightDiff = Math.abs(currentHeight - storedData.height);
-            if (heightDiff > THRESHOLD) {
-                heightsChanged = true;
+            const widthDiff = Math.abs(currentWidth - storedData.width);
+            if (heightDiff > THRESHOLD || widthDiff > THRESHOLD) {
+                dimensionsChanged = true;
                 break;
             }
         }
 
-        return heightsChanged;
+        return dimensionsChanged;
     }
 
     setupWindowResize() {
@@ -735,8 +742,8 @@ class BorderArtSystem {
             return;
         }
 
-        // Only redraw if heights have actually changed
-        if (this.checkHeightsChanged()) {
+        // Only redraw if dimensions (width or height) have actually changed
+        if (this.checkDimensionsChanged()) {
             this.redrawBorders();
         }
     }
@@ -793,7 +800,7 @@ class BorderArtSystem {
         // Reset sketch tracking
         this.totalSketchesExpected = 0;
         this.firstDrawComplete.clear();
-        this.sketchHeights.clear();
+        this.sketchDimensions.clear();
 
         // Handle full frame borders
         const frameBorders = document.querySelectorAll('.block-border');
@@ -861,8 +868,8 @@ class BorderArtSystem {
             return;
         }
 
-        // Check height - for vertical borders, check grandparent height
-        let height;
+        // Check height and width - for vertical borders, check grandparent height
+        let height, width;
         if (orientation === 'vertical') {
             const parent = container.parentElement;
             const grandparent = parent ? parent.parentElement : null;
@@ -870,16 +877,18 @@ class BorderArtSystem {
 
             // Cap at viewport height for performance - creates sticky viewport-height borders
             height = Math.min(sectionHeight, window.innerHeight);
+            width = container.offsetWidth || 40;
         } else {
             height = container.offsetHeight || 42;
+            width = container.offsetWidth || 100;
         }
 
         if (height <= 0) {
             return;
         }
 
-        // Store the height for this sketch
-        this.sketchHeights.set(containerId, { height, orientation });
+        // Store the dimensions for this sketch
+        this.sketchDimensions.set(containerId, { width, height, orientation });
 
         // Increment expected sketches count
         this.totalSketchesExpected++;
@@ -1286,7 +1295,6 @@ class BorderArtSystem {
                         const cross = orientation === 'vertical' ? x : y;
 
                         let totalIntensity = 0;
-                        let colorRotation = 0;
 
                         // Calculate symmetric pattern values
                         symmetryLayers.forEach(layer => {
@@ -1306,19 +1314,13 @@ class BorderArtSystem {
                             // Combine waves with symmetry
                             const pattern = (wave + wave2) * 0.5 * layer.amplitude;
                             totalIntensity += Math.abs(pattern);
-
-                            // Rotating color wheel
-                            colorRotation += p.sin(time * 0.1 + layer.colorShift) * 0.3;
                         });
 
                         // Normalize and enhance
                         totalIntensity = totalIntensity / symmetryLayers.length;
                         totalIntensity = p.pow(p.constrain(totalIntensity, 0, 1), 0.6);
 
-                        // Apply rotating color wheel effect
-                        const hueShift = (time * 0.05 + colorRotation) % 1.0;
-
-                        // Mix base color with color wheel rotation
+                        // Mix base color without hue shifting (stay at same hue)
                         // For light colors, use dark baseline and invert intensity
                         // For dark colors, use light baseline
                         let r, g, b;
@@ -1326,15 +1328,15 @@ class BorderArtSystem {
                             // Light color: go from dark to light (inverted)
                             const baseline = 90;
                             const invertedIntensity = 1 - totalIntensity;
-                            r = p.lerp(baseColor[0], baseline, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI) * 0.3));
-                            g = p.lerp(baseColor[1], baseline - 8, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI / 3) * 0.3));
-                            b = p.lerp(baseColor[2], baseline - 12, invertedIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2 * p.TWO_PI / 3) * 0.3));
+                            r = p.lerp(baseColor[0], baseline, invertedIntensity);
+                            g = p.lerp(baseColor[1], baseline - 8, invertedIntensity);
+                            b = p.lerp(baseColor[2], baseline - 12, invertedIntensity);
                         } else {
                             // Dark color: go from light to dark (normal)
                             const baseline = 220;
-                            r = p.lerp(baseline, baseColor[0], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI) * 0.3));
-                            g = p.lerp(baseline - 8, baseColor[1], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + p.TWO_PI / 3) * 0.3));
-                            b = p.lerp(baseline - 12, baseColor[2], totalIntensity * (1 + p.sin(hueShift * p.TWO_PI + 2 * p.TWO_PI / 3) * 0.3));
+                            r = p.lerp(baseline, baseColor[0], totalIntensity);
+                            g = p.lerp(baseline - 8, baseColor[1], totalIntensity);
+                            b = p.lerp(baseline - 12, baseColor[2], totalIntensity);
                         }
 
                         p.fill(r, g, b);
