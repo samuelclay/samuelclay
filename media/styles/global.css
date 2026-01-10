@@ -110,14 +110,12 @@ body {
     z-index: 1000;
     position: sticky;
     top: 0;
-    background: var(--color-bg);
 }
 
 #bottombar {
     height: 80px;
     z-index: 1;
     position: relative;
-    background: linear-gradient(to top, var(--color-bg) 0%, var(--color-bg) calc(100% - 50px), transparent 100%);
 }
 
 #wrapper {
@@ -430,10 +428,9 @@ body {
     left: 0;
     width: 40px;
     height: 100%; /* Full section height */
-    background: transparent;
     pointer-events: none;
     overflow: visible; /* Allow sticky child to overflow */
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 4px;
 }
 
 /* Full frame border components */
