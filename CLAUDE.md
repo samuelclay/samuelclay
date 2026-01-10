@@ -41,6 +41,13 @@ Note: Port 80 may be running a different service in development, always use port
 make ssh RUN="cmd"    # Run command on samuelclay.com (uses /srv/secrets-newsblur/keys/newsblur.key)
 ```
 
+### Deploying to Production
+```bash
+make ssh RUN="cd /srv/samuelclay && git pull && docker-compose restart web"
+```
+
+**Important**: After pulling changes that modify templates or static files, you must restart the `web` container. Running `docker-compose up -d` alone won't pick up template changes because gunicorn caches them. Always use `docker-compose restart web` to ensure changes are reflected.
+
 ## Architecture
 
 ### Application Structure
