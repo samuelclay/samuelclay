@@ -200,26 +200,42 @@ body {
 }
 
 #topbar {
-    height: 78px;
-    z-index: 1000;
-    position: sticky;
-    top: 0;
+    height: 200px;
+    z-index: 1;
+    position: relative;
+    pointer-events: none; /* Allow clicking through the faded area */
+}
+
+#topbar canvas {
+    /* Fade from solid at top to transparent at bottom, ending at ~145px */
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 72%);
+    mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 72%);
 }
 
 #bottombar {
-    height: 80px;
+    height: 200px;
     z-index: 1;
     position: relative;
+    margin-top: -120px; /* Pull up into content area */
+    pointer-events: none;
+}
+
+#bottombar canvas {
+    /* Fade from transparent at top to solid at bottom, starting at ~25px */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 13%, black 60%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 13%, black 60%, black 100%);
 }
 
 #wrapper {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: var(--spacing-xxl) var(--spacing-lg) 0;
+    margin-top: -120px; /* Pull content up into faded topbar area */
+    padding: var(--spacing-xxl) var(--spacing-lg) var(--spacing-xxl);
     box-sizing: border-box;
     overflow: visible;
     /* Allow header to extend left */
+    position: relative; /* Ensure content appears above faded topbar */
 }
 
 #wrapper.subview {
@@ -507,8 +523,8 @@ body {
     /* Sticky positioning */
     position: -webkit-sticky;
     position: sticky;
-    top: 80px;
-    /* Stick below the topbar */
+    top: 20px;
+    /* Small offset from viewport top */
     z-index: 500;
     align-self: flex-start;
     /* Stick to top of section */
@@ -624,7 +640,7 @@ body {
 .border-left {
     /* Sticky canvas container - follows viewport scroll, capped at viewport height */
     position: sticky;
-    top: 80px; /* Desktop: below topbar */
+    top: 20px; /* Small offset from viewport top */
     left: 0;
     width: 40px;
     /* Height set by JavaScript to min(section height, viewport height) for performance */
@@ -1232,15 +1248,20 @@ small, small a, small a:link, small a:visited {
         font-size: 15px;
     }
 
-    /* Disable sticky topbar on mobile for better performance */
+    /* Smaller topbar/bottombar on mobile */
     #topbar {
-        position: relative;
-        top: auto;
+        height: 100px;
+    }
+
+    #bottombar {
+        height: 100px;
+        margin-top: -40px;
     }
 
     #wrapper {
         width: auto;
         padding: var(--spacing-xl) var(--spacing-md);
+        margin-top: -40px; /* Less overlap on mobile */
     }
 
     /* Stack section-wrapper vertically on mobile */
