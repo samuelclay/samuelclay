@@ -947,6 +947,69 @@
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 1.0 : 0.0;
         }
 
+        // Calculate link colors that are readable on light/dark backgrounds
+        getLinkColors(baseColor) {
+            const [r, g, b] = baseColor;
+
+            // Calculate relative luminance (perceived brightness)
+            const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+            // Light mode (background #EEECEA) - need darker colors for contrast
+            let lightR = r, lightG = g, lightB = b;
+            if (luminance > 0.55) {
+                // Darken bright colors for readability on light background
+                const factor = 0.65 + (0.55 - luminance) * 0.5;
+                lightR = Math.round(r * factor);
+                lightG = Math.round(g * factor);
+                lightB = Math.round(b * factor);
+            } else if (luminance > 0.45) {
+                // Slightly darken medium-bright colors
+                const factor = 0.85;
+                lightR = Math.round(r * factor);
+                lightG = Math.round(g * factor);
+                lightB = Math.round(b * factor);
+            }
+
+            // Dark mode (background #1a1a1a) - need brighter colors for contrast
+            let darkR = r, darkG = g, darkB = b;
+            if (luminance < 0.35) {
+                // Lighten dark colors for readability on dark background
+                const factor = 0.45;
+                darkR = Math.round(r + (255 - r) * factor);
+                darkG = Math.round(g + (255 - g) * factor);
+                darkB = Math.round(b + (255 - b) * factor);
+            } else if (luminance < 0.5) {
+                // Slightly brighten medium colors
+                const factor = 1.15;
+                darkR = Math.min(255, Math.round(r * factor));
+                darkG = Math.min(255, Math.round(g * factor));
+                darkB = Math.min(255, Math.round(b * factor));
+            }
+
+            // Hover states - slightly darker/lighter than base
+            const lightHoverFactor = 0.75;
+            const darkHoverFactor = 1.2;
+
+            return {
+                light: `rgb(${lightR}, ${lightG}, ${lightB})`,
+                lightHover: `rgb(${Math.round(lightR * lightHoverFactor)}, ${Math.round(lightG * lightHoverFactor)}, ${Math.round(lightB * lightHoverFactor)})`,
+                dark: `rgb(${darkR}, ${darkG}, ${darkB})`,
+                darkHover: `rgb(${Math.min(255, Math.round(darkR * darkHoverFactor))}, ${Math.min(255, Math.round(darkG * darkHoverFactor))}, ${Math.min(255, Math.round(darkB * darkHoverFactor))})`
+            };
+        }
+
+        // Update CSS variables for link colors
+        updateLinkColors(color) {
+            const linkColors = this.getLinkColors(color);
+            const root = document.documentElement;
+
+            root.style.setProperty('--link-color-light', linkColors.light);
+            root.style.setProperty('--link-color-light-hover', linkColors.lightHover);
+            root.style.setProperty('--link-color-dark', linkColors.dark);
+            root.style.setProperty('--link-color-dark-hover', linkColors.darkHover);
+
+        }
+
         getCurrentTheme() {
             return localStorage.getItem('theme') || 'auto';
         }
@@ -1168,6 +1231,9 @@
                 ];
             }
 
+            // Update link colors to match border art color
+            this.updateLinkColors(displayColor);
+
             // Detect DPI changes
             if (dpr !== this.currentDpr) {
                 this.currentDpr = dpr;
@@ -1200,7 +1266,7 @@
                 gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
             }
 
-            // After first frame renders, reveal all canvases with CSS transition
+            // After first frame renders, reveal all canvases and content with CSS transition
             if (!this.firstFrameRendered && this.effects.length > 0) {
                 this.firstFrameRendered = true;
                 // Use requestAnimationFrame to ensure the frame is painted before revealing
@@ -1208,6 +1274,8 @@
                     for (const effect of this.effects) {
                         effect.canvas.style.opacity = '1';
                     }
+                    // Trigger content fade-in at the same time as canvases
+                    document.documentElement.classList.add('content-ready');
                 });
             }
 
@@ -1719,6 +1787,9 @@
             // Create canvases and effects
             this.createBorderCanvases();
             this.createHUD();
+
+            // Set initial link colors to match the randomly selected color
+            this.updateLinkColors(this.currentColor);
 
             if (this.effects.length === 0) {
                 console.warn('No border effects initialized');
