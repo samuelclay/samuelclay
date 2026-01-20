@@ -947,54 +947,93 @@
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 1.0 : 0.0;
         }
 
+        // Convert RGB to HSL
+        rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return [h, s, l];
+        }
+
+        // Convert HSL to RGB
+        hslToRgb(h, s, l) {
+            let r, g, b;
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+        }
+
         // Calculate link colors that are readable on light/dark backgrounds
         getLinkColors(baseColor) {
             const [r, g, b] = baseColor;
+            let [h, s, l] = this.rgbToHsl(r, g, b);
 
-            // Calculate relative luminance (perceived brightness)
-            const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+            // Light mode - adjust based on hue for readability
+            let lightH = h;
+            let lightS = s;
+            let maxLightness;
 
-            // Light mode (background #EEECEA) - need darker colors for contrast
-            let lightR = r, lightG = g, lightB = b;
-            if (luminance > 0.55) {
-                // Darken bright colors for readability on light background
-                const factor = 0.65 + (0.55 - luminance) * 0.5;
-                lightR = Math.round(r * factor);
-                lightG = Math.round(g * factor);
-                lightB = Math.round(b * factor);
-            } else if (luminance > 0.45) {
-                // Slightly darken medium-bright colors
-                const factor = 0.85;
-                lightR = Math.round(r * factor);
-                lightG = Math.round(g * factor);
-                lightB = Math.round(b * factor);
+            // Yellow hues (h ~0.1-0.2) look muddy when darkened - shift toward orange
+            if (h >= 0.1 && h <= 0.2) {
+                // Shift yellows toward orange (lower hue) for richer appearance when dark
+                lightH = Math.max(0.06, h - 0.04);
+                lightS = Math.max(s, 0.7);
+                maxLightness = 0.42;
+            } else if (h > 0.2 && h <= 0.45) {
+                // Chartreuse, green, mint - boost saturation for vibrancy
+                lightS = Math.max(s, 0.5);
+                maxLightness = 0.38;
+            } else if (h > 0.45 && h <= 0.55) {
+                // Cyan/teal range
+                maxLightness = 0.40;
+            } else {
+                // Reds, oranges, blues, purples - can be lighter
+                maxLightness = 0.45;
             }
 
-            // Dark mode (background #1a1a1a) - need brighter colors for contrast
-            let darkR = r, darkG = g, darkB = b;
-            if (luminance < 0.35) {
-                // Lighten dark colors for readability on dark background
-                const factor = 0.45;
-                darkR = Math.round(r + (255 - r) * factor);
-                darkG = Math.round(g + (255 - g) * factor);
-                darkB = Math.round(b + (255 - b) * factor);
-            } else if (luminance < 0.5) {
-                // Slightly brighten medium colors
-                const factor = 1.15;
-                darkR = Math.min(255, Math.round(r * factor));
-                darkG = Math.min(255, Math.round(g * factor));
-                darkB = Math.min(255, Math.round(b * factor));
-            }
+            let lightL = Math.min(l, maxLightness);
+            const [lightR, lightG, lightB] = this.hslToRgb(lightH, lightS, lightL);
 
-            // Hover states - slightly darker/lighter than base
-            const lightHoverFactor = 0.75;
-            const darkHoverFactor = 1.2;
+            // Dark mode - lighten dark colors for contrast on dark background
+            let darkL = Math.max(l, 0.55);
+            const [darkR, darkG, darkB] = this.hslToRgb(h, s, darkL);
+
+            // Hover states - subtle shift
+            const [lightHoverR, lightHoverG, lightHoverB] = this.hslToRgb(lightH, lightS, Math.max(0.2, lightL * 0.8));
+            const [darkHoverR, darkHoverG, darkHoverB] = this.hslToRgb(h, s, Math.min(0.75, darkL * 1.1));
 
             return {
                 light: `rgb(${lightR}, ${lightG}, ${lightB})`,
-                lightHover: `rgb(${Math.round(lightR * lightHoverFactor)}, ${Math.round(lightG * lightHoverFactor)}, ${Math.round(lightB * lightHoverFactor)})`,
+                lightHover: `rgb(${lightHoverR}, ${lightHoverG}, ${lightHoverB})`,
                 dark: `rgb(${darkR}, ${darkG}, ${darkB})`,
-                darkHover: `rgb(${Math.min(255, Math.round(darkR * darkHoverFactor))}, ${Math.min(255, Math.round(darkG * darkHoverFactor))}, ${Math.min(255, Math.round(darkB * darkHoverFactor))})`
+                darkHover: `rgb(${darkHoverR}, ${darkHoverG}, ${darkHoverB})`
             };
         }
 
