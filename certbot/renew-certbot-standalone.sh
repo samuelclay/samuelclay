@@ -3,11 +3,17 @@
 # Script for standalone certbot renewal without DNS validation
 # This avoids DNSimple API issues by using HTTP validation
 
-set -e
-
 # Change to the main project directory (not certbot subdir)
 # This ensures we use the main docker-compose.yml and share volumes with nginx
 cd /srv/samuelclay
+
+# Ensure nginx is ALWAYS restarted, even if certbot fails
+restart_nginx() {
+    echo "Starting nginx..."
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml start nginx
+    echo "Nginx restarted."
+}
+trap restart_nginx EXIT
 
 # Stop nginx to free up port 80 for standalone validation
 echo "Stopping nginx..."
@@ -43,8 +49,5 @@ if [ -d "/var/lib/docker/volumes/samuelclay_certs/_data/live/samuelclay.com-0001
     '
 fi
 
-# Start nginx back up
-echo "Starting nginx..."
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml start nginx
-
+# Note: nginx restart is handled by the EXIT trap above
 echo "Renewal process completed!"
