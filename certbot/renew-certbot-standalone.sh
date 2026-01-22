@@ -10,14 +10,16 @@ cd /srv/samuelclay
 # Ensure nginx is ALWAYS restarted, even if certbot fails
 restart_nginx() {
     echo "Starting nginx..."
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml start nginx
+    docker start samuelclay-nginx || true
     echo "Nginx restarted."
 }
 trap restart_nginx EXIT
 
 # Stop nginx to free up port 80 for standalone validation
 echo "Stopping nginx..."
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml stop nginx
+docker stop samuelclay-nginx || true
+# Wait for port to be fully released
+sleep 2
 
 # Run certbot renewal in standalone mode with non-interactive flag
 echo "Running certbot renewal..."
