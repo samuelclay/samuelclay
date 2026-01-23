@@ -3,10 +3,6 @@
 # Script for standalone certbot renewal without DNS validation
 # This avoids DNSimple API issues by using HTTP validation
 
-# Change to the main project directory (not certbot subdir)
-# This ensures we use the main docker-compose.yml and share volumes with nginx
-cd /srv/samuelclay
-
 # Ensure nginx is ALWAYS restarted, even if certbot fails
 restart_nginx() {
     echo "Starting nginx..."
@@ -19,11 +15,13 @@ trap restart_nginx EXIT
 echo "Stopping nginx..."
 docker stop samuelclay-nginx || true
 # Wait for port to be fully released
-sleep 2
+sleep 3
 
-# Run certbot renewal in standalone mode with non-interactive flag
+# Run certbot renewal using docker run directly (avoids docker-compose issues)
 echo "Running certbot renewal..."
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml run --rm -p 80:80 certbot certonly \
+docker run --rm -p 80:80 \
+    -v samuelclay_certs:/etc/letsencrypt \
+    certbot/certbot certonly \
     --standalone \
     --preferred-challenges http \
     --agree-tos \
@@ -33,23 +31,7 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml run --rm -p 80:8
     --non-interactive \
     --email samuel@ofbrooklyn.com \
     -d samuelclay.com \
-    -d www.samuelclay.com \
-    -v
-
-# Note: Removed wildcard domain as standalone doesn't support it
-# Wildcard domains require DNS validation
-
-# Check if renewal created a new directory (e.g., samuelclay.com-0001)
-if [ -d "/var/lib/docker/volumes/samuelclay_certs/_data/live/samuelclay.com-0001" ]; then
-    echo "New certificate directory detected, updating symlinks..."
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml run --rm --entrypoint sh certbot -c '
-        rm -f /etc/letsencrypt/live/samuelclay.com/*.pem
-        ln -s /etc/letsencrypt/live/samuelclay.com-0001/fullchain.pem /etc/letsencrypt/live/samuelclay.com/fullchain.pem
-        ln -s /etc/letsencrypt/live/samuelclay.com-0001/privkey.pem /etc/letsencrypt/live/samuelclay.com/privkey.pem
-        ln -s /etc/letsencrypt/live/samuelclay.com-0001/chain.pem /etc/letsencrypt/live/samuelclay.com/chain.pem
-        ln -s /etc/letsencrypt/live/samuelclay.com-0001/cert.pem /etc/letsencrypt/live/samuelclay.com/cert.pem
-    '
-fi
+    -d www.samuelclay.com
 
 # Note: nginx restart is handled by the EXIT trap above
 echo "Renewal process completed!"
