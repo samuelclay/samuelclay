@@ -863,6 +863,14 @@
             this.colorFadeProgress = 1.0;
             this.colorFadeStartTime = null;
 
+            // Theme (isDark) transition state
+            this.currentIsDark = this.getIsDark();
+            this.targetIsDark = null;
+            this.fadeStartIsDark = null;
+            this.isDarkFadeProgress = 1.0;
+            this.isDarkFadeStartTime = null;
+            this.themeFadeDuration = 1000; // ms for theme transitions
+
             // Randomly select a style on page load
             const styleKeys = Object.keys(this.styles);
             this.currentStyle = styleKeys[Math.floor(Math.random() * styleKeys.length)];
@@ -1217,8 +1225,17 @@
             this.lastFrameTime = now;
 
             const elapsed = (now - this.startTime) / 1000.0;
-            const isDark = this.getIsDark();
             const dpr = window.devicePixelRatio;
+
+            // Check for system theme changes (when in auto mode)
+            const actualIsDark = this.getIsDark();
+            if (this.isDarkFadeStartTime === null && actualIsDark !== this.currentIsDark) {
+                // Theme changed externally (system preference), trigger fade
+                this.fadeStartIsDark = this.currentIsDark;
+                this.targetIsDark = actualIsDark;
+                this.isDarkFadeStartTime = now;
+                this.isDarkFadeProgress = 0.0;
+            }
 
             // Update fade opacity
             const fadeElapsed = now - this.fadeStartTime;
@@ -1257,6 +1274,19 @@
                 }
             }
 
+            // Update isDark (theme) interpolation
+            if (this.isDarkFadeStartTime !== null) {
+                const isDarkElapsed = now - this.isDarkFadeStartTime;
+                this.isDarkFadeProgress = Math.min(isDarkElapsed / this.themeFadeDuration, 1.0);
+
+                if (this.isDarkFadeProgress >= 1.0) {
+                    this.currentIsDark = this.targetIsDark;
+                    this.isDarkFadeStartTime = null;
+                    this.targetIsDark = null;
+                    this.fadeStartIsDark = null;
+                }
+            }
+
             // Calculate display color (interpolated if transitioning)
             let displayColor = this.currentColor;
             if (this.colorFadeStartTime !== null && this.fadeStartColor && this.targetColor) {
@@ -1268,6 +1298,15 @@
                     this.fadeStartColor[1] + (this.targetColor[1] - this.fadeStartColor[1]) * eased,
                     this.fadeStartColor[2] + (this.targetColor[2] - this.fadeStartColor[2]) * eased
                 ];
+            }
+
+            // Calculate display isDark (interpolated if transitioning)
+            let displayIsDark = this.currentIsDark;
+            if (this.isDarkFadeStartTime !== null && this.fadeStartIsDark !== null && this.targetIsDark !== null) {
+                const t = this.isDarkFadeProgress;
+                // Smooth easing
+                const eased = t * t * (3 - 2 * t);
+                displayIsDark = this.fadeStartIsDark + (this.targetIsDark - this.fadeStartIsDark) * eased;
             }
 
             // Update link colors to match border art color
@@ -1295,7 +1334,7 @@
                 }
 
                 gl.uniform1f(uniforms.time, elapsed);
-                gl.uniform1f(uniforms.isDark, isDark);
+                gl.uniform1f(uniforms.isDark, displayIsDark);
                 gl.uniform1f(uniforms.opacity, this.fadeOpacity);
                 gl.uniform3f(uniforms.baseColor,
                     displayColor[0],
@@ -1407,6 +1446,16 @@
         switchTheme(theme) {
             localStorage.setItem('theme', theme);
             document.documentElement.setAttribute('data-theme', theme);
+
+            // Trigger fade transition for WebGL isDark value
+            const newIsDark = this.getIsDark();
+            if (newIsDark !== this.currentIsDark) {
+                this.fadeStartIsDark = this.currentIsDark;
+                this.targetIsDark = newIsDark;
+                this.isDarkFadeStartTime = performance.now();
+                this.isDarkFadeProgress = 0.0;
+            }
+
             this.updateHUDColors();
         }
 
