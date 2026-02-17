@@ -1,71 +1,53 @@
 # CertBot SSL Certificate Renewal Setup
 
-## Problem Fixed
-The CertBot renewal was failing because it was prompting for interactive input "(E)xpand/(C)ancel" when trying to expand the certificate. This has been fixed by adding the `--non-interactive` flag to all CertBot commands.
-
-## Files Created
-
-1. **docker-compose.yml** - Docker configuration with CertBot service configured for non-interactive mode
-2. **renew-certbot-standalone.sh** - Manual renewal script using `certonly` command with standalone validation
-3. **renew-certbot-auto.sh** - Automated renewal script using `renew` command (recommended for cron)
-4. **setup-certbot-cron.sh** - Script to set up automatic renewal via cron
-
-## Deployment Instructions
-
-1. **Push to Git Repository:**
-   ```bash
-   git add certbot/
-   git commit -m "Fix CertBot non-interactive renewal issue"
-   git push
-   ```
-
-2. **Deploy to Server:**
-   SSH into the server and pull the latest changes:
-   ```bash
-   ssh samuelclay.com
-   cd /home/sclay/samuelclay
-   git pull
-   ```
-
-3. **Set Up Automatic Renewal:**
-   Run the setup script on the server:
-   ```bash
-   cd certbot/
-   ./setup-certbot-cron.sh
-   ```
-
 ## How It Works
 
-- **Automatic Renewal:** The `renew-certbot-auto.sh` script runs twice daily via cron (3 AM and 3 PM)
-- **Non-Interactive:** All CertBot commands now include `--non-interactive` flag to prevent prompts
+- **Automatic Renewal:** `renew-certbot-standalone.sh` runs twice daily via cron (3 AM and 3 PM)
+- **Uses `certbot renew`:** Reads the existing renewal config at `/etc/letsencrypt/renewal/samuelclay.com.conf` and only renews when within 30 days of expiration
 - **Standalone Validation:** Uses HTTP validation on port 80 (nginx is temporarily stopped during renewal)
-- **Smart Renewal:** The `renew` command only renews certificates within 30 days of expiration
+- **Safety:** An EXIT trap ensures nginx is always restarted, even if certbot fails
+
+## Files
+
+1. **renew-certbot-standalone.sh** - Renewal script called by cron. Stops nginx, runs `certbot renew`, restarts nginx.
+2. **setup-certbot-cron.sh** - Sets up the cron job on the server. Run once after deployment.
+
+## Deployment
+
+1. Push changes and pull on server:
+   ```bash
+   git push
+   make ssh RUN="cd /srv/samuelclay && git pull"
+   ```
+
+2. Set up the cron job (only needed once, or to update):
+   ```bash
+   make ssh RUN="bash /srv/samuelclay/certbot/setup-certbot-cron.sh"
+   ```
 
 ## Manual Testing
 
-To test the renewal process manually:
+Dry-run (no actual renewal):
 ```bash
-ssh samuelclay.com
-cd /home/sclay/samuelclay/certbot
-./renew-certbot-auto.sh
+make ssh RUN="docker stop samuelclay-nginx && docker run --rm -p 80:80 -v samuelclay_certs:/etc/letsencrypt certbot/certbot renew --dry-run --non-interactive; docker start samuelclay-nginx"
+```
+
+Check certificate status:
+```bash
+make ssh RUN="docker run --rm -v samuelclay_certs:/etc/letsencrypt certbot/certbot certificates"
 ```
 
 ## Monitoring
 
-Check renewal logs:
 ```bash
-ssh samuelclay.com
-tail -f /var/log/renew_certbot.log
+# Check renewal logs
+make ssh RUN="tail -20 /var/log/renew_certbot.log"
+
+# Check cron job
+make ssh RUN="crontab -l | grep certbot"
 ```
 
-Check cron job:
-```bash
-ssh samuelclay.com
-crontab -l | grep certbot
-```
+## Past Issues
 
-## Notes
-
-- The wildcard certificate (*.samuelclay.com) requires DNS validation which was causing issues with DNSimple API
-- The current setup only renews the main domain (samuelclay.com) using HTTP validation
-- If wildcard support is needed in the future, consider using DNS validation with proper API credentials
+- **Feb 2026:** Cert expired because cron was calling `renew-certbot-auto.sh` which didn't exist on the server. Also, using `certbot certonly --expand` created duplicate certs with suffixed names (`samuelclay.com-0002`) while nginx pointed to the original path. Fixed by switching to `certbot renew` which uses existing renewal config.
+- **Sep 2024:** CertBot was prompting for interactive input. Fixed with `--non-interactive` flag.

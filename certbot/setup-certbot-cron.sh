@@ -15,15 +15,9 @@ fi
 # Runs twice daily at 3:00 AM and 3:00 PM to ensure certificates are renewed promptly
 CRON_JOB="0 3,15 * * * /bin/bash /srv/samuelclay/certbot/renew-certbot-standalone.sh >> /var/log/renew_certbot.log 2>&1"
 
-# Check if cron job already exists
-if crontab -l 2>/dev/null | grep -q "renew-certbot-standalone.sh"; then
-    echo "Cron job for CertBot renewal already exists. Updating..."
-    # Remove old cron job and add new one
-    (crontab -l 2>/dev/null | grep -v "renew-certbot" ; echo "$CRON_JOB") | crontab -
-else
-    echo "Adding new cron job for CertBot renewal..."
-    (crontab -l 2>/dev/null ; echo "$CRON_JOB") | crontab -
-fi
+# Remove any old certbot cron jobs (both renew-certbot-auto and renew-certbot-standalone)
+echo "Removing any existing certbot cron jobs..."
+(crontab -l 2>/dev/null | grep -v "renew-certbot" ; echo "$CRON_JOB") | crontab -
 
 echo "Cron job setup complete!"
 echo "The renewal script will run twice daily at 3:00 AM and 3:00 PM."
