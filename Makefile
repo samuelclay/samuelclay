@@ -15,6 +15,19 @@ default: up
 up:
 	docker-compose $(COMPOSE_FILES) up -d
 
+dev:
+	docker-compose $(COMPOSE_FILES) up -d
+	@echo ""
+	@echo "\033[1;36m  ╔══════════════════════════════════════╗\033[0m"
+	@echo "\033[1;36m  ║                                      ║\033[0m"
+	@echo "\033[1;36m  ║\033[0m   \033[1;33m⚡ samuelclay.com dev server\033[0m       \033[1;36m║\033[0m"
+	@echo "\033[1;36m  ║\033[0m                                      \033[1;36m║\033[0m"
+	@echo "\033[1;36m  ║\033[0m   \033[1;32m→ http://localhost:8882\033[0m             \033[1;36m║\033[0m"
+	@echo "\033[1;36m  ║\033[0m                                      \033[1;36m║\033[0m"
+	@echo "\033[1;36m  ╚══════════════════════════════════════╝\033[0m"
+	@echo ""
+	docker-compose $(COMPOSE_FILES) logs -f -n0
+
 down:
 	docker-compose $(COMPOSE_FILES) down
 

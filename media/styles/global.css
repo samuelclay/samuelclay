@@ -948,6 +948,10 @@ ul li {
     grid-template-columns: 6fr 6fr;
 }
 
+.block-socials ul li {
+    grid-template-columns: 4fr 8fr;
+}
+
 .block-past-projects ul li {
     grid-template-columns: 4fr 8fr;
 }
