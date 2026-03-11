@@ -38,6 +38,7 @@ echo "$(date): Running certbot renew..."
 docker run --rm -p 80:80 \
     -v samuelclay_certs:/etc/letsencrypt \
     certbot/certbot renew \
-    --non-interactive
+    --non-interactive \
+    --renew-before-expiry-days 45
 
 echo "$(date): Renewal process completed!"
