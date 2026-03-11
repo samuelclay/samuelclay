@@ -32,16 +32,13 @@ sleep 3
 
 # Check if cert expires within 45 days and force renewal if so.
 # certbot's default threshold is 30 days, so we check ourselves.
-EXPIRY=$(docker run --rm \
+CERT_INFO=$(docker run --rm \
     -v samuelclay_certs:/etc/letsencrypt \
-    certbot/certbot certificates 2>/dev/null \
-    | grep "Expiry Date" | sed 's/.*: //' | sed 's/ (.*//')
+    certbot/certbot certificates 2>/dev/null)
+DAYS_LEFT=$(echo "$CERT_INFO" | grep -oP 'VALID: \K[0-9]+')
 RENEW_FLAG=""
-if [ -n "$EXPIRY" ]; then
-    EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s 2>/dev/null)
-    NOW_EPOCH=$(date +%s)
-    DAYS_LEFT=$(( (EXPIRY_EPOCH - NOW_EPOCH) / 86400 ))
-    echo "$(date): Certificate expires in $DAYS_LEFT days ($EXPIRY)"
+if [ -n "$DAYS_LEFT" ]; then
+    echo "$(date): Certificate valid for $DAYS_LEFT more days"
     if [ "$DAYS_LEFT" -le 45 ]; then
         echo "$(date): Within 45-day window, forcing renewal..."
         RENEW_FLAG="--force-renewal"
