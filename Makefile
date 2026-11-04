@@ -7,7 +7,7 @@ else
     COMPOSE_FILES=-f docker-compose.yml -f docker-compose.dev.yml
 endif
 
-.PHONY: up down
+.PHONY: up down stop
 
 # By default, the 'up' target will be executed
 default: up
@@ -28,7 +28,7 @@ dev:
 	@echo ""
 	docker-compose $(COMPOSE_FILES) logs -f -n0
 
-down:
+down stop:
 	docker-compose $(COMPOSE_FILES) down
 
 log:
